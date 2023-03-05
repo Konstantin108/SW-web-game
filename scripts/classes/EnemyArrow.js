@@ -42,6 +42,7 @@ class EnemyArrow {
             this.y = config.mapSizeY + 2;
             renderer.clear(this.selectorName);
             renderer.renderStatusBar();
+            renderer.renderHeartScaleAnimation();
             this.remove();
         }
         this.hit_x = null;

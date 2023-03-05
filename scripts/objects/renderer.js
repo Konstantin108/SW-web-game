@@ -21,7 +21,7 @@ let renderer = {
             }
             this.map += "</tr>";
         }
-        return `<table><tbody>${this.map}</tbody></table>`;
+        return templatePrinter.mapTemplatePrint(this.map);
     },
 
     renderPlayer() {
@@ -65,50 +65,9 @@ let renderer = {
     },
 
     renderStatusBar() {
-        this.statusBar = `
-                <div id="statusBarContainer">
-                    <div id="statusBar">
-                        <div id="skull"></div>
-                        <div class="statusBarElement">
-                            <strong>
-                                <div class="infoContainer">
-                                    <div>
-                                        Уровень
-                                    </div>
-                                    <div>
-                                        ${progressController.level}
-                                    </div>    
-                                </div>
-                            </strong>
-                        </div>
-                        <div class="statusBarElement">
-                            <strong>
-                                <div class="infoContainer">
-                                    <div>
-                                        Очки
-                                    </div>
-                                    <div>
-                                        ${progressController.score}
-                                    </div>
-                                </div>
-                            </strong>
-                        </div>
-                        <div class="statusBarElement">
-                            <strong>
-                                <div class="infoContainer">
-                                    <div>
-                                        Уничтожено кораблей
-                                    </div>
-                                    <div>
-                                        ${progressController.shipDestroyer} 
-                                    </div>
-                                </div>
-                            </strong>
-                        </div>
-                            ${this.renderLivesBar()}
-                    </div>
-                </div>`;
+        this.statusBar = templatePrinter.statusBarTemplatePrint(progressController.level, progressController.score, progressController.shipDestroyer, this.renderLivesBar());
         let statusBar = document.querySelector("#statusBarContainer");
+
         if (statusBar) this.container.removeChild(statusBar);
         this.container.insertAdjacentHTML("beforeend", this.statusBar);
     },
@@ -120,18 +79,7 @@ let renderer = {
         let lostLives = livesCount - player.lives;
 
         if (livesCount > 5) {
-            livesBar = `<div class="statusBarElement">
-                            <strong>
-                                <div class="infoContainer">
-                                    <div>
-                                        Жизни
-                                    </div>
-                                    <div>
-                                        ${player.lives}
-                                    </div>
-                                </div>
-                            </strong>
-                        </div>`;
+            livesBar = templatePrinter.livesBarTemplatePrint(player.lives);
         } else {
             for (let i = 0; i < player.lives; i++) {
                 heartsBox += `<div class="heart"></div>`;
@@ -139,11 +87,32 @@ let renderer = {
             for (let i = 0; i < lostLives; i++) {
                 heartsBox += `<div class="lostHeart"></div>`;
             }
-            livesBar = `<div id="heartsBar">
-                            ${heartsBox}
-                        </div>`;
+            livesBar = templatePrinter.heartsBarTemplatePrint(heartsBox);
         }
-        return livesBar
+        return livesBar;
+    },
+
+    renderHeartScaleAnimation() {
+        let selector = "heartScale";
+        let hearts = document.querySelectorAll(".heart");
+        let lostHearts = document.querySelectorAll(".lostHeart");
+
+        for (let heart = 0; heart <= hearts.length; heart++) {
+            if (hearts[heart]) {
+                hearts[heart].classList.add(`${selector}`);
+                setTimeout(() => {
+                    hearts[heart].classList.remove(`${selector}`);
+                }, 300)
+            }
+        }
+        for (let lostHeart = 0; lostHeart <= lostHearts.length; lostHeart++) {
+            if (lostHearts[lostHeart]) {
+                lostHearts[lostHeart].classList.add(`${selector}`);
+                setTimeout(() => {
+                    lostHearts[lostHeart].classList.remove(`${selector}`);
+                }, 300)
+            }
+        }
     },
 
     clear(selector) {
