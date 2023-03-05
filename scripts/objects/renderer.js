@@ -50,7 +50,10 @@ let renderer = {
     renderHit(arrowsArray) {
         for (let i = 0; i < arrowsArray.length; i++) {
             let enemyHitPosition = document.querySelector(`[data-x="${arrowsArray[i].hit_x}"][data-y="${arrowsArray[i].hit_y}"]`);
-            if (enemyHitPosition) enemyHitPosition.classList.add("hit");
+            if (enemyHitPosition) {
+                enemyHitPosition.classList.add("hit");
+                enemyHitPosition.classList.remove("blockage");
+            }
             setTimeout(() => {
                 this.clear("hit");
             }, 500)

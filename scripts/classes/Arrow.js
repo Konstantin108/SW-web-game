@@ -42,7 +42,7 @@ class Arrow {
                 renderer.renderHit(arrowController.arrowsArray);
                 progressController.scoreUp(config.shipDestroyedReward);
                 progressController.shipDestroyer += 1;
-                blockageController.blockagesArray[i] = new Blockage();
+                blockageController.blockagesArray[i] = new Blockage(helperController.getRandomInt(0, config.mapSizeX));
                 renderer.renderStatusBar();
                 this.remove();
             }

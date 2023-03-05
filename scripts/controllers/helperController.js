@@ -27,5 +27,24 @@ let helperController = {
             center = (config.mapSizeY - 1) / 2 + 1;
         }
         return center;
+    },
+
+    findPossiblePositions(employedPositionsArray, possiblePositionsArray) {
+        let availablePositionsArray = [];
+
+        let setObject = new Set(employedPositionsArray);
+        availablePositionsArray.push(possiblePositionsArray.filter(elem => !setObject.has(elem)));
+        return availablePositionsArray[0];
+    },
+
+    findValidValueInArrayOnIndex(array) {
+        let index = this.getRandomInt(0, array.length);
+        let result = array[index];
+
+        if (result) {
+            return result;
+        } else {
+            this.findValidValueInArrayOnIndex(array);
+        }
     }
 }
