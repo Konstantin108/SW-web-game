@@ -23,6 +23,7 @@ let crashChecker = {
                     renderer.renderPlayer();
                     renderer.renderStatusBar();
                     renderer.renderHeartScaleAnimation();
+                    renderer.renderScullChangeColor();
                 }
             }
         }

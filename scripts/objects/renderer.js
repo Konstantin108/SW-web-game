@@ -115,6 +115,19 @@ let renderer = {
         }
     },
 
+    renderScullChangeColor() {
+        let scull = document.querySelector("#scull");
+        let whiteScull = "whiteScull";
+        let redScull = "redScull";
+
+        scull.classList.remove(`${whiteScull}`);
+        scull.classList.add(`${redScull}`);
+        setTimeout(() => {
+            scull.classList.remove(`${redScull}`);
+            scull.classList.add(`${whiteScull}`);
+        }, 300);
+    },
+
     clear(selector) {
         let removeTargets = document.querySelectorAll(`.${selector}`);
         removeTargets.forEach(removeTarget => {

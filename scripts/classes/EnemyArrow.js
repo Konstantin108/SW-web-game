@@ -43,6 +43,7 @@ class EnemyArrow {
             renderer.clear(this.selectorName);
             renderer.renderStatusBar();
             renderer.renderHeartScaleAnimation();
+            renderer.renderScullChangeColor();
             this.remove();
         }
         this.hit_x = null;

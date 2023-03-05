@@ -13,7 +13,7 @@ let templatePrinter = {
         return `
                 <div id="statusBarContainer">
                     <div id="statusBar">
-                        <div id="skull"></div>
+                        <div id="scull" class="whiteScull"></div>
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer">
