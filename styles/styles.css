@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:500,500i,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap");
+html {
+  background-color: black;
+}
+
+#container {
+  background-image: url("../images/background-space.jpg");
+  background-repeat: no-repeat;
+  background-color: #453d4c;
+}
+
+table {
+  border-collapse: collapse;
+  border: 3px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  width: 50px;
+  height: 50px;
+  border: 3px solid black;
+}
+
+#statusBarContainer {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+
+#statusBar {
+  font-family: Roboto Condensed;
+  font-size: 20px;
+  color: lawngreen;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-image: url("../images/background-rusty-iron.jpg");
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  background-size: 100%;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.statusBarElement {
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  background-color: black;
+  padding: 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 12px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#skull {
+  background-image: url("../images/skull-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 55px;
+}
+
+#heartsBar,
+#heartsBox {
+  display: flex;
+}
+
+.heart {
+  background-image: url("../images/heart-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 55px;
+  animation: heart-scale 0.3s;
+}
+
+.lostHeart {
+  background-image: url("../images/lost-heart-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 55px;
+  animation: heart-scale 0.3s;
+}
+
+@keyframes heart-scale {
+  from {
+    scale: 1.2;
+  }
+  to {
+    scale: 1;
+  }
+}
+.player {
+  background-image: url("../images/player-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.invincibility {
+  background-image: url("../images/player-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: invincibility-blink 0.6s infinite;
+}
+
+@keyframes invincibility-blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+.blockage {
+  background-image: url("../images/blockage-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.arrow {
+  background-image: url("../images/arrow-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.enemyArrow {
+  background-image: url("../images/enemy-arrow-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  transform: scale(0.2);
+}
+
+.hit {
+  background-image: url("../images/hit-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  transform: scale(2);
+}
+
+.crash {
+  background-image: url("../images/crash-img.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  transform: scale(1.8);
+}
+
+/*# sourceMappingURL=styles.css.map */
