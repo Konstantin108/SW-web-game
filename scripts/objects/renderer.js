@@ -75,7 +75,7 @@ let renderer = {
         this.container.insertAdjacentHTML("beforeend", this.statusBar);
     },
 
-    renderLivesBar() {
+    renderLivesBar() {          // если больше 5 жизней то будет отрисовано простое табло
         let livesCount = config.lives;
         let livesBar = null;
         let heartsBox = "";
