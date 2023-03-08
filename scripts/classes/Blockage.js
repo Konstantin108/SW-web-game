@@ -5,10 +5,11 @@ class Blockage {
 
     y = 0;
     selectorName = "blockage";
+    thisSelectorOverlay = "bonus";
     speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
 
     shoot(x_pos, y_pos) {
-        if (helperController.randomEnemyFire()) {
+        if (helperController.randomEvent(progressController.fireChance)) {
             return {
                 x: x_pos,
                 y: y_pos
@@ -39,10 +40,12 @@ class Blockage {
                     x_pos = this.x;
                     this.x = x_pos;
                 }
+
                 if (this.y > 1) {
                     enemyArrowController.enemyArrowCreate(this.shoot(x_pos, y_pos));
                     enemyArrowController.enemyArrowMove();
                 }
+
             } else if (y_pos == config.mapSizeY + 1) {
                 y_pos = config.mapSizeY + 2;
                 this.y = y_pos;
@@ -53,8 +56,11 @@ class Blockage {
                 this.y = y_pos;
                 renderer.renderStatusBar();
             }
+
+
+
             renderer.clear(this.selectorName);
-            renderer.renderMovingObjects(blockageController.blockagesArray, this.selectorName);
+            renderer.renderMovingObjects(blockageController.blockagesArray, this.selectorName, this.thisSelectorOverlay);
             crashChecker.crashCheck(blockageController.blockagesArray, true);
         }
         progressController.progress();

@@ -6,7 +6,9 @@ let config = {
     crashMulct: -100,
     arrowSpeed: 50,
     enemyArrowSpeed: 200,
+    bonusSpeed: 1500,
+    bonusChance: 50,
     invincibilityAfterCrash: 4000,
-    lives: 5,
+    lives: 999,
     levels: levels.setLevelsParams()
 }

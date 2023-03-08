@@ -18,7 +18,11 @@ let player = {
             "ArrowLeft",
             "ArrowRight",
             "ArrowDown",
-            "ArrowUp"
+            "ArrowUp",
+            "KeyA",
+            "KeyD",
+            "KeyS",
+            "KeyW"
         ];
         let x_value = this.x;
         let y_value = this.y;
@@ -27,15 +31,23 @@ let player = {
             if (possibleDirections.includes(event.code)) {
                 switch (event.code) {
                     case possibleDirections[0]:
+                    case possibleDirections[8]:
+                    case possibleDirections[12]:
                         x_value += -1;
                         break;
                     case possibleDirections[1]:
+                    case possibleDirections[9]:
+                    case possibleDirections[13]:
                         x_value += 1;
                         break;
                     case possibleDirections[2]:
+                    case possibleDirections[10]:
+                    case possibleDirections[14]:
                         y_value += 1;
                         break;
                     case possibleDirections[3]:
+                    case possibleDirections[11]:
+                    case possibleDirections[15]:
                         y_value += -1;
                         break;
                     case possibleDirections[4]:
@@ -54,18 +66,6 @@ let player = {
                         x_value += 1;
                         y_value += 1;
                         break;
-                    case possibleDirections[8]:
-                        x_value += -1;
-                        break;
-                    case possibleDirections[9]:
-                        x_value += 1;
-                        break;
-                    case possibleDirections[10]:
-                        y_value += 1;
-                        break;
-                    case possibleDirections[11]:
-                        y_value += -1;
-                        break;
                 }
                 if (x_value <= config.mapSizeX && y_value <= config.mapSizeY && x_value >= 0 && y_value >= 0) {
                     player.x = x_value;
@@ -79,6 +79,7 @@ let player = {
                 renderer.clear("player");
                 renderer.clear("invincibility");
                 renderer.renderPlayer();
+                bonusController.pickedCheck();
                 crashChecker.crashCheck(blockageController.blockagesArray, true);
             }
         })
@@ -88,6 +89,7 @@ let player = {
         let shootBtnsArr = [
             "Space",
             "Numpad5",
+            "Numpad0",
         ];
 
         document.addEventListener("keydown", function (event) {

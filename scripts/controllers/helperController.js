@@ -3,10 +3,10 @@ let helperController = {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },
 
-    randomEnemyFire() {
+    randomEvent(probabilityOfAction) {
         let chance = Math.random() * 100;
         chance = chance.toFixed(0);
-        if (chance <= progressController.fireChance) {
+        if (chance <= probabilityOfAction) {
             return true;
         }
     },

@@ -42,7 +42,7 @@ let templatePrinter = {
                             <strong>
                                 <div class="infoContainer">
                                     <div>
-                                        Уничтожено кораблей
+                                        Уничтожено противников
                                     </div>
                                     <div>
                                         ${shipDestroyer} 

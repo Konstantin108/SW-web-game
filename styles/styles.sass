@@ -1,14 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:500,500i,600&display=swap'), url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap')
 
 html
-  background-color: black
-
-//  стили контейнера и карты
-
-#container
   background-image: url("../images/background-space.jpg")
   background-repeat: no-repeat
   background-color: #453d4c
+
+//  стили карты
 
 table
   border-collapse: collapse
@@ -27,7 +24,6 @@ td
 #statusBarContainer
   display: flex
   justify-content: center
-  background-color: black
 
 #statusBar
   font-family: Roboto Condensed
@@ -61,7 +57,7 @@ td
   align-items: center
 
 .whiteScull
-  background-image: url("../images/scull-img.png")
+  background-image: url("../images/scull.png")
   background-size: 100%
   background-repeat: no-repeat
   width: 50px
@@ -69,7 +65,7 @@ td
   transition: .3s
 
 .redScull
-  background-image: url("../images/red-scull-img.png")
+  background-image: url("../images/red-scull.png")
   background-size: 100%
   background-repeat: no-repeat
   width: 50px
@@ -85,14 +81,14 @@ td
   display: flex
 
 .heart
-  background-image: url("../images/heart-img.png")
+  background-image: url("../images/heart.png")
   background-size: 100%
   background-repeat: no-repeat
   width: 50px
   height: 55px
 
 .lostHeart
-  background-image: url("../images/lost-heart-img.png")
+  background-image: url("../images/lost-heart.png")
   background-size: 100%
   background-repeat: no-repeat
   width: 50px
@@ -110,13 +106,13 @@ td
 //  стили игрока
 
 .player
-  background-image: url("../images/player-img.png")
+  background-image: url("../images/player.png")
   background-size: 100%
   background-repeat: no-repeat
   opacity: 1
 
 .invincibility
-  background-image: url("../images/player-img.png")
+  background-image: url("../images/player.png")
   background-size: 100%
   background-repeat: no-repeat
   animation: invincibility-blink .6s infinite
@@ -130,32 +126,40 @@ td
 //  стили движущихся объектов и столкновений
 
 .blockage
-  background-image: url("../images/blockage-img.png")
+  background-image: url("../images/blockage.png")
   background-size: 100%
   background-repeat: no-repeat
   opacity: 1
 
 .arrow
-  background-image: url("../images/arrow-img.png")
+  background-image: url("../images/arrow.png")
   background-size: 100%
   background-repeat: no-repeat
 
 .enemyArrow
-  background-image: url("../images/enemy-arrow-img.png")
+  background-image: url("../images/enemy-arrow.png")
   background-size: 100%
   background-repeat: no-repeat
   transition: .3s
   transform: scale(.2)
 
+.bonus
+  background-image: url("../images/bonus-drill.png")
+  background-size: 100%
+  background-repeat: no-repeat
+
+.pickedBonus
+  background-color: white
+
 .hit
-  background-image: url("../images/hit-img.png")
+  background-image: url("../images/hit.png")
   background-size: 100%
   background-repeat: no-repeat
   transition: .3s
   transform: scale(2)
 
 .crash
-  background-image: url("../images/crash-img.png")
+  background-image: url("../images/crash.png")
   background-size: 100%
   background-repeat: no-repeat
   transition: .3s

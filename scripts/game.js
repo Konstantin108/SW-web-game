@@ -9,6 +9,7 @@ let game = {
     run() {
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
+        bonusController.bonusAppearanceListener();
         player.move();
         player.shoot();
     },

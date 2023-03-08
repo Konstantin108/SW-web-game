@@ -49,10 +49,10 @@ let renderer = {
 
     renderHit(arrowsArray) {
         for (let i = 0; i < arrowsArray.length; i++) {
-            let enemyHitPosition = document.querySelector(`[data-x="${arrowsArray[i].hit_x}"][data-y="${arrowsArray[i].hit_y}"]`);
-            if (enemyHitPosition) {
-                enemyHitPosition.classList.add("hit");
-                enemyHitPosition.classList.remove("blockage");
+            let hitPosition = document.querySelector(`[data-x="${arrowsArray[i].hit_x}"][data-y="${arrowsArray[i].hit_y}"]`);
+            if (hitPosition) {
+                hitPosition.classList.add("hit");
+                hitPosition.classList.remove("blockage");
             }
             setTimeout(() => {
                 this.clear("hit");
@@ -60,11 +60,31 @@ let renderer = {
         }
     },
 
-    renderMovingObjects(objectsArray, selector) {
-        for (let i = 0; i < objectsArray.length; i++) {
-            let enemyArrowPosition = document.querySelector(`[data-x="${objectsArray[i].x}"][data-y="${objectsArray[i].y}"]`);
-            if (enemyArrowPosition) enemyArrowPosition.classList.add(`${selector}`);
+    renderPickedBonus(bonusesArray) {
+        for (let i = 0; i < bonusesArray.length; i++) {
+            let pickedBonusPosition = document.querySelector(`[data-x="${bonusesArray[i].picked_x}"][data-y="${bonusesArray[i].picked_y}"]`);
+            if (pickedBonusPosition) {
+                pickedBonusPosition.classList.add("pickedBonus");
+                pickedBonusPosition.classList.remove("bonus");
+            }
+            setTimeout(() => {
+                this.clear("pickedBonus");
+            }, 500)
         }
+    },
+
+    renderMovingObjects(objectsArray, selector, thisSelectorOverlay = null) {
+        for (let i = 0; i < objectsArray.length; i++) {
+            let objectPosition = document.querySelector(`[data-x="${objectsArray[i].x}"][data-y="${objectsArray[i].y}"]`);
+            if (objectPosition) {
+                this.renderPriorityObjects(objectPosition, `${thisSelectorOverlay}`);
+                objectPosition.classList.add(`${selector}`);
+            }
+        }
+    },
+
+    renderPriorityObjects(objectPosition, removingSelector) {
+        if (objectPosition.classList.contains(`${removingSelector}`)) objectPosition.classList.remove(`${removingSelector}`);
     },
 
     renderStatusBar() {
