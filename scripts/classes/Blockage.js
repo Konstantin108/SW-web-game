@@ -3,18 +3,15 @@ class Blockage {
         this.x = x;
     }
 
-    static shootingCount = 0;
     y = 0;
     selectorName = "blockage";
     speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
 
-    shoot() {
+    shoot(x_pos, y_pos) {
         if (helperController.randomEnemyFire()) {
-            Blockage.shootingCount += 1;
             return {
-                shootingCount: Blockage.shootingCount,
-                x: this.x,
-                y: this.y
+                x: x_pos,
+                y: y_pos
             }
         }
     }
@@ -42,6 +39,10 @@ class Blockage {
                     x_pos = this.x;
                     this.x = x_pos;
                 }
+                if (this.y > 1) {
+                    enemyArrowController.enemyArrowCreate(this.shoot(x_pos, y_pos));
+                    enemyArrowController.enemyArrowMove();
+                }
             } else if (y_pos == config.mapSizeY + 1) {
                 y_pos = config.mapSizeY + 2;
                 this.y = y_pos;
@@ -57,10 +58,5 @@ class Blockage {
             crashChecker.crashCheck(blockageController.blockagesArray, true);
         }
         progressController.progress();
-        if (this.y > 1) {
-            this.shoot();
-            enemyArrowController.enemyArrowCreate(this.shoot());
-            enemyArrowController.enemyArrowMove();
-        }
     }
 }

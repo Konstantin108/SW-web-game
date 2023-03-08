@@ -3,9 +3,7 @@ let enemyArrowController = {
 
     enemyArrowCreate(shootingBlockageData) {
         if (shootingBlockageData) {
-            while (this.enemyArrowsArray.length < shootingBlockageData.shootingCount) {
-                this.enemyArrowsArray.push(new EnemyArrow(shootingBlockageData.x, shootingBlockageData.y));
-            }
+            this.enemyArrowsArray.push(new EnemyArrow(shootingBlockageData.x, shootingBlockageData.y));
         }
     },
 
@@ -15,6 +13,7 @@ let enemyArrowController = {
                 this.enemyArrowsArray[i].makeStep();
             }
         }
-        // console.log(`enemy arrows - ${this.enemyArrowsArray}`);
+        // console.log("enemy arrows:")
+        // console.log(this.enemyArrowsArray);
     }
 }

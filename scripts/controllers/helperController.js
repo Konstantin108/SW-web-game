@@ -4,7 +4,11 @@ let helperController = {
     },
 
     randomEnemyFire() {
-        if (Math.random() * 10 <= progressController.fireChance) return true;
+        let chance = Math.random() * 100;
+        chance = chance.toFixed(0);
+        if (chance <= progressController.fireChance) {
+            return true;
+        }
     },
 
     getCenterMapOnX() {

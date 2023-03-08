@@ -58,7 +58,6 @@ class EnemyArrow {
                 if (enemyArrowsArray[i].id == this.id) {
                     clearInterval(this.makeStep());
                     enemyArrowController.enemyArrowsArray.splice(i, 1);
-                    Blockage.shootingCount += -1;
                 }
             }
         }

@@ -13,6 +13,7 @@ let arrowController = {
                 this.arrowsArray[i].makeStep();
             }
         }
-        // console.log(`player\'s arrows - ${this.arrowsArray}`);
+        // console.log("player\'s arrows:");
+        // console.log(this.arrowsArray);
     }
 }

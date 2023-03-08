@@ -49,7 +49,7 @@ let progressController = {
         return this.score;
     },
 
-    compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {           //blockegesCount не может быть больше config.mapSizeX
+    compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {           // blockegesCount не может быть больше config.mapSizeX
         let blockagesCount = null;
 
         if (blockagesCountOnLevel <= config.mapSizeX) {
@@ -62,9 +62,6 @@ let progressController = {
 
     newLevelEntry(blockagesCount) {
         alert(`Переход на новый уровень => Уровень ${progressController.level}\nПоздравляем!`);
-        arrowController.arrowsArray = [];
-        enemyArrowController.enemyArrowsArray = [];
-        blockageController.blockagesArray = [];
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
     },
