@@ -22,7 +22,7 @@ class Arrow {
             }
         }
         renderer.clear(this.selectorName);
-        renderer.renderMovingObjects(arrowController.arrowsArray, this.selectorName);
+        renderer.renderMovingObjects(arrowController.arrowsArray);
         this.hit();
     }
 

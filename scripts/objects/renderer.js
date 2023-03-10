@@ -64,27 +64,31 @@ let renderer = {
         for (let i = 0; i < bonusesArray.length; i++) {
             let pickedBonusPosition = document.querySelector(`[data-x="${bonusesArray[i].picked_x}"][data-y="${bonusesArray[i].picked_y}"]`);
             if (pickedBonusPosition) {
-                pickedBonusPosition.classList.add("pickedBonus");
-                pickedBonusPosition.classList.remove("bonus");
+                pickedBonusPosition.classList.add("picked");
+                pickedBonusPosition.classList.remove(`${bonusesArray[i].name}`);
             }
             setTimeout(() => {
-                this.clear("pickedBonus");
+                this.clear("picked");
             }, 500)
         }
     },
 
-    renderMovingObjects(objectsArray, selector, thisSelectorOverlay = null) {
+    renderMovingObjects(objectsArray, thisSelectorOverlay = null) {
         for (let i = 0; i < objectsArray.length; i++) {
             let objectPosition = document.querySelector(`[data-x="${objectsArray[i].x}"][data-y="${objectsArray[i].y}"]`);
             if (objectPosition) {
-                this.renderPriorityObjects(objectPosition, `${thisSelectorOverlay}`);
-                objectPosition.classList.add(`${selector}`);
+                this.renderPriorityObjects(objectPosition, thisSelectorOverlay);
+                objectPosition.classList.add(`${objectsArray[i].selectorName}`);
             }
         }
     },
 
-    renderPriorityObjects(objectPosition, removingSelector) {
-        if (objectPosition.classList.contains(`${removingSelector}`)) objectPosition.classList.remove(`${removingSelector}`);
+    renderPriorityObjects(objectPosition, removingSelectors) {
+        if (removingSelectors) {
+            for (let i = 0; i <= removingSelectors.length; i++) {
+                if (objectPosition.classList.contains(`${removingSelectors[i]}`)) objectPosition.classList.remove(`${removingSelectors[i]}`);
+            }
+        }
     },
 
     renderStatusBar() {

@@ -2,11 +2,11 @@ let bonusController = {
     bonusesArray: [],
 
     bonusAppearanceListener() {
-        setInterval(() => this.bonusCreate(), 5000);
+        setInterval(() => this.bonusCreate(), 5000)
     },
 
     bonusCreate() {
-        if (helperController.randomEvent(config.bonusChance)) {
+        if (helperController.randomEvent(config.bonuses.bonusChance)) {
             this.bonusesArray.push(new Bonus());
         }
         this.bonusMove();

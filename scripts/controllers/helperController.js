@@ -5,9 +5,22 @@ let helperController = {
 
     randomEvent(probabilityOfAction) {
         let chance = Math.random() * 100;
+
         chance = chance.toFixed(0);
         if (chance <= probabilityOfAction) {
             return true;
+        }
+    },
+
+    getRandomForBonus() {
+        let bonusTypes = config.bonuses.bonusTypes;
+        let chance = Math.random() * 100;
+
+        chance = chance.toFixed(0);
+        for (key in bonusTypes) {
+            if (chance >= bonusTypes[key].chanceFrom && chance <= bonusTypes[key].chanceTo) {
+                return bonusTypes[key];
+            }
         }
     },
 

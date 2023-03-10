@@ -5,7 +5,13 @@ class Blockage {
 
     y = 0;
     selectorName = "blockage";
-    thisSelectorOverlay = "bonus";
+    thisSelectorOverlay = [
+        "drill",
+        "trinity",
+        "shield",
+        "life",
+        "killAll"
+    ];
     speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
 
     shoot(x_pos, y_pos) {
@@ -60,7 +66,7 @@ class Blockage {
 
 
             renderer.clear(this.selectorName);
-            renderer.renderMovingObjects(blockageController.blockagesArray, this.selectorName, this.thisSelectorOverlay);
+            renderer.renderMovingObjects(blockageController.blockagesArray, this.thisSelectorOverlay);
             crashChecker.crashCheck(blockageController.blockagesArray, true);
         }
         progressController.progress();

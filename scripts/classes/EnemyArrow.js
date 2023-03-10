@@ -26,7 +26,7 @@ class EnemyArrow {
             }
         }
         renderer.clear(this.selectorName);
-        renderer.renderMovingObjects(enemyArrowController.enemyArrowsArray, this.selectorName);
+        renderer.renderMovingObjects(enemyArrowController.enemyArrowsArray);
         this.hit();
     }
 

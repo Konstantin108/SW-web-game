@@ -1,11 +1,14 @@
 class Bonus {
     static id = 0;
     id = Bonus.id++;
-    selectorName = "bonus";
-    thisSelectorOverlay = "enemyArrow";
+    type = helperController.getRandomForBonus().type;
+    selectorName = helperController.getRandomForBonus().name;
+    thisSelectorOverlay = [
+        "enemyArrow"
+    ];
     x = helperController.getRandomInt(0, config.mapSizeX);
     y = 0;
-    speed = config.bonusSpeed;
+    speed = config.bonuses.bonusSpeed;
     picked_x = null;
     picked_y = null;
 
@@ -24,7 +27,7 @@ class Bonus {
             }
         }
         renderer.clear(this.selectorName);
-        renderer.renderMovingObjects(bonusController.bonusesArray, this.selectorName, this.thisSelectorOverlay);
+        renderer.renderMovingObjects(bonusController.bonusesArray, this.thisSelectorOverlay);
         this.picked();
     }
 
