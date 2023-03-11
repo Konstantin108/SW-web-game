@@ -24,6 +24,12 @@ let helperController = {
         }
     },
 
+    removeAllTimers(timersArray) {
+        for (let timer = 0; timer < timersArray.length; timer++) {
+            clearInterval(timersArray[timer]);
+        }
+    },
+
     getCenterMapOnX() {
         let center = null;
 

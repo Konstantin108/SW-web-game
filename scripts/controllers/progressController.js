@@ -62,6 +62,8 @@ let progressController = {
 
     newLevelEntry(blockagesCount) {
         alert(`Переход на новый уровень => Уровень ${progressController.level}\nПоздравляем!`);
+        helperController.removeAllTimers(bonusController.bonusTimerIdsArray);
+        helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
     },

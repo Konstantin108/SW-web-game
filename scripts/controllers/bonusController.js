@@ -1,8 +1,9 @@
 let bonusController = {
+    bonusTimerIdsArray: [],
     bonusesArray: [],
 
     bonusAppearanceListener() {
-        setInterval(() => this.bonusCreate(), 5000)
+        this.bonusTimerIdsArray.push(setInterval(() => this.bonusCreate(), 5000));
     },
 
     bonusCreate() {
@@ -24,7 +25,9 @@ let bonusController = {
                 this.bonusesArray[i].makeStep();
             }
         }
-        // console.log("bonuses")
-        // console.log(this.bonusesArray);
+        console.log("bonuses:")
+        console.log(this.bonusesArray);
+        console.log("bonusTimerIds:")
+        console.log(this.bonusTimerIdsArray);
     }
 }
