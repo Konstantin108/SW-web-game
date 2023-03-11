@@ -28,9 +28,9 @@ let blockageController = {
         for (let i = 0; i < blockagesArray.length; i++) {
             this.blockageTimerIdsArray.push(setInterval(() => blockagesArray[i].step(), blockagesArray[i].speed));
         }
-        console.log("blockages:");
-        console.log(this.blockagesArray);
-        console.log("blockageTimerIds:");
-        console.log(this.blockageTimerIdsArray);
+        // console.log("blockages:");
+        // console.log(this.blockagesArray);
+        // console.log("blockageTimerIds:");
+        // console.log(this.blockageTimerIdsArray);
     }
 }

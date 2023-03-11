@@ -3,7 +3,7 @@ let bonuses = {
     setBonusesParams() {
         return {
             bonusSpeed: 1500,
-            bonusChance: 50,
+            bonusChance: 90,
             bonusTypes: {
                 1: {
                     name: "drill",

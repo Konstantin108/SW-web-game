@@ -25,9 +25,9 @@ let bonusController = {
                 this.bonusesArray[i].makeStep();
             }
         }
-        console.log("bonuses:")
-        console.log(this.bonusesArray);
-        console.log("bonusTimerIds:")
-        console.log(this.bonusTimerIdsArray);
+        // console.log("bonuses:")
+        // console.log(this.bonusesArray);
+        // console.log("bonusTimerIds:")
+        // console.log(this.bonusTimerIdsArray);
     }
 }

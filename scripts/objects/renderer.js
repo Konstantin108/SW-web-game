@@ -47,30 +47,26 @@ let renderer = {
         }, 500)
     },
 
-    renderHit(arrowsArray) {
-        for (let i = 0; i < arrowsArray.length; i++) {
-            let hitPosition = document.querySelector(`[data-x="${arrowsArray[i].hit_x}"][data-y="${arrowsArray[i].hit_y}"]`);
-            if (hitPosition) {
-                hitPosition.classList.add("hit");
-                hitPosition.classList.remove("blockage");
-            }
-            setTimeout(() => {
-                this.clear("hit");
-            }, 500)
+    renderHit(arrow) {
+        let hitPosition = document.querySelector(`[data-x="${arrow.hit_x}"][data-y="${arrow.hit_y}"]`);
+        if (hitPosition) {
+            hitPosition.classList.add("hit");
+            hitPosition.classList.remove("blockage");
         }
+        setTimeout(() => {
+            this.clear("hit");
+        }, 500)
     },
 
-    renderPickedBonus(bonusesArray) {
-        for (let i = 0; i < bonusesArray.length; i++) {
-            let pickedBonusPosition = document.querySelector(`[data-x="${bonusesArray[i].picked_x}"][data-y="${bonusesArray[i].picked_y}"]`);
-            if (pickedBonusPosition) {
-                pickedBonusPosition.classList.add("picked");
-                pickedBonusPosition.classList.remove(`${bonusesArray[i].name}`);
-            }
-            setTimeout(() => {
-                this.clear("picked");
-            }, 500)
+    renderPickedBonus(bonus) {
+        let pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`);
+        if (pickedBonusPosition) {
+            pickedBonusPosition.classList.add("picked");
+            pickedBonusPosition.classList.remove(`${bonus.name}`);
         }
+        setTimeout(() => {
+            this.clear("picked");
+        }, 500)
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {

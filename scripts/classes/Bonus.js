@@ -41,7 +41,7 @@ class Bonus {
             this.picked_y = this.y;
             this.y = config.mapSizeY + 2;
             renderer.clear(this.selectorName);
-            renderer.renderPickedBonus(bonusController.bonusesArray);
+            renderer.renderPickedBonus(this);
             this.remove();
         }
         this.picked_x = null;
