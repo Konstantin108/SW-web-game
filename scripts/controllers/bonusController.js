@@ -3,7 +3,7 @@ let bonusController = {
     bonusesArray: [],
 
     bonusAppearanceListener() {
-        this.bonusTimerIdsArray.push(setInterval(() => this.bonusCreate(), 5000));
+        this.bonusTimerIdsArray.push(setInterval(() => this.bonusCreate(), 2000));
     },
 
     bonusCreate() {
@@ -14,9 +14,12 @@ let bonusController = {
     },
 
     pickedCheck() {
+        let pickedBonus = null;
+
         for (let i = 0; i < this.bonusesArray.length; i++) {
-            this.bonusesArray[i].picked();
+            pickedBonus = this.bonusesArray[i].getBonus(this.bonusesArray[i].picked());
         }
+        if (pickedBonus) return pickedBonus;
     },
 
     bonusMove() {

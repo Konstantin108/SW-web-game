@@ -35,7 +35,6 @@ class Blockage {
                     employedPositionsOnXArray.push(blockagesArray[i].x);
                 }
             }
-
             x_pos += helperController.getRandomInt(-1, 1);
             y_pos += 1;
             if (y_pos <= config.mapSizeY) {
@@ -46,12 +45,10 @@ class Blockage {
                     x_pos = this.x;
                     this.x = x_pos;
                 }
-
                 if (this.y > 1) {
                     enemyArrowController.enemyArrowCreate(this.shoot(x_pos, y_pos));
                     enemyArrowController.enemyArrowMove();
                 }
-
             } else if (y_pos == config.mapSizeY + 1) {
                 y_pos = config.mapSizeY + 2;
                 this.y = y_pos;
@@ -62,9 +59,6 @@ class Blockage {
                 this.y = y_pos;
                 renderer.renderStatusBar();
             }
-
-
-
             renderer.clear(this.selectorName);
             renderer.renderMovingObjects(blockageController.blockagesArray, this.thisSelectorOverlay);
             crashChecker.crashCheck(blockageController.blockagesArray, true);

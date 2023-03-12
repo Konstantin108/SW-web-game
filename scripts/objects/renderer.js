@@ -25,17 +25,16 @@ let renderer = {
     },
 
     renderPlayer() {
-        let playerColor = "";
-
-        if (player.invincibility) {
-            playerColor = "invincibility";
-        } else {
-            playerColor = "player";
-        }
         let playerPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
         playerPosition.classList.remove("blockage");
         playerPosition.classList.remove("enemyArrow");
-        playerPosition.classList.add(playerColor);
+        playerPosition.classList.add(player.selectorName);
+        if (player.invincibility) {
+            playerPosition.classList.add("invincibility");
+        }
+        if (player.extraSelectorName) {
+            playerPosition.classList.add(`${player.extraSelectorName}`);
+        }
     },
 
     renderCrash() {
@@ -61,6 +60,7 @@ let renderer = {
     renderPickedBonus(bonus) {
         let pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`);
         if (pickedBonusPosition) {
+            pickedBonusPosition.classList.remove(player.selectorName);
             pickedBonusPosition.classList.add("picked");
             pickedBonusPosition.classList.remove(`${bonus.name}`);
         }

@@ -12,7 +12,7 @@ table
   border: 3px solid black
   margin-left: auto
   margin-right: auto
-  background: rgba(255, 255, 255, .14)
+  background-color: rgba(255, 255, 255, .14)
 
 td
   width: 50px
@@ -111,10 +111,23 @@ td
   background-repeat: no-repeat
   opacity: 1
 
-.invincibility
-  background-image: url("../images/player.png")
+.player-drill
+  background-image: url("../images/player-drill.png")
   background-size: 100%
   background-repeat: no-repeat
+  opacity: 1
+
+.player-trinity
+  background-image: url("../images/player-trinity.png")
+  background-size: 100%
+  background-repeat: no-repeat
+  opacity: 1
+
+.player-shield
+  background-color: rgba(46, 232, 99, .7)
+  border-radius: 50%
+
+.invincibility
   animation: invincibility-blink .6s infinite
 
 @keyframes invincibility-blink
@@ -170,6 +183,7 @@ td
 
 .picked
   background-image: url("../images/picked.png")
+  background-color: rgba(0, 0, 0, 0)
   background-size: 100%
   background-repeat: no-repeat
   transition: .3s

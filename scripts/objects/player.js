@@ -4,6 +4,8 @@ let player = {
     x: helperController.getCenterMapOnX(),
     y: config.mapSizeY,
     shootingCount: 0,
+    selectorName: "player",
+    extraSelectorName: null,
 
     move() {
         let possibleDirections = [
@@ -76,11 +78,12 @@ let player = {
                     player.x = x_value;
                     player.y = y_value
                 }
-                renderer.clear("player");
-                renderer.clear("invincibility");
-                renderer.renderPlayer();
                 bonusController.pickedCheck();
                 crashChecker.crashCheck(blockageController.blockagesArray, true);
+                if (player.invincibility) renderer.clear("invincibility");
+                renderer.clear(player.selectorName);
+                if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
+                renderer.renderPlayer();
             }
         })
     },

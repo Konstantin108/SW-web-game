@@ -65,6 +65,7 @@ let progressController = {
         helperController.removeAllTimers(bonusController.bonusTimerIdsArray);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
+        bonusController.bonusAppearanceListener();
         blockageController.blockageMove(blockageController.blockagesArray);
     },
 }

@@ -1,8 +1,8 @@
 class Bonus {
     static id = 0;
     id = Bonus.id++;
-    type = helperController.getRandomForBonus().type;
-    selectorName = helperController.getRandomForBonus().name;
+    objectType = helperController.getRandomForBonus();
+    selectorName = this.objectType.name;
     thisSelectorOverlay = [
         "enemyArrow"
     ];
@@ -28,7 +28,8 @@ class Bonus {
         }
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(bonusController.bonusesArray, this.thisSelectorOverlay);
-        this.picked();
+        this.getBonus(this.picked());
+        renderer.renderPlayer();
     }
 
     makeStep() {
@@ -36,16 +37,56 @@ class Bonus {
     }
 
     picked() {
+        let pickedBonus = null;
+
         if (player.x == this.x && player.y == this.y) {
             this.picked_x = this.x;
             this.picked_y = this.y;
             this.y = config.mapSizeY + 2;
-            renderer.clear(this.selectorName);
             renderer.renderPickedBonus(this);
+            pickedBonus = this;
             this.remove();
+            // console.log(pickedBonus);    // данные подобранного бонуса
+            return pickedBonus;
         }
         this.picked_x = null;
         this.picked_y = null;
+    }
+
+    getBonus(bonus) {
+        if (bonus) {
+            this.setNewPropertiesForPlayer(bonus.objectType);
+        }
+    }
+
+    setNewPropertiesForPlayer(bonus) {
+        if (bonus.playerOutlook) {
+            renderer.clear(player.selectorName);
+            player.selectorName = bonus.playerOutlook;
+            renderer.renderPlayer();
+            this.newPropertiesForPlayerOffCall(bonus);
+        }
+        if (bonus.playerExtraOutlook) {
+            crashChecker.invincibilityOff();
+            player.extraSelectorName = bonus.playerExtraOutlook;
+            this.newPropertiesForPlayerOffCall(bonus);
+        }
+    }
+
+    newPropertiesForPlayerOff(bonus) {
+        if (bonus.playerOutlook) {
+            renderer.clear(player.selectorName);
+            player.selectorName = "player";
+            renderer.renderPlayer();
+        }
+        if (bonus.playerExtraOutlook) {
+            renderer.clear(player.extraSelectorName);
+            player.extraSelectorName = null;
+        }
+    }
+
+    newPropertiesForPlayerOffCall(bonus) {
+        setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
     }
 
     remove() {
