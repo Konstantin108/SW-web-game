@@ -4,10 +4,9 @@ let config = {
     missReward: 1,
     shipDestroyedReward: 2,
     crashMulct: -100,
-    arrowSpeed: 50,
     enemyArrowSpeed: 200,
     invincibilityAfterCrash: 4000,
-    lives: 999,
+    lives: 5,
     bonuses: bonuses.setBonusesParams(this),
     levels: levels.setLevelsParams()
 }

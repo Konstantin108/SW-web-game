@@ -4,7 +4,7 @@ class Arrow {
     selectorName = "arrow";
     x = player.x;
     y = player.y - 1;
-    speed = config.arrowSpeed;
+    speed = 50;
     hit_x = null;
     hit_y = null;
 
@@ -38,7 +38,7 @@ class Arrow {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
                 this.y = -1;
-                renderer.clear(this.selectorName)
+                renderer.clear(this.selectorName);
                 renderer.renderHit(this);
                 progressController.scoreUp(config.shipDestroyedReward);
                 progressController.shipDestroyer += 1;

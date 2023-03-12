@@ -1,9 +1,19 @@
 let arrowController = {
+    arrowTypes: {
+        "arrow": Arrow,
+        "arrow-drill": ArrowDrill,
+        "arrow-trinity": ArrowTrinity
+    },
     arrowsArray: [],
 
     arrowCreate() {
         while (this.arrowsArray.length < player.shootingCount) {
-            this.arrowsArray.push(new Arrow());
+            for (key in this.arrowTypes) {
+                if (key == player.arrowType) {
+                    this.arrowsArray.push(new this.arrowTypes[key]);
+                }
+            }
+
         }
     },
 

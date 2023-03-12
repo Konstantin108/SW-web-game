@@ -71,6 +71,10 @@ class Bonus {
             player.extraSelectorName = bonus.playerExtraOutlook;
             this.newPropertiesForPlayerOffCall(bonus);
         }
+        if (bonus.playerArrowType) {
+            player.arrowType = bonus.playerArrowType;
+            this.newPropertiesForPlayerOffCall(bonus);
+        }
     }
 
     newPropertiesForPlayerOff(bonus) {
@@ -82,6 +86,9 @@ class Bonus {
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);
             player.extraSelectorName = null;
+        }
+        if (bonus.playerArrowType) {
+            player.arrowType = "arrow";
         }
     }
 

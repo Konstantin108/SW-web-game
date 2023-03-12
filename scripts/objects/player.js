@@ -6,6 +6,7 @@ let player = {
     shootingCount: 0,
     selectorName: "player",
     extraSelectorName: null,
+    arrowType: "arrow",
 
     move() {
         let possibleDirections = [

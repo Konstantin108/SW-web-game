@@ -3,7 +3,7 @@ let bonusController = {
     bonusesArray: [],
 
     bonusAppearanceListener() {
-        this.bonusTimerIdsArray.push(setInterval(() => this.bonusCreate(), 2000));
+        this.bonusTimerIdsArray.push(setInterval(() => this.bonusCreate(), 5000));
     },
 
     bonusCreate() {

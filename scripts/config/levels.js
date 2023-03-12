@@ -13,7 +13,7 @@ let levels = {
             },
             {
                 levelNum: 2,
-                scoreCountForThisLevel: 60,
+                scoreCountForThisLevel: 200,
                 multiplier: 2,
                 blockagesCount: 5,
                 fireChance: 2,
@@ -22,7 +22,7 @@ let levels = {
             },
             {
                 levelNum: 3,
-                scoreCountForThisLevel: 100,
+                scoreCountForThisLevel: 600,
                 multiplier: 2,
                 blockagesCount: 5,
                 fireChance: 15,
@@ -31,7 +31,7 @@ let levels = {
             },
             {
                 levelNum: 4,
-                scoreCountForThisLevel: 200,
+                scoreCountForThisLevel: 1000,
                 multiplier: 3,
                 blockagesCount: 6,
                 fireChance: 18,
@@ -40,7 +40,7 @@ let levels = {
             },
             {
                 levelNum: 5,
-                scoreCountForThisLevel: 1200,
+                scoreCountForThisLevel: 1500,
                 multiplier: 4,
                 blockagesCount: 6,
                 fireChance: 20,
@@ -49,7 +49,7 @@ let levels = {
             },
             {
                 levelNum: "win",
-                scoreCountForThisLevel: 1500,
+                scoreCountForThisLevel: 1800,
                 multiplier: 0,
                 blockagesCount: 0,
                 fireChance: 0,
