@@ -1,9 +1,10 @@
 let bonuses = {
 
-    setBonusesParams(config) {
+    setBonusesParams() {
         return {
             bonusSpeed: 1500,
             bonusChance: 18,
+            // bonusChance: 90,
             bonusTypes: {
                 1: {
                     name: "drill",
@@ -12,10 +13,9 @@ let bonuses = {
                     playerArrowType: "arrow-drill",
                     chanceFrom: 0,
                     chanceTo: 35,
-                    itemToStorage: false,
+                    // chanceFrom: 0,
+                    // chanceTo: 1,
                     actionTime: 20000,
-                    limitOnMaxItemsInStorage: false,
-                    maxItemInStorage: false
                 },
                 2: {
                     name: "trinity",
@@ -24,10 +24,9 @@ let bonuses = {
                     playerArrowType: "arrow-trinity",
                     chanceFrom: 36,
                     chanceTo: 74,
-                    itemToStorage: false,
+                    // chanceFrom: 2,
+                    // chanceTo: 3,
                     actionTime: 20000,
-                    limitOnMaxItemsInStorage: false,
-                    maxItemInStorage: false
                 },
                 3: {
                     name: "shield",
@@ -36,10 +35,9 @@ let bonuses = {
                     playerArrowType: null,
                     chanceFrom: 75,
                     chanceTo: 89,
-                    itemToStorage: false,
+                    // chanceFrom: 4,
+                    // chanceTo: 5,
                     actionTime: 30000,
-                    limitOnMaxItemsInStorage: false,
-                    maxItemInStorage: false
                 },
                 4: {
                     name: "life",
@@ -48,10 +46,9 @@ let bonuses = {
                     playerArrowType: null,
                     chanceFrom: 90,
                     chanceTo: 98,
-                    itemToStorage: true,
+                    // chanceFrom: 8,
+                    // chanceTo: 100,
                     actionTime: null,
-                    limitOnMaxItemsInStorage: true,
-                    maxItemInStorage: config.lives
                 },
                 5: {
                     name: "killAll",
@@ -60,10 +57,9 @@ let bonuses = {
                     playerArrowType: null,
                     chanceFrom: 99,
                     chanceTo: 100,
-                    itemToStorage: true,
+                    // chanceFrom: 6,
+                    // chanceTo: 7,
                     actionTime: null,
-                    limitOnMaxItemsInStorage: true,
-                    maxItemInStorage: 1
                 }
             }
         }

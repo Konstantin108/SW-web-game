@@ -75,6 +75,13 @@ class Bonus {
             player.arrowType = bonus.playerArrowType;
             this.newPropertiesForPlayerOffCall(bonus);
         }
+        if (bonus.name == "life") {
+            if (player.lives < config.lives) {
+                player.lives += 1;
+                renderer.renderStatusBar();
+                renderer.renderHeartScaleAnimation();
+            }
+        }
     }
 
     newPropertiesForPlayerOff(bonus) {
@@ -95,6 +102,7 @@ class Bonus {
     newPropertiesForPlayerOffCall(bonus) {
         setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
     }
+
 
     remove() {
         let bonusArray = bonusController.bonusesArray;
