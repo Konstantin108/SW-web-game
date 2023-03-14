@@ -82,6 +82,11 @@ class Bonus {
                 renderer.renderHeartScaleAnimation();
             }
         }
+        if (bonus.name == "killAll") {
+            if (player.bombsCount < config.maxBombsCount) {
+                player.bombsCount += 1;   // рендерить часть статусбара с количеством бомб
+            }
+        }
     }
 
     newPropertiesForPlayerOff(bonus) {

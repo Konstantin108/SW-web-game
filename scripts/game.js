@@ -12,6 +12,7 @@ let game = {
         bonusController.bonusAppearanceListener();
         player.move();
         player.shoot();
+        player.useBomb();
     },
 
     quit() {

@@ -13,6 +13,7 @@ table
   margin-left: auto
   margin-right: auto
   background-color: rgba(255, 255, 255, .14)
+  transition: .2s
 
 td
   width: 50px
@@ -55,6 +56,9 @@ td
   display: flex
   flex-direction: column
   align-items: center
+
+.infoLabel
+  text-align: center
 
 .whiteScull
   background-image: url("../images/scull.png")
@@ -125,7 +129,7 @@ td
 
 .player-shield
   background-color: rgba(46, 232, 99, .7)
-  box-shadow: 0 0 30px greenyellow
+  box-shadow: 0 0 60px greenyellow
   border-radius: 50%
 
 .invincibility
@@ -216,3 +220,8 @@ td
   background-repeat: no-repeat
   transition: .3s
   transform: scale(1.8)
+
+.explosion
+  padding: 1px
+  background-color: rgba(255, 255, 255)
+  box-shadow: 0 0 280px white

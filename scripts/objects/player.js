@@ -7,6 +7,7 @@ let player = {
     selectorName: "player",
     extraSelectorName: null,
     arrowType: "arrow",
+    bombsCount: config.startBombsCount,
 
     move() {
         let possibleDirections = [
@@ -101,6 +102,19 @@ let player = {
                 player.shootingCount += 1;
                 arrowController.arrowCreate();
                 arrowController.arrowMove();
+            }
+        })
+    },
+
+    useBomb() {
+        let useBombBtnsArr = [
+            "ControlLeft",
+            "ControlRight"
+        ];
+
+        document.addEventListener("keydown", function (event) {
+            if (useBombBtnsArr.includes(event.code)) {
+                explosion.explode();
             }
         })
     }

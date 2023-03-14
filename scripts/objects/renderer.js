@@ -46,8 +46,14 @@ let renderer = {
         }, 500)
     },
 
-    renderHit(arrow) {
-        let hitPosition = document.querySelector(`[data-x="${arrow.hit_x}"][data-y="${arrow.hit_y}"]`);
+    renderHit(object) {
+        let hitPosition = null;
+
+        if (object.selectorName == "blockage") {
+            hitPosition = document.querySelector(`[data-x="${object.x}"][data-y="${object.y}"]`);
+        } else {
+            hitPosition = document.querySelector(`[data-x="${object.hit_x}"][data-y="${object.hit_y}"]`);
+        }
         if (hitPosition) {
             hitPosition.classList.add("hit");
             hitPosition.classList.remove("blockage");
@@ -55,6 +61,15 @@ let renderer = {
         setTimeout(() => {
             this.clear("hit");
         }, 500)
+    },
+
+    renderExplosion() {
+        let table = document.querySelector("table");
+
+        table.classList.add("explosion");
+        setTimeout(() => {
+            table.classList.remove("explosion");
+        }, 200);
     },
 
     renderPickedBonus(bonus) {
@@ -120,22 +135,22 @@ let renderer = {
         let hearts = document.querySelectorAll(".heart");
         let lostHearts = document.querySelectorAll(".lostHeart");
 
-        for (let heart = 0; heart <= hearts.length; heart++) {
-            if (hearts[heart]) {
-                hearts[heart].classList.add(`${selector}`);
+        hearts.forEach((heart) => {
+            if (heart) {
+                heart.classList.add(`${selector}`);
                 setTimeout(() => {
-                    hearts[heart].classList.remove(`${selector}`);
+                    heart.classList.remove(`${selector}`);
                 }, 300)
             }
-        }
-        for (let lostHeart = 0; lostHeart <= lostHearts.length; lostHeart++) {
-            if (lostHearts[lostHeart]) {
-                lostHearts[lostHeart].classList.add(`${selector}`);
+        });
+        lostHearts.forEach((lostHeart) => {
+            if (lostHeart) {
+                lostHeart.classList.add(`${selector}`);
                 setTimeout(() => {
-                    lostHearts[lostHeart].classList.remove(`${selector}`);
+                    lostHeart.classList.remove(`${selector}`);
                 }, 300)
             }
-        }
+        });
     },
 
     renderScullChangeColor() {

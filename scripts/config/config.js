@@ -7,6 +7,8 @@ let config = {
     enemyArrowSpeed: 200,
     invincibilityAfterCrash: 4000,
     lives: 5,
+    maxBombsCount: 1,
+    startBombsCount: 0,
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams()
 }

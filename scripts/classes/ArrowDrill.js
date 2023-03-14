@@ -9,10 +9,7 @@ class ArrowDrill extends Arrow {
             if (blockagesArray[i].x == this.x && blockagesArray[i].y == this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
-                renderer.renderHit(this);
-                progressController.scoreUp(config.shipDestroyedReward);
-                progressController.shipDestroyer += 1;
-                blockageController.blockagesArray[i] = new Blockage(helperController.getRandomInt(0, config.mapSizeX));
+                progressController.killEnemy(this, i);
                 renderer.renderStatusBar();
             }
         }

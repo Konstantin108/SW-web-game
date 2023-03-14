@@ -17,7 +17,7 @@ let templatePrinter = {
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer">
-                                    <div>
+                                    <div class="infoLabel">
                                         Уровень
                                     </div>
                                     <div>
@@ -29,7 +29,7 @@ let templatePrinter = {
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer">
-                                    <div>
+                                    <div class="infoLabel">
                                         Очки
                                     </div>
                                     <div>
@@ -41,7 +41,7 @@ let templatePrinter = {
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer">
-                                    <div>
+                                    <div class="infoLabel">
                                         Уничтожено противников
                                     </div>
                                     <div>
@@ -60,7 +60,7 @@ let templatePrinter = {
                 <div class="statusBarElement">
                     <strong>
                         <div class="infoContainer">
-                            <div>
+                            <div class="infoLabel">
                                 Жизни
                             </div>
                             <div>

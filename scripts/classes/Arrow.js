@@ -39,10 +39,7 @@ class Arrow {
                 this.hit_y = this.y;
                 this.y = -1;
                 renderer.clear(this.selectorName);
-                renderer.renderHit(this);
-                progressController.scoreUp(config.shipDestroyedReward);
-                progressController.shipDestroyer += 1;
-                blockageController.blockagesArray[i] = new Blockage(helperController.getRandomInt(0, config.mapSizeX));
+                progressController.killEnemy(this, i);
                 renderer.renderStatusBar();
                 this.remove();
             }

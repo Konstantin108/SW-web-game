@@ -3,7 +3,7 @@ let bonuses = {
     setBonusesParams() {
         return {
             bonusSpeed: 1500,
-            bonusChance: 18,
+            bonusChance: 30,
             // bonusChance: 90,
             bonusTypes: {
                 1: {
@@ -46,8 +46,8 @@ let bonuses = {
                     playerArrowType: null,
                     chanceFrom: 90,
                     chanceTo: 98,
-                    // chanceFrom: 8,
-                    // chanceTo: 100,
+                    // chanceFrom: 6,
+                    // chanceTo: 7,
                     actionTime: null,
                 },
                 5: {
@@ -57,8 +57,8 @@ let bonuses = {
                     playerArrowType: null,
                     chanceFrom: 99,
                     chanceTo: 100,
-                    // chanceFrom: 6,
-                    // chanceTo: 7,
+                    // chanceFrom: 8,
+                    // chanceTo: 100,
                     actionTime: null,
                 }
             }
