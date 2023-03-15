@@ -104,7 +104,7 @@ class Bonus {
         }
     }
 
-    newPropertiesForPlayerOffCall(bonus) {
+    newPropertiesForPlayerOffCall(bonus) {    // сбрасывать таймер при подборе нового бонуса
         setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
     }
 
