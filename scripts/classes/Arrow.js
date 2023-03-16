@@ -39,7 +39,7 @@ class Arrow {
                 this.hit_y = this.y;
                 this.y = -1;
                 renderer.clear(this.selectorName);
-                progressController.killEnemy(this, i);
+                progressController.killEnemy(this, i, 0);
                 renderer.renderStatusBar();
                 this.remove();
             }

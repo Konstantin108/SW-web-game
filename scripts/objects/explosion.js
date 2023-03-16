@@ -7,7 +7,7 @@ let explosion = {
             player.bombsCount += -1;
             renderer.renderExplosion();   // рендерить часть статусбара с количеством бомб
             for (let i = 0; i < blockagesArray.length; i++) {
-                progressController.killEnemy(blockagesArray[i], i);
+                progressController.killEnemy(blockagesArray[i], i, -8);
             }
             renderer.renderStatusBar();
         }

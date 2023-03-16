@@ -12,7 +12,7 @@ table {
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(255, 255, 255, 0.14);
-  transition: 0.2s;
+  transition: 0.8s;
 }
 
 td {
@@ -247,10 +247,27 @@ td {
   transform: scale(1.8);
 }
 
-.explosion {
-  padding: 1px;
+.flash {
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 280px white;
+  box-shadow: 0 0 360px white;
+}
+
+.explosion {
+  background-image: url("../images/explosion.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 320px #e1601d;
+  animation: explosion 0.8s;
+}
+
+@keyframes explosion {
+  from {
+    background-size: 50%;
+  }
+  to {
+    background-size: 260%;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

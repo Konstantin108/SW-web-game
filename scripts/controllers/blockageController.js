@@ -18,7 +18,7 @@ let blockageController = {
             let indexOfNumber = helperController.getRandomInt(0, actualPossiblePositionsArray.length);
             let x_pos = actualPossiblePositionsArray[indexOfNumber];
             if (x_pos) {
-                this.blockagesArray.push(new Blockage(x_pos));
+                this.blockagesArray.push(new Blockage(x_pos, 0));
             }
             actualPossiblePositionsArray.splice(indexOfNumber, 1);
         }

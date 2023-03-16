@@ -40,11 +40,11 @@ let progressController = {
         return this.score += scoreType * this.multiplier;
     },
 
-    killEnemy(coordinateObject, blockage) {
+    killEnemy(coordinateObject, blockage, y_pos) {
         renderer.renderHit(coordinateObject);
         this.scoreUp(config.shipDestroyedReward);
         this.shipDestroyer += 1;
-        blockageController.blockagesArray[blockage] = new Blockage(helperController.getRandomInt(0, config.mapSizeX));
+        blockageController.blockagesArray[blockage] = new Blockage(helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
     scoreDown() {

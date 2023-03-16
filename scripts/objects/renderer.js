@@ -66,10 +66,16 @@ let renderer = {
     renderExplosion() {
         let table = document.querySelector("table");
 
-        table.classList.add("explosion");
+        table.classList.add("flash");
+        setTimeout(() => {
+            table.classList.add("explosion");
+        }, 500);
+        setTimeout(() => {
+            table.classList.remove("flash");
+        }, 2000);
         setTimeout(() => {
             table.classList.remove("explosion");
-        }, 200);
+        }, 1800);
     },
 
     renderPickedBonus(bonus) {

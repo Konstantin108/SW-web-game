@@ -13,7 +13,7 @@ table
   margin-left: auto
   margin-right: auto
   background-color: rgba(255, 255, 255, .14)
-  transition: .2s
+  transition: .8s
 
 td
   width: 50px
@@ -141,7 +141,7 @@ td
   to
     opacity: .3
 
-//  стили движущихся объектов и столкновений
+//  стили движущихся объектов
 
 .blockage
   background-image: url("../images/blockage.png")
@@ -196,6 +196,8 @@ td
   background-size: 100%
   background-repeat: no-repeat
 
+//  стили взаимодействий
+
 .picked
   background-image: url("../images/picked.png")
   background-color: rgba(0, 0, 0, 0)
@@ -221,7 +223,21 @@ td
   transition: .3s
   transform: scale(1.8)
 
-.explosion
-  padding: 1px
+.flash
   background-color: rgba(255, 255, 255)
-  box-shadow: 0 0 280px white
+  box-shadow: 0 0 360px white
+
+.explosion
+  background-image: url("../images/explosion.png")
+  background-position: center
+  background-repeat: no-repeat
+  background-color: rgba(255, 255, 255)
+  box-shadow: 0 0 320px #e1601d
+  animation: explosion .8s
+
+@keyframes explosion
+  from
+    background-size: 50%
+  to
+    background-size: 260%
+

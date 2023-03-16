@@ -13,7 +13,7 @@ let crashChecker = {
                         renderer.renderCrash();
                         if (player.lives > 1) {
                             player.lives += -1;
-                            if (createNewBlockage) dangerArray[i] = new Blockage(helperController.getRandomInt(0, config.mapSizeX));
+                            if (createNewBlockage) dangerArray[i] = new Blockage(helperController.getRandomInt(0, config.mapSizeX), 0);
                             // progressController.scoreDown();       // потеря очков при аварии отключена
                             player.invincibility = true;
                             this.invincibilityOffCall();

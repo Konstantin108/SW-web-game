@@ -9,7 +9,7 @@ class ArrowDrill extends Arrow {
             if (blockagesArray[i].x == this.x && blockagesArray[i].y == this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
-                progressController.killEnemy(this, i);
+                progressController.killEnemy(this, i, 0);
                 renderer.renderStatusBar();
             }
         }

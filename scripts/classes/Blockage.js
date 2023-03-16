@@ -1,9 +1,9 @@
 class Blockage {
-    constructor(x) {
+    constructor(x, y) {
         this.x = x;
+        this.y = y;
     }
 
-    y = 0;
     selectorName = "blockage";
     thisSelectorOverlay = [
         "drill",
