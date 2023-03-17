@@ -81,9 +81,9 @@ let renderer = {
     renderPickedBonus(bonus) {
         let pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`);
         if (pickedBonusPosition) {
+            pickedBonusPosition.classList.remove(`${bonus.name}`);
             pickedBonusPosition.classList.remove(player.selectorName);
             pickedBonusPosition.classList.add("picked");
-            pickedBonusPosition.classList.remove(`${bonus.name}`);
         }
         setTimeout(() => {
             this.clear("picked");

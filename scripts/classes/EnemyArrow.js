@@ -41,9 +41,6 @@ class EnemyArrow {
             crashChecker.crashCheck(enemyArrowController.enemyArrowsArray);
             this.y = config.mapSizeY + 2;
             renderer.clear(this.selectorName);
-            renderer.renderStatusBar();
-            renderer.renderHeartScaleAnimation();
-            renderer.renderScullChangeColor();
             this.remove();
         }
         this.hit_x = null;
