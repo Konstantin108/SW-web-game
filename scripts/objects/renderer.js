@@ -66,6 +66,43 @@ let renderer = {
         }, 500);
     },
 
+    renderSuperAbility() {
+        let superAbilityAbimationStartY = player.y - 1;
+        let superAbilityAbimationStartX = player.x;
+
+        for (let i = superAbilityAbimationStartY; i >= 0; i--) {
+            let superAbilityFlashCenterLinePosition = document.querySelector(`[data-x="${superAbilityAbimationStartX}"][data-y="${i}"]`);
+            if (superAbilityFlashCenterLinePosition) {
+                superAbilityFlashCenterLinePosition.classList.add("superAbilityCenterLine");
+            }
+            if (i <= superAbilityAbimationStartY - 1) {
+                let superAbilityFlashLeftSecondPosition = document.querySelector(`[data-x="${superAbilityAbimationStartX + 1}"][data-y="${i}"]`);
+                if (superAbilityFlashLeftSecondPosition) {
+                    superAbilityFlashLeftSecondPosition.classList.add("superAbilitySecondLine");
+                }
+                let superAbilityFlashRightSecondPosition = document.querySelector(`[data-x="${superAbilityAbimationStartX - 1}"][data-y="${i}"]`);
+                if (superAbilityFlashRightSecondPosition) {
+                    superAbilityFlashRightSecondPosition.classList.add("superAbilitySecondLine");
+                }
+            }
+            if (i <= superAbilityAbimationStartY - 2) {
+                let superAbilityFlashLeftThirdPosition = document.querySelector(`[data-x="${superAbilityAbimationStartX + 2}"][data-y="${i}"]`);
+                if (superAbilityFlashLeftThirdPosition) {
+                    superAbilityFlashLeftThirdPosition.classList.add("superAbilityThirdLine");
+                }
+                let superAbilityFlashRightThirdPosition = document.querySelector(`[data-x="${superAbilityAbimationStartX - 2}"][data-y="${i}"]`);
+                if (superAbilityFlashRightThirdPosition) {
+                    superAbilityFlashRightThirdPosition.classList.add("superAbilityThirdLine");
+                }
+            }
+            setTimeout(() => {
+                this.clear("superAbilityCenterLine");
+                this.clear("superAbilitySecondLine",);
+                this.clear("superAbilityThirdLine");
+            }, 200);
+        }
+    },
+
     renderExplosion() {
         let table = document.querySelector("table");
 

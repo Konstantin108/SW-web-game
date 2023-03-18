@@ -87,7 +87,7 @@ let player = {
                 if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
                 renderer.renderPlayer();
             }
-        })
+        });
     },
 
     shoot() {
@@ -103,19 +103,37 @@ let player = {
                 arrowController.arrowCreate();
                 arrowController.arrowMove();
             }
-        })
+        });
     },
 
     useBomb() {
-        let useBombBtnsArr = [
-            "ControlLeft",
-            "ControlRight"
-        ];
+        let useBombBtn = "ControlRight";
 
         document.addEventListener("keydown", function (event) {
-            if (useBombBtnsArr.includes(event.code)) {
+            if (useBombBtn == event.code) {
                 explosion.explode();
             }
-        })
+        });
+    },
+
+    useSuperAbility() {
+        let blockagesArray = blockageController.blockagesArray;
+        let useSuperAbilityBtn = "ControlLeft";
+
+        document.addEventListener("keydown", function (event) {
+            if (useSuperAbilityBtn == event.code) {
+                for (let i = 0; i < blockagesArray.length; i++) {
+                    if (blockagesArray[i].x == player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
+                        blockagesArray[i].x == player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                        blockagesArray[i].x == player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
+                        blockagesArray[i].x == player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                        blockagesArray[i].x == player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
+                        progressController.killEnemy(blockagesArray[i], i, -3);
+                        renderer.renderStatusBar();
+                    }
+                }
+                renderer.renderSuperAbility();
+            }
+        });
     }
 }

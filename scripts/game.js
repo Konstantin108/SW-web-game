@@ -13,6 +13,7 @@ let game = {
         player.move();
         player.shoot();
         player.useBomb();
+        player.useSuperAbility();
     },
 
     quit() {
@@ -22,7 +23,7 @@ let game = {
             if (event.code == quitBtn) {
                 game.over();
             }
-        })
+        });
     },
 
     over(win = false) {
