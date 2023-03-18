@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:500,500i,600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap");
-html {
+body {
   background-image: url("../images/background-space.jpg");
   background-repeat: no-repeat;
   background-color: #453d4c;
@@ -13,6 +13,7 @@ table {
   margin-right: auto;
   background-color: rgba(255, 255, 255, 0.14);
   transition: 0.8s;
+  position: relative;
 }
 
 td {
@@ -106,10 +107,10 @@ td {
 }
 
 .heartScale {
-  animation: heart-scale 0.3s;
+  animation: scale 0.3s;
 }
 
-@keyframes heart-scale {
+@keyframes scale {
   from {
     scale: 1.2;
   }
@@ -117,6 +118,45 @@ td {
     scale: 1;
   }
 }
+#bombBar {
+  background-image: url("../images/background-rusty-iron2.jpg");
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  position: absolute;
+  left: 100%;
+  top: 91.1%;
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
+  transition: 0.2s;
+}
+
+.bomb {
+  background-image: url("../images/bomb.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+  animation: scale 0.3s;
+}
+
+.emptyBomb {
+  background-image: url("../images/empty-bomb.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+  animation: scale 0.3s;
+}
+
+.redBomb {
+  background-image: url("../images/red-bomb.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+  animation: scale 0.3s;
+}
+
 .player {
   background-image: url("../images/player.png");
   background-size: 100%;

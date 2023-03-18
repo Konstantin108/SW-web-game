@@ -3,6 +3,8 @@ let renderer = {
     y: config.mapSizeY,
     map: "",
     statusBar: null,
+    superAbilityBar: null,
+    bombBar: null,
     container: document.querySelector("#container"),
 
     render() {
@@ -11,6 +13,7 @@ let renderer = {
         this.container.insertAdjacentHTML("afterbegin", renderedMap);
         this.renderPlayer();
         this.renderStatusBar();
+        this.renderBombBar();
     },
 
     renderMap() {
@@ -43,7 +46,7 @@ let renderer = {
         crashPosition.classList.add("crash");
         setTimeout(() => {
             this.clear("crash");
-        }, 500)
+        }, 500);
     },
 
     renderHit(object) {
@@ -60,7 +63,7 @@ let renderer = {
         }
         setTimeout(() => {
             this.clear("hit");
-        }, 500)
+        }, 500);
     },
 
     renderExplosion() {
@@ -87,7 +90,7 @@ let renderer = {
         }
         setTimeout(() => {
             this.clear("picked");
-        }, 500)
+        }, 500);
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {
@@ -114,6 +117,29 @@ let renderer = {
 
         if (statusBar) this.container.removeChild(statusBar);
         this.container.insertAdjacentHTML("beforeend", this.statusBar);
+    },
+
+    renderBombBar(playerHasBomb = true) {
+        let table = document.querySelector("table");
+        let bombElement = document.querySelector("#bombBar");
+        let bomb = null;
+
+        if (bombElement) table.removeChild(bombElement);
+        if (player.bombsCount < 1) {
+            bomb = `<div class="emptyBomb"></div>`;
+        } else {
+            bomb = `<div class="bomb"></div>`;
+        }
+
+        if (!playerHasBomb) {
+            bomb = `<div class="redBomb"></div>`;
+            setTimeout(() => {
+                this.renderBombBar();
+            }, 200);
+        }
+
+        this.bombBar = templatePrinter.bombBarTemplatePrint(bomb);
+        table.insertAdjacentHTML("afterbegin", this.bombBar);
     },
 
     renderLivesBar() {          // если больше 5 жизней то будет отрисовано простое табло
@@ -146,7 +172,7 @@ let renderer = {
                 heart.classList.add(`${selector}`);
                 setTimeout(() => {
                     heart.classList.remove(`${selector}`);
-                }, 300)
+                }, 300);
             }
         });
         lostHearts.forEach((lostHeart) => {
@@ -154,7 +180,7 @@ let renderer = {
                 lostHeart.classList.add(`${selector}`);
                 setTimeout(() => {
                     lostHeart.classList.remove(`${selector}`);
-                }, 300)
+                }, 300);
             }
         });
     },

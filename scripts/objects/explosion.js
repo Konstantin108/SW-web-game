@@ -2,6 +2,7 @@ let explosion = {
 
     explode() {
         let blockagesArray = blockageController.blockagesArray;
+        let playerHasBomb = true;
 
         if (player.bombsCount > 0) {
             player.bombsCount += -1;
@@ -10,6 +11,10 @@ let explosion = {
                 progressController.killEnemy(blockagesArray[i], i, -8);
             }
             renderer.renderStatusBar();
+            renderer.renderBombBar();
+        } else {
+            playerHasBomb = false;
+            renderer.renderBombBar(playerHasBomb);
         }
     }
 }

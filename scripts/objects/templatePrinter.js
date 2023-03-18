@@ -76,5 +76,12 @@ let templatePrinter = {
                 <div id="heartsBar">
                     ${heartsBox}
                 </div>`;
+    },
+
+    bombBarTemplatePrint(bomb) {
+        return `
+                <div id="bombBar">
+                    ${bomb}
+                </div>`;
     }
 }

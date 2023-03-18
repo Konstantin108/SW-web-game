@@ -84,7 +84,8 @@ class Bonus {
         }
         if (bonus.name == "killAll") {
             if (player.bombsCount < config.maxBombsCount) {
-                player.bombsCount += 1;   // рендерить часть статусбара с количеством бомб
+                player.bombsCount += 1;
+                renderer.renderBombBar();
             }
         }
     }
@@ -107,7 +108,6 @@ class Bonus {
     newPropertiesForPlayerOffCall(bonus) {    // сбрасывать таймер при подборе нового бонуса
         setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
     }
-
 
     remove() {
         let bonusArray = bonusController.bonusesArray;
