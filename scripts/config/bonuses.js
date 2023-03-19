@@ -4,7 +4,7 @@ let bonuses = {
         return {
             bonusSpeed: 1500,
             bonusChance: 30,
-            // bonusChance: 90,
+            // bonusChance: 96,
             bonusTypes: {
                 1: {
                     name: "drill",
