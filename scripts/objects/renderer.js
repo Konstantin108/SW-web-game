@@ -204,7 +204,7 @@ let renderer = {
         let hearts = document.querySelectorAll(".heart");
         let lostHearts = document.querySelectorAll(".lostHeart");
 
-        hearts.forEach((heart) => {
+        hearts.forEach(heart => {
             if (heart) {
                 heart.classList.add(`${selector}`);
                 setTimeout(() => {
@@ -212,7 +212,7 @@ let renderer = {
                 }, 300);
             }
         });
-        lostHearts.forEach((lostHeart) => {
+        lostHearts.forEach(lostHeart => {
             if (lostHeart) {
                 lostHeart.classList.add(`${selector}`);
                 setTimeout(() => {
