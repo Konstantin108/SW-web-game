@@ -44,9 +44,7 @@ let renderer = {
         let crashPosition = document.querySelector(`[data-x="${crashChecker.x}"][data-y="${crashChecker.y}"]`);
         crashPosition.classList.remove("blockage");
         crashPosition.classList.add("crash");
-        setTimeout(() => {
-            this.clear("crash");
-        }, 500);
+        setTimeout(() => this.clear("crash"), 500);
     },
 
     renderHit(object) {
@@ -61,9 +59,7 @@ let renderer = {
             hitPosition.classList.add("hit");
             hitPosition.classList.remove("blockage");
         }
-        setTimeout(() => {
-            this.clear("hit");
-        }, 500);
+        setTimeout(() => this.clear("hit"), 500);
     },
 
     renderSuperAbility() {
@@ -97,7 +93,7 @@ let renderer = {
             }
             setTimeout(() => {
                 this.clear("superAbilityCenterLine");
-                this.clear("superAbilitySecondLine",);
+                this.clear("superAbilitySecondLine");
                 this.clear("superAbilityThirdLine");
             }, 200);
         }
@@ -107,15 +103,9 @@ let renderer = {
         let table = document.querySelector("table");
 
         table.classList.add("flash");
-        setTimeout(() => {
-            table.classList.add("explosion");
-        }, 500);
-        setTimeout(() => {
-            table.classList.remove("flash");
-        }, 2000);
-        setTimeout(() => {
-            table.classList.remove("explosion");
-        }, 1800);
+        setTimeout(() => table.classList.add("explosion"), 500);
+        setTimeout(() => table.classList.remove("flash"), 2000);
+        setTimeout(() => table.classList.remove("explosion"), 1800);
     },
 
     renderPickedBonus(bonus) {
@@ -125,9 +115,7 @@ let renderer = {
             pickedBonusPosition.classList.remove(player.selectorName);
             pickedBonusPosition.classList.add("picked");
         }
-        setTimeout(() => {
-            this.clear("picked");
-        }, 500);
+        setTimeout(() => this.clear("picked"), 500);
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {
@@ -170,9 +158,7 @@ let renderer = {
 
         if (!playerHasBomb) {
             bomb = `<div class="redBomb"></div>`;
-            setTimeout(() => {
-                this.renderBombBar();
-            }, 200);
+            setTimeout(() => this.renderBombBar(), 200);
         }
 
         this.bombBar = templatePrinter.bombBarTemplatePrint(bomb);
@@ -207,17 +193,13 @@ let renderer = {
         hearts.forEach(heart => {
             if (heart) {
                 heart.classList.add(`${selector}`);
-                setTimeout(() => {
-                    heart.classList.remove(`${selector}`);
-                }, 300);
+                setTimeout(() => heart.classList.remove(`${selector}`), 300);
             }
         });
         lostHearts.forEach(lostHeart => {
             if (lostHeart) {
                 lostHeart.classList.add(`${selector}`);
-                setTimeout(() => {
-                    lostHeart.classList.remove(`${selector}`);
-                }, 300);
+                setTimeout(() => lostHeart.classList.remove(`${selector}`), 300);
             }
         });
     },
@@ -237,8 +219,6 @@ let renderer = {
 
     clear(selector) {
         let removeTargets = document.querySelectorAll(`.${selector}`);
-        removeTargets.forEach(removeTarget => {
-            removeTarget.classList.remove(`${selector}`);
-        });
+        removeTargets.forEach(removeTarget => removeTarget.classList.remove(`${selector}`));
     }
 }
