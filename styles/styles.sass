@@ -261,15 +261,27 @@ td
 
 .superAbilityCenterLine
   background-color: white
-  box-shadow: 0 0 100px #e6e673
+  box-shadow: 0 0 250px #e6e673
 
 .superAbilitySecondLine
   background-color: yellow
-  box-shadow: 0 0 100px #cea72e
+  box-shadow: 0 0 250px #cea72e
+  transition: .2s
+  animation: superAbilityGrowsInWidth .2s
 
 .superAbilityThirdLine
   background-color: orange
-  box-shadow: 0 0 100px #c14a2e
+  box-shadow: 0 0 250px #c14a2e
+  transition: .4s
+  animation: superAbilityGrowsInWidth .4s
+
+@keyframes superAbilityGrowsInWidth
+  from
+    width: 0
+    opacity: .8
+  to
+    width: 50px
+    opacity: 1
 
 .flash
   background-color: rgba(255, 255, 255)
@@ -288,4 +300,3 @@ td
     background-size: 50%
   to
     background-size: 260%
-

@@ -289,19 +289,33 @@ td {
 
 .superAbilityCenterLine {
   background-color: white;
-  box-shadow: 0 0 100px #e6e673;
+  box-shadow: 0 0 250px #e6e673;
 }
 
 .superAbilitySecondLine {
   background-color: yellow;
-  box-shadow: 0 0 100px #cea72e;
+  box-shadow: 0 0 250px #cea72e;
+  transition: 0.2s;
+  animation: superAbilityGrowsInWidth 0.2s;
 }
 
 .superAbilityThirdLine {
   background-color: orange;
-  box-shadow: 0 0 100px #c14a2e;
+  box-shadow: 0 0 250px #c14a2e;
+  transition: 0.4s;
+  animation: superAbilityGrowsInWidth 0.4s;
 }
 
+@keyframes superAbilityGrowsInWidth {
+  from {
+    width: 0;
+    opacity: 0.8;
+  }
+  to {
+    width: 50px;
+    opacity: 1;
+  }
+}
 .flash {
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 360px white;
