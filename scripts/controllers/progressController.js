@@ -8,6 +8,10 @@ let progressController = {
     blockagesCount: 0,
     score: 0,
     shipDestroyer: 0,
+    shipDestroyedCounterForSuperAbilityCharge: 0,
+    superAbilityCharge: 0,
+
+    superAbilityIsCharged: config.superAbilityIsCharged,
 
     progress() {
         this.blockagesCount = this.compareBlockagesCountAndMapSizeX(config.levels[0].blockagesCount);
@@ -44,6 +48,7 @@ let progressController = {
         renderer.renderHit(coordinateObject);
         this.scoreUp(config.shipDestroyedReward);
         this.shipDestroyer += 1;
+        this.superAbilityCharging();
         blockageController.blockagesArray[blockage] = new Blockage(helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
@@ -54,6 +59,24 @@ let progressController = {
         if (score < 0) score = 0;
         this.score = score;
         return this.score;
+    },
+
+    superAbilityCharging() {
+        if (!player.superAbilityIsActivated) {
+            this.shipDestroyedCounterForSuperAbilityCharge += 1;
+            if (this.shipDestroyedCounterForSuperAbilityCharge % 10 == 0) {
+                this.superAbilityCharge += 1;
+                console.log(this.superAbilityCharge);
+            }
+            console.log(this.shipDestroyedCounterForSuperAbilityCharge);
+        }
+        if (this.superAbilityCharge == this.superAbilityIsCharged) {
+            player.superAbilityIsActivated = true;
+            this.shipDestroyedCounterForSuperAbilityCharge = 0;
+            this.superAbilityCharge = 0;
+            console.log('from progressController');
+            console.log(player.superAbilityIsActivated);
+        }
     },
 
     compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {           // blockegesCount не может быть больше config.mapSizeX

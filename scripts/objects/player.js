@@ -8,6 +8,7 @@ let player = {
     extraSelectorName: null,
     arrowType: "arrow",
     bombsCount: config.startBombsCount,
+    superAbilityIsActivated: config.superAbilityIsActivated,
 
     move() {
         let possibleDirections = [
@@ -122,17 +123,24 @@ let player = {
 
         document.addEventListener("keydown", function (event) {
             if (useSuperAbilityBtn == event.code) {
-                for (let i = 0; i < blockagesArray.length; i++) {
-                    if (blockagesArray[i].x == player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x == player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x == player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x == player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x == player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
-                        progressController.killEnemy(blockagesArray[i], i, -3);
-                        renderer.renderStatusBar();
+
+                console.log(player.superAbilityIsActivated);
+                if (player.superAbilityIsActivated) {
+                    for (let i = 0; i < blockagesArray.length; i++) {
+                        if (blockagesArray[i].x == player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x == player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x == player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x == player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x == player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
+                            progressController.killEnemy(blockagesArray[i], i, -3);
+                            renderer.renderStatusBar();
+                        }
                     }
+                    player.superAbilityIsActivated = false;
+                    renderer.renderSuperAbility();
+                }else{
+                    // анимация невозможно выстрелить
                 }
-                renderer.renderSuperAbility();
             }
         });
     }

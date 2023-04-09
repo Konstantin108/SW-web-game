@@ -9,6 +9,8 @@ let config = {
     lives: 5,
     maxBombsCount: 1,
     startBombsCount: 0,
+    superAbilityIsActivated: false,
+    superAbilityIsCharged: 2,
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams()
 }
