@@ -60,19 +60,18 @@ class Bonus {
     }
 
     setNewPropertiesForPlayer(bonus) {
-        if (bonus.playerOutlook) {
+        if (bonus.playerArrowType) {
             renderer.clear(player.selectorName);
             player.selectorName = bonus.playerOutlook;
+            player.arrowType = bonus.playerArrowType;
             renderer.renderPlayer();
+            this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
         }
         if (bonus.playerExtraOutlook) {
             crashChecker.invincibilityOff();
             player.extraSelectorName = bonus.playerExtraOutlook;
-            this.newPropertiesForPlayerOffCall(bonus);
-        }
-        if (bonus.playerArrowType) {
-            player.arrowType = bonus.playerArrowType;
+            this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
         }
         if (bonus.name == "life") {
@@ -91,22 +90,31 @@ class Bonus {
     }
 
     newPropertiesForPlayerOff(bonus) {
-        if (bonus.playerOutlook) {
+        if (bonus.playerArrowType) {
             renderer.clear(player.selectorName);
             player.selectorName = "player";
+            player.arrowType = "arrow";
             renderer.renderPlayer();
         }
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);
             player.extraSelectorName = null;
         }
+    }
+
+    newPropertiesForPlayerOffCall(bonus) {
+        let timerId = setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
         if (bonus.playerArrowType) {
-            player.arrowType = "arrow";
+            player.bonusNewArrowTypeIsActivatedTimerId = timerId;
+        } else {
+            player.bonusShieldIsActivatedTimerId = timerId;
         }
     }
 
-    newPropertiesForPlayerOffCall(bonus) {    // сбрасывать таймер при подборе нового бонуса
-        setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
+    newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId) {
+        if (bonusIsActivatedTimerId) {
+            clearTimeout(bonusIsActivatedTimerId);
+        }
     }
 
     remove() {

@@ -9,6 +9,8 @@ let player = {
     arrowType: "arrow",
     bombsCount: config.startBombsCount,
     superAbilityIsActivated: config.superAbilityIsActivated,
+    bonusNewArrowTypeIsActivatedTimerId: null,
+    bonusShieldIsActivatedTimerId: null,
 
     move() {
         let possibleDirections = [
@@ -138,7 +140,7 @@ let player = {
                     }
                     player.superAbilityIsActivated = false;
                     renderer.renderSuperAbility();
-                }else{
+                } else {
                     // анимация невозможно выстрелить
                 }
             }

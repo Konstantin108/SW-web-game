@@ -10,7 +10,6 @@ let progressController = {
     shipDestroyer: 0,
     shipDestroyedCounterForSuperAbilityCharge: 0,
     superAbilityCharge: 0,
-
     superAbilityIsCharged: config.superAbilityIsCharged,
 
     progress() {
