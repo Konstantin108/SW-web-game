@@ -17,7 +17,7 @@ class EnemyArrow {
             y_pos += 1;
             if (y_pos <= config.mapSizeY) {
                 this.y = y_pos;
-            } else if (y_pos == config.mapSizeY + 1) {
+            } else if (y_pos === config.mapSizeY + 1) {
                 y_pos = config.mapSizeY + 2;
                 this.y = y_pos;
                 renderer.clear(this.selectorName);
@@ -35,7 +35,7 @@ class EnemyArrow {
     }
 
     hit() {
-        if (player.x == this.x && player.y == this.y) {
+        if (player.x === this.x && player.y === this.y) {
             this.hit_x = this.x;
             this.hit_y = this.y;
             crashChecker.crashCheck(enemyArrowController.enemyArrowsArray);
@@ -52,7 +52,7 @@ class EnemyArrow {
 
         for (let i = 0; i <= enemyArrowsArray.length; i++) {
             if (enemyArrowsArray[i]) {
-                if (enemyArrowsArray[i].id == this.id) {
+                if (enemyArrowsArray[i].id === this.id) {
                     clearInterval(this.makeStep());
                     enemyArrowController.enemyArrowsArray.splice(i, 1);
                 }

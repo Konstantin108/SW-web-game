@@ -50,7 +50,7 @@ let renderer = {
     renderHit(object) {
         let hitPosition = null;
 
-        if (object.selectorName == "blockage") {
+        if (object.selectorName === "blockage") {
             hitPosition = document.querySelector(`[data-x="${object.x}"][data-y="${object.y}"]`);
         } else {
             hitPosition = document.querySelector(`[data-x="${object.hit_x}"][data-y="${object.hit_y}"]`);

@@ -14,7 +14,7 @@ class Arrow {
             y_pos += -1;
             if (y_pos >= -1) {
                 this.y = y_pos;
-            } else if (y_pos == -2) {
+            } else if (y_pos === -2) {
                 y_pos = -3;
                 this.y = y_pos;
                 this.remove();
@@ -34,7 +34,7 @@ class Arrow {
         let blockagesArray = blockageController.blockagesArray;
 
         for (let i = 0; i < blockagesArray.length; i++) {
-            if (blockagesArray[i].x == this.x && blockagesArray[i].y == this.y) {
+            if (blockagesArray[i].x === this.x && blockagesArray[i].y === this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
                 this.y = -1;
@@ -53,7 +53,7 @@ class Arrow {
 
         for (let i = 0; i <= arrowsArray.length; i++) {
             if (arrowsArray[i]) {
-                if (arrowsArray[i].id == this.id) {
+                if (arrowsArray[i].id === this.id) {
                     clearInterval(this.makeStep());
                     arrowsArray.splice(i, 1);
                     player.shootingCount += -1;

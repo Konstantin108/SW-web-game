@@ -19,7 +19,7 @@ let progressController = {
         blockageController.blockageCreate(this.blockagesCount);
 
         for (let i = 1; i < this.levels.length; i++) {
-            if (this.levels[i].scoreCountForThisLevel < this.score && this.levels.length == levelsLeft) {
+            if (this.levels[i].scoreCountForThisLevel < this.score && this.levels.length === levelsLeft) {
                 if (this.levels.length > 2) {
                     this.level = this.levels[i].levelNum;
                     this.multiplier = this.levels[i].multiplier;
@@ -63,13 +63,13 @@ let progressController = {
     superAbilityCharging() {
         if (!player.superAbilityIsActivated) {
             this.shipDestroyedCounterForSuperAbilityCharge += 1;
-            if (this.shipDestroyedCounterForSuperAbilityCharge % 10 == 0) {
+            if (this.shipDestroyedCounterForSuperAbilityCharge % 10 === 0) {
                 this.superAbilityCharge += 1;
                 console.log(this.superAbilityCharge);
             }
             console.log(this.shipDestroyedCounterForSuperAbilityCharge);
         }
-        if (this.superAbilityCharge == this.superAbilityIsCharged) {
+        if (this.superAbilityCharge === this.superAbilityIsCharged) {
             player.superAbilityIsActivated = true;
             this.shipDestroyedCounterForSuperAbilityCharge = 0;
             this.superAbilityCharge = 0;

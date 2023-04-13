@@ -6,7 +6,7 @@ class ArrowDrill extends Arrow {
         let blockagesArray = blockageController.blockagesArray;
 
         for (let i = 0; i < blockagesArray.length; i++) {
-            if (blockagesArray[i].x == this.x && blockagesArray[i].y == this.y) {
+            if (blockagesArray[i].x === this.x && blockagesArray[i].y === this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
                 progressController.killEnemy(this, i, 0);

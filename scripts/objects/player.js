@@ -113,7 +113,7 @@ let player = {
         let useBombBtn = "ControlRight";
 
         document.addEventListener("keydown", function (event) {
-            if (useBombBtn == event.code) {
+            if (useBombBtn === event.code) {
                 explosion.explode();
             }
         });
@@ -124,16 +124,16 @@ let player = {
         let useSuperAbilityBtn = "ControlLeft";
 
         document.addEventListener("keydown", function (event) {
-            if (useSuperAbilityBtn == event.code) {
+            if (useSuperAbilityBtn === event.code) {
 
                 console.log(player.superAbilityIsActivated);
                 if (player.superAbilityIsActivated) {
                     for (let i = 0; i < blockagesArray.length; i++) {
-                        if (blockagesArray[i].x == player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
-                            blockagesArray[i].x == player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                            blockagesArray[i].x == player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
-                            blockagesArray[i].x == player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                            blockagesArray[i].x == player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
+                        if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x === player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x === player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                            blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
                             progressController.killEnemy(blockagesArray[i], i, -3);
                             renderer.renderStatusBar();
                         }

@@ -33,7 +33,7 @@ let helperController = {
     getCenterMapOnX() {
         let center = null;
 
-        if (config.mapSizeX % 2 == 0) {
+        if (config.mapSizeX % 2 === 0) {
             center = config.mapSizeX / 2;
         } else {
             center = (config.mapSizeX - 1) / 2 + 1;
@@ -44,7 +44,7 @@ let helperController = {
     getCenterMapOnY() {
         let center = null;
 
-        if (config.mapSizeY % 2 == 0) {
+        if (config.mapSizeY % 2 === 0) {
             center = config.mapSizeY / 2;
         } else {
             center = (config.mapSizeY - 1) / 2 + 1;

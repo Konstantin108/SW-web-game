@@ -18,7 +18,7 @@ class Bonus {
             y_pos += 1;
             if (y_pos <= config.mapSizeY) {
                 this.y = y_pos;
-            } else if (y_pos == config.mapSizeY + 1) {
+            } else if (y_pos === config.mapSizeY + 1) {
                 y_pos = config.mapSizeY + 2;
                 this.y = y_pos;
                 renderer.clear(this.selectorName);
@@ -39,7 +39,7 @@ class Bonus {
     picked() {
         let pickedBonus = null;
 
-        if (player.x == this.x && player.y == this.y) {
+        if (player.x === this.x && player.y === this.y) {
             this.picked_x = this.x;
             this.picked_y = this.y;
             this.y = config.mapSizeY + 2;
@@ -74,14 +74,14 @@ class Bonus {
             this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
         }
-        if (bonus.name == "life") {
+        if (bonus.name === "life") {
             if (player.lives < config.lives) {
                 player.lives += 1;
                 renderer.renderStatusBar();
                 renderer.renderHeartScaleAnimation();
             }
         }
-        if (bonus.name == "killAll") {
+        if (bonus.name === "killAll") {
             if (player.bombsCount < config.maxBombsCount) {
                 player.bombsCount += 1;
                 renderer.renderBombBar();
@@ -122,7 +122,7 @@ class Bonus {
 
         for (let i = 0; i <= bonusArray.length; i++) {
             if (bonusArray[i]) {
-                if (bonusArray[i].id == this.id) {
+                if (bonusArray[i].id === this.id) {
                     clearInterval(this.makeStep());
                     bonusController.bonusesArray.splice(i, 1);
                 }

@@ -5,11 +5,11 @@ let crashChecker = {
 
     crashCheck(dangerArray, createNewBlockage = false) {
         for (let i = 0; i < dangerArray.length; i++) {
-            if (dangerArray[i].x == player.x && dangerArray[i].y == player.y) {
+            if (dangerArray[i].x === player.x && dangerArray[i].y === player.y) {
                 this.x = player.x;
                 this.y = player.y;
                 if (!player.invincibility) {
-                    if (player.extraSelectorName != "player-shield") {
+                    if (player.extraSelectorName !== "player-shield") {
                         renderer.renderCrash();
                         if (player.lives > 1) {
                             player.lives += -1;

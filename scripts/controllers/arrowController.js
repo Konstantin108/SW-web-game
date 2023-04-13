@@ -9,7 +9,7 @@ let arrowController = {
     arrowCreate() {
         while (this.arrowsArray.length < player.shootingCount) {
             for (key in this.arrowTypes) {
-                if (key == player.arrowType) {
+                if (key === player.arrowType) {
                     this.arrowsArray.push(new this.arrowTypes[key]);
                 }
             }

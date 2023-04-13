@@ -49,7 +49,7 @@ class Blockage {
                     enemyArrowController.enemyArrowCreate(this.shoot(x_pos, y_pos));
                     enemyArrowController.enemyArrowMove();
                 }
-            } else if (y_pos == config.mapSizeY + 1) {
+            } else if (y_pos === config.mapSizeY + 1) {
                 y_pos = config.mapSizeY + 2;
                 this.y = y_pos;
                 progressController.scoreUp(config.missReward);
