@@ -1,4 +1,8 @@
-let bonusController = {
+import {helperController} from "./helperController.js";
+import {Bonus} from "../classes/Bonus.js";
+import {config} from "../config/config.js";
+
+export const bonusController = {
     bonusTimerIdsArray: [],
     bonusesArray: [],
 

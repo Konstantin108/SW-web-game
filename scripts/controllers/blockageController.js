@@ -1,4 +1,8 @@
-let blockageController = {
+import {config} from "../config/config.js";
+import {helperController} from "./helperController.js";
+import {Blockage} from "../classes/Blockage.js";
+
+export const blockageController = {
     blockageTimerIdsArray: [],
     blockagesArray: [],
 

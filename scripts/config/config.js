@@ -1,4 +1,7 @@
-let config = {
+import {bonuses} from "./bonuses.js";
+import {levels} from "./levels.js";
+
+export const config = {
     mapSizeX: 10,
     mapSizeY: 13,
     missReward: 1,

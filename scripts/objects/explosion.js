@@ -1,4 +1,9 @@
-let explosion = {
+import {blockageController} from "../controllers/blockageController.js";
+import {player} from "./player.js";
+import {renderer} from "./renderer.js";
+import {progressController} from "../controllers/progressController.js";
+
+export const explosion = {
 
     explode() {
         let blockagesArray = blockageController.blockagesArray;

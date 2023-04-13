@@ -1,4 +1,10 @@
-let game = {
+import {progressController} from "./controllers/progressController.js";
+import {blockageController} from "./controllers/blockageController.js";
+import {bonusController} from "./controllers/bonusController.js";
+import {player} from "./objects/player.js";
+import {renderer} from "./objects/renderer.js";
+
+export const game = {
     playerIsAlive: true,
 
     init() {

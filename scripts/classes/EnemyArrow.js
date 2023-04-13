@@ -1,4 +1,11 @@
-class EnemyArrow {
+import {config} from "../config/config.js";
+import {game} from "../game.js";
+import {renderer} from "../objects/renderer.js";
+import {enemyArrowController} from "../controllers/enemyArrowController.js";
+import {crashChecker} from "../objects/crashChecker.js";
+import {player} from "../objects/player.js";
+
+export class EnemyArrow {
     constructor(x, y) {
         this.x = x;
         this.y = y + 1;

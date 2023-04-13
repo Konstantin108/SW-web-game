@@ -1,4 +1,13 @@
-let progressController = {
+import {config} from "../config/config.js";
+import {blockageController} from "./blockageController.js";
+import {game} from "../game.js";
+import {renderer} from "../objects/renderer.js";
+import {Blockage} from "../classes/Blockage.js";
+import {helperController} from "./helperController.js";
+import {player} from "../objects/player.js";
+import {bonusController} from "./bonusController.js";
+
+export const progressController = {
     levels: config.levels,
     level: config.levels[0].levelNum,
     maxBlockageSpeed: config.levels[0].maxBlockageSpeed,

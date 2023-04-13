@@ -1,10 +1,10 @@
-let bonuses = {
+export const bonuses = {
 
     setBonusesParams() {
         return {
             bonusSpeed: 1500,
             bonusChance: 30,
-            // bonusChance: 96,
+            // bonusChance: 99,
             bonusTypes: {
                 1: {
                     name: "drill",

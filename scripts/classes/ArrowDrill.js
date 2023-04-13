@@ -1,4 +1,9 @@
-class ArrowDrill extends Arrow {
+import {blockageController} from "../controllers/blockageController.js";
+import {progressController} from "../controllers/progressController.js";
+import {Arrow} from "./Arrow.js";
+import {renderer} from "../objects/renderer.js";
+
+export class ArrowDrill extends Arrow {
     selectorName = "arrow-drill";
     speed = 20;
 

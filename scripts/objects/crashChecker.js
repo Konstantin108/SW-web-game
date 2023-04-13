@@ -1,4 +1,11 @@
-let crashChecker = {
+import {config} from "../config/config.js";
+import {player} from "./player.js";
+import {renderer} from "./renderer.js";
+import {game} from "../game.js";
+import {Blockage} from "../classes/Blockage.js";
+import {helperController} from "../controllers/helperController.js";
+
+export const crashChecker = {
     invincibilityAfterCrash: config.invincibilityAfterCrash,
     x: null,
     y: null,
@@ -9,7 +16,7 @@ let crashChecker = {
                 this.x = player.x;
                 this.y = player.y;
                 if (!player.invincibility) {
-                    if (player.extraSelectorName !== "player-shield") {
+                    if (player.extraSelectorName != "player-shield") {
                         renderer.renderCrash();
                         if (player.lives > 1) {
                             player.lives += -1;

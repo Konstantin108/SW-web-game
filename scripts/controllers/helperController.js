@@ -1,4 +1,6 @@
-let helperController = {
+import {config} from "../config/config.js";
+
+export const helperController = {
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },
@@ -17,7 +19,7 @@ let helperController = {
         let chance = Math.random() * 100;
 
         chance = chance.toFixed(0);
-        for (key in bonusTypes) {
+        for (let key in bonusTypes) {
             if (chance >= bonusTypes[key].chanceFrom && chance <= bonusTypes[key].chanceTo) {
                 return bonusTypes[key];
             }

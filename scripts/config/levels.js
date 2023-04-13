@@ -1,4 +1,4 @@
-let levels = {
+export const levels = {
 
     setLevelsParams() {
         return [

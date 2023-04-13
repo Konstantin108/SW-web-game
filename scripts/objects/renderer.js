@@ -1,4 +1,10 @@
-let renderer = {
+import {config} from "../config/config.js";
+import {player} from "./player.js";
+import {templatePrinter} from "./templatePrinter.js";
+import {progressController} from "../controllers/progressController.js";
+import {crashChecker} from "./crashChecker.js";
+
+export const renderer = {
     x: config.mapSizeX,
     y: config.mapSizeY,
     map: "",

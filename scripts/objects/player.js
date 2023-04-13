@@ -1,4 +1,14 @@
-let player = {
+import {config} from "../config/config.js";
+import {helperController} from "../controllers/helperController.js";
+import {bonusController} from "../controllers/bonusController.js";
+import {crashChecker} from "./crashChecker.js";
+import {blockageController} from "../controllers/blockageController.js";
+import {renderer} from "./renderer.js";
+import {explosion} from "./explosion.js";
+import {progressController} from "../controllers/progressController.js";
+import {arrowController} from "../controllers/arrowController.js";
+
+export const player = {
     lives: config.lives,
     invincibility: false,
     x: helperController.getCenterMapOnX(),

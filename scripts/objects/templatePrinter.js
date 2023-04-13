@@ -1,4 +1,4 @@
-let templatePrinter = {
+export const templatePrinter = {
 
     mapTemplatePrint(map) {
         return `

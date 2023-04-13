@@ -1,4 +1,11 @@
-class Arrow {
+import {renderer} from "../objects/renderer.js";
+import {player} from "../objects/player.js";
+import {game} from "../game.js";
+import {arrowController} from "../controllers/arrowController.js";
+import {blockageController} from "../controllers/blockageController.js";
+import {progressController} from "../controllers/progressController.js";
+
+export class Arrow {
     static id = 0;
     id = Arrow.id++;
     selectorName = "arrow";

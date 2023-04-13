@@ -1,4 +1,6 @@
-let enemyArrowController = {
+import {EnemyArrow} from "../classes/EnemyArrow.js";
+
+export const enemyArrowController = {
     enemyArrowsArray: [],
 
     enemyArrowCreate(shootingBlockageData) {

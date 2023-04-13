@@ -1,4 +1,9 @@
-let arrowController = {
+import {player} from "../objects/player.js";
+import {Arrow} from "../classes/Arrow.js";
+import {ArrowDrill} from "../classes/ArrowDrill.js";
+import {ArrowTrinity} from "../classes/ArrowTrinity.js";
+
+export const arrowController = {
     arrowTypes: {
         "arrow": Arrow,
         "arrow-drill": ArrowDrill,
@@ -8,7 +13,7 @@ let arrowController = {
 
     arrowCreate() {
         while (this.arrowsArray.length < player.shootingCount) {
-            for (key in this.arrowTypes) {
+            for (let key in this.arrowTypes) {
                 if (key === player.arrowType) {
                     this.arrowsArray.push(new this.arrowTypes[key]);
                 }

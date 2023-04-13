@@ -1,4 +1,13 @@
-class Blockage {
+import {helperController} from "../controllers/helperController.js";
+import {progressController} from "../controllers/progressController.js";
+import {game} from "../game.js";
+import {blockageController} from "../controllers/blockageController.js";
+import {config} from "../config/config.js";
+import {renderer} from "../objects/renderer.js";
+import {crashChecker} from "../objects/crashChecker.js";
+import {enemyArrowController} from "../controllers/enemyArrowController.js";
+
+export class Blockage {
     constructor(x, y) {
         this.x = x;
         this.y = y;

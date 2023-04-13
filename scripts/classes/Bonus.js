@@ -1,4 +1,12 @@
-class Bonus {
+import {config} from "../config/config.js";
+import {helperController} from "../controllers/helperController.js";
+import {game} from "../game.js";
+import {renderer} from "../objects/renderer.js";
+import {bonusController} from "../controllers/bonusController.js";
+import {player} from "../objects/player.js";
+import {crashChecker} from "../objects/crashChecker.js";
+
+export class Bonus {
     static id = 0;
     id = Bonus.id++;
     objectType = helperController.getRandomForBonus();
