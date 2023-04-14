@@ -20,6 +20,7 @@ export const renderer = {
         this.renderPlayer();
         this.renderStatusBar();
         this.renderBombBar();
+        this.renderSuperAbilityBar();
     },
 
     renderMap() {
@@ -157,18 +158,51 @@ export const renderer = {
 
         if (bombElement) table.removeChild(bombElement);
         if (player.bombsCount < 1) {
-            bomb = `<div class="emptyBomb"></div>`;
+            bomb = `<div class="bomb emptyBomb"></div>`;
         } else {
-            bomb = `<div class="bomb"></div>`;
+            bomb = `<div class="bomb activeBomb"></div>`;
         }
 
         if (!playerHasBomb) {
-            bomb = `<div class="redBomb"></div>`;
+            bomb = `<div class="bomb redBomb"></div>`;
             setTimeout(() => this.renderBombBar(), 200);
         }
 
         this.bombBar = templatePrinter.bombBarTemplatePrint(bomb);
         table.insertAdjacentHTML("afterbegin", this.bombBar);
+    },
+
+    renderSuperAbilityBar(superAbilityIsActivated = true) {
+        let table = document.querySelector("table");
+        let superAbilityBarElement = document.querySelector("#superAbilityBar");
+        let shineSectorsCount = config.superAbilityIsCharged;
+        let shineSectorsBox = "";
+        let shineSectorsIsOn = progressController.superAbilityCharge;
+        let shineSectorsIsOff = shineSectorsCount - shineSectorsIsOn;
+
+        if (superAbilityBarElement) table.removeChild(superAbilityBarElement);
+        for (let i = 0; i < shineSectorsIsOff; i++) {
+            shineSectorsBox += `<div class="shineSector shineSectorIsOff"></div>`;
+        }
+        for (let i = 0; i < shineSectorsIsOn; i++) {
+            shineSectorsBox += `<div class="shineSector shineSectorIsOn"></div>`;
+        }
+        this.superAbilityBar = templatePrinter.superAbilityBarTemplatePrint(shineSectorsBox);
+        table.insertAdjacentHTML("afterbegin", this.superAbilityBar);
+
+        let lightningElement = document.querySelector("#lightningElement");
+        if (shineSectorsIsOn === shineSectorsCount) {
+            lightningElement.classList.remove("lightningIsOff");
+            lightningElement.classList.add("lightningIsOn");
+        } else {
+            lightningElement.classList.remove("lightningIsOn");
+            lightningElement.classList.add("lightningIsOff");
+        }
+
+        if (!superAbilityIsActivated) {
+            lightningElement.classList.add("lightningIsOut");
+            setTimeout(() => this.renderSuperAbilityBar(), 200);
+        }
     },
 
     renderLivesBar() {          // если больше 5 жизней то будет отрисовано простое табло
@@ -181,10 +215,10 @@ export const renderer = {
             livesBar = templatePrinter.livesBarTemplatePrint(player.lives);
         } else {
             for (let i = 0; i < player.lives; i++) {
-                heartsBox += `<div class="heart"></div>`;
+                heartsBox += `<div class="heart availableHeart"></div>`;
             }
             for (let i = 0; i < lostLives; i++) {
-                heartsBox += `<div class="lostHeart"></div>`;
+                heartsBox += `<div class="heart lostHeart"></div>`;
             }
             livesBar = templatePrinter.heartsBarTemplatePrint(heartsBox);
         }

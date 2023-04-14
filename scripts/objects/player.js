@@ -150,8 +150,9 @@ export const player = {
                     }
                     player.superAbilityIsActivated = false;
                     renderer.renderSuperAbility();
+                    renderer.renderSuperAbilityBar();
                 } else {
-                    // анимация невозможно выстрелить
+                    renderer.renderSuperAbilityBar(player.superAbilityIsActivated);
                 }
             }
         });

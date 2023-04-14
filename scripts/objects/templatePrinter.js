@@ -83,5 +83,19 @@ export const templatePrinter = {
                 <div id="bombBar">
                     ${bomb}
                 </div>`;
+    },
+
+    superAbilityBarTemplatePrint(sectors) {
+        return `
+                <div id="superAbilityBar">
+                    <div id="lightningElementContainer">
+                        <div id="lightningElement" class="lightningIsOff"></div>
+                    </div>
+                    <div id="shineSectorsContainer">
+                        <div id="shineSectorsBox">
+                            ${sectors}
+                        </div>
+                    </div>
+                </div>`;
     }
 }

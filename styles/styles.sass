@@ -61,21 +61,18 @@ td
 .infoLabel
   text-align: center
 
-.whiteScull
-  background-image: url("../images/scull.png")
+#scull
   background-size: 100%
   background-repeat: no-repeat
   width: 50px
   height: 55px
   transition: .3s
 
+.whiteScull
+  background-image: url("../images/scull.png")
+
 .redScull
   background-image: url("../images/red-scull.png")
-  background-size: 100%
-  background-repeat: no-repeat
-  width: 50px
-  height: 55px
-  transition: .3s
   margin-bottom: 3px
   scale: 1.1
 
@@ -86,18 +83,16 @@ td
   display: flex
 
 .heart
-  background-image: url("../images/heart.png")
   background-size: 100%
   background-repeat: no-repeat
   width: 50px
   height: 55px
 
+.availableHeart
+  background-image: url("../images/heart.png")
+
 .lostHeart
   background-image: url("../images/lost-heart.png")
-  background-size: 100%
-  background-repeat: no-repeat
-  width: 50px
-  height: 55px
 
 .heartScale
   animation: scale .3s
@@ -120,48 +115,95 @@ td
   transition: .2s
 
 .bomb
-  background-image: url("../images/bomb.png")
   background-size: 100%
   background-repeat: no-repeat
   width: 70px
   height: 70px
   animation: scale .3s
+
+.activeBomb
+  background-image: url("../images/bomb.png")
 
 .emptyBomb
   background-image: url("../images/empty-bomb.png")
-  background-size: 100%
-  background-repeat: no-repeat
-  width: 70px
-  height: 70px
-  animation: scale .3s
 
 .redBomb
   background-image: url("../images/red-bomb.png")
+
+#superAbilityBar
+  position: absolute
+  right: 100%
+  top: 58.8%
+
+#shineSectorsContainer
+  display: flex
+  justify-content: end
+
+#shineSectorsBox
+  background-image: url("../images/background-rusty-iron3.jpg")
+  background-repeat: no-repeat
+  background-color: saddlebrown
+  display: block
+  width: 16px
+  padding: 10px
+
+.shineSector
+  width: 10px
+  height: 28px
+  margin-bottom: 5px
+  border-radius: 12px
+
+.shineSectorIsOn
+  background-color: lawngreen
+
+.shineSectorIsOff
+  background-color: black
+
+#lightningElementContainer
+  background-image: url("../images/background-rusty-iron3.jpg")
+  background-repeat: no-repeat
+  background-color: saddlebrown
+  border-bottom-left-radius: 12px
+  border-top-left-radius: 12px
+  padding-left: 10px
+  padding-right: 10px
+  padding-top: 12px
+  padding-bottom: 17px
+  transition: .2s
+
+#lightningElement
   background-size: 100%
   background-repeat: no-repeat
-  width: 70px
-  height: 70px
+  width: 50px
+  height: 106px
   animation: scale .3s
+
+.lightningIsOn
+  background-image: url("../images/lightning.png")
+
+.lightningIsOff
+  background-image: url("../images/empty-lightning.png")
+
+.lightningIsOut
+  background-image: url("../images/red-lightning.png")
 
 //  стили игрока
 
-.player
-  background-image: url("../images/player.png")
+.player,
+.player-drill,
+.player-trinity
   background-size: 100%
   background-repeat: no-repeat
   opacity: 1
+
+.player
+  background-image: url("../images/player.png")
 
 .player-drill
   background-image: url("../images/player-drill.png")
-  background-size: 100%
-  background-repeat: no-repeat
-  opacity: 1
 
 .player-trinity
   background-image: url("../images/player-trinity.png")
-  background-size: 100%
-  background-repeat: no-repeat
-  opacity: 1
 
 .player-shield
   background-color: rgba(46, 232, 99, .7)
@@ -179,84 +221,73 @@ td
 
 //  стили движущихся объектов
 
-.blockage
-  background-image: url("../images/blockage.png")
+.blockage,
+.arrow,
+.arrow-drill,
+.arrow-trinity,
+.enemyArrow,
+.drill,
+.trinity,
+.shield,
+.life,
+.killAll
   background-size: 100%
   background-repeat: no-repeat
+
+.blockage
+  background-image: url("../images/blockage.png")
   opacity: 1
 
 .arrow
   background-image: url("../images/arrow.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .arrow-drill
   background-image: url("../images/arrow-drill.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .arrow-trinity
   background-image: url("../images/arrow-trinity.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .enemyArrow
   background-image: url("../images/enemy-arrow.png")
-  background-size: 100%
-  background-repeat: no-repeat
   transition: .3s
   transform: scale(.2)
 
 .drill
   background-image: url("../images/bonus-drill.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .trinity
   background-image: url("../images/bonus-trinity.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .shield
   background-image: url("../images/bonus-shield.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .life
   background-image: url("../images/bonus-life.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 .killAll
   background-image: url("../images/bonus-kill-all.png")
-  background-size: 100%
-  background-repeat: no-repeat
 
 //  стили взаимодействий
+
+.picked,
+.hit,
+.crash
+  background-size: 100%
+  background-repeat: no-repeat
+  box-shadow: 0 0 0 0
+  transition: .3s
 
 .picked
   background-image: url("../images/picked.png")
   background-color: rgba(0, 0, 0, 0)
-  box-shadow: 0 0 0 0
-  background-size: 100%
-  background-repeat: no-repeat
-  transition: .3s
   transform: scale(2)
 
 .hit
   background-image: url("../images/hit.png")
-  background-size: 100%
-  box-shadow: 0 0 0 0
-  background-repeat: no-repeat
-  transition: .3s
   transform: scale(2)
 
 .crash
   background-image: url("../images/crash.png")
-  background-size: 100%
-  box-shadow: 0 0 0 0
-  background-repeat: no-repeat
-  transition: .3s
   transform: scale(1.8)
 
 .superAbilityCenterLine

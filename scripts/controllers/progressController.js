@@ -75,6 +75,7 @@ export const progressController = {
             if (this.shipDestroyedCounterForSuperAbilityCharge % 10 === 0) {
                 this.superAbilityCharge += 1;
                 console.log(this.superAbilityCharge);
+                renderer.renderSuperAbilityBar();
             }
             console.log(this.shipDestroyedCounterForSuperAbilityCharge);
         }
