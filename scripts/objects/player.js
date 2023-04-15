@@ -135,8 +135,6 @@ export const player = {
 
         document.addEventListener("keydown", function (event) {
             if (useSuperAbilityBtn === event.code) {
-
-                console.log(player.superAbilityIsActivated);
                 if (player.superAbilityIsActivated) {
                     for (let i = 0; i < blockagesArray.length; i++) {
                         if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||

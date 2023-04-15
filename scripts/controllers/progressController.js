@@ -74,17 +74,13 @@ export const progressController = {
             this.shipDestroyedCounterForSuperAbilityCharge += 1;
             if (this.shipDestroyedCounterForSuperAbilityCharge % 10 === 0) {
                 this.superAbilityCharge += 1;
-                console.log(this.superAbilityCharge);
                 renderer.renderSuperAbilityBar();
             }
-            console.log(this.shipDestroyedCounterForSuperAbilityCharge);
         }
         if (this.superAbilityCharge === this.superAbilityIsCharged) {
             player.superAbilityIsActivated = true;
             this.shipDestroyedCounterForSuperAbilityCharge = 0;
             this.superAbilityCharge = 0;
-            console.log('from progressController');
-            console.log(player.superAbilityIsActivated);
         }
     },
 
