@@ -11,9 +11,7 @@ export const bonusController = {
     },
 
     bonusCreate() {
-        if (helperController.randomEvent(config.bonuses.bonusChance)) {
-            this.bonusesArray.push(new Bonus());
-        }
+        if (helperController.randomEvent(config.bonuses.bonusChance)) this.bonusesArray.push(new Bonus());
         this.bonusMove();
     },
 
@@ -28,9 +26,7 @@ export const bonusController = {
 
     bonusMove() {
         for (let i = 0; i < this.bonusesArray.length; i++) {
-            if (this.bonusesArray[i]) {
-                this.bonusesArray[i].makeStep();
-            }
+            if (this.bonusesArray[i]) this.bonusesArray[i].makeStep();
         }
         // console.log("bonuses:")
         // console.log(this.bonusesArray);

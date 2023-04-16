@@ -104,14 +104,14 @@ export const player = {
     },
 
     shoot() {
-        let shootBtnsArr = [
+        let shootBtnsArray = [
             "Space",
             "Numpad5",
             "Numpad0",
         ];
 
         document.addEventListener("keydown", function (event) {
-            if (shootBtnsArr.includes(event.code)) {
+            if (shootBtnsArray.includes(event.code)) {
                 player.shootingCount += 1;
                 arrowController.arrowCreate();
                 arrowController.arrowMove();
@@ -123,9 +123,7 @@ export const player = {
         let useBombBtn = "ControlRight";
 
         document.addEventListener("keydown", function (event) {
-            if (useBombBtn === event.code) {
-                explosion.explode();
-            }
+            if (useBombBtn === event.code) explosion.explode();
         });
     },
 

@@ -12,21 +12,19 @@ export const arrowController = {
     arrowsArray: [],
 
     arrowCreate() {
-        while (this.arrowsArray.length < player.shootingCount) {
-            for (let key in this.arrowTypes) {
-                if (key === player.arrowType) {
-                    this.arrowsArray.push(new this.arrowTypes[key]);
-                }
+        for (let key in this.arrowTypes) {
+            if (key === player.arrowType && key != "arrow-trinity") {
+                this.arrowsArray.push(new this.arrowTypes[key]);
             }
-
+            if (key === player.arrowType && key === "arrow-trinity") {
+                this.arrowsArray.push(new this.arrowTypes[key](player.x - 1), new this.arrowTypes[key](player.x), new this.arrowTypes[key](player.x + 1));
+            }
         }
     },
 
     arrowMove() {
         for (let i = 0; i < this.arrowsArray.length; i++) {
-            if (this.arrowsArray[i]) {
-                this.arrowsArray[i].makeStep();
-            }
+            if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
         }
         // console.log("player\'s arrows:");
         // console.log(this.arrowsArray);

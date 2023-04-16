@@ -26,9 +26,7 @@ export const game = {
         let quitBtn = "Escape";
 
         document.addEventListener("keydown", function (event) {
-            if (event.code === quitBtn) {
-                game.over();
-            }
+            if (event.code === quitBtn) game.over();
         });
     },
 

@@ -46,8 +46,6 @@ export const crashChecker = {
     },
 
     invincibilityOffCall() {
-        if (player.invincibility) {
-            setTimeout(() => this.invincibilityOff(), this.invincibilityAfterCrash);
-        }
+        if (player.invincibility) setTimeout(() => this.invincibilityOff(), this.invincibilityAfterCrash);
     }
 }

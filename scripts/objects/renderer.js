@@ -39,12 +39,8 @@ export const renderer = {
         playerPosition.classList.remove("blockage");
         playerPosition.classList.remove("enemyArrow");
         playerPosition.classList.add(player.selectorName);
-        if (player.invincibility) {
-            playerPosition.classList.add("invincibility");
-        }
-        if (player.extraSelectorName) {
-            playerPosition.classList.add(`${player.extraSelectorName}`);
-        }
+        if (player.invincibility) playerPosition.classList.add("invincibility");
+        if (player.extraSelectorName) playerPosition.classList.add(`${player.extraSelectorName}`);
     },
 
     renderCrash() {

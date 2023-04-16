@@ -13,9 +13,7 @@ export const explosion = {
             player.bombsCount += -1;
             renderer.renderExplosion();
             for (let i = 0; i < blockagesArray.length; i++) {
-                if (blockagesArray[i].y >= 0) {
-                    progressController.killEnemy(blockagesArray[i], i, -8);
-                }
+                if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, -8);
             }
             renderer.renderStatusBar();
             renderer.renderBombBar();

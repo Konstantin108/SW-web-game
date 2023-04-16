@@ -62,9 +62,7 @@ export class Bonus {
     }
 
     getBonus(bonus) {
-        if (bonus) {
-            this.setNewPropertiesForPlayer(bonus.objectType);
-        }
+        if (bonus) this.setNewPropertiesForPlayer(bonus.objectType);
     }
 
     setNewPropertiesForPlayer(bonus) {
@@ -120,9 +118,7 @@ export class Bonus {
     }
 
     newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId) {
-        if (bonusIsActivatedTimerId) {
-            clearTimeout(bonusIsActivatedTimerId);
-        }
+        if (bonusIsActivatedTimerId) clearTimeout(bonusIsActivatedTimerId);
     }
 
     remove() {

@@ -9,9 +9,7 @@ export const helperController = {
         let chance = Math.random() * 100;
 
         chance = chance.toFixed(0);
-        if (chance <= probabilityOfAction) {
-            return true;
-        }
+        if (chance <= probabilityOfAction) return true;
     },
 
     getRandomForBonus() {
@@ -20,9 +18,7 @@ export const helperController = {
 
         chance = chance.toFixed(0);
         for (let key in bonusTypes) {
-            if (chance >= bonusTypes[key].chanceFrom && chance <= bonusTypes[key].chanceTo) {
-                return bonusTypes[key];
-            }
+            if (chance >= bonusTypes[key].chanceFrom && chance <= bonusTypes[key].chanceTo) return bonusTypes[key];
         }
     },
 
