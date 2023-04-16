@@ -85,6 +85,50 @@ export const templatePrinter = {
                 </div>`;
     },
 
+    bonusShieldBarTemplatePrint(bonusShieldElement) {
+        return `
+                <div id="bonusShieldBar">
+                    <div class="statusBarElement bonusBarElement">
+                        <strong>
+                            <div class="infoContainer">
+                                <div class="infoLabel bonusLabel">
+                                    ${bonusShieldElement}
+                                </div>
+                            </div>        
+                        </strong>
+                    </div>
+                    <div class="statusBarElement bonusBarElement">
+                        <strong>
+                            <div class="infoContainer">
+                                <div id="timerForBonusShield" class="infoLabel timerLabel"></div>
+                            </div>
+                        </strong>
+                    </div>
+                </div>`;
+    },
+
+    bonusNewArrowTypeTemplatePrint(bonusNewArrowTypeElement) {
+        return `
+                <div id="bonusNewArrowTypeBar">
+                    <div class="statusBarElement bonusBarElement">
+                        <strong>
+                            <div class="infoContainer">
+                                <div class="infoLabel bonusLabel">
+                                    ${bonusNewArrowTypeElement}
+                                </div>
+                            </div>    
+                        </strong>
+                    </div>
+                    <div class="statusBarElement bonusBarElement">
+                        <strong>
+                            <div class="infoContainer">
+                                <div id="timerForBonusNewArrowType" class="infoLabel timerLabel"></div>
+                            </div>
+                        </strong>
+                    </div>
+                </div>`;
+    },
+
     superAbilityBarTemplatePrint(sectors) {
         return `
                 <div id="superAbilityBar">

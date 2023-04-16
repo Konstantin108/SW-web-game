@@ -11,6 +11,8 @@ export const renderer = {
     statusBar: null,
     superAbilityBar: null,
     bombBar: null,
+    bonusShieldBar: null,
+    bonusNewArrowTypeBar: null,
     container: document.querySelector("#container"),
 
     render() {
@@ -20,6 +22,8 @@ export const renderer = {
         this.renderPlayer();
         this.renderStatusBar();
         this.renderBombBar();
+        this.renderBonusShieldBar();
+        this.renderBonusNewArrowTypeBar();
         this.renderSuperAbilityBar();
     },
 
@@ -166,6 +170,38 @@ export const renderer = {
 
         this.bombBar = templatePrinter.bombBarTemplatePrint(bomb);
         table.insertAdjacentHTML("afterbegin", this.bombBar);
+    },
+
+    renderBonusShieldBar(bonusShield = null) {
+        let table = document.querySelector("table");
+        let bonusShieldBarDivElement = document.querySelector("#bonusShieldBar");
+        let bonusShieldElement = null;
+
+        if (bonusShieldBarDivElement) table.removeChild(bonusShieldBarDivElement);
+
+        if (bonusShield) {
+            bonusShieldElement = `<div class="${bonusShield}"></div>`;
+        } else {
+            bonusShieldElement = `<div></div>`;
+        }
+        this.bonusShieldBar = templatePrinter.bonusShieldBarTemplatePrint(bonusShieldElement);
+        table.insertAdjacentHTML("afterbegin", this.bonusShieldBar);
+    },
+
+    renderBonusNewArrowTypeBar(bonusNewArrowType = null) {
+        let table = document.querySelector("table");
+        let bonusNewArrowTypeBarDivElement = document.querySelector("#bonusNewArrowTypeBar");
+        let bonusNewArrowTypeElement = null;
+
+        if (bonusNewArrowTypeBarDivElement) table.removeChild(bonusNewArrowTypeBarDivElement);
+
+        if (bonusNewArrowType) {
+            bonusNewArrowTypeElement = `<div class="${bonusNewArrowType}"></div>`;
+        } else {
+            bonusNewArrowTypeElement = `<div></div>`;
+        }
+        this.bonusNewArrowTypeBar = templatePrinter.bonusNewArrowTypeTemplatePrint(bonusNewArrowTypeElement);
+        table.insertAdjacentHTML("afterbegin", this.bonusNewArrowTypeBar);
     },
 
     renderSuperAbilityBar(superAbilityIsActivated = true) {

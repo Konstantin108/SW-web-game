@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:500,500i,600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap");
+* {
+  font-family: Roboto Condensed;
+}
+
 body {
   background-image: url("../images/background-space.jpg");
   background-repeat: no-repeat;
@@ -28,7 +32,6 @@ td {
 }
 
 #statusBar {
-  font-family: Roboto Condensed;
   font-size: 20px;
   color: lawngreen;
   display: flex;
@@ -121,8 +124,7 @@ td {
   background-color: saddlebrown;
   position: absolute;
   left: 100%;
-  top: 91.1%;
-  border-bottom-right-radius: 12px;
+  top: 58%;
   border-top-right-radius: 12px;
   transition: 0.2s;
 }
@@ -145,6 +147,75 @@ td {
 
 .redBomb {
   background-image: url("../images/red-bomb.png");
+}
+
+#bonusShieldBar,
+#bonusNewArrowTypeBar {
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  font-size: 20px;
+  color: lawngreen;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  left: 100%;
+  transition: 0.2s;
+}
+
+#bonusShieldBar {
+  background-image: url("../images/background-rusty-iron.jpg");
+  top: 67%;
+  border-top-right-radius: 12px;
+}
+
+#bonusNewArrowTypeBar {
+  background-image: url("../images/background-rusty-iron3.jpg");
+  top: 83.1%;
+  border-bottom-right-radius: 12px;
+}
+
+.bonusBarElement {
+  margin-bottom: 6px;
+}
+
+.bonusLabel {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 48px;
+  height: 48px;
+  display: flex;
+}
+
+.timerLabel {
+  width: 48px;
+  height: 24px;
+}
+
+.drillPickUpImage,
+.trinityPickUpImage,
+.shieldPickUpImage {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  animation: invincibility-blink 0.6s infinite;
+}
+
+.drillPickUpImage {
+  background-image: url("../images/bonus-drill.png");
+  animation-delay: 14s;
+}
+
+.trinityPickUpImage {
+  background-image: url("../images/bonus-trinity.png");
+  animation-delay: 14s;
+}
+
+.shieldPickUpImage {
+  background-image: url("../images/bonus-shield.png");
+  animation-delay: 24s;
 }
 
 #superAbilityBar {

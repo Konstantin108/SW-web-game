@@ -3,14 +3,15 @@ export const bonuses = {
     setBonusesParams() {
         return {
             bonusSpeed: 1500,
-            // bonusChance: 30,
-            bonusChance: 99,
+            bonusChance: 30,
+            // bonusChance: 99,
             bonusTypes: {
                 1: {
                     name: "drill",
                     playerOutlook: "player-drill",
                     playerExtraOutlook: null,
                     playerArrowType: "arrow-drill",
+                    pickUpImageName: "drillPickUpImage",
                     chanceFrom: 0,
                     chanceTo: 35,
                     // chanceFrom: 0,
@@ -22,6 +23,7 @@ export const bonuses = {
                     playerOutlook: "player-trinity",
                     playerExtraOutlook: null,
                     playerArrowType: "arrow-trinity",
+                    pickUpImageName: "trinityPickUpImage",
                     chanceFrom: 36,
                     chanceTo: 74,
                     // chanceFrom: 2,
@@ -33,10 +35,11 @@ export const bonuses = {
                     playerOutlook: null,
                     playerExtraOutlook: "player-shield",
                     playerArrowType: null,
+                    pickUpImageName: "shieldPickUpImage",
                     chanceFrom: 75,
                     chanceTo: 89,
-                    // chanceFrom: 4,
-                    // chanceTo: 5,
+                    // chanceFrom: 8,
+                    // chanceTo: 100,
                     actionTime: 30000,
                 },
                 4: {
@@ -44,6 +47,7 @@ export const bonuses = {
                     playerOutlook: null,
                     playerExtraOutlook: null,
                     playerArrowType: null,
+                    pickUpImageName: null,
                     chanceFrom: 90,
                     chanceTo: 98,
                     // chanceFrom: 6,
@@ -55,10 +59,11 @@ export const bonuses = {
                     playerOutlook: null,
                     playerExtraOutlook: null,
                     playerArrowType: null,
+                    pickUpImageName: null,
                     chanceFrom: 99,
                     chanceTo: 100,
-                    // chanceFrom: 8,
-                    // chanceTo: 100,
+                    // chanceFrom: 4,
+                    // chanceTo: 5,
                     actionTime: null,
                 }
             }

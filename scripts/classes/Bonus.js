@@ -71,12 +71,14 @@ export class Bonus {
             player.selectorName = bonus.playerOutlook;
             player.arrowType = bonus.playerArrowType;
             renderer.renderPlayer();
+            renderer.renderBonusNewArrowTypeBar(bonus.pickUpImageName);
             this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
         }
         if (bonus.playerExtraOutlook) {
             crashChecker.invincibilityOff();
             player.extraSelectorName = bonus.playerExtraOutlook;
+            renderer.renderBonusShieldBar(bonus.pickUpImageName);
             this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
         }
@@ -101,10 +103,12 @@ export class Bonus {
             player.selectorName = "player";
             player.arrowType = "arrow";
             renderer.renderPlayer();
+            renderer.renderBonusNewArrowTypeBar();
         }
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);
             player.extraSelectorName = null;
+            renderer.renderBonusShieldBar();
         }
     }
 
