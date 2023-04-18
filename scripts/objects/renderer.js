@@ -172,37 +172,87 @@ export const renderer = {
         table.insertAdjacentHTML("afterbegin", this.bombBar);
     },
 
+    // объединить в одну функцию
     renderBonusShieldBar(bonusShield = null) {
         let table = document.querySelector("table");
         let bonusShieldBarDivElement = document.querySelector("#bonusShieldBar");
+        let bonusShieldBarDivTimer = "timerForBonusShield";
+        let bonusShieldTimerLabel = "bonusShieldTimerLabel";
         let bonusShieldElement = null;
+        let bonusShieldTimer = null;
+        let timer = null;
 
         if (bonusShieldBarDivElement) table.removeChild(bonusShieldBarDivElement);
 
         if (bonusShield) {
-            bonusShieldElement = `<div class="${bonusShield}"></div>`;
+            bonusShieldElement = `<div class="${bonusShield.pickUpImageName}"></div>`;
+            timer = bonusShield.actionTime / 1000;
+            this.renderBonusTimer(timer, bonusShieldBarDivTimer, bonusShieldTimerLabel);
         } else {
             bonusShieldElement = `<div></div>`;
+            bonusShieldTimer = `<div id="${bonusShieldBarDivTimer}"></div>`;
         }
         this.bonusShieldBar = templatePrinter.bonusShieldBarTemplatePrint(bonusShieldElement);
         table.insertAdjacentHTML("afterbegin", this.bonusShieldBar);
     },
 
+    // объединить в одну функцию
     renderBonusNewArrowTypeBar(bonusNewArrowType = null) {
         let table = document.querySelector("table");
         let bonusNewArrowTypeBarDivElement = document.querySelector("#bonusNewArrowTypeBar");
+        let bonusNewArrowTypeBarDivTimer = "timerForBonusNewArrowType";
+        let bonusNewArrowTypeTimerLabel = "bonusNewArrowTypeTimerLabel";
         let bonusNewArrowTypeElement = null;
+        let bonusNewArrowTypeTimer = null;
+        let timer = null;
 
         if (bonusNewArrowTypeBarDivElement) table.removeChild(bonusNewArrowTypeBarDivElement);
 
         if (bonusNewArrowType) {
-            bonusNewArrowTypeElement = `<div class="${bonusNewArrowType}"></div>`;
+            bonusNewArrowTypeElement = `<div class="${bonusNewArrowType.pickUpImageName}"></div>`;
+            timer = bonusNewArrowType.actionTime / 1000;
+            this.renderBonusTimer(timer, bonusNewArrowTypeBarDivTimer, bonusNewArrowTypeTimerLabel);
         } else {
             bonusNewArrowTypeElement = `<div></div>`;
+            bonusNewArrowTypeTimer = `<div id="${bonusNewArrowTypeBarDivTimer}"></div>`;
         }
         this.bonusNewArrowTypeBar = templatePrinter.bonusNewArrowTypeTemplatePrint(bonusNewArrowTypeElement);
         table.insertAdjacentHTML("afterbegin", this.bonusNewArrowTypeBar);
     },
+
+    // разобраться с таймерами
+    renderBonusTimer(timer, timerElement, bonusTimerLabel) {
+        let timerLabel = document.querySelector(".timerLabel");
+        console.log(bonusTimerLabel);
+        console.log(timerLabel);
+        let timerDiv = document.querySelector(`#${timerElement}`)
+        let timerData = `<div id="${timerElement}">${timer}</div>`;
+
+        if (timerDiv) timerLabel.removeChild(timerDiv);
+        timerLabel.insertAdjacentHTML("afterbegin", timerData);
+        console.log(timer);
+
+
+        if (timer > 0) {
+            setTimeout(() => {
+                return this.renderBonusTimer(timer += -1, timerElement, bonusTimerLabel);
+            }, 1000);
+        }
+    },
+
+    // renderBonusTimer(timer, timerElement) {
+    //     let timerLabel = document.querySelector(".timerLabel");
+    //     let timerDiv = document.querySelector(`#${timerElement}`)
+    //
+    //     let interval = setInterval(()=>{
+    //         if (timerDiv) timerLabel.removeChild(timerDiv);
+    //         return `<div id="${timerElement}">${timer - 1}</div>`;
+    //     }, 1000);
+    //
+    //     if(timer === 0) clearInterval(interval);
+    //
+    //
+    // },
 
     renderSuperAbilityBar(superAbilityIsActivated = true) {
         let table = document.querySelector("table");
