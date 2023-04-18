@@ -100,7 +100,6 @@ export const templatePrinter = {
                     <div class="statusBarElement bonusBarElement">
                         <strong>
                             <div class="infoContainer">
-                                <!--             Возможно избавиться от лишних id               -->
                                 <div id="bonusShieldTimerLabel" class="infoLabel timerLabel">
                                     <div id="timerForBonusShield"></div>    
                                 </div>
@@ -125,7 +124,6 @@ export const templatePrinter = {
                     <div class="statusBarElement bonusBarElement">
                         <strong>
                             <div class="infoContainer">
-                                <!--             Возможно избавиться от лишних id               -->
                                 <div id="bonusNewArrowTypeTimerLabel" class="infoLabel timerLabel">
                                     <div id="timerForBonusNewArrowType"></div>    
                                 </div>
