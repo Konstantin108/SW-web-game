@@ -171,7 +171,7 @@ td {
 }
 
 #bonusNewArrowTypeBar {
-  background-image: url("../images/background-rusty-iron3.jpg");
+  background-image: url("../images/background-rusty-iron2.jpg");
   top: 83.1%;
   border-bottom-right-radius: 12px;
 }
@@ -230,7 +230,7 @@ td {
 }
 
 #shineSectorsBox {
-  background-image: url("../images/background-rusty-iron3.jpg");
+  background-image: url("../images/background-rusty-iron2.jpg");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   display: block;
@@ -254,7 +254,7 @@ td {
 }
 
 #lightningElementContainer {
-  background-image: url("../images/background-rusty-iron3.jpg");
+  background-image: url("../images/background-rusty-iron2.jpg");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   border-bottom-left-radius: 12px;

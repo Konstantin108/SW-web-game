@@ -196,7 +196,6 @@ export const renderer = {
         } else {
             bonusShieldElement = `<div></div>`;
             bonusShieldTimer = `<div id="${bonusShieldBarDivTimer}"></div>`;
-            this.renderBonusTimer(null);
         }
         this.bonusShieldBar = templatePrinter.bonusShieldBarTemplatePrint(bonusShieldElement);
         table.insertAdjacentHTML("afterbegin", this.bonusShieldBar);
@@ -224,13 +223,12 @@ export const renderer = {
         } else {
             bonusNewArrowTypeElement = `<div></div>`;
             bonusNewArrowTypeTimer = `<div id="${bonusNewArrowTypeBarDivTimer}"></div>`;
-            this.renderBonusTimer(null);
         }
         this.bonusNewArrowTypeBar = templatePrinter.bonusNewArrowTypeTemplatePrint(bonusNewArrowTypeElement);
         table.insertAdjacentHTML("afterbegin", this.bonusNewArrowTypeBar);
     },
 
-    renderBonusTimer(timer, timerId = null, timerElement = null, bonusTimerLabel = null) {
+    renderBonusTimer(timer, timerId, timerElement, bonusTimerLabel) {
         if (timer) {
             let timerLabel = document.querySelector(`#${bonusTimerLabel}`);
             let timerDiv = document.querySelector(`#${timerElement}`)
