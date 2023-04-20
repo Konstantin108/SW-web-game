@@ -166,12 +166,14 @@ td {
 
 #bonusShieldBar {
   background-image: url("../images/background-rusty-iron.jpg");
+  background-color: saddlebrown;
   top: 67%;
   border-top-right-radius: 12px;
 }
 
 #bonusNewArrowTypeBar {
   background-image: url("../images/background-rusty-iron2.jpg");
+  background-color: saddlebrown;
   top: 83.1%;
   border-bottom-right-radius: 12px;
 }
