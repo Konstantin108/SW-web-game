@@ -85,38 +85,14 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    bonusShieldBarTemplatePrint(bonusShieldElement) {
+    bonusBarElementTemplatePrint(bonusElement, bonusBarDivElementId, bonusTimerLabel, bonusBarDivTimer) {
         return `
-                <div id="bonusShieldBar">
+                <div id="${bonusBarDivElementId}">
                     <div class="statusBarElement bonusBarElement">
                         <strong>
                             <div class="infoContainer">
                                 <div class="infoLabel bonusLabel">
-                                    ${bonusShieldElement}
-                                </div>
-                            </div>        
-                        </strong>
-                    </div>
-                    <div class="statusBarElement bonusBarElement">
-                        <strong>
-                            <div class="infoContainer">
-                                <div id="bonusShieldTimerLabel" class="infoLabel timerLabel">
-                                    <div id="timerForBonusShield"></div>    
-                                </div>
-                            </div>
-                        </strong>
-                    </div>
-                </div>`;
-    },
-
-    bonusNewArrowTypeTemplatePrint(bonusNewArrowTypeElement) {
-        return `
-                <div id="bonusNewArrowTypeBar">
-                    <div class="statusBarElement bonusBarElement">
-                        <strong>
-                            <div class="infoContainer">
-                                <div class="infoLabel bonusLabel">
-                                    ${bonusNewArrowTypeElement}
+                                    ${bonusElement}
                                 </div>
                             </div>    
                         </strong>
@@ -124,8 +100,8 @@ export const templatePrinter = {
                     <div class="statusBarElement bonusBarElement">
                         <strong>
                             <div class="infoContainer">
-                                <div id="bonusNewArrowTypeTimerLabel" class="infoLabel timerLabel">
-                                    <div id="timerForBonusNewArrowType"></div>    
+                                <div id="${bonusTimerLabel}" class="infoLabel timerLabel">
+                                    <div id="${bonusBarDivTimer}"></div>    
                                 </div>
                             </div>
                         </strong>

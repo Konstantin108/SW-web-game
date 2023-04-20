@@ -24,8 +24,8 @@ export const renderer = {
         this.renderPlayer();
         this.renderStatusBar();
         this.renderBombBar();
-        this.renderBonusShieldBar();
-        this.renderBonusNewArrowTypeBar();
+        this.renderBonusBarElement("shieldBar");
+        this.renderBonusBarElement("newArrowTypeBar");
         this.renderSuperAbilityBar();
     },
 
@@ -174,61 +174,57 @@ export const renderer = {
         table.insertAdjacentHTML("afterbegin", this.bombBar);
     },
 
-    renderBonusShieldBar(bonusShield = null) {
+    renderBonusBarElement(elementType, bonus = null) {
         let table = document.querySelector("table");
-        let bonusShieldBarDivElement = document.querySelector("#bonusShieldBar");
-        let bonusShieldBarDivTimer = "timerForBonusShield";
-        let bonusShieldTimerLabel = "bonusShieldTimerLabel";
-        let bonusShieldElement = null;
-        let bonusShieldTimer = null;
+        let bonusBarDivElement = null;
+        let bonusBarDivTimer = null;
+        let bonusTimerLabel = null;
+        let bonusBarDivElementId = null;
+        let bonusElement = null;
+        let bonusTimer = null;
         let timer = null;
 
-        if (bonusShieldBarDivElement) table.removeChild(bonusShieldBarDivElement);
-
-        if (bonusShield) {
-            bonusShieldElement = `<div class="${bonusShield.pickUpImageName}"></div>`;
-
-            timer = bonusShield.actionTime / 1000;
-            clearInterval(this.bonusShieldTimerId);
-            setTimeout(() => {
-                this.renderBonusTimer(timer, "bonusShieldTimerId", bonusShieldBarDivTimer, bonusShieldTimerLabel)
-            }, 10);
+        if (elementType === "shieldBar") {
+            bonusBarDivElementId = "bonusShieldBar";
+            bonusBarDivTimer = "timerForBonusShield";
+            bonusTimerLabel = "bonusShieldTimerLabel";
         } else {
-            bonusShieldElement = `<div></div>`;
-            bonusShieldTimer = `<div id="${bonusShieldBarDivTimer}"></div>`;
+            bonusBarDivElementId = "bonusNewArrowTypeBar";
+            bonusBarDivTimer = "timerForBonusNewArrowType";
+            bonusTimerLabel = "bonusNewArrowTypeTimerLabel";
         }
-        this.bonusShieldBar = templatePrinter.bonusShieldBarTemplatePrint(bonusShieldElement);
-        table.insertAdjacentHTML("afterbegin", this.bonusShieldBar);
+
+        bonusBarDivElement = document.querySelector(`#${bonusBarDivElementId}`);
+
+        if (bonusBarDivElement) table.removeChild(bonusBarDivElement);
+
+        if (bonus) {
+            bonusElement = `<div class="${bonus.pickUpImageName}"></div>`;
+
+            timer = bonus.actionTime / 1000;
+
+            if (elementType === "shieldBar") {
+                clearInterval(this.bonusShieldTimerId);
+            } else {
+                clearInterval(this.bonusNewArrowTypeTimerId);
+            }
+
+            setTimeout(() => this.renderBonusTimer(timer, elementType, bonusBarDivTimer, bonusTimerLabel), 10);
+        } else {
+            bonusElement = `<div></div>`;
+            bonusTimer = `<div id="${bonusBarDivTimer}"></div>`;
+        }
+
+        if (elementType === "shieldBar") {
+            this.bonusShieldBar = templatePrinter.bonusBarElementTemplatePrint(bonusElement, bonusBarDivElementId, bonusTimerLabel, bonusBarDivTimer);
+            table.insertAdjacentHTML("afterbegin", this.bonusShieldBar);
+        } else {
+            this.bonusNewArrowTypeBar = templatePrinter.bonusBarElementTemplatePrint(bonusElement, bonusBarDivElementId, bonusTimerLabel, bonusBarDivTimer);
+            table.insertAdjacentHTML("afterbegin", this.bonusNewArrowTypeBar);
+        }
     },
 
-    renderBonusNewArrowTypeBar(bonusNewArrowType = null) {
-        let table = document.querySelector("table");
-        let bonusNewArrowTypeBarDivElement = document.querySelector("#bonusNewArrowTypeBar");
-        let bonusNewArrowTypeBarDivTimer = "timerForBonusNewArrowType";
-        let bonusNewArrowTypeTimerLabel = "bonusNewArrowTypeTimerLabel";
-        let bonusNewArrowTypeElement = null;
-        let bonusNewArrowTypeTimer = null;
-        let timer = null;
-
-        if (bonusNewArrowTypeBarDivElement) table.removeChild(bonusNewArrowTypeBarDivElement);
-
-        if (bonusNewArrowType) {
-            bonusNewArrowTypeElement = `<div class="${bonusNewArrowType.pickUpImageName}"></div>`;
-
-            timer = bonusNewArrowType.actionTime / 1000;
-            clearInterval(this.bonusNewArrowTypeTimerId);
-            setTimeout(() => {
-                this.renderBonusTimer(timer, "bonusNewArrowTypeTimerId", bonusNewArrowTypeBarDivTimer, bonusNewArrowTypeTimerLabel)
-            }, 10);
-        } else {
-            bonusNewArrowTypeElement = `<div></div>`;
-            bonusNewArrowTypeTimer = `<div id="${bonusNewArrowTypeBarDivTimer}"></div>`;
-        }
-        this.bonusNewArrowTypeBar = templatePrinter.bonusNewArrowTypeTemplatePrint(bonusNewArrowTypeElement);
-        table.insertAdjacentHTML("afterbegin", this.bonusNewArrowTypeBar);
-    },
-
-    renderBonusTimer(timer, timerId, timerElement, bonusTimerLabel) {
+    renderBonusTimer(timer, elementType, timerElement, bonusTimerLabel) {
         if (timer) {
             let timerLabel = document.querySelector(`#${bonusTimerLabel}`);
             let timerDiv = document.querySelector(`#${timerElement}`)
@@ -240,11 +236,11 @@ export const renderer = {
 
             if (timer > 0) {
                 thisTimerId = setTimeout(() => {
-                    return this.renderBonusTimer(timer += -1, timerId, timerElement, bonusTimerLabel);
+                    return this.renderBonusTimer(timer += -1, elementType, timerElement, bonusTimerLabel);
                 }, 1000);
             }
 
-            if (timerId === "bonusShieldTimerId") {
+            if (elementType === "shieldBar") {
                 this.bonusShieldTimerId = thisTimerId;
             } else {
                 this.bonusNewArrowTypeTimerId = thisTimerId;
