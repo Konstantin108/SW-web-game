@@ -12,13 +12,16 @@ export const arrowController = {
     arrowsArray: [],
 
     arrowCreate() {
-        for (let key in this.arrowTypes) {
-            if (key === player.arrowType && key != "arrow-trinity") {
-                this.arrowsArray.push(new this.arrowTypes[key]);
-            }
-            if (key === player.arrowType && key === "arrow-trinity") {
-                this.arrowsArray.push(new this.arrowTypes[key](player.x - 1), new this.arrowTypes[key](player.x), new this.arrowTypes[key](player.x + 1));
-            }
+        let arrowType = player.arrowType;
+
+        if (arrowType != "arrow-trinity") {
+            this.arrowsArray.push(new this.arrowTypes[arrowType]);
+        } else {
+            this.arrowsArray.push(
+                new this.arrowTypes[arrowType](player.x - 1),
+                new this.arrowTypes[arrowType](player.x),
+                new this.arrowTypes[arrowType](player.x + 1)
+            );
         }
     },
 

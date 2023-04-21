@@ -12,13 +12,12 @@ export const helperController = {
         if (chance <= probabilityOfAction) return true;
     },
 
-    getRandomForBonus() {
-        let bonusTypes = config.bonuses.bonusTypes;
+    getRandomType(types) {
         let chance = Math.random() * 100;
 
         chance = chance.toFixed(0);
-        for (let key in bonusTypes) {
-            if (chance >= bonusTypes[key].chanceFrom && chance <= bonusTypes[key].chanceTo) return bonusTypes[key];
+        for (let key in types) {
+            if (chance >= types[key].chanceFrom && chance <= types[key].chanceTo) return types[key];
         }
     },
 

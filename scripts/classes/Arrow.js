@@ -3,7 +3,6 @@ import {player} from "../objects/player.js";
 import {game} from "../game.js";
 import {arrowController} from "../controllers/arrowController.js";
 import {blockageController} from "../controllers/blockageController.js";
-import {progressController} from "../controllers/progressController.js";
 
 export class Arrow {
     static id = 0;
@@ -11,6 +10,7 @@ export class Arrow {
     selectorName = "arrow";
     x = player.x;
     y = player.y - 1;
+    damage = 1;
     speed = 50;
     hit_x = null;
     hit_y = null;
@@ -46,7 +46,7 @@ export class Arrow {
                 this.hit_y = this.y;
                 this.y = -1;
                 renderer.clear(this.selectorName);
-                progressController.killEnemy(this, i, 0);
+                blockagesArray[i].getDamage(this, i, 0);
                 renderer.renderStatusBar();
                 this.remove();
             }

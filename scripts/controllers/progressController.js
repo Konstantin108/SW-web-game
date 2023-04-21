@@ -2,7 +2,6 @@ import {config} from "../config/config.js";
 import {blockageController} from "./blockageController.js";
 import {game} from "../game.js";
 import {renderer} from "../objects/renderer.js";
-import {Blockage} from "../classes/Blockage.js";
 import {helperController} from "./helperController.js";
 import {player} from "../objects/player.js";
 import {bonusController} from "./bonusController.js";
@@ -53,11 +52,14 @@ export const progressController = {
     },
 
     killEnemy(coordinateObject, blockage, y_pos) {
+        let blockageTypes = blockageController.blockageTypesProvider();
+        let blockageType = blockageController.blockageCreateOneUnit();
+
         renderer.renderHit(coordinateObject);
         this.scoreUp(config.shipDestroyedReward);
         this.shipDestroyer += 1;
         this.superAbilityCharging();
-        blockageController.blockagesArray[blockage] = new Blockage(helperController.getRandomInt(0, config.mapSizeX), y_pos);
+        blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
     scoreDown() {

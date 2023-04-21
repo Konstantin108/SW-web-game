@@ -1,6 +1,7 @@
 export const bonuses = {
 
     setBonusesParams() {
+        // процент выпадения бонусов будет от 1 до 8ми процентов
         return {
             bonusSpeed: 1500,
             bonusChance: 30,

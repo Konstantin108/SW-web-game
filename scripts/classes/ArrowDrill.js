@@ -1,10 +1,10 @@
 import {blockageController} from "../controllers/blockageController.js";
-import {progressController} from "../controllers/progressController.js";
 import {Arrow} from "./Arrow.js";
 import {renderer} from "../objects/renderer.js";
 
 export class ArrowDrill extends Arrow {
     selectorName = "arrow-drill";
+    damage = 2;
     speed = 20;
 
     hit() {
@@ -14,7 +14,7 @@ export class ArrowDrill extends Arrow {
             if (blockagesArray[i].x === this.x && blockagesArray[i].y === this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
-                progressController.killEnemy(this, i, 0);
+                blockagesArray[i].getDamage(this, i, 0);
                 renderer.renderStatusBar();
             }
         }

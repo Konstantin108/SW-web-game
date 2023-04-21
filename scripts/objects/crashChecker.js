@@ -2,8 +2,8 @@ import {config} from "../config/config.js";
 import {player} from "./player.js";
 import {renderer} from "./renderer.js";
 import {game} from "../game.js";
-import {Blockage} from "../classes/Blockage.js";
 import {helperController} from "../controllers/helperController.js";
+import {blockageController} from "../controllers/blockageController.js";
 
 export const crashChecker = {
     invincibilityAfterCrash: config.invincibilityAfterCrash,
@@ -11,6 +11,9 @@ export const crashChecker = {
     y: null,
 
     crashCheck(dangerArray, createNewBlockage = false) {
+        let blockageTypes = blockageController.blockageTypesProvider();
+        let blockageType = blockageController.blockageCreateOneUnit();
+
         for (let i = 0; i < dangerArray.length; i++) {
             if (dangerArray[i].x === player.x && dangerArray[i].y === player.y) {
                 this.x = player.x;
@@ -18,15 +21,12 @@ export const crashChecker = {
                 if (!player.invincibility) {
                     if (player.extraSelectorName != "player-shield") {
                         renderer.renderCrash();
-                        if (player.lives > 1) {
-                            player.lives += -1;
-                            if (createNewBlockage) dangerArray[i] = new Blockage(helperController.getRandomInt(0, config.mapSizeX), 0);
-                            // progressController.scoreDown();       // потеря очков при аварии отключена
-                            player.invincibility = true;
-                            this.invincibilityOffCall();
-                        } else {
-                            game.over();
-                        }
+                        player.lives += -1;
+                        if (createNewBlockage) dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
+                        // progressController.scoreDown();       // потеря очков при аварии отключена
+                        player.invincibility = true;
+                        this.invincibilityOffCall();
+                        if (player.lives <= 0) game.over();
                         renderer.renderPlayer();
                         renderer.renderStatusBar();
                         renderer.renderHeartScaleAnimation();

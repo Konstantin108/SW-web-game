@@ -7,5 +7,6 @@ export class ArrowTrinity extends Arrow {
     }
 
     selectorName = "arrow-trinity";
+    damage = 3;
     speed = 80;
 }

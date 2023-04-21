@@ -9,7 +9,7 @@ import {crashChecker} from "../objects/crashChecker.js";
 export class Bonus {
     static id = 0;
     id = Bonus.id++;
-    objectType = helperController.getRandomForBonus();
+    objectType = helperController.getRandomType(config.bonuses.bonusTypes);
     selectorName = this.objectType.name;
     thisSelectorOverlay = [
         "enemyArrow"

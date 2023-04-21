@@ -13,6 +13,7 @@ export class Blockage {
         this.y = y;
     }
 
+    lives = 1;
     selectorName = "blockage";
     thisSelectorOverlay = [
         "drill",
@@ -73,5 +74,10 @@ export class Blockage {
             crashChecker.crashCheck(blockageController.blockagesArray, true);
         }
         progressController.progress();
+    }
+
+    getDamage(hitData, blockageNumberInBlockagesArray, newStartPositionOnY) {
+        this.lives += -hitData.damage;
+        if (this.lives <= 0) progressController.killEnemy(hitData, blockageNumberInBlockagesArray, newStartPositionOnY);
     }
 }

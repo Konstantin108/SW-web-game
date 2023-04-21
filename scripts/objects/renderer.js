@@ -42,7 +42,7 @@ export const renderer = {
 
     renderPlayer() {
         let playerPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
-        playerPosition.classList.remove("blockage");
+        playerPosition.classList.remove("blockage", "blockageBull");
         playerPosition.classList.remove("enemyArrow");
         playerPosition.classList.add(player.selectorName);
         if (player.invincibility) playerPosition.classList.add("invincibility");
@@ -51,7 +51,7 @@ export const renderer = {
 
     renderCrash() {
         let crashPosition = document.querySelector(`[data-x="${crashChecker.x}"][data-y="${crashChecker.y}"]`);
-        crashPosition.classList.remove("blockage");
+        crashPosition.classList.remove("blockage", "blockageBull");
         crashPosition.classList.add("crash");
         setTimeout(() => this.clear("crash"), 500);
     },
@@ -59,16 +59,16 @@ export const renderer = {
     renderHit(object) {
         let hitPosition = null;
 
-        if (object.selectorName === "blockage") {
+        if (object.selectorName === "blockage" || object.selectorName === "blockageBull") {
             hitPosition = document.querySelector(`[data-x="${object.x}"][data-y="${object.y}"]`);
         } else {
             hitPosition = document.querySelector(`[data-x="${object.hit_x}"][data-y="${object.hit_y}"]`);
         }
         if (hitPosition) {
             hitPosition.classList.add("hit");
-            hitPosition.classList.remove("blockage");
+            hitPosition.classList.remove("blockage", "blockageBull");
+            setTimeout(() => this.clear("hit"), 500);
         }
-        setTimeout(() => this.clear("hit"), 500);
     },
 
     renderSuperAbility() {
@@ -123,8 +123,8 @@ export const renderer = {
             pickedBonusPosition.classList.remove(`${bonus.name}`);
             pickedBonusPosition.classList.remove(player.selectorName);
             pickedBonusPosition.classList.add("picked");
+            setTimeout(() => this.clear("picked"), 500);
         }
-        setTimeout(() => this.clear("picked"), 500);
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {
