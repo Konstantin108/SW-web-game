@@ -51,12 +51,12 @@ export const progressController = {
         return this.score += scoreType * this.multiplier;
     },
 
-    killEnemy(coordinateObject, blockage, y_pos) {
+    killEnemy(coordinateObject, blockage, shipDestroyedReward, y_pos) {
         let blockageTypes = blockageController.blockageTypesProvider();
         let blockageType = blockageController.blockageCreateOneUnit();
 
         renderer.renderHit(coordinateObject);
-        this.scoreUp(config.shipDestroyedReward);
+        this.scoreUp(shipDestroyedReward);
         this.shipDestroyer += 1;
         this.superAbilityCharging();
         blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);

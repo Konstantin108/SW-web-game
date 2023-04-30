@@ -43,7 +43,7 @@ export const renderer = {
     renderPlayer() {
         let playerPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
         playerPosition.classList.remove("blockage", "blockageBull");
-        playerPosition.classList.remove("enemyArrow");
+        playerPosition.classList.remove("enemyArrowBomb");
         playerPosition.classList.add(player.selectorName);
         if (player.invincibility) playerPosition.classList.add("invincibility");
         if (player.extraSelectorName) playerPosition.classList.add(`${player.extraSelectorName}`);
@@ -54,6 +54,16 @@ export const renderer = {
         crashPosition.classList.remove("blockage", "blockageBull");
         crashPosition.classList.add("crash");
         setTimeout(() => this.clear("crash"), 500);
+    },
+
+    renderGetDamageEnemy(hitData, selectorName) {
+        let getDamageEnemyPosition = null;
+
+        getDamageEnemyPosition = document.querySelector(`[data-x="${hitData.hit_x}"][data-y="${hitData.hit_y}"]`);
+        if (getDamageEnemyPosition) {
+            getDamageEnemyPosition.classList.add(`${selectorName}`);
+            setTimeout(() => this.clear(`${selectorName}`), 40);
+        }
     },
 
     renderHit(object) {

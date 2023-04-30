@@ -288,11 +288,14 @@ td
 //  стили движущихся объектов
 
 .blockage,
+.blockageWhite,
 .blockageBull,
+.blockageWhiteBull,
 .arrow,
 .arrow-drill,
 .arrow-trinity,
 .enemyArrow,
+.enemyArrowBomb,
 .drill,
 .trinity,
 .shield,
@@ -306,8 +309,18 @@ td
   opacity: 1
   scale: 1
 
+.blockageWhite
+  background-image: url("../images/blockage-white.png")
+  opacity: 1
+  scale: 1
+
 .blockageBull
   background-image: url("../images/blockage-bull.png")
+  opacity: 1
+  scale: 2.2
+
+.blockageWhiteBull
+  background-image: url("../images/blockage-white-bull.png")
   opacity: 1
   scale: 2.2
 
@@ -324,6 +337,10 @@ td
   background-image: url("../images/enemy-arrow.png")
   transition: .3s
   transform: scale(.2)
+
+.enemyArrowBomb
+  background-image: url("../images/enemy-arrow-bomb.png")
+  transition: .3s
 
 .drill
   background-image: url("../images/bonus-drill.png")

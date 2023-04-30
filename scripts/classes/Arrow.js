@@ -24,8 +24,7 @@ export class Arrow {
             } else if (y_pos === -2) {
                 y_pos = -3;
                 this.y = y_pos;
-                this.remove();
-                return null;
+                this.remove()
             }
         }
         renderer.clear(this.selectorName);
@@ -34,7 +33,8 @@ export class Arrow {
     }
 
     makeStep() {
-        return setInterval(() => this.step(), this.speed);
+        let timerId = setInterval(() => this.step(), this.speed);
+        setTimeout(() => clearInterval(timerId), 1300);
     }
 
     hit() {
@@ -46,7 +46,7 @@ export class Arrow {
                 this.hit_y = this.y;
                 this.y = -1;
                 renderer.clear(this.selectorName);
-                blockagesArray[i].getDamage(this, i, 0);
+                blockagesArray[i].getDamage(this, i, blockagesArray[i].shipDestroyedReward, 0);
                 renderer.renderStatusBar();
                 this.remove();
             }
@@ -61,9 +61,7 @@ export class Arrow {
         for (let i = 0; i <= arrowsArray.length; i++) {
             if (arrowsArray[i]) {
                 if (arrowsArray[i].id === this.id) {
-                    clearInterval(this.makeStep());
-                    arrowsArray.splice(i, 1);
-                    player.shootingCount += -1;
+                    arrowController.arrowsArray.splice(i, 1);
                 }
             }
         }

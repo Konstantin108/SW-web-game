@@ -13,7 +13,6 @@ export const player = {
     invincibility: false,
     x: helperController.getCenterMapOnX(),
     y: config.mapSizeY,
-    shootingCount: 0,
     selectorName: "player",
     extraSelectorName: null,
     arrowType: "arrow",
@@ -109,13 +108,19 @@ export const player = {
             "Numpad5",
             "Numpad0",
         ];
+        let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
-            if (shootBtnsArray.includes(event.code)) {
-                player.shootingCount += 1;
-                arrowController.arrowCreate();
-                arrowController.arrowMove();
+            if (!isPressBtn) {
+                if (shootBtnsArray.includes(event.code)) {
+                    arrowController.arrowCreate();
+                    arrowController.arrowMove();
+                    isPressBtn = true;
+                }
             }
+        });
+        document.addEventListener("keyup", function (event) {
+            if (shootBtnsArray.includes(event.code)) isPressBtn = false;
         });
     },
 
@@ -140,7 +145,7 @@ export const player = {
                             blockagesArray[i].x === player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
                             blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
                             blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
-                            progressController.killEnemy(blockagesArray[i], i, -3);
+                            progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -3);
                             renderer.renderStatusBar();
                         }
                     }

@@ -10,15 +10,39 @@ export const levels = {
                 fireChance: 15,
                 maxBlockageSpeed: 1300,
                 minBlockageSpeed: 2500,
+                blockageTypes: {
+                    1: {
+                        name: "blockage",
+                        chanceFrom: 0,
+                        chanceTo: 98,
+                    },
+                    2: {
+                        name: "blockageBull",
+                        chanceFrom: 99,
+                        chanceTo: 100,
+                    },
+                }
             },
             {
                 levelNum: 2,
                 scoreCountForThisLevel: 200,
                 multiplier: 2,
                 blockagesCount: 5,
-                fireChance: 2,
+                fireChance: 15,
                 maxBlockageSpeed: 1300,
                 minBlockageSpeed: 2500,
+                blockageTypes: {
+                    1: {
+                        name: "blockage",
+                        chanceFrom: 0,
+                        chanceTo: 1,
+                    },
+                    2: {
+                        name: "blockageBull",
+                        chanceFrom: 2,
+                        chanceTo: 100,
+                    },
+                }
             },
             {
                 levelNum: 3,
@@ -28,6 +52,18 @@ export const levels = {
                 fireChance: 15,
                 maxBlockageSpeed: 1100,
                 minBlockageSpeed: 2300,
+                blockageTypes: {
+                    1: {
+                        name: "blockage",
+                        chanceFrom: 0,
+                        chanceTo: 80,
+                    },
+                    2: {
+                        name: "blockageBull",
+                        chanceFrom: 81,
+                        chanceTo: 100,
+                    },
+                }
             },
             {
                 levelNum: 4,
@@ -37,6 +73,18 @@ export const levels = {
                 fireChance: 18,
                 maxBlockageSpeed: 1000,
                 minBlockageSpeed: 2200,
+                blockageTypes: {
+                    1: {
+                        name: "blockage",
+                        chanceFrom: 0,
+                        chanceTo: 80,
+                    },
+                    2: {
+                        name: "blockageBull",
+                        chanceFrom: 81,
+                        chanceTo: 100,
+                    },
+                }
             },
             {
                 levelNum: 5,
@@ -46,6 +94,18 @@ export const levels = {
                 fireChance: 20,
                 maxBlockageSpeed: 1000,
                 minBlockageSpeed: 2200,
+                blockageTypes: {
+                    1: {
+                        name: "blockage",
+                        chanceFrom: 0,
+                        chanceTo: 80,
+                    },
+                    2: {
+                        name: "blockageBull",
+                        chanceFrom: 81,
+                        chanceTo: 100,
+                    },
+                }
             },
             {
                 levelNum: "win",
@@ -55,6 +115,18 @@ export const levels = {
                 fireChance: 0,
                 maxBlockageSpeed: 0,
                 minBlockageSpeed: 0,
+                blockageTypes: {
+                    1: {
+                        name: "blockage",
+                        chanceFrom: 0,
+                        chanceTo: 80,
+                    },
+                    2: {
+                        name: "blockageBull",
+                        chanceFrom: 81,
+                        chanceTo: 100,
+                    },
+                }
             }
         ]
     }

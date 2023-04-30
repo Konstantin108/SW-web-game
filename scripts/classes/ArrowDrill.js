@@ -14,7 +14,7 @@ export class ArrowDrill extends Arrow {
             if (blockagesArray[i].x === this.x && blockagesArray[i].y === this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
-                blockagesArray[i].getDamage(this, i, 0);
+                blockagesArray[i].getDamage(this, i, blockagesArray[i].shipDestroyedReward, 0);
                 renderer.renderStatusBar();
             }
         }

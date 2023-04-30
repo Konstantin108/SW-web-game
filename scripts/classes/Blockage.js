@@ -14,7 +14,10 @@ export class Blockage {
     }
 
     lives = 1;
+    shipDestroyedReward = 2;
     selectorName = "blockage";
+    getDamageOutlookSelectorName = "blockageWhite";
+    arrowTypeSelectorName = "enemyArrow";
     thisSelectorOverlay = [
         "drill",
         "trinity",
@@ -24,9 +27,10 @@ export class Blockage {
     ];
     speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
 
-    shoot(x_pos, y_pos) {
+    shoot(arrowTypeSelectorName, x_pos, y_pos) {
         if (helperController.randomEvent(progressController.fireChance)) {
             return {
+                arrowType: arrowTypeSelectorName,
                 x: x_pos,
                 y: y_pos
             }
@@ -56,7 +60,7 @@ export class Blockage {
                     this.x = x_pos;
                 }
                 if (this.y > 1) {
-                    enemyArrowController.enemyArrowCreate(this.shoot(x_pos, y_pos));
+                    enemyArrowController.enemyArrowCreate(this.shoot(this.arrowTypeSelectorName, x_pos, y_pos));
                     enemyArrowController.enemyArrowMove();
                 }
             } else if (y_pos === config.mapSizeY + 1) {
@@ -76,8 +80,9 @@ export class Blockage {
         progressController.progress();
     }
 
-    getDamage(hitData, blockageNumberInBlockagesArray, newStartPositionOnY) {
+    getDamage(hitData, blockageNumberInBlockagesArray, shipDestroyedReward, newStartPositionOnY) {
         this.lives += -hitData.damage;
-        if (this.lives <= 0) progressController.killEnemy(hitData, blockageNumberInBlockagesArray, newStartPositionOnY);
+        if (this.lives > 0) renderer.renderGetDamageEnemy(hitData, this.getDamageOutlookSelectorName);
+        if (this.lives <= 0) progressController.killEnemy(hitData, blockageNumberInBlockagesArray,shipDestroyedReward, newStartPositionOnY);
     }
 }

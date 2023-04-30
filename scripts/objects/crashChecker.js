@@ -21,16 +21,23 @@ export const crashChecker = {
                 if (!player.invincibility) {
                     if (player.extraSelectorName != "player-shield") {
                         renderer.renderCrash();
-                        player.lives += -1;
-                        if (createNewBlockage) dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
+                        if (createNewBlockage) {
+                            dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
+                            player.lives += -1;
+                        } else {
+                            player.lives += -dangerArray[i].damage;
+                        }
                         // progressController.scoreDown();       // потеря очков при аварии отключена
                         player.invincibility = true;
                         this.invincibilityOffCall();
-                        if (player.lives <= 0) game.over();
-                        renderer.renderPlayer();
-                        renderer.renderStatusBar();
-                        renderer.renderHeartScaleAnimation();
-                        renderer.renderScullChangeColor();
+                        if (player.lives <= 0) {
+                            game.over();
+                        } else {
+                            renderer.renderPlayer();
+                            renderer.renderStatusBar();
+                            renderer.renderHeartScaleAnimation();
+                            renderer.renderScullChangeColor();
+                        }
                     }
                 }
             }

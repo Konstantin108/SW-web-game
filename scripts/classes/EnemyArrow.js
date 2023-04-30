@@ -14,7 +14,8 @@ export class EnemyArrow {
     static id = 0;
     id = EnemyArrow.id++;
     selectorName = "enemyArrow";
-    speed = config.enemyArrowSpeed;
+    speed = 200;
+    damage = 1;
     hit_x = null;
     hit_y = null;
 
@@ -29,7 +30,6 @@ export class EnemyArrow {
                 this.y = y_pos;
                 renderer.clear(this.selectorName);
                 this.remove();
-                return null;
             }
         }
         renderer.clear(this.selectorName);
@@ -38,7 +38,8 @@ export class EnemyArrow {
     }
 
     makeStep() {
-        return setInterval(() => this.step(), this.speed);
+        let timerId = setInterval(() => this.step(), this.speed);
+        setTimeout(() => clearInterval(timerId), 1300);
     }
 
     hit() {
@@ -60,7 +61,6 @@ export class EnemyArrow {
         for (let i = 0; i <= enemyArrowsArray.length; i++) {
             if (enemyArrowsArray[i]) {
                 if (enemyArrowsArray[i].id === this.id) {
-                    clearInterval(this.makeStep());
                     enemyArrowController.enemyArrowsArray.splice(i, 1);
                 }
             }

@@ -31,7 +31,6 @@ export class Bonus {
                 this.y = y_pos;
                 renderer.clear(this.selectorName);
                 this.remove();
-                return null;
             }
         }
         renderer.clear(this.selectorName);
@@ -41,7 +40,8 @@ export class Bonus {
     }
 
     makeStep() {
-        return setInterval(() => this.step(), this.speed);
+        let timerId = setInterval(() => this.step(), this.speed);
+        setTimeout(() => clearInterval(timerId), 30000);
     }
 
     picked() {
@@ -131,7 +131,6 @@ export class Bonus {
         for (let i = 0; i <= bonusArray.length; i++) {
             if (bonusArray[i]) {
                 if (bonusArray[i].id === this.id) {
-                    clearInterval(this.makeStep());
                     bonusController.bonusesArray.splice(i, 1);
                 }
             }
