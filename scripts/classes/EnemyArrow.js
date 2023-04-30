@@ -20,17 +20,16 @@ export class EnemyArrow {
     hit_y = null;
 
     step() {
-        if (game.playerIsAlive) {
-            let y_pos = this.y;
-            y_pos += 1;
-            if (y_pos <= config.mapSizeY) {
-                this.y = y_pos;
-            } else if (y_pos === config.mapSizeY + 1) {
-                y_pos = config.mapSizeY + 2;
-                this.y = y_pos;
-                renderer.clear(this.selectorName);
-                this.remove();
-            }
+        if (!game.playerIsAlive) return;
+        let y_pos = this.y;
+        y_pos += 1;
+        if (y_pos <= config.mapSizeY) {
+            this.y = y_pos;
+        } else if (y_pos === config.mapSizeY + 1) {
+            y_pos = config.mapSizeY + 2;
+            this.y = y_pos;
+            renderer.clear(this.selectorName);
+            this.remove();
         }
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(enemyArrowController.enemyArrowsArray);

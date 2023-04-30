@@ -16,16 +16,15 @@ export class Arrow {
     hit_y = null;
 
     step() {
-        if (game.playerIsAlive) {
-            let y_pos = this.y;
-            y_pos += -1;
-            if (y_pos >= -1) {
-                this.y = y_pos;
-            } else if (y_pos === -2) {
-                y_pos = -3;
-                this.y = y_pos;
-                this.remove()
-            }
+        if (!game.playerIsAlive) return;
+        let y_pos = this.y;
+        y_pos += -1;
+        if (y_pos >= -1) {
+            this.y = y_pos;
+        } else if (y_pos === -2) {
+            y_pos = -3;
+            this.y = y_pos;
+            this.remove()
         }
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(arrowController.arrowsArray);

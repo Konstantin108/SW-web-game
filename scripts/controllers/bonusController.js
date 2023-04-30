@@ -1,12 +1,19 @@
 import {helperController} from "./helperController.js";
 import {Bonus} from "../classes/Bonus.js";
 import {config} from "../config/config.js";
+import {renderer} from "../objects/renderer.js";
+import {player} from "../objects/player.js";
 
 export const bonusController = {
     bonusesArray: [],
+    bonusAppearanceListenerTimerId: null,
 
     bonusAppearanceListener() {
-        setInterval(() => this.bonusCreate(), 5000);
+        this.bonusAppearanceListenerTimerId = setInterval(() => this.bonusCreate(), 5000);
+    },
+
+    bonusAppearanceListenerTimerIdRemove() {
+        clearInterval(this.bonusAppearanceListenerTimerId);
     },
 
     bonusCreate() {
@@ -21,6 +28,17 @@ export const bonusController = {
             pickedBonus = this.bonusesArray[i].getBonus(this.bonusesArray[i].picked());
         }
         if (pickedBonus) return pickedBonus;
+    },
+
+    allNewPropertiesForPlayerOff() {
+        renderer.clear(player.selectorName);
+        player.selectorName = "player";
+        player.arrowType = "arrow";
+        player.extraSelectorName = null;
+        renderer.renderPlayer();
+        renderer.clear(player.extraSelectorName);
+        renderer.renderBonusBarElement("newArrowTypeBar", true);
+        renderer.renderBonusBarElement("shieldBar", true);
     },
 
     bonusMove() {

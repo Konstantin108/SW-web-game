@@ -3,6 +3,7 @@ import {blockageController} from "./controllers/blockageController.js";
 import {bonusController} from "./controllers/bonusController.js";
 import {player} from "./objects/player.js";
 import {renderer} from "./objects/renderer.js";
+import {helperController} from "./controllers/helperController.js";
 
 export const game = {
     playerIsAlive: true,
@@ -39,6 +40,9 @@ export const game = {
             result = `Игра окончена! Достигнут уровень: ${progressController.level}\nКораблей уничтожено: ${progressController.shipDestroyer}, Набранное количество очков: ${progressController.score}`;
         }
         this.playerIsAlive = false;
+        bonusController.bonusAppearanceListenerTimerIdRemove();
+        bonusController.allNewPropertiesForPlayerOff();
+        helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         alert(result);
         console.log(result);
     }

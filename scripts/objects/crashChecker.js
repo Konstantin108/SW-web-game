@@ -18,27 +18,27 @@ export const crashChecker = {
             if (dangerArray[i].x === player.x && dangerArray[i].y === player.y) {
                 this.x = player.x;
                 this.y = player.y;
-                if (!player.invincibility) {
-                    if (player.extraSelectorName != "player-shield") {
-                        renderer.renderCrash();
-                        if (createNewBlockage) {
-                            dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
-                            player.lives += -1;
-                        } else {
-                            player.lives += -dangerArray[i].damage;
-                        }
-                        // progressController.scoreDown();       // потеря очков при аварии отключена
-                        player.invincibility = true;
-                        this.invincibilityOffCall();
-                        if (player.lives <= 0) {
-                            game.over();
-                        } else {
-                            renderer.renderPlayer();
-                            renderer.renderStatusBar();
-                            renderer.renderHeartScaleAnimation();
-                            renderer.renderScullChangeColor();
-                        }
+                if (player.invincibility) return;
+                if (player.extraSelectorName != "player-shield") {
+                    renderer.renderCrash();
+                    if (createNewBlockage) {
+                        dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
+                        player.lives += -1;
+                    } else {
+                        player.lives += -dangerArray[i].damage;
                     }
+                    // progressController.scoreDown();       // потеря очков при аварии отключена
+                    player.invincibility = true;
+                    this.invincibilityOffCall();
+                    if (player.lives <= 0) {
+                        game.over();
+                    } else {
+                        renderer.renderPlayer();
+                        renderer.renderStatusBar();
+                        renderer.renderHeartScaleAnimation();
+                        renderer.renderScullChangeColor();
+                    }
+
                 }
             }
         }
