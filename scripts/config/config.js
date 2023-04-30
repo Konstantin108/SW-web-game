@@ -1,6 +1,5 @@
 import {bonuses} from "./bonuses.js";
 import {levels} from "./levels.js";
-import {blockages} from "./blockages.js";
 
 export const config = {
     mapSizeX: 10,
@@ -13,7 +12,6 @@ export const config = {
     startBombsCount: 0,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
-    blockages: blockages.setBlockagesParams(),
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
 }

@@ -83,6 +83,6 @@ export class Blockage {
     getDamage(hitData, blockageNumberInBlockagesArray, shipDestroyedReward, newStartPositionOnY) {
         this.lives += -hitData.damage;
         if (this.lives > 0) renderer.renderGetDamageEnemy(hitData, this.getDamageOutlookSelectorName);
-        if (this.lives <= 0) progressController.killEnemy(hitData, blockageNumberInBlockagesArray,shipDestroyedReward, newStartPositionOnY);
+        if (this.lives <= 0) progressController.killEnemy(hitData, blockageNumberInBlockagesArray, shipDestroyedReward, newStartPositionOnY);
     }
 }

@@ -4,7 +4,7 @@ export const bonuses = {
         // процент выпадения бонусов будет от 1 до 8ми процентов
         return {
             bonusSpeed: 1500,
-            bonusChance: 30,
+            bonusChance: 8,
             // bonusChance: 99,
             bonusTypes: {
                 1: {

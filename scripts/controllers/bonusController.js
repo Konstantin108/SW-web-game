@@ -3,11 +3,10 @@ import {Bonus} from "../classes/Bonus.js";
 import {config} from "../config/config.js";
 
 export const bonusController = {
-    bonusTimerIdsArray: [],
     bonusesArray: [],
 
     bonusAppearanceListener() {
-        this.bonusTimerIdsArray.push(setInterval(() => this.bonusCreate(), 5000));
+        setInterval(() => this.bonusCreate(), 5000);
     },
 
     bonusCreate() {
@@ -30,7 +29,5 @@ export const bonusController = {
         }
         // console.log("bonuses:")
         // console.log(this.bonusesArray);
-        // console.log("bonusTimerIds:")
-        // console.log(this.bonusTimerIdsArray);
     }
 }

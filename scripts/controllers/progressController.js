@@ -13,6 +13,7 @@ export const progressController = {
     minBlockageSpeed: config.levels[0].minBlockageSpeed,
     multiplier: config.levels[0].multiplier,
     fireChance: config.levels[0].fireChance,
+    blockageTypes: config.levels[0].blockageTypes,
     blockagesCount: 0,
     score: 0,
     shipDestroyer: 0,
@@ -35,6 +36,7 @@ export const progressController = {
                     this.maxBlockageSpeed = this.levels[i].maxBlockageSpeed;
                     this.minBlockageSpeed = this.levels[i].minBlockageSpeed;
                     this.fireChance = this.levels[i].fireChance;
+                    this.blockageTypes = this.levels[i].blockageTypes;
                     this.newLevelEntry(this.blockagesCount);
                     this.levels.shift();
                     levelsLeft += -1;
@@ -99,7 +101,6 @@ export const progressController = {
 
     newLevelEntry(blockagesCount) {
         alert(`Переход на новый уровень => Уровень ${progressController.level}\nПоздравляем!`);
-        helperController.removeAllTimers(bonusController.bonusTimerIdsArray);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         bonusController.bonusAppearanceListener();

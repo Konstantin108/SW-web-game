@@ -14,13 +14,8 @@ export const levels = {
                     1: {
                         name: "blockage",
                         chanceFrom: 0,
-                        chanceTo: 98,
-                    },
-                    2: {
-                        name: "blockageBull",
-                        chanceFrom: 99,
                         chanceTo: 100,
-                    },
+                    }
                 }
             },
             {
@@ -35,11 +30,11 @@ export const levels = {
                     1: {
                         name: "blockage",
                         chanceFrom: 0,
-                        chanceTo: 1,
+                        chanceTo: 90,
                     },
                     2: {
                         name: "blockageBull",
-                        chanceFrom: 2,
+                        chanceFrom: 91,
                         chanceTo: 100,
                     },
                 }
@@ -56,11 +51,11 @@ export const levels = {
                     1: {
                         name: "blockage",
                         chanceFrom: 0,
-                        chanceTo: 80,
+                        chanceTo: 85,
                     },
                     2: {
                         name: "blockageBull",
-                        chanceFrom: 81,
+                        chanceFrom: 86,
                         chanceTo: 100,
                     },
                 }
@@ -98,11 +93,11 @@ export const levels = {
                     1: {
                         name: "blockage",
                         chanceFrom: 0,
-                        chanceTo: 80,
+                        chanceTo: 75,
                     },
                     2: {
                         name: "blockageBull",
-                        chanceFrom: 81,
+                        chanceFrom: 76,
                         chanceTo: 100,
                     },
                 }
@@ -115,18 +110,7 @@ export const levels = {
                 fireChance: 0,
                 maxBlockageSpeed: 0,
                 minBlockageSpeed: 0,
-                blockageTypes: {
-                    1: {
-                        name: "blockage",
-                        chanceFrom: 0,
-                        chanceTo: 80,
-                    },
-                    2: {
-                        name: "blockageBull",
-                        chanceFrom: 81,
-                        chanceTo: 100,
-                    },
-                }
+                blockageTypes: {}
             }
         ]
     }

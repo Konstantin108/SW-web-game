@@ -2,6 +2,7 @@ import {config} from "../config/config.js";
 import {helperController} from "./helperController.js";
 import {Blockage} from "../classes/Blockage.js";
 import {BlockageBull} from "../classes/BlockageBull.js";
+import {progressController} from "./progressController.js";
 
 export const blockageController = {
     blockageTypes: {
@@ -21,7 +22,7 @@ export const blockageController = {
     },
 
     blockageCreateOneUnit() {
-        let blockageType = helperController.getRandomType(config.blockages.blockageTypes);
+        let blockageType = helperController.getRandomType(progressController.blockageTypes);
         return blockageType.name;
     },
 
