@@ -38,7 +38,7 @@ export const blockageController = {
             let blockageType = this.blockageCreateOneUnit();
             let x_pos = actualPossiblePositionsArray[indexOfNumber];
 
-            if (x_pos) this.blockagesArray.push(new this.blockageTypes[blockageType](x_pos, 0));
+            if (x_pos) this.blockagesArray.push(new this.blockageTypes[blockageType](x_pos));
             actualPossiblePositionsArray.splice(indexOfNumber, 1);
         }
     },

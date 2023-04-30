@@ -28,7 +28,7 @@ export const progressController = {
         blockageController.blockageCreate(this.blockagesCount);
 
         for (let i = 1; i < this.levels.length; i++) {
-            if (this.levels[i].scoreCountForThisLevel < this.score && this.levels.length === levelsLeft) {
+            if (this.levels[i].scoreCountForThisLevel <= this.score && this.levels.length === levelsLeft) {
                 if (this.levels.length > 2) {
                     this.level = this.levels[i].levelNum;
                     this.multiplier = this.levels[i].multiplier;
