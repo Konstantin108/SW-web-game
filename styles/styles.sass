@@ -180,19 +180,18 @@ td
   background-repeat: no-repeat
   width: 50px
   height: 50px
-  animation: invincibility-blink .6s infinite
+
+.blinkBeforeBonusOff
+  animation: blink .6s infinite
 
 .drillPickUpImage
   background-image: url("../images/bonus-drill.png")
-  animation-delay: 14s
 
 .trinityPickUpImage
   background-image: url("../images/bonus-trinity.png")
-  animation-delay: 14s
 
 .shieldPickUpImage
   background-image: url("../images/bonus-shield.png")
-  animation-delay: 24s
 
 //  левый худ
 
@@ -277,9 +276,9 @@ td
   border-radius: 50%
 
 .invincibility
-  animation: invincibility-blink .6s infinite
+  animation: blink .6s infinite
 
-@keyframes invincibility-blink
+@keyframes blink
   from
     opacity: 1
   to

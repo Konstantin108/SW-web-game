@@ -4,16 +4,14 @@ import {bonusController} from "./controllers/bonusController.js";
 import {player} from "./objects/player.js";
 import {renderer} from "./objects/renderer.js";
 import {helperController} from "./controllers/helperController.js";
+import {crashChecker} from "./objects/crashChecker.js";
 
 export const game = {
-    playerIsAlive: true,
-
-    init() {
-        alert("1) Нажми F12, чтобы открыть панель управления\n2) Закрой данное окно\n3) В появившейся панели выбери вкладку \"Console\"\n4) Если управление не работает, то надо кликнуть по белому фону\n\nИспользуй Numpad для передвижения, пробел - для выстрела, ты должен уходить  от летящих на тебя кораблей. Каждое столкновение будет отнимать жизнь и очки. Будь осторожен, турбулентность будет тебе мешать!");
-        renderer.render();
-    },
+    gameIsRuned: false,
 
     run() {
+        this.gameIsRuned = true;
+        renderer.render();
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -23,31 +21,70 @@ export const game = {
         player.useSuperAbility();
     },
 
-    quit() {
+    showPauseMenu() {
         let quitBtn = "Escape";
 
         document.addEventListener("keydown", function (event) {
-            if (event.code === quitBtn) game.over();
+            if (event.code === quitBtn) {
+                game.paused();
+            }
         });
+    },
+
+    paused() {
+        let text = "Игра остановлена! Хотите продолжить?\n\"ОК\" - продолжить играть\n\"Отмена\" - закончить игру"
+
+        if (this.gameIsRuned) this.stopGame();
+        if (confirm(text)) {
+            this.resumeGame();
+            // alert("Игра возобновлена, но таймеры всё еще остановлены!");
+        } else {
+            this.quitConfirm();
+        }
+    },
+
+    stopGame() {
+        this.gameIsRuned = false;
+        bonusController.bonusAppearanceListenerTimerIdRemove();
+        bonusController.allNewPropertiesForPlayerOffCallCancel();
+        crashChecker.invincibilityOffCallCancel();
+        helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
+    },
+
+    resumeGame() {
+        this.gameIsRuned = true;
+        player.offBonusCall();
+        // запуск бонусов после снятия паузы для проверки работы таймеров
+        // после паузы возможно запуск будет другим методом
+        // bonusController.bonusAppearanceListener();
+    },
+
+    quitConfirm() {
+        let text = "Вы уверены, что хотите закончить игру?";
+
+        if (confirm(text)) {
+            alert(this.quit());
+        } else {
+            this.paused();
+        }
+    },
+
+    quit() {
+        return `Игра окончена! Достигнут уровень: ${progressController.level}\nКораблей уничтожено: ${progressController.shipDestroyer}, Набранное количество очков: ${progressController.score}`;
     },
 
     over(win = false) {
         let result = "";
 
+        this.stopGame();
         if (win) {
             result = `Игра пройдена! Поздравляю!\nТвой результат: кораблей уничтожено всего: ${progressController.shipDestroyer},\nНабранное количество очков всего: ${progressController.score}`
         } else {
-            result = `Игра окончена! Достигнут уровень: ${progressController.level}\nКораблей уничтожено: ${progressController.shipDestroyer}, Набранное количество очков: ${progressController.score}`;
+            result = this.quit();
         }
-        this.playerIsAlive = false;
-        bonusController.bonusAppearanceListenerTimerIdRemove();
-        bonusController.allNewPropertiesForPlayerOff();
-        helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         alert(result);
-        console.log(result);
     }
 }
 
-game.init();
 game.run();
-game.quit();
+game.showPauseMenu();

@@ -3,6 +3,7 @@ import {player} from "./player.js";
 import {templatePrinter} from "./templatePrinter.js";
 import {progressController} from "../controllers/progressController.js";
 import {crashChecker} from "./crashChecker.js";
+import {game} from "../game.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -24,8 +25,8 @@ export const renderer = {
         this.renderPlayer();
         this.renderStatusBar();
         this.renderBombBar();
-        this.renderBonusBarElement("shieldBar", false);
-        this.renderBonusBarElement("newArrowTypeBar", false);
+        this.renderBonusBarElement("shieldBar");
+        this.renderBonusBarElement("newArrowTypeBar");
         this.renderSuperAbilityBar();
     },
 
@@ -184,7 +185,7 @@ export const renderer = {
         table.insertAdjacentHTML("afterbegin", this.bombBar);
     },
 
-    renderBonusBarElement(elementType, timerOff, bonus = null) {
+    renderBonusBarElement(elementType, bonus = null) {
         let table = document.querySelector("table");
         let bonusBarDivElement = null;
         let bonusBarDivTimer = null;
@@ -193,6 +194,7 @@ export const renderer = {
         let bonusElement = null;
         let bonusTimer = null;
         let timer = null;
+        let bonusElementObject = null;
 
         if (elementType === "shieldBar") {
             bonusBarDivElementId = "bonusShieldBar";
@@ -208,13 +210,9 @@ export const renderer = {
 
         if (bonusBarDivElement) table.removeChild(bonusBarDivElement);
 
-        if (timerOff) {
-            clearTimeout(this.bonusShieldTimerId);
-            clearTimeout(this.bonusNewArrowTypeTimerId);
-        }
-
         if (bonus) {
             bonusElement = `<div class="${bonus.pickUpImageName}"></div>`;
+            setTimeout(() => bonusElementObject = document.querySelector(`.${bonus.pickUpImageName}`), 10);
 
             timer = bonus.actionTime / 1000;
 
@@ -224,7 +222,7 @@ export const renderer = {
                 clearTimeout(this.bonusNewArrowTypeTimerId);
             }
 
-            setTimeout(() => this.renderBonusTimer(timer, elementType, bonusBarDivTimer, bonusTimerLabel), 10);
+            setTimeout(() => this.renderBonusTimer(timer, elementType, bonusBarDivTimer, bonusTimerLabel, bonusElementObject), 10);
         } else {
             bonusElement = `<div></div>`;
             bonusTimer = `<div id="${bonusBarDivTimer}"></div>`;
@@ -239,21 +237,25 @@ export const renderer = {
         }
     },
 
-    renderBonusTimer(timer, elementType, timerElement, bonusTimerLabel) {
+    renderBonusTimer(timer, elementType, timerElement, bonusTimerLabel, bonusElementObject) {
         if (!timer) return;
         let timerLabel = document.querySelector(`#${bonusTimerLabel}`);
         let timerDiv = document.querySelector(`#${timerElement}`)
         let timerData = `<div id="${timerElement}">${timer}</div>`;
         let thisTimerId = null;
+        let tick = -1;
+
+        if (!game.gameIsRuned) tick = 0;
 
         if (timerDiv) timerLabel.removeChild(timerDiv);
         timerLabel.insertAdjacentHTML("afterbegin", timerData);
-
         if (timer > 0) {
             thisTimerId = setTimeout(() => {
-                return this.renderBonusTimer(timer += -1, elementType, timerElement, bonusTimerLabel);
+                return this.renderBonusTimer(timer += tick, elementType, timerElement, bonusTimerLabel, bonusElementObject);
             }, 1000);
         }
+
+        if (timer <= 6) bonusElementObject.classList.add("blinkBeforeBonusOff");
 
         if (elementType === "shieldBar") {
             this.bonusShieldTimerId = thisTimerId;

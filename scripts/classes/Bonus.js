@@ -21,7 +21,7 @@ export class Bonus {
     picked_y = null;
 
     step() {
-        if (!game.playerIsAlive) return;
+        if (!game.gameIsRuned) return;
         let y_pos = this.y;
         y_pos += 1;
         if (y_pos <= config.mapSizeY) {
@@ -69,17 +69,23 @@ export class Bonus {
             renderer.clear(player.selectorName);
             player.selectorName = bonus.playerOutlook;
             player.arrowType = bonus.playerArrowType;
+            player.bonusObjectNewArrowType = bonus;
+            player.bonusNewArrowTypeIsActivated = true;
             renderer.renderPlayer();
-            renderer.renderBonusBarElement("newArrowTypeBar", false, bonus);
-            this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId);
+            renderer.renderBonusBarElement("newArrowTypeBar", bonus);
+            this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId, player.calculateTimeInBonusNewArrowTypeOffTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
+            this.calculateTimeInBonusOff(bonus.actionTime / 1000, "newArrowType");
         }
         if (bonus.playerExtraOutlook) {
             crashChecker.invincibilityOff();
             player.extraSelectorName = bonus.playerExtraOutlook;
-            renderer.renderBonusBarElement("shieldBar", false, bonus);
-            this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId);
+            player.bonusObjectShield = bonus;
+            player.bonusShieldIsActivated = true;
+            renderer.renderBonusBarElement("shieldBar", bonus);
+            this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId, player.calculateTimeInBonusShieldOffTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
+            this.calculateTimeInBonusOff(bonus.actionTime / 1000, "shield");
         }
         if (bonus.name === "life") {
             if (player.lives < config.lives) {
@@ -101,13 +107,15 @@ export class Bonus {
             renderer.clear(player.selectorName);
             player.selectorName = "player";
             player.arrowType = "arrow";
+            player.bonusNewArrowTypeIsActivated = false;
             renderer.renderPlayer();
-            renderer.renderBonusBarElement("newArrowTypeBar", false);
+            renderer.renderBonusBarElement("newArrowTypeBar");
         }
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);
             player.extraSelectorName = null;
-            renderer.renderBonusBarElement("shieldBar", false);
+            player.bonusShieldIsActivated = false;
+            renderer.renderBonusBarElement("shieldBar");
         }
     }
 
@@ -120,8 +128,29 @@ export class Bonus {
         }
     }
 
-    newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId) {
+    newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId, calculateTimeInBonusOffTimerId) {
         if (bonusIsActivatedTimerId) clearTimeout(bonusIsActivatedTimerId);
+        if (calculateTimeInBonusOffTimerId) clearTimeout(calculateTimeInBonusOffTimerId);
+    }
+
+    calculateTimeInBonusOff(bonusActionTime, calculateTimeInBonusOffType) {
+        let calculateTimeInBonusOffTimerId = null;
+        let tick = -1;
+
+        if (!game.gameIsRuned) tick = 0;
+
+        if (bonusActionTime > 0) {
+            calculateTimeInBonusOffTimerId = setTimeout(() => {
+                return this.calculateTimeInBonusOff(bonusActionTime += tick, calculateTimeInBonusOffType);
+            }, 1000);
+        }
+        if (calculateTimeInBonusOffType === "newArrowType") {
+            player.calculateTimeInBonusNewArrowTypeOffTimerId = calculateTimeInBonusOffTimerId;
+            player.calculateTimeInBonusNewArrowTypeOff = bonusActionTime;
+        } else {
+            player.calculateTimeInBonusShieldOffTimerId = calculateTimeInBonusOffTimerId;
+            player.calculateTimeInBonusShieldOff = bonusActionTime;
+        }
     }
 
     remove() {

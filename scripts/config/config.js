@@ -10,6 +10,8 @@ export const config = {
     lives: 5,
     maxBombsCount: 1,
     startBombsCount: 0,
+    bonusNewArrowTypeIsActivated: false,
+    bonusShieldIsActivated: false,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
     bonuses: bonuses.setBonusesParams(),

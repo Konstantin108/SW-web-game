@@ -16,7 +16,7 @@ export class Arrow {
     hit_y = null;
 
     step() {
-        if (!game.playerIsAlive) return;
+        if (!game.gameIsRuned) return;
         let y_pos = this.y;
         y_pos += -1;
         if (y_pos >= -1) {

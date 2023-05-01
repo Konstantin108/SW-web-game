@@ -1,7 +1,6 @@
 import {helperController} from "./helperController.js";
 import {Bonus} from "../classes/Bonus.js";
 import {config} from "../config/config.js";
-import {renderer} from "../objects/renderer.js";
 import {player} from "../objects/player.js";
 
 export const bonusController = {
@@ -30,15 +29,11 @@ export const bonusController = {
         if (pickedBonus) return pickedBonus;
     },
 
-    allNewPropertiesForPlayerOff() {
-        renderer.clear(player.selectorName);
-        player.selectorName = "player";
-        player.arrowType = "arrow";
-        player.extraSelectorName = null;
-        renderer.renderPlayer();
-        renderer.clear(player.extraSelectorName);
-        renderer.renderBonusBarElement("newArrowTypeBar", true);
-        renderer.renderBonusBarElement("shieldBar", true);
+    allNewPropertiesForPlayerOffCallCancel() {
+        clearTimeout(player.bonusShieldIsActivatedTimerId);
+        clearTimeout(player.bonusNewArrowTypeIsActivatedTimerId);
+        player.bonusShieldIsActivated = false;
+        player.bonusNewArrowTypeIsActivated = false;
     },
 
     bonusMove() {

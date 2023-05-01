@@ -12,6 +12,7 @@ import {game} from "../game.js";
 export const player = {
     lives: config.lives,
     invincibility: false,
+    invincibilityTimerId: null,
     x: helperController.getCenterMapOnX(),
     y: config.mapSizeY,
     selectorName: "player",
@@ -19,8 +20,16 @@ export const player = {
     arrowType: "arrow",
     bombsCount: config.startBombsCount,
     superAbilityIsActivated: config.superAbilityIsActivated,
-    bonusNewArrowTypeIsActivatedTimerId: null,
-    bonusShieldIsActivatedTimerId: null,
+    bonusNewArrowTypeIsActivated: config.bonusNewArrowTypeIsActivated,
+    bonusShieldIsActivated: config.bonusShieldIsActivated,
+    bonusNewArrowTypeIsActivatedTimerId: null,  // id таймера, который отменит действие бонуса усиление оружия
+    bonusShieldIsActivatedTimerId: null,  // id таймера, который отменит действие бонуса щит
+    calculateTimeInBonusNewArrowTypeOff: null,  // сюда записывается цифра - количество секунд до окончания действия бонуса усиление оружия
+    calculateTimeInBonusShieldOff: null,  // сюда записывается цифра - количество секунд до окончания действия бонуса щит
+    calculateTimeInBonusNewArrowTypeOffTimerId: null,  // id таймера delay в методе calculateTimeInBonusOff() для бонуса усиление оружия
+    calculateTimeInBonusShieldOffTimerId: null,  // id таймера delay в методе calculateTimeInBonusOff() для бонуса щит
+    bonusObjectNewArrowType: null,  // данные подобраного бонуса усиление оружия для возобновления действия после снятия игры с паузы
+    bonusObjectShield: null,  // данные подобраного бонуса щит для возобновления действия после снятия игры с паузы,
 
     move() {
         let possibleDirections = [
@@ -45,7 +54,7 @@ export const player = {
         let y_value = this.y;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.playerIsAlive) return;
+            if (!game.gameIsRuned) return;
             if (possibleDirections.includes(event.code)) {
                 switch (event.code) {
                     case possibleDirections[0]:
@@ -113,7 +122,7 @@ export const player = {
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.playerIsAlive) return;
+            if (!game.gameIsRuned) return;
             if (!isPressBtn) {
                 if (shootBtnsArray.includes(event.code)) {
                     arrowController.arrowCreate();
@@ -127,11 +136,32 @@ export const player = {
         });
     },
 
+    offBonusNewArrowType() {
+        renderer.clear(this.selectorName);
+        this.selectorName = "player";
+        this.arrowType = "arrow";
+        this.bonusNewArrowTypeIsActivated = false;
+        renderer.renderPlayer();
+        renderer.renderBonusBarElement("newArrowTypeBar");
+    },
+
+    offBonusShield() {
+        renderer.clear(this.extraSelectorName);
+        this.extraSelectorName = null;
+        this.bonusShieldIsActivated = false;
+        renderer.renderBonusBarElement("shieldBar");
+    },
+
+    offBonusCall() {
+        if (this.bonusObjectNewArrowType) this.bonusNewArrowTypeIsActivatedTimerId = setTimeout(() => this.offBonusNewArrowType(), this.calculateTimeInBonusNewArrowTypeOff * 1000);
+        if (this.bonusObjectShield) this.bonusShieldIsActivatedTimerId = setTimeout(() => this.offBonusShield(), this.calculateTimeInBonusShieldOff * 1000);
+    },
+
     useBomb() {
         let useBombBtn = "ControlRight";
 
         document.addEventListener("keydown", function (event) {
-            if (!game.playerIsAlive) return;
+            if (!game.gameIsRuned) return;
             if (useBombBtn === event.code) explosion.explode();
         });
     },
@@ -141,7 +171,7 @@ export const player = {
         let useSuperAbilityBtn = "ControlLeft";
 
         document.addEventListener("keydown", function (event) {
-            if (!game.playerIsAlive) return;
+            if (!game.gameIsRuned) return;
             if (useSuperAbilityBtn === event.code) {
                 if (player.superAbilityIsActivated) {
                     for (let i = 0; i < blockagesArray.length; i++) {
