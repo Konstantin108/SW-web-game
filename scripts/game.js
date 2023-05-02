@@ -53,10 +53,11 @@ export const game = {
 
     resumeGame() {
         this.gameIsRuned = true;
+        bonusController.bonusAppearanceListener();
+        bonusController.resumeGameMakeStepOffCall();
+        crashChecker.invincibilityOffCall(player.timeInInvincibilityOff * 1000);
+        blockageController.blockageMove(blockageController.blockagesArray);
         player.offBonusCall();
-        // запуск бонусов после снятия паузы для проверки работы таймеров
-        // после паузы возможно запуск будет другим методом
-        // bonusController.bonusAppearanceListener();
     },
 
     quitConfirm() {

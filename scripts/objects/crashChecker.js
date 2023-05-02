@@ -29,7 +29,8 @@ export const crashChecker = {
                     }
                     // progressController.scoreDown();       // потеря очков при аварии отключена
                     player.invincibility = true;
-                    this.invincibilityOffCall();
+                    this.invincibilityOffCall(this.invincibilityAfterCrash);
+                    this.calculateTimeInInvincibilityOff(this.invincibilityAfterCrash / 1000);
                     if (player.lives <= 0) {
                         game.over();
                     } else {
@@ -52,11 +53,26 @@ export const crashChecker = {
         renderer.renderPlayer();
     },
 
-    invincibilityOffCall() {
-        if (player.invincibility) player.invincibilityTimerId = setTimeout(() => this.invincibilityOff(), this.invincibilityAfterCrash);
+    invincibilityOffCall(invincibilityAfterCrash) {
+        if (player.invincibility) player.invincibilityTimerId = setTimeout(() => this.invincibilityOff(), invincibilityAfterCrash);
     },
 
     invincibilityOffCallCancel() {
         clearTimeout(player.invincibilityTimerId);
+        clearTimeout(player.timeInInvincibilityOffTimerId);
+    },
+
+    calculateTimeInInvincibilityOff(invincibilityAfterCrashActionTime) {
+        let calculateTimeInInvincibilityOffTimerId = null;
+        let tick = -1;
+
+        if (!game.gameIsRuned) tick = 0;
+        if (invincibilityAfterCrashActionTime > 0) {
+            calculateTimeInInvincibilityOffTimerId = setTimeout(() => {
+                return this.calculateTimeInInvincibilityOff(invincibilityAfterCrashActionTime += tick);
+            }, 1000);
+        }
+        player.timeInInvincibilityOffTimerId = calculateTimeInInvincibilityOffTimerId;
+        player.timeInInvincibilityOff = invincibilityAfterCrashActionTime;
     }
 }

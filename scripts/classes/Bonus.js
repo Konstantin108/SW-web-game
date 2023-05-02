@@ -19,6 +19,8 @@ export class Bonus {
     speed = config.bonuses.bonusSpeed;
     picked_x = null;
     picked_y = null;
+    timerId = null;  // id таймера интервала для метода makeStep()
+    timeBonusCanMakeStepTimerId = null;  // id таймера отсчета времени до удаления interval для отключения makeStep()
 
     step() {
         if (!game.gameIsRuned) return;
@@ -39,8 +41,11 @@ export class Bonus {
     }
 
     makeStep() {
-        let timerId = setInterval(() => this.step(), this.speed);
-        setTimeout(() => clearInterval(timerId), 30000);
+        this.timerId = setInterval(() => this.step(), this.speed);
+    }
+
+    makeStepOff() {
+        this.timeBonusCanMakeStepTimerId = setTimeout(() => clearInterval(this.timerId), 30000);
     }
 
     picked() {

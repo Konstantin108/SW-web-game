@@ -34,11 +34,25 @@ export const bonusController = {
         clearTimeout(player.bonusNewArrowTypeIsActivatedTimerId);
         player.bonusShieldIsActivated = false;
         player.bonusNewArrowTypeIsActivated = false;
+        for (let i = 0; i < this.bonusesArray.length; i++) {
+            if (this.bonusesArray[i]) {
+                if (this.bonusesArray[i].timeBonusCanMakeStepTimerId) clearTimeout(this.bonusesArray[i].timeBonusCanMakeStepTimerId);
+            }
+        }
+    },
+
+    resumeGameMakeStepOffCall() {
+        for (let i = 0; i < this.bonusesArray.length; i++) {
+            if (this.bonusesArray[i]) this.bonusesArray[i].makeStepOff();
+        }
     },
 
     bonusMove() {
         for (let i = 0; i < this.bonusesArray.length; i++) {
-            if (this.bonusesArray[i]) this.bonusesArray[i].makeStep();
+            if (this.bonusesArray[i]) {
+                this.bonusesArray[i].makeStep();
+                this.bonusesArray[i].makeStepOff();
+            }
         }
         // console.log("bonuses:")
         // console.log(this.bonusesArray);

@@ -12,7 +12,9 @@ import {game} from "../game.js";
 export const player = {
     lives: config.lives,
     invincibility: false,
-    invincibilityTimerId: null,
+    invincibilityTimerId: null,  // id таймера до окончания действия неуязвимости
+    timeInInvincibilityOffTimerId: null,  // id таймера delay в методе calculateTimeInInvincibilityOff()
+    timeInInvincibilityOff: null,  // сюда записывается цифра - количество секунд до окончания неуязвимости
     x: helperController.getCenterMapOnX(),
     y: config.mapSizeY,
     selectorName: "player",
