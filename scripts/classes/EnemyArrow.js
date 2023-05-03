@@ -38,7 +38,7 @@ export class EnemyArrow {
 
     makeStep() {
         let timerId = setInterval(() => this.step(), this.speed);
-        setTimeout(() => clearInterval(timerId), 1300);
+        setTimeout(() => clearInterval(timerId), 2000);
     }
 
     hit() {

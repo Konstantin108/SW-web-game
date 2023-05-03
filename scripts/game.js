@@ -5,6 +5,8 @@ import {player} from "./objects/player.js";
 import {renderer} from "./objects/renderer.js";
 import {helperController} from "./controllers/helperController.js";
 import {crashChecker} from "./objects/crashChecker.js";
+import {arrowController} from "./controllers/arrowController.js";
+import {enemyArrowController} from "./controllers/enemyArrowController.js";
 
 export const game = {
     gameIsRuned: false,
@@ -37,7 +39,6 @@ export const game = {
         if (this.gameIsRuned) this.stopGame();
         if (confirm(text)) {
             this.resumeGame();
-            // alert("Игра возобновлена, но таймеры всё еще остановлены!");
         } else {
             this.quitConfirm();
         }
@@ -57,6 +58,8 @@ export const game = {
         bonusController.resumeGameMakeStepOffCall();
         crashChecker.invincibilityOffCall(player.timeInInvincibilityOff * 1000);
         blockageController.blockageMove(blockageController.blockagesArray);
+        arrowController.arrowMove();
+        enemyArrowController.enemyArrowMove();
         player.offBonusCall();
     },
 
