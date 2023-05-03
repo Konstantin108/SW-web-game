@@ -14,14 +14,14 @@ export const arrowController = {
     arrowCreate() {
         let arrowType = player.arrowType;
 
-        if (arrowType != "arrow-trinity") {
-            this.arrowsArray.push(new this.arrowTypes[arrowType]);
-        } else {
+        if (arrowType === "arrow-trinity") {
             this.arrowsArray.push(
                 new this.arrowTypes[arrowType](player.x - 1),
                 new this.arrowTypes[arrowType](player.x),
                 new this.arrowTypes[arrowType](player.x + 1)
             );
+        } else {
+            this.arrowsArray.push(new this.arrowTypes[arrowType]);
         }
     },
 
