@@ -61,7 +61,7 @@ export const progressController = {
         this.scoreUp(shipDestroyedReward);
         this.shipDestroyer += 1;
         this.superAbilityCharging();
-        blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
+        if (blockageType) blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
     scoreDown() {
@@ -99,7 +99,7 @@ export const progressController = {
     },
 
     newLevelEntry(blockagesCount) {
-        alert(`Переход на новый уровень => Уровень ${progressController.level}\nПоздравляем!`);
+        console.log(`Переход на новый уровень => Уровень ${progressController.level}\nПоздравляем!`);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         bonusController.bonusAppearanceListener();

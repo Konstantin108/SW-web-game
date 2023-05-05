@@ -54,10 +54,10 @@ export const game = {
 
     resumeGame() {
         this.gameIsRuned = true;
+        blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         bonusController.resumeGameMakeStepOffCall();
         crashChecker.invincibilityOffCall(player.timeInInvincibilityOff * 1000);
-        blockageController.blockageMove(blockageController.blockagesArray);
         arrowController.arrowMove();
         enemyArrowController.enemyArrowMove();
         player.offBonusCall();

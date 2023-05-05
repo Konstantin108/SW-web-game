@@ -23,7 +23,7 @@ export const blockageController = {
 
     blockageCreateOneUnit() {
         let blockageType = helperController.getRandomType(progressController.blockageTypes);
-        return blockageType.name;
+        if (blockageType) return blockageType.name;
     },
 
     blockageTypesProvider() {
