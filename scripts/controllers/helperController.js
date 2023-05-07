@@ -1,6 +1,7 @@
 import {config} from "../config/config.js";
 
 export const helperController = {
+
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },

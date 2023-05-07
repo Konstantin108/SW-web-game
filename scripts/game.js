@@ -7,13 +7,18 @@ import {helperController} from "./controllers/helperController.js";
 import {crashChecker} from "./objects/crashChecker.js";
 import {arrowController} from "./controllers/arrowController.js";
 import {enemyArrowController} from "./controllers/enemyArrowController.js";
+import {config} from "./config/config.js";
 
 export const game = {
+    startGameDelayNumber: config.startGameDelayNumber,
     gameIsRuned: false,
+
+    init() {
+        renderer.render();
+    },
 
     run() {
         this.gameIsRuned = true;
-        renderer.render();
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -23,10 +28,26 @@ export const game = {
         player.useSuperAbility();
     },
 
+    startGameDelay(delay, resumeGame = false) {
+        if (delay < this.startGameDelayNumber + 1) renderer.renderStartGameDelay(delay);
+        if (delay > 0) {
+            setTimeout(() => {
+                return this.startGameDelay(delay += -1, resumeGame);
+            }, 1000);
+        } else {
+            if (resumeGame) {
+                this.resumeGame();
+            } else {
+                this.run();
+            }
+        }
+    },
+
     showPauseMenu() {
         let quitBtn = "Escape";
 
         document.addEventListener("keydown", function (event) {
+            if (!game.gameIsRuned) return;
             if (event.code === quitBtn) {
                 game.paused();
             }
@@ -38,7 +59,7 @@ export const game = {
 
         if (this.gameIsRuned) this.stopGame();
         if (confirm(text)) {
-            this.resumeGame();
+            this.startGameDelay(this.startGameDelayNumber, true);
         } else {
             this.quitConfirm();
         }
@@ -90,5 +111,6 @@ export const game = {
     }
 }
 
-game.run();
+game.init();
+game.startGameDelay(game.startGameDelayNumber + 1);
 game.showPauseMenu();

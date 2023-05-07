@@ -121,5 +121,16 @@ export const templatePrinter = {
                         </div>
                     </div>
                 </div>`;
+    },
+
+    startGameDelayTemplatePrint(delay) {
+        return `
+                <div id="numberContainer">
+                    <div id="numberElement">                                                      
+                        <strong>
+                            ${delay}
+                        </strong>
+                    </div>        
+                </div>`;
     }
 }

@@ -352,5 +352,16 @@ export const renderer = {
     clear(selector) {
         let removeTargets = document.querySelectorAll(`.${selector}`);
         removeTargets.forEach(removeTarget => removeTarget.classList.remove(`${selector}`));
+    },
+
+    renderStartGameDelay(delay) {
+        let table = document.querySelector("table");
+        let numberElement = null;
+
+        if (delay === 0) delay = "GO";
+        table.insertAdjacentHTML("afterbegin", templatePrinter.startGameDelayTemplatePrint(delay));
+
+        numberElement = document.querySelector("#numberContainer");
+        if (numberElement) setTimeout(() => table.removeChild(numberElement), 1000);
     }
 }

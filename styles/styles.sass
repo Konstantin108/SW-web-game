@@ -425,3 +425,38 @@ td
     background-size: 50%
   to
     background-size: 260%
+
+//  стили отсчета перед стартом игры
+
+#numberContainer
+  position: absolute
+  z-index: 4
+  margin-left: 28.5%
+  margin-top: 50%
+  width: 260px
+  height: 260px
+  display: flex
+  justify-content: center
+  cursor: default
+
+#numberElement
+  font-style: italic
+  color: lawngreen
+  font-size: 166px
+  animation: numberIn .3s, numberOut .3s .7s
+
+@keyframes numberIn
+  from
+    transform: translate(0, -16px)
+    opacity: .8
+  to
+    transform: translate(0, 0)
+    opacity: 1
+
+@keyframes numberOut
+  from
+    scale: 1
+    opacity: 1
+  to
+    scale: 1.2
+    opacity: 0
