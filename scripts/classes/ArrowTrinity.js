@@ -1,4 +1,5 @@
 import {Arrow} from "./Arrow.js";
+import {config} from "../config/config.js";
 
 export class ArrowTrinity extends Arrow {
     constructor(x) {
@@ -7,6 +8,6 @@ export class ArrowTrinity extends Arrow {
     }
 
     selectorName = "arrow-trinity";
-    damage = 3;
-    speed = 80;
+    damage = config.arrowTrinityDamage;
+    speed = config.arrowTrinitySpeed;
 }

@@ -1,8 +1,9 @@
 import {Blockage} from "./Blockage.js";
+import {config} from "../config/config.js";
 
 export class BlockageBull extends Blockage {
-    lives = 5;
-    shipDestroyedReward = 3;
+    lives = config.blockageBullLives;
+    shipDestroyedReward = config.blockageBullShipDestroyedRewars;
     selectorName = "blockageBull";
     getDamageOutlookSelectorName = "blockageWhiteBull";
     arrowTypeSelectorName = "enemyArrowBomb";

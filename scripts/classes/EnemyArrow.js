@@ -14,8 +14,8 @@ export class EnemyArrow {
     static id = 0;
     id = EnemyArrow.id++;
     selectorName = "enemyArrow";
-    speed = 200;
-    damage = 1;
+    damage = config.enemyArrowDamage;
+    speed = config.enemyArrowSpeed;
     hit_x = null;
     hit_y = null;
 

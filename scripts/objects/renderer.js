@@ -4,6 +4,7 @@ import {templatePrinter} from "./templatePrinter.js";
 import {progressController} from "../controllers/progressController.js";
 import {crashChecker} from "./crashChecker.js";
 import {game} from "../game.js";
+import {boss} from "./boss.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -48,6 +49,19 @@ export const renderer = {
         playerPosition.classList.add(player.selectorName);
         if (player.invincibility) playerPosition.classList.add("invincibility");
         if (player.extraSelectorName) playerPosition.classList.add(`${player.extraSelectorName}`);
+    },
+
+    renderBoss(thisSelectorOverlay) {
+        let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
+        this.renderPriorityObjects(bossPosition, thisSelectorOverlay);
+        bossPosition.classList.add("boss");
+    },
+
+    renderGetDamageBoss(thisSelectorOverlay) {
+        let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
+        this.renderPriorityObjects(thisSelectorOverlay);
+        bossPosition.classList.add("bossWhite");
+        setTimeout(() => this.clear("bossWhite"), 40);
     },
 
     renderCrash() {

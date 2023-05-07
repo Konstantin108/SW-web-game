@@ -8,6 +8,7 @@ import {crashChecker} from "./objects/crashChecker.js";
 import {arrowController} from "./controllers/arrowController.js";
 import {enemyArrowController} from "./controllers/enemyArrowController.js";
 import {config} from "./config/config.js";
+import {boss} from "./objects/boss.js";
 
 export const game = {
     startGameDelayNumber: config.startGameDelayNumber,
@@ -26,6 +27,7 @@ export const game = {
         player.shoot();
         player.useBomb();
         player.useSuperAbility();
+        boss.putBossBody();   // вызов босса при старте игры для отладки босса
     },
 
     startGameDelay(delay, resumeGame = false) {
@@ -112,5 +114,6 @@ export const game = {
 }
 
 game.init();
-game.startGameDelay(game.startGameDelayNumber + 1);
+// game.startGameDelay(game.startGameDelayNumber + 1);
+game.startGameDelay(0);   // выключен отсчет
 game.showPauseMenu();

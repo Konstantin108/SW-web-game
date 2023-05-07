@@ -3,6 +3,8 @@ import {player} from "../objects/player.js";
 import {game} from "../game.js";
 import {arrowController} from "../controllers/arrowController.js";
 import {blockageController} from "../controllers/blockageController.js";
+import {config} from "../config/config.js";
+import {boss} from "../objects/boss.js";
 
 export class Arrow {
     static id = 0;
@@ -10,8 +12,8 @@ export class Arrow {
     selectorName = "arrow";
     x = player.x;
     y = player.y - 1;
-    damage = 1;
-    speed = 50;
+    damage = config.arrowDamage;
+    speed = config.arrowSpeed;
     hit_x = null;
     hit_y = null;
 
@@ -29,6 +31,7 @@ export class Arrow {
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(arrowController.arrowsArray);
         this.hit();
+        this.hitBoss();
     }
 
     makeStep() {
@@ -52,6 +55,13 @@ export class Arrow {
         }
         this.hit_x = null;
         this.hit_y = null;
+    }
+
+    hitBoss() {
+        if (boss.bodyX.includes(this.x) && boss.y === this.y) {
+            boss.getDamage(this);
+            this.remove();
+        }
     }
 
     remove() {

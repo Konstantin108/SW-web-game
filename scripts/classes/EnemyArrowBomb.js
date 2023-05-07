@@ -1,7 +1,8 @@
 import {EnemyArrow} from "./EnemyArrow.js";
+import {config} from "../config/config.js";
 
 export class EnemyArrowBomb extends EnemyArrow {
     selectorName = "enemyArrowBomb";
-    speed = 100;
-    damage = 3;
+    damage = config.enemyArrowBombDamage;
+    speed = config.enemyArrowBombSpeed;
 }

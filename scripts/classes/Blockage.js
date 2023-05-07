@@ -12,8 +12,8 @@ export class Blockage {
         this.y = y;
     }
 
-    lives = 1;
-    shipDestroyedReward = 2;
+    lives = config.blockageLives;
+    shipDestroyedReward = config.blockageShipDestroyedRewars;
     selectorName = "blockage";
     getDamageOutlookSelectorName = "blockageWhite";
     arrowTypeSelectorName = "enemyArrow";

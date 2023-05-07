@@ -1,11 +1,12 @@
 import {blockageController} from "../controllers/blockageController.js";
 import {Arrow} from "./Arrow.js";
 import {renderer} from "../objects/renderer.js";
+import {config} from "../config/config.js";
 
 export class ArrowDrill extends Arrow {
     selectorName = "arrow-drill";
-    damage = 2;
-    speed = 20;
+    damage = config.arrowDrillDamage;
+    speed = config.arrowDrillSpeed;
 
     hit() {
         let blockagesArray = blockageController.blockagesArray;
