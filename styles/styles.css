@@ -508,7 +508,7 @@ td {
   font-style: italic;
   color: lawngreen;
   font-size: 166px;
-  animation: numberIn 0.3s, numberOut 0.3s 0.7s;
+  animation: numberIn 0.3s, numberOut 0.3s 0.8s;
 }
 
 @keyframes numberIn {

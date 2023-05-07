@@ -29,8 +29,8 @@ export const game = {
     },
 
     startGameDelay(delay, resumeGame = false) {
-        if (delay < this.startGameDelayNumber + 1) renderer.renderStartGameDelay(delay);
-        if (delay > 0) {
+        if (delay < this.startGameDelayNumber + 1 && delay >= 0) renderer.renderStartGameDelay(delay);
+        if (delay > -1) {
             setTimeout(() => {
                 return this.startGameDelay(delay += -1, resumeGame);
             }, 1000);
