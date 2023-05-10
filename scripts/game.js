@@ -46,11 +46,15 @@ export const game = {
     },
 
     showPauseMenu() {
-        let quitBtn = "Escape";
+        let pauseBtnsArray = [
+            "Escape",
+            "Pause",
+            "KeyP"
+        ];
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRuned) return;
-            if (event.code === quitBtn) {
+            if (pauseBtnsArray.includes(event.code)) {
                 game.paused();
             }
         });
