@@ -342,11 +342,11 @@ td {
   background-image: url("../images/boss-white.png");
 }
 
-.blueShield {
+.bossBlueShield {
   position: relative;
 }
 
-.blueShield::after {
+.bossBlueShield::after {
   content: "-";
   background-color: #6565dc;
   color: #6565dc;

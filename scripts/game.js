@@ -29,7 +29,7 @@ export const game = {
         player.useSuperAbility();
         boss.putBossBody();  // вызов босса при старте игры для отладки босса
         boss.makeStep();
-        boss.onShield("blueShield", 1);  // создание щита босса при старте игры для отладки щита
+        boss.onShield("bossBlueShield", 1);  // создание щита босса при старте игры для отладки щита
     },
 
     startGameDelay(delay, resumeGame = false) {
