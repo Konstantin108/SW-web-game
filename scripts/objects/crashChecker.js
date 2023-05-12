@@ -64,7 +64,7 @@ export const crashChecker = {
         let calculateTimeInInvincibilityOffTimerId = null;
         let tick = -1;
 
-        if (!game.gameIsRuned) tick = 0;
+        if (!game.gameIsRunning) tick = 0;
         if (invincibilityAfterCrashActionTime > 0) {
             calculateTimeInInvincibilityOffTimerId = setTimeout(() => {
                 return this.calculateTimeInInvincibilityOff(invincibilityAfterCrashActionTime += tick);

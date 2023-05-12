@@ -11,15 +11,15 @@ import {config} from "./config/config.js";
 import {boss} from "./objects/boss.js";
 
 export const game = {
-    startGameDelayNumber: config.startGameDelayNumber,
-    gameIsRuned: false,
+    startGameDelaySecondsCount: config.startGameDelaySecondsCount,
+    gameIsRunning: false,
 
     init() {
         renderer.render();
     },
 
     run() {
-        this.gameIsRuned = true;
+        this.gameIsRunning = true;
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -31,7 +31,14 @@ export const game = {
     },
 
     startGameDelay(delay, resumeGame = false) {
-        if (delay < this.startGameDelayNumber + 1 && delay >= 0) renderer.renderStartGameDelay(delay);
+        let message = "";
+
+        if (delay != 0) {
+            message = delay;
+        } else {
+            message = "GO";
+        }
+        if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
         if (delay > -1) {
             setTimeout(() => {
                 return this.startGameDelay(delay += -1, resumeGame);
@@ -53,7 +60,7 @@ export const game = {
         ];
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRuned) return;
+            if (!game.gameIsRunning) return;
             if (pauseBtnsArray.includes(event.code)) {
                 game.paused();
             }
@@ -63,16 +70,16 @@ export const game = {
     paused() {
         let text = "Игра остановлена! Хотите продолжить?\n\"ОК\" - продолжить играть\n\"Отмена\" - закончить игру"
 
-        if (this.gameIsRuned) this.stopGame();
+        if (this.gameIsRunning) this.stopGame();
         if (confirm(text)) {
-            this.startGameDelay(this.startGameDelayNumber, true);
+            this.startGameDelay(this.startGameDelaySecondsCount, true);
         } else {
             this.quitConfirm();
         }
     },
 
     stopGame() {
-        this.gameIsRuned = false;
+        this.gameIsRunning = false;
         bonusController.bonusAppearanceListenerTimerIdRemove();
         bonusController.allNewPropertiesForPlayerOffCallCancel();
         crashChecker.invincibilityOffCallCancel();
@@ -80,7 +87,7 @@ export const game = {
     },
 
     resumeGame() {
-        this.gameIsRuned = true;
+        this.gameIsRunning = true;
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         bonusController.resumeGameMakeStepOffCall();
@@ -118,6 +125,6 @@ export const game = {
 }
 
 game.init();
-// game.startGameDelay(game.startGameDelayNumber + 1);
+// game.startGameDelay(game.startGameDelaySecondsCount + 1);
 game.startGameDelay(0);   // выключен отсчет
 game.showPauseMenu();

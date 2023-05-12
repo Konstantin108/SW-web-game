@@ -123,12 +123,12 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    startGameDelayTemplatePrint(delay) {
+    inCenterTableNotifyTemplatePrint(message) {
         return `
-                <div id="numberContainer">
-                    <div id="numberElement">                                                      
+                <div id="messageContainer">
+                    <div id="messageElement">                                                      
                         <strong>
-                            ${delay}
+                            ${message}
                         </strong>
                     </div>        
                 </div>`;

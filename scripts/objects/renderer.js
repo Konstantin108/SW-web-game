@@ -259,7 +259,7 @@ export const renderer = {
         let thisTimerId = null;
         let tick = -1;
 
-        if (!game.gameIsRuned) tick = 0;
+        if (!game.gameIsRunning) tick = 0;
 
         if (timerDiv) timerLabel.removeChild(timerDiv);
         timerLabel.insertAdjacentHTML("afterbegin", timerData);
@@ -368,14 +368,13 @@ export const renderer = {
         removeTargets.forEach(removeTarget => removeTarget.classList.remove(`${selector}`));
     },
 
-    renderStartGameDelay(delay) {
+    renderInCenterTableNotify(message) {
         let table = document.querySelector("table");
-        let numberElement = null;
+        let messageElement = null;
 
-        if (delay === 0) delay = "GO";
-        table.insertAdjacentHTML("afterbegin", templatePrinter.startGameDelayTemplatePrint(delay));
+        table.insertAdjacentHTML("afterbegin", templatePrinter.inCenterTableNotifyTemplatePrint(message));
 
-        numberElement = document.querySelector("#numberContainer");
-        if (numberElement) setTimeout(() => table.removeChild(numberElement), 1000);
+        messageElement = document.querySelector("#messageContainer");
+        if (messageElement) setTimeout(() => table.removeChild(messageElement), 1000);
     }
 }

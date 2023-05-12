@@ -508,22 +508,20 @@ td {
     background-size: 260%;
   }
 }
-#numberContainer {
+#messageContainer {
   position: absolute;
   z-index: 4;
-  margin-left: 28.5%;
   margin-top: 50%;
-  width: 260px;
-  height: 260px;
+  width: 600px;
   display: flex;
   justify-content: center;
   cursor: default;
 }
 
-#numberElement {
+#messageElement {
   font-style: italic;
   color: lawngreen;
-  font-size: 166px;
+  font-size: 140px;
   animation: numberIn 0.3s, numberOut 0.3s 0.8s;
 }
 

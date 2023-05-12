@@ -99,7 +99,9 @@ export const progressController = {
     },
 
     newLevelEntry(blockagesCount) {
-        console.log(`Переход на новый уровень => Уровень ${progressController.level}\nПоздравляем!`);
+        let message = `LEVEL ${progressController.level}`;
+
+        renderer.renderInCenterTableNotify(message);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         bonusController.bonusAppearanceListener();

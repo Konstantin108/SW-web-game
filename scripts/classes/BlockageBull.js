@@ -3,7 +3,7 @@ import {config} from "../config/config.js";
 
 export class BlockageBull extends Blockage {
     lives = config.blockageBullLives;
-    shipDestroyedReward = config.blockageBullShipDestroyedRewars;
+    shipDestroyedReward = config.blockageBullShipDestroyedRewards;
     selectorName = "blockageBull";
     getDamageOutlookSelectorName = "blockageWhiteBull";
     arrowTypeSelectorName = "enemyArrowBomb";

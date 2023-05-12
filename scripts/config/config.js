@@ -5,7 +5,7 @@ export const config = {
     // игра и игрок
     mapSizeX: 10,
     mapSizeY: 13,
-    startGameDelayNumber: 3,
+    startGameDelaySecondsCount: 3,
     missReward: 1,
     crashMulct: -100,
     invincibilityAfterCrash: 4000,
@@ -30,9 +30,9 @@ export const config = {
     enemyArrowBombSpeed: 100,
     // враги и босс
     blockageLives: 1,
-    blockageShipDestroyedRewars: 2,
+    blockageShipDestroyedRewards: 2,
     blockageBullLives: 5,
-    blockageBullShipDestroyedRewars: 3,
+    blockageBullShipDestroyedRewards: 3,
     bossLives: 100,
     bossDestroyedReward: 1000,
     // уровни и бонусы

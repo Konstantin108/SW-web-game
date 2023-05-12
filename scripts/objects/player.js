@@ -56,7 +56,7 @@ export const player = {
         let y_value = this.y;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRuned) return;
+            if (!game.gameIsRunning) return;
             if (possibleDirections.includes(event.code)) {
                 switch (event.code) {
                     case possibleDirections[0]:
@@ -124,7 +124,7 @@ export const player = {
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRuned) return;
+            if (!game.gameIsRunning) return;
             if (!isPressBtn) {
                 if (shootBtnsArray.includes(event.code)) {
                     arrowController.arrowCreate();
@@ -163,7 +163,7 @@ export const player = {
         let useBombBtn = "ControlRight";
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRuned) return;
+            if (!game.gameIsRunning) return;
             if (useBombBtn === event.code) explosion.explode();
         });
     },
@@ -173,7 +173,7 @@ export const player = {
         let useSuperAbilityBtn = "ControlLeft";
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRuned) return;
+            if (!game.gameIsRunning) return;
             if (useSuperAbilityBtn === event.code) {
                 if (player.superAbilityIsActivated) {
                     for (let i = 0; i < blockagesArray.length; i++) {

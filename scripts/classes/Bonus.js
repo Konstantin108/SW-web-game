@@ -23,7 +23,7 @@ export class Bonus {
     timeBonusCanMakeStepTimerId = null;  // id таймера отсчета времени до удаления interval для отключения makeStep()
 
     step() {
-        if (!game.gameIsRuned) return;
+        if (!game.gameIsRunning) return;
         let y_pos = this.y;
         y_pos += 1;
         if (y_pos <= config.mapSizeY) {
@@ -142,7 +142,7 @@ export class Bonus {
         let calculateTimeInBonusOffTimerId = null;
         let tick = -1;
 
-        if (!game.gameIsRuned) tick = 0;
+        if (!game.gameIsRunning) tick = 0;
 
         if (bonusActionTime > 0) {
             calculateTimeInBonusOffTimerId = setTimeout(() => {
