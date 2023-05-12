@@ -51,17 +51,24 @@ export const renderer = {
         if (player.extraSelectorName) playerPosition.classList.add(`${player.extraSelectorName}`);
     },
 
-    renderBoss(thisSelectorOverlay) {
+    renderBoss(selectorName, thisSelectorOverlay) {
         let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
         this.renderPriorityObjects(bossPosition, thisSelectorOverlay);
-        bossPosition.classList.add("boss");
+        bossPosition.classList.add(`${selectorName}`);
     },
 
-    renderGetDamageBoss(thisSelectorOverlay) {
+    renderGetDamageBoss(selectorName, thisSelectorOverlay) {
         let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
         this.renderPriorityObjects(thisSelectorOverlay);
-        bossPosition.classList.add("bossWhite");
-        setTimeout(() => this.clear("bossWhite"), 40);
+        bossPosition.classList.add(`${selectorName}`);
+        setTimeout(() => this.clear(`${selectorName}`), 40);
+    },
+
+    renderBossShield(shieldBody, selectorName) {
+        for (let i = 0; i < shieldBody.x.length; i++) {
+            let bossShieldPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);
+            if (bossShieldPosition) bossShieldPosition.classList.add(`${selectorName}`);
+        }
     },
 
     renderCrash() {

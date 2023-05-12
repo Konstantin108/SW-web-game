@@ -35,6 +35,7 @@ export const config = {
     blockageBullShipDestroyedRewards: 3,
     bossLives: 100,
     bossDestroyedReward: 1000,
+    bossSpeed: 1000,
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),

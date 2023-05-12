@@ -14,6 +14,7 @@ export class Blockage {
 
     lives = config.blockageLives;
     shipDestroyedReward = config.blockageShipDestroyedRewards;
+    speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
     selectorName = "blockage";
     getDamageOutlookSelectorName = "blockageWhite";
     arrowTypeSelectorName = "enemyArrow";
@@ -24,7 +25,6 @@ export class Blockage {
         "life",
         "killAll"
     ];
-    speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
 
     shoot(arrowTypeSelectorName, x_pos, y_pos) {
         if (helperController.randomEvent(progressController.fireChance)) {

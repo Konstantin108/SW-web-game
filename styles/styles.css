@@ -342,6 +342,23 @@ td {
   background-image: url("../images/boss-white.png");
 }
 
+.blueShield {
+  position: relative;
+}
+
+.blueShield::after {
+  content: "-";
+  background-color: #6565dc;
+  color: #6565dc;
+  width: 50px;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  box-shadow: 0 0 20px #ffffff;
+  animation: blink 1.5s infinite;
+}
+
 .blockage,
 .blockageWhite,
 .blockageBull,
