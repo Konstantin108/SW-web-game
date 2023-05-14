@@ -57,6 +57,12 @@ export const renderer = {
         bossPosition.classList.add(`${selectorName}`);
     },
 
+    renderBossCreate() {
+        let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
+        bossPosition.classList.add("bossCreate");
+        setTimeout(() => bossPosition.classList.remove("bossCreate"), 2000);
+    },
+
     renderGetDamageBoss(selectorName, thisSelectorOverlay) {
         let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
         this.renderPriorityObjects(thisSelectorOverlay);
@@ -64,10 +70,10 @@ export const renderer = {
         setTimeout(() => this.clear(`${selectorName}`), 40);
     },
 
-    renderBossShield(shieldBody, selectorName) {
+    renderBossShield(shieldBody) {
         for (let i = 0; i < shieldBody.x.length; i++) {
             let bossShieldPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);
-            if (bossShieldPosition) bossShieldPosition.classList.add(`${selectorName}`);
+            if (bossShieldPosition) bossShieldPosition.classList.add("bossShield");
         }
     },
 
@@ -149,14 +155,26 @@ export const renderer = {
         setTimeout(() => table.classList.remove("explosion"), 1800);
     },
 
-    renderPickedBonus(bonus) {
-        let pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`);
+    renderPickedBonus(bonus, playerPickUpThisBonus = true) {
+        let pickedBonusPosition = null;
+
+        if (playerPickUpThisBonus) {
+            pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`);
+        } else {
+            pickedBonusPosition = document.querySelector(`[data-x="${bonus.x}"][data-y="${bonus.y}"]`);
+        }
         if (pickedBonusPosition) {
             pickedBonusPosition.classList.remove(`${bonus.name}`);
             pickedBonusPosition.classList.remove(player.selectorName);
             pickedBonusPosition.classList.add("picked");
             setTimeout(() => this.clear("picked"), 500);
         }
+    },
+
+    renderTeleportation(){
+        let teleportationPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
+        teleportationPosition.classList.add("teleportation");
+        setTimeout(() => teleportationPosition.classList.remove("teleportation"), 500);
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {

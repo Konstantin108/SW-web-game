@@ -5,6 +5,8 @@ import {renderer} from "../objects/renderer.js";
 import {helperController} from "./helperController.js";
 import {player} from "../objects/player.js";
 import {bonusController} from "./bonusController.js";
+import {boss} from "../objects/boss.js";
+import {explosion} from "../objects/explosion.js";
 
 export const progressController = {
     levels: config.levels,
@@ -14,6 +16,7 @@ export const progressController = {
     multiplier: config.levels[0].multiplier,
     fireChance: config.levels[0].fireChance,
     blockageTypes: config.levels[0].blockageTypes,
+    bossExist: config.levels[0].bossExist,
     blockagesCount: 0,
     score: 0,
     shipDestroyer: 0,
@@ -37,6 +40,7 @@ export const progressController = {
                     this.minBlockageSpeed = this.levels[i].minBlockageSpeed;
                     this.fireChance = this.levels[i].fireChance;
                     this.blockageTypes = this.levels[i].blockageTypes;
+                    this.bossExist = this.levels[i].bossExist;
                     this.newLevelEntry(this.blockagesCount);
                     this.levels.shift();
                     levelsLeft += -1;
@@ -104,7 +108,14 @@ export const progressController = {
         renderer.renderInCenterTableNotify(message);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
-        bonusController.bonusAppearanceListener();
         blockageController.blockageMove(blockageController.blockagesArray);
+        if (this.bossExist) {
+            setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
+            setTimeout(() => {
+                explosion.explode();
+                bonusController.destroyAllBonuses();
+            }, 2000);
+            setTimeout(() => boss.createBoss(), 3000);
+        }
     },
 }

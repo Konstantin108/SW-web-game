@@ -20,6 +20,7 @@ export const player = {
     selectorName: "player",
     extraSelectorName: null,
     arrowType: "arrow",
+    canMove: true,
     bombsCount: config.startBombsCount,
     superAbilityIsActivated: config.superAbilityIsActivated,
     bonusNewArrowTypeIsActivated: config.bonusNewArrowTypeIsActivated,
@@ -57,6 +58,7 @@ export const player = {
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
+            if (!player.canMove) return;
             if (possibleDirections.includes(event.code)) {
                 switch (event.code) {
                     case possibleDirections[0]:
@@ -125,6 +127,7 @@ export const player = {
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
+            if (!player.canMove) return;
             if (!isPressBtn) {
                 if (shootBtnsArray.includes(event.code)) {
                     arrowController.arrowCreate();
@@ -164,7 +167,8 @@ export const player = {
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
-            if (useBombBtn === event.code) explosion.explode();
+            if (!player.canMove) return;
+            if (useBombBtn === event.code) explosion.explosionCall();
         });
     },
 
@@ -174,6 +178,7 @@ export const player = {
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
+            if (!player.canMove) return;
             if (useSuperAbilityBtn === event.code) {
                 if (player.superAbilityIsActivated) {
                     for (let i = 0; i < blockagesArray.length; i++) {

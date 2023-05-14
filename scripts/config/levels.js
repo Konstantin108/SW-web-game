@@ -16,7 +16,8 @@ export const levels = {
                         chanceFrom: 0,
                         chanceTo: 100,
                     }
-                }
+                },
+                bossExist: false
             },
             {
                 levelNum: 2,
@@ -37,7 +38,8 @@ export const levels = {
                         chanceFrom: 91,
                         chanceTo: 100,
                     },
-                }
+                },
+                bossExist: true  // для теста босса
             },
             {
                 levelNum: 3,
@@ -58,7 +60,8 @@ export const levels = {
                         chanceFrom: 86,
                         chanceTo: 100,
                     },
-                }
+                },
+                bossExist: false
             },
             {
                 levelNum: 4,
@@ -79,7 +82,8 @@ export const levels = {
                         chanceFrom: 81,
                         chanceTo: 100,
                     },
-                }
+                },
+                bossExist: false
             },
             {
                 levelNum: 5,
@@ -100,7 +104,8 @@ export const levels = {
                         chanceFrom: 76,
                         chanceTo: 100,
                     },
-                }
+                },
+                bossExist: false
             },
             {
                 levelNum: "win",
@@ -110,7 +115,8 @@ export const levels = {
                 fireChance: 0,
                 maxBlockageSpeed: 0,
                 minBlockageSpeed: 0,
-                blockageTypes: {}
+                blockageTypes: {},
+                bossExist: false
             }
         ]
     }

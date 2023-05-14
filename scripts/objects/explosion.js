@@ -5,21 +5,23 @@ import {progressController} from "../controllers/progressController.js";
 
 export const explosion = {
 
+    explosionCall() {
+        if (player.bombsCount > 0) {
+            this.explode();
+        } else {
+            renderer.renderBombBar(false);
+        }
+    },
+
     explode() {
         let blockagesArray = blockageController.blockagesArray;
-        let playerHasBomb = true;
 
-        if (player.bombsCount > 0) {
-            player.bombsCount += -1;
-            renderer.renderExplosion();
-            for (let i = 0; i < blockagesArray.length; i++) {
-                if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8);
-            }
-            renderer.renderStatusBar();
-            renderer.renderBombBar();
-        } else {
-            playerHasBomb = false;
-            renderer.renderBombBar(playerHasBomb);
+        player.bombsCount += -1;
+        renderer.renderExplosion();
+        for (let i = 0; i < blockagesArray.length; i++) {
+            if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8);
         }
+        renderer.renderStatusBar();
+        renderer.renderBombBar();
     }
 }

@@ -2,6 +2,7 @@ import {helperController} from "../controllers/helperController.js";
 import {renderer} from "./renderer.js";
 import {config} from "../config/config.js";
 import {game} from "../game.js";
+import {player} from "./player.js";
 
 export const boss = {
     x: helperController.getCenterMapOnX(),
@@ -37,11 +38,30 @@ export const boss = {
         return (this.offsetX - 1) / 2;
     },
 
-    putBossBody() {
+    createBoss() {
+        player.canMove = false;
+        renderer.renderTeleportation();
+        player.x = helperController.getCenterMapOnX();
+        player.y = config.mapSizeY;
+        player.move();
+        if (player.invincibility) renderer.clear("invincibility");
+        renderer.clear(player.selectorName);
+        if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
+        setTimeout(() => {
+            renderer.renderTeleportation();
+            renderer.renderPlayer();
+        }, 500);
+
         for (let i = this.x - this.getBossBodyEdgeOnX(); i <= this.offsetX + 1; i++) {
             this.bodyX.push(i);
         }
+        renderer.renderBossCreate();
         renderer.renderBoss(this.selectorName, this.thisSelectorOverlay);
+        setTimeout(() => {
+            this.makeStep();
+            player.canMove = true;
+        }, 2000);
+        setTimeout(() => this.onShield(), 1500);
     },
 
     step() {
@@ -65,16 +85,16 @@ export const boss = {
         clearInterval(this.timerId);
     },
 
-    onShield(shieldType, y_pos) {
+    onShield() {
         let shieldBody = {
             x: [],
-            y: this.y + y_pos
+            y: this.y + 1
         };
 
         for (let i = 0; i <= config.mapSizeX; i++) {
             shieldBody.x.push(i)
         }
-        renderer.renderBossShield(shieldBody, shieldType);
+        renderer.renderBossShield(shieldBody);
     },
 
     getDamage(hitData) {

@@ -47,13 +47,21 @@ export const bonusController = {
         }
     },
 
-    bonusMove() {
-        for (let i = 0; i < this.bonusesArray.length; i++) {
-            if (this.bonusesArray[i]) {
-                this.bonusesArray[i].makeStep();
-                this.bonusesArray[i].makeStepOff();
+    destroyAllBonuses() {
+        let bonusesArray = this.bonusesArray;
+
+        while (bonusesArray.length) {
+            for (let i = 0; i < bonusesArray.length; i++) {
+                if (this.bonusesArray[i]) this.bonusesArray[i].destroy();
             }
         }
+    },
+
+    bonusMove() {
+        if (!this.bonusesArray.length) return;
+        let bonus = this.bonusesArray.at(-1);
+        bonus.makeStep();
+        bonus.makeStepOff();
         // console.log("bonuses:")
         // console.log(this.bonusesArray);
     }

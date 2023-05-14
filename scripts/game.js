@@ -27,9 +27,7 @@ export const game = {
         player.shoot();
         player.useBomb();
         player.useSuperAbility();
-        boss.putBossBody();  // вызов босса при старте игры для отладки босса
-        boss.makeStep();
-        boss.onShield("bossBlueShield", 1);  // создание щита босса при старте игры для отладки щита
+        // boss.createBoss();  // вызов босса при старте игры для отладки босса
     },
 
     startGameDelay(delay, resumeGame = false) {
@@ -129,6 +127,6 @@ export const game = {
 }
 
 game.init();
-// game.startGameDelay(game.startGameDelaySecondsCount + 1);
-game.startGameDelay(0);  // выключен отсчет
+game.startGameDelay(game.startGameDelaySecondsCount + 1);
+// game.startGameDelay(0);  // отключение отсчета перед стартом игры
 game.showPauseMenu();

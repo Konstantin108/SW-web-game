@@ -296,23 +296,43 @@ td
 .boss
   background-image: url("../images/boss.png")
 
+.bossCreate
+  animation: bossCreate 2s
+
 .bossWhite
   background-image: url("../images/boss-white.png")
 
-.bossBlueShield
+.bossShield
   position: relative
 
-.bossBlueShield::after
+.bossShield::after
   content: "-"
   background-color: #6565dc
   color: #6565dc
   width: 50px
   height: 4px
+  scale: 1.1
   position: absolute
   left: 0
   bottom: 0
   box-shadow: 0 0 20px #ffffff
-  animation: blink 1.5s infinite
+  animation: onBossShield .3s, blink 1.5s infinite
+
+@keyframes onBossShield
+  from
+    width: 0
+    scale: 0
+    opacity: 0
+  to
+    width: 50px
+    scale: 1.1
+    opacity: 1
+
+@keyframes bossCreate
+  from
+    transform: translate(0, -40px)
+  to
+    transform: translate(0, 0)
 
 //  стили движущихся объектов
 
@@ -395,7 +415,8 @@ td
 
 .picked,
 .hit,
-.crash
+.crash,
+.teleportation
   background-size: 100%
   background-repeat: no-repeat
   box-shadow: 0 0 0 0
@@ -405,6 +426,10 @@ td
   background-image: url("../images/picked.png")
   background-color: rgba(0, 0, 0, 0)
   transform: scale(2)
+
+.teleportation
+  background-image: url("../images/teleportation.png")
+  transform: scale(1.8)
 
 .hit
   background-image: url("../images/hit.png")

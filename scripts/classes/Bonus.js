@@ -65,6 +65,11 @@ export class Bonus {
         this.picked_y = null;
     }
 
+    destroy() {
+        renderer.renderPickedBonus(this, false);
+        this.remove();
+    }
+
     getBonus(bonus) {
         if (bonus) this.setNewPropertiesForPlayer(bonus.objectType);
     }
