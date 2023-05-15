@@ -55,12 +55,12 @@ export const player = {
             "KeyS",
             "KeyW"
         ];
-        let x_value = this.x;
-        let y_value = this.y;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
+            let x_value = player.x;
+            let y_value = player.y;
             if (possibleDirections.includes(event.code)) {
                 switch (event.code) {
                     case possibleDirections[0]:
@@ -111,6 +111,8 @@ export const player = {
                 }
                 bonusController.pickedCheck();
                 crashChecker.crashCheck(blockageController.blockagesArray, true);
+                crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.bodyX, boss.y, boss.crashDamage));
+                crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.shieldBody.x, boss.shieldBody.y, boss.shieldCrashDamage));
                 if (player.invincibility) renderer.clear("invincibility");
                 renderer.clear(player.selectorName);
                 if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
@@ -203,6 +205,7 @@ export const player = {
                             renderer.renderStatusBar();
                         }
                     }
+                    if (boss.shieldBody) boss.bossShieldGetDamage();
                     player.superAbilityIsActivated = false;
                     renderer.renderSuperAbility();
                     renderer.renderSuperAbilityBar();

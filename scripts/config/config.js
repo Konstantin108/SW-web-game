@@ -32,11 +32,15 @@ export const config = {
     // враги и босс
     blockageLives: 1,
     blockageShipDestroyedRewards: 2,
+    blockageCrashDamage: 1,
     blockageBullLives: 5,
     blockageBullShipDestroyedRewards: 3,
+    blockageBullCrashDamage: 1,
     bossLives: 10000,
     bossDestroyedReward: 10000,
     bossSpeed: 1000,
+    bossCrashDamage: 3,
+    bossShieldCrashDamage: 3,
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),

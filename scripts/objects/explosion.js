@@ -8,6 +8,7 @@ export const explosion = {
     explosionCall() {
         if (player.bombsCount > 0) {
             this.explode();
+            player.bombsCount += -1;
         } else {
             renderer.renderBombBar(false);
         }
@@ -16,7 +17,6 @@ export const explosion = {
     explode() {
         let blockagesArray = blockageController.blockagesArray;
 
-        player.bombsCount += -1;
         renderer.renderExplosion();
         for (let i = 0; i < blockagesArray.length; i++) {
             if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8);

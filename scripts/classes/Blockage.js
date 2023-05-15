@@ -15,6 +15,7 @@ export class Blockage {
     lives = config.blockageLives;
     shipDestroyedReward = config.blockageShipDestroyedRewards;
     speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
+    crashDamage = config.blockageCrashDamage;
     selectorName = "blockage";
     getDamageOutlookSelectorName = "blockageWhite";
     arrowTypeSelectorName = "enemyArrow";

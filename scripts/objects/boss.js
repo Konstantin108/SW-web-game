@@ -11,13 +11,19 @@ export const boss = {
     lives: config.bossLives,
     destroyedReward: config.bossDestroyedReward,
     speed: config.bossSpeed,
+    crashDamage: config.bossCrashDamage,
+    shieldCrashDamage: config.bossShieldCrashDamage,
     selectorName: "boss",
     getDamageOutlookSelectorName: "bossWhite",
     offsetX: 7,
     bodyX: [],
-    shieldBody: null,
+    shieldBody: {
+        x: [],
+        y: null
+    },
     toTheRight: true,
     timerId: null,
+    invincibility: true,
     thisSelectorOverlay: [
         "player",
         "player-drill",
@@ -42,18 +48,7 @@ export const boss = {
 
     createBoss() {
         player.canMove = false;
-        renderer.renderTeleportation("out");
-        player.x = helperController.getCenterMapOnX();
-        player.y = config.mapSizeY;
-        player.move();
-        if (player.invincibility) renderer.clear("invincibility");
-        renderer.clear(player.selectorName);
-        if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
-        setTimeout(() => {
-            renderer.renderTeleportation("in");
-            renderer.renderPlayer();
-        }, 500);
-
+        this.returnPlayerOnStartCell();
         for (let i = this.x - this.getBossBodyEdgeOnX(); i <= this.offsetX + 1; i++) {
             this.bodyX.push(i);
         }
@@ -62,6 +57,7 @@ export const boss = {
         setTimeout(() => {
             this.makeStep();
             player.canMove = true;
+            this.invincibility = false;
         }, 2000);
         setTimeout(() => this.onShield(), 1500);
     },
@@ -70,7 +66,7 @@ export const boss = {
         if (!game.gameIsRunning) return;
         let bodyX = this.bodyX;
 
-        if (this.bodyX.length) this.bodyX.splice(7, this.bodyX.length);
+        if (this.bodyX.length) this.bodyX.splice(this.offsetX, this.bodyX.length);
         this.bodyX = [];
         if (this.toTheRight) {
             this.x += 1;
@@ -97,15 +93,26 @@ export const boss = {
         if (progressController.bossExist) clearInterval(this.timerId);
     },
 
-    onShield() {
-        this.shieldBody = {
-            x: [],
-            y: this.y + 1
-        };
+    bodyCellsArrayForCrashChecker(body, y, crashDamageType) {
+        let bodyCellsArray = [];
 
+        body.forEach(elem => {
+            bodyCellsArray.push(
+                {
+                    crashDamage: crashDamageType,
+                    x: elem,
+                    y: y
+                }
+            )
+        });
+        return bodyCellsArray;
+    },
+
+    onShield() {
         for (let i = 0; i <= config.mapSizeX; i++) {
             this.shieldBody.x.push(i)
         }
+        this.shieldBody.y = this.y + 1;
         renderer.renderBossShield(this.shieldBody, "on");
         this.offShieldCall();
     },
@@ -113,7 +120,8 @@ export const boss = {
     // действие щита будет 10 секунд, отключение на 3 секунды
     offShield() {
         renderer.renderBossShield(this.shieldBody, "off");
-        this.shieldBody = null;
+        this.shieldBody.x = [];
+        this.shieldBody.y = null;
         setTimeout(() => this.onShield(), 3000);
     },
 
@@ -127,6 +135,7 @@ export const boss = {
 
     // переработать метод, будет так же получение урона от explosion
     getDamage(hitData, damageByPlayerSuperAbility = false) {
+        if (this.invincibility) return;
         if (damageByPlayerSuperAbility) {
             this.lives += -hitData;
         } else {
@@ -134,5 +143,19 @@ export const boss = {
         }
         console.log(this);
         if (this.lives > 0) renderer.renderGetDamageBoss(this.getDamageOutlookSelectorName, this.thisSelectorOverlay);
-    }
+    },
+
+    returnPlayerOnStartCell() {
+        if (player.x === helperController.getCenterMapOnX() && player.y === config.mapSizeY) return;
+        renderer.renderTeleportation("out");
+        player.x = helperController.getCenterMapOnX();
+        player.y = config.mapSizeY;
+        if (player.invincibility) renderer.clear("invincibility");
+        renderer.clear(player.selectorName);
+        if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
+        setTimeout(() => {
+            renderer.renderTeleportation("in");
+            renderer.renderPlayer();
+        }, 500);
+    },
 }
