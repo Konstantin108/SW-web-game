@@ -8,6 +8,7 @@ import {explosion} from "./explosion.js";
 import {progressController} from "../controllers/progressController.js";
 import {arrowController} from "../controllers/arrowController.js";
 import {game} from "../game.js";
+import {boss} from "./boss.js";
 
 export const player = {
     lives: config.lives,
@@ -22,6 +23,7 @@ export const player = {
     arrowType: "arrow",
     canMove: true,
     bombsCount: config.startBombsCount,
+    superAbilityDamage: config.superAbilityDamage,
     superAbilityIsActivated: config.superAbilityIsActivated,
     bonusNewArrowTypeIsActivated: config.bonusNewArrowTypeIsActivated,
     bonusShieldIsActivated: config.bonusShieldIsActivated,
@@ -188,6 +190,16 @@ export const player = {
                             blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
                             blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
                             progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -3);
+                            renderer.renderStatusBar();
+                        }
+                    }
+                    if (progressController.bossExist) {
+                        if (boss.bodyX.includes(player.x) && boss.y < player.y && boss.y >= 0 ||
+                            boss.bodyX.includes(player.x) - 1 && boss.y < player.y - 1 && boss.y >= 0 ||
+                            boss.bodyX.includes(player.x) - 2 && boss.y < player.y - 2 && boss.y >= 0 ||
+                            boss.bodyX.includes(player.x) + 1 && boss.y < player.y - 1 && boss.y >= 0 ||
+                            boss.bodyX.includes(player.x) + 2 && boss.y < player.y - 2 && boss.y >= 0) {
+                            boss.getDamage(player.superAbilityDamage, true);
                             renderer.renderStatusBar();
                         }
                     }

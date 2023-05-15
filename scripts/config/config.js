@@ -14,6 +14,7 @@ export const config = {
     startBombsCount: 0,
     bonusNewArrowTypeIsActivated: false,
     bonusShieldIsActivated: false,
+    superAbilityDamage: 100,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
     // стрелы игрока
@@ -33,8 +34,8 @@ export const config = {
     blockageShipDestroyedRewards: 2,
     blockageBullLives: 5,
     blockageBullShipDestroyedRewards: 3,
-    bossLives: 100,
-    bossDestroyedReward: 1000,
+    bossLives: 10000,
+    bossDestroyedReward: 10000,
     bossSpeed: 1000,
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),

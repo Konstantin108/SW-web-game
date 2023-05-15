@@ -70,10 +70,28 @@ export const renderer = {
         setTimeout(() => this.clear(`${selectorName}`), 40);
     },
 
-    renderBossShield(shieldBody) {
+    renderBossShieldHit(shieldBody) {
+        for (let i = 0; i < shieldBody.x.length; i++) {
+            let bossShieldHitPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);
+            if (bossShieldHitPosition) {
+                bossShieldHitPosition.classList.add("bossShieldHit");
+                setTimeout(() => bossShieldHitPosition.classList.remove("bossShieldHit"), 150);
+            }
+        }
+    },
+
+    renderBossShield(shieldBody, mode) {
         for (let i = 0; i < shieldBody.x.length; i++) {
             let bossShieldPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);
-            if (bossShieldPosition) bossShieldPosition.classList.add("bossShield");
+            if (bossShieldPosition) {
+                if (mode === "on") {
+                    bossShieldPosition.classList.add("bossShield");
+                } else {
+                    bossShieldPosition.classList.remove("bossShield");
+                    bossShieldPosition.classList.add("bossShieldOff");
+                    setTimeout(() => bossShieldPosition.classList.remove("bossShieldOff"), 300);
+                }
+            }
         }
     },
 
@@ -171,10 +189,17 @@ export const renderer = {
         }
     },
 
-    renderTeleportation(){
+    renderTeleportation(mode) {
+        let selector = null;
+
+        if (mode === "out") {
+            selector = "teleportationOut";
+        } else {
+            selector = "teleportationIn";
+        }
         let teleportationPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
-        teleportationPosition.classList.add("teleportation");
-        setTimeout(() => teleportationPosition.classList.remove("teleportation"), 500);
+        teleportationPosition.classList.add(`${selector}`);
+        setTimeout(() => teleportationPosition.classList.remove(`${selector}`), 500);
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {

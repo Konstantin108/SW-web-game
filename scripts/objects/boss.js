@@ -3,6 +3,7 @@ import {renderer} from "./renderer.js";
 import {config} from "../config/config.js";
 import {game} from "../game.js";
 import {player} from "./player.js";
+import {progressController} from "../controllers/progressController.js";
 
 export const boss = {
     x: helperController.getCenterMapOnX(),
@@ -14,6 +15,7 @@ export const boss = {
     getDamageOutlookSelectorName: "bossWhite",
     offsetX: 7,
     bodyX: [],
+    shieldBody: null,
     toTheRight: true,
     timerId: null,
     thisSelectorOverlay: [
@@ -40,7 +42,7 @@ export const boss = {
 
     createBoss() {
         player.canMove = false;
-        renderer.renderTeleportation();
+        renderer.renderTeleportation("out");
         player.x = helperController.getCenterMapOnX();
         player.y = config.mapSizeY;
         player.move();
@@ -48,7 +50,7 @@ export const boss = {
         renderer.clear(player.selectorName);
         if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
         setTimeout(() => {
-            renderer.renderTeleportation();
+            renderer.renderTeleportation("in");
             renderer.renderPlayer();
         }, 500);
 
@@ -66,11 +68,21 @@ export const boss = {
 
     step() {
         if (!game.gameIsRunning) return;
+        let bodyX = this.bodyX;
+
+        if (this.bodyX.length) this.bodyX.splice(7, this.bodyX.length);
+        this.bodyX = [];
         if (this.toTheRight) {
             this.x += 1;
+            for (let i = 0; i <= bodyX.length; i++) {
+                this.bodyX.push(bodyX[i] + 1);
+            }
             if (this.x === config.mapSizeX - 3) this.toTheRight = false;
         } else {
             this.x += -1;
+            for (let i = 0; i <= bodyX.length; i++) {
+                this.bodyX.push(bodyX[i] - 1);
+            }
             if (this.x === 3) this.toTheRight = true;
         }
         renderer.clear(this.selectorName);
@@ -78,27 +90,48 @@ export const boss = {
     },
 
     makeStep() {
-        this.timerId = setInterval(() => this.step(), this.speed);
+        if (progressController.bossExist) this.timerId = setInterval(() => this.step(), this.speed);
     },
 
     makeStepOff() {
-        clearInterval(this.timerId);
+        if (progressController.bossExist) clearInterval(this.timerId);
     },
 
     onShield() {
-        let shieldBody = {
+        this.shieldBody = {
             x: [],
             y: this.y + 1
         };
 
         for (let i = 0; i <= config.mapSizeX; i++) {
-            shieldBody.x.push(i)
+            this.shieldBody.x.push(i)
         }
-        renderer.renderBossShield(shieldBody);
+        renderer.renderBossShield(this.shieldBody, "on");
+        this.offShieldCall();
     },
 
-    getDamage(hitData) {
-        this.lives += -hitData.damage;
+    // действие щита будет 10 секунд, отключение на 3 секунды
+    offShield() {
+        renderer.renderBossShield(this.shieldBody, "off");
+        this.shieldBody = null;
+        setTimeout(() => this.onShield(), 3000);
+    },
+
+    offShieldCall() {
+        setTimeout(() => this.offShield(), 10000);
+    },
+
+    bossShieldGetDamage() {
+        renderer.renderBossShieldHit(this.shieldBody);
+    },
+
+    // переработать метод, будет так же получение урона от explosion
+    getDamage(hitData, damageByPlayerSuperAbility = false) {
+        if (damageByPlayerSuperAbility) {
+            this.lives += -hitData;
+        } else {
+            this.lives += -hitData.damage;
+        }
         console.log(this);
         if (this.lives > 0) renderer.renderGetDamageBoss(this.getDamageOutlookSelectorName, this.thisSelectorOverlay);
     }

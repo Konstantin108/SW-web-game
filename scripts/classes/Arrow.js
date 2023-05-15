@@ -5,6 +5,7 @@ import {arrowController} from "../controllers/arrowController.js";
 import {blockageController} from "../controllers/blockageController.js";
 import {config} from "../config/config.js";
 import {boss} from "../objects/boss.js";
+import {progressController} from "../controllers/progressController.js";
 
 export class Arrow {
     static id = 0;
@@ -30,8 +31,9 @@ export class Arrow {
         }
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(arrowController.arrowsArray);
-        this.hit();
+        this.hitBossShield();
         this.hitBoss();
+        this.hit();
     }
 
     makeStep() {
@@ -58,15 +60,26 @@ export class Arrow {
     }
 
     hitBoss() {
+        if (!progressController.bossExist) return;
         if (boss.bodyX.includes(this.x) && boss.y === this.y) {
+            this.y = -1;
             boss.getDamage(this);
+            this.remove();
+        }
+    }
+
+    hitBossShield() {
+        if (!progressController.bossExist) return;
+        if (!boss.shieldBody) return;
+        if (boss.shieldBody.x.includes(this.x) && boss.shieldBody.y + 1 === this.y) {
+            this.y = -1;
+            boss.bossShieldGetDamage();
             this.remove();
         }
     }
 
     remove() {
         let arrowsArray = arrowController.arrowsArray;
-
         for (let i = 0; i <= arrowsArray.length; i++) {
             if (arrowsArray[i]) {
                 if (arrowsArray[i].id === this.id) {

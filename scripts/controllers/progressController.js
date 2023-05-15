@@ -104,12 +104,15 @@ export const progressController = {
 
     newLevelEntry(blockagesCount) {
         let message = `LEVEL ${progressController.level}`;
+        let playerCantSopGameTime = 1000;
 
+        game.playerCanStopGame = false;
         renderer.renderInCenterTableNotify(message);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
         if (this.bossExist) {
+            playerCantSopGameTime = 3000;
             setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
             setTimeout(() => {
                 explosion.explode();
@@ -117,5 +120,6 @@ export const progressController = {
             }, 2000);
             setTimeout(() => boss.createBoss(), 3000);
         }
+        setTimeout(() => game.playerCanStopGame = true, playerCantSopGameTime);
     },
 }

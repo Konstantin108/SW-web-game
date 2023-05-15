@@ -13,9 +13,9 @@ export const enemyArrowController = {
     },
 
     enemyArrowMove() {
-        for (let i = 0; i < this.enemyArrowsArray.length; i++) {
-            if (this.enemyArrowsArray[i]) this.enemyArrowsArray[i].makeStep();
-        }
+        if (!this.enemyArrowsArray.length) return;
+        let enemyArrow = this.enemyArrowsArray.at(-1);
+        enemyArrow.makeStep();
         // console.log("enemy arrows:")
         // console.log(this.enemyArrowsArray);
     }

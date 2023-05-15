@@ -21,7 +21,7 @@ export const levels = {
             },
             {
                 levelNum: 2,
-                scoreCountForThisLevel: 200,
+                scoreCountForThisLevel: 4,
                 multiplier: 2,
                 blockagesCount: 5,
                 fireChance: 15,

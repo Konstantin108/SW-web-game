@@ -13,6 +13,7 @@ import {boss} from "./objects/boss.js";
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
     gameIsRunning: false,
+    playerCanStopGame: true,
 
     init() {
         renderer.render();
@@ -61,6 +62,7 @@ export const game = {
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
+            if (!game.playerCanStopGame) return;
             if (pauseBtnsArray.includes(event.code)) {
                 game.paused();
             }

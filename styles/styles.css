@@ -338,30 +338,49 @@ td {
   background-image: url("../images/boss.png");
 }
 
-.bossCreate {
-  animation: bossCreate 2s;
-}
-
 .bossWhite {
   background-image: url("../images/boss-white.png");
 }
 
-.bossShield {
+.bossCreate {
+  animation: bossCreate 2s;
+}
+
+.bossShield,
+.bossShieldOff {
   position: relative;
 }
 
-.bossShield::after {
+.bossShield::after,
+.bossShieldOff::after {
   content: "-";
-  background-color: #6565dc;
   color: #6565dc;
-  width: 50px;
-  height: 4px;
   scale: 1.1;
   position: absolute;
   left: 0;
   bottom: 0;
   box-shadow: 0 0 20px #ffffff;
+}
+
+.bossShield::after {
+  width: 50px;
+  height: 4px;
+  background-color: #6565dc;
+  transition: 0.3s;
   animation: onBossShield 0.3s, blink 1.5s infinite;
+}
+
+.bossShieldOff::after {
+  width: 0;
+  height: 4px;
+  background-color: #6565dc;
+  transition: 0.3s;
+}
+
+.bossShieldHit::after {
+  width: 50px;
+  height: 10px;
+  background-color: #ffffff;
 }
 
 @keyframes onBossShield {
@@ -477,7 +496,8 @@ td {
 .picked,
 .hit,
 .crash,
-.teleportation {
+.teleportationOut,
+.teleportationIn {
   background-size: 100%;
   background-repeat: no-repeat;
   box-shadow: 0 0 0 0;
@@ -490,8 +510,16 @@ td {
   transform: scale(2);
 }
 
-.teleportation {
+.teleportationOut,
+.teleportationIn {
   background-image: url("../images/teleportation.png");
+}
+
+.teleportationOut {
+  transform: scale(0.6);
+}
+
+.teleportationIn {
   transform: scale(1.8);
 }
 
