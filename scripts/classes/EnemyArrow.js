@@ -59,9 +59,7 @@ export class EnemyArrow {
 
         for (let i = 0; i <= enemyArrowsArray.length; i++) {
             if (enemyArrowsArray[i]) {
-                if (enemyArrowsArray[i].id === this.id) {
-                    enemyArrowController.enemyArrowsArray.splice(i, 1);
-                }
+                if (enemyArrowsArray[i].id === this.id) enemyArrowController.enemyArrowsArray.splice(i, 1);
             }
         }
     }

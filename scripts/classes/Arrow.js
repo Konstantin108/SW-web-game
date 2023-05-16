@@ -82,9 +82,7 @@ export class Arrow {
         let arrowsArray = arrowController.arrowsArray;
         for (let i = 0; i <= arrowsArray.length; i++) {
             if (arrowsArray[i]) {
-                if (arrowsArray[i].id === this.id) {
-                    arrowController.arrowsArray.splice(i, 1);
-                }
+                if (arrowsArray[i].id === this.id) arrowController.arrowsArray.splice(i, 1);
             }
         }
     }

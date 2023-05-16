@@ -168,9 +168,7 @@ export class Bonus {
 
         for (let i = 0; i <= bonusArray.length; i++) {
             if (bonusArray[i]) {
-                if (bonusArray[i].id === this.id) {
-                    bonusController.bonusesArray.splice(i, 1);
-                }
+                if (bonusArray[i].id === this.id) bonusController.bonusesArray.splice(i, 1);
             }
         }
     }

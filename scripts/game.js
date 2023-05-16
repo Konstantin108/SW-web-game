@@ -63,9 +63,7 @@ export const game = {
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!game.playerCanStopGame) return;
-            if (pauseBtnsArray.includes(event.code)) {
-                game.paused();
-            }
+            if (pauseBtnsArray.includes(event.code)) game.paused();
         });
     },
 

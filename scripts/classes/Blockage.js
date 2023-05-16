@@ -44,9 +44,7 @@ export class Blockage {
         let employedPositionsOnXArray = [];
 
         for (let i = 0; i <= blockagesArray.length; i++) {
-            if (blockagesArray[i]) {
-                employedPositionsOnXArray.push(blockagesArray[i].x);
-            }
+            if (blockagesArray[i]) employedPositionsOnXArray.push(blockagesArray[i].x);
         }
         x_pos += helperController.getRandomInt(-1, 1);
         y_pos += 1;
