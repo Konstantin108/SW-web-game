@@ -203,11 +203,22 @@ export const renderer = {
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {
+        let priorityRenderBossSelectors = [
+            "boss",
+            "bossWhite"
+        ];
+
         for (let i = 0; i < objectsArray.length; i++) {
             let objectPosition = document.querySelector(`[data-x="${objectsArray[i].x}"][data-y="${objectsArray[i].y}"]`);
             if (objectPosition) {
-                this.renderPriorityObjects(objectPosition, thisSelectorOverlay);
-                objectPosition.classList.add(`${objectsArray[i].selectorName}`);
+                let canRenderObject = 0;
+                for (let selector = 0; selector < priorityRenderBossSelectors.length; selector++) {
+                    if (!objectPosition.classList.contains(`${priorityRenderBossSelectors[selector]}`)) canRenderObject += 1;
+                }
+                if (canRenderObject === 2) {
+                    this.renderPriorityObjects(objectPosition, thisSelectorOverlay);
+                    objectPosition.classList.add(`${objectsArray[i].selectorName}`);
+                }
             }
         }
     },
