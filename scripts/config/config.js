@@ -41,6 +41,8 @@ export const config = {
     bossSpeed: 1000,
     bossCrashDamage: 3,
     bossShieldCrashDamage: 3,
+    bossShieldIsOnSecondsCount: 10000,  // возможно увеличить время действия щита
+    bossShieldIsOffSecondsCount: 3000,
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),

@@ -85,6 +85,7 @@ export const game = {
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         crashChecker.invincibilityOffCallCancel();
         boss.makeStepOff();
+        boss.removeShieldTimerId();
     },
 
     resumeGame() {
@@ -96,6 +97,7 @@ export const game = {
         enemyArrowController.enemyArrowMove();
         crashChecker.invincibilityOffCall(player.timeInInvincibilityOff * 1000);
         boss.makeStep();
+        boss.setShieldTimerIdOnResumeGame();
         player.offBonusCall();
     },
 

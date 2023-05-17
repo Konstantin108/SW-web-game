@@ -23,6 +23,12 @@ export const boss = {
     },
     toTheRight: true,
     timerId: null,
+    shieldTimerId: null,  // id таймера до включения или отключения щита
+    calculateTime: null,  // сюда записывается цифра - количество секунд до включения или отключения щита
+    callTurnType: null,  // сюда записывается, что ожидалось в момент включения паузы, включение или выключение щита
+    calculateTimeShieldOnOrOffDelayTimerId: null,  // id таймера delay в методе calculateTimeShieldOnOrOff()
+    shieldIsOnSecondsCount: config.bossShieldIsOnSecondsCount,
+    shieldIsOffSecondsCount: config.bossShieldIsOffSecondsCount,
     invincibility: true,
     thisSelectorOverlay: [
         "player",
@@ -114,23 +120,58 @@ export const boss = {
         }
         this.shieldBody.y = this.y + 1;
         renderer.renderBossShield(this.shieldBody, "on");
-        this.offShieldCall();
+        this.shieldOnOrOffCall(this.shieldIsOnSecondsCount, "callTurnOff");
     },
 
-    // действие щита будет 10 секунд, отключение на 3 секунды
     offShield() {
         renderer.renderBossShield(this.shieldBody, "off");
         this.shieldBody.x = [];
         this.shieldBody.y = null;
-        setTimeout(() => this.onShield(), 3000);
+        this.shieldOnOrOffCall(this.shieldIsOffSecondsCount, "callTurnOn");
     },
 
-    offShieldCall() {
-        setTimeout(() => this.offShield(), 10000);
+    shieldOnOrOffCall(timer, mode) {
+        if (mode === "callTurnOff") {
+            this.shieldTimerId = setTimeout(() => this.offShield(), timer);
+        } else {
+            this.shieldTimerId = setTimeout(() => this.onShield(), timer);
+        }
+        this.calculateTimeShieldOnOrOff(timer / 1000, mode);
     },
 
-    bossShieldGetDamage() {
+    removeShieldTimerId() {
+        if (!progressController.bossExist) return;
+        if (this.shieldTimerId) clearTimeout(this.shieldTimerId);
+        if (this.calculateTimeShieldOnOrOffDelayTimerId) clearTimeout(this.calculateTimeShieldOnOrOffDelayTimerId);
+    },
+
+    setShieldTimerIdOnResumeGame() {
+        if (!progressController.bossExist) return;
+        if (this.callTurnType === "callTurnOff") {
+            this.shieldOnOrOffCall(this.calculateTime * 1000, "callTurnOff");
+        } else {
+            this.shieldOnOrOffCall(this.calculateTime * 1000, "callTurnOn");
+        }
+    },
+
+    calculateTimeShieldOnOrOff(delay, turn) {
+        let tick = -1;
+
+        if (!game.gameIsRunning) tick = 0;
+        if (delay > 0) {
+            this.calculateTimeShieldOnOrOffDelayTimerId = setTimeout(() => {
+                return this.calculateTimeShieldOnOrOff(delay += tick, turn);
+            }, 1000);
+        }
+        this.calculateTime = delay;
+        this.callTurnType = turn;
+    },
+
+    bossShieldGetDamage(damageByPlayerSuperAbility = false) {
         renderer.renderBossShieldHit(this.shieldBody);
+        if (!damageByPlayerSuperAbility) return;
+        this.removeShieldTimerId();
+        setTimeout(() => this.offShield(), 150);
     },
 
     // переработать метод, будет так же получение урона от explosion

@@ -205,7 +205,7 @@ export const player = {
                             renderer.renderStatusBar();
                         }
                     }
-                    if (boss.shieldBody) boss.bossShieldGetDamage();
+                    if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
                     player.superAbilityIsActivated = false;
                     renderer.renderSuperAbility();
                     renderer.renderSuperAbilityBar();
