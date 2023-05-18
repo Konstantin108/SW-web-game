@@ -23,6 +23,7 @@ export const progressController = {
     shipDestroyedCounterForSuperAbilityCharge: 0,
     superAbilityCharge: 0,
     superAbilityIsCharged: config.superAbilityIsCharged,
+    playerCanEnterNewLevel: true,
 
     progress() {
         this.blockagesCount = this.compareBlockagesCountAndMapSizeX(config.levels[0].blockagesCount);
@@ -31,7 +32,7 @@ export const progressController = {
         blockageController.blockageCreate(this.blockagesCount);
 
         for (let i = 1; i < this.levels.length; i++) {
-            if (this.levels[i].scoreCountForThisLevel <= this.score && this.levels.length === levelsLeft) {
+            if (this.levels[i].scoreCountForThisLevel <= this.score && this.levels.length === levelsLeft && this.playerCanEnterNewLevel) {
                 if (this.levels.length > 2) {
                     this.level = this.levels[i].levelNum;
                     this.multiplier = this.levels[i].multiplier;
@@ -41,6 +42,7 @@ export const progressController = {
                     this.fireChance = this.levels[i].fireChance;
                     this.blockageTypes = this.levels[i].blockageTypes;
                     this.bossExist = this.levels[i].bossExist;
+                    if (this.bossExist) this.playerCanEnterNewLevel = false;
                     this.newLevelEntry(this.blockagesCount);
                     this.levels.shift();
                     levelsLeft += -1;
@@ -68,6 +70,13 @@ export const progressController = {
         if (blockageType) blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
+    killBoss(bossDestroyedReward) {
+        boss.makeStepOff();
+        if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward);
+        this.playerCanEnterNewLevel = true;
+        renderer.renderStatusBar();
+    },
+
     scoreDown() {
         let score = this.score;
 
@@ -91,7 +100,7 @@ export const progressController = {
         }
     },
 
-    compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {           // blockegesCount не может быть больше config.mapSizeX
+    compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {  // blockegesCount не может быть больше config.mapSizeX
         let blockagesCount = null;
 
         if (blockagesCountOnLevel <= config.mapSizeX) {

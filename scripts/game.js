@@ -28,7 +28,6 @@ export const game = {
         player.shoot();
         player.useBomb();
         player.useSuperAbility();
-        // boss.createBoss();  // вызов босса при старте игры для отладки босса
     },
 
     startGameDelay(delay, resumeGame = false) {

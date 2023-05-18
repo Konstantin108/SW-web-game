@@ -202,7 +202,6 @@ export const player = {
                             boss.bodyX.includes(player.x) + 1 && boss.y < player.y - 1 && boss.y >= 0 ||
                             boss.bodyX.includes(player.x) + 2 && boss.y < player.y - 2 && boss.y >= 0) {
                             boss.getDamage(player.superAbilityDamage, true);
-                            renderer.renderStatusBar();
                         }
                     }
                     if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);

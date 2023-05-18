@@ -70,10 +70,11 @@ export const renderer = {
         setTimeout(() => this.clear(`${selectorName}`), 40);
     },
 
-    renderBossShieldHit(shieldBody) {
+    renderBossShieldHit(shieldBody, hitData) {
         for (let i = 0; i < shieldBody.x.length; i++) {
             let bossShieldHitPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);
             if (bossShieldHitPosition) {
+                if (hitData) bossShieldHitPosition.classList.remove(`${hitData.selectorName}`);
                 bossShieldHitPosition.classList.add("bossShieldHit");
                 setTimeout(() => bossShieldHitPosition.classList.remove("bossShieldHit"), 150);
             }
@@ -372,7 +373,7 @@ export const renderer = {
         }
     },
 
-    renderLivesBar() {          // если больше 5 жизней то будет отрисовано простое табло
+    renderLivesBar() {  // если больше 5 жизней то будет отрисовано простое табло
         let livesCount = config.lives;
         let livesBar = null;
         let heartsBox = "";

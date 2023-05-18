@@ -58,7 +58,7 @@ export class Bonus {
             renderer.renderPickedBonus(this);
             pickedBonus = this;
             this.remove();
-            // console.log(pickedBonus);    // данные подобранного бонуса
+            // console.log(pickedBonus);  // данные подобранного бонуса
             return pickedBonus;
         }
         this.picked_x = null;

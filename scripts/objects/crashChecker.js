@@ -27,7 +27,7 @@ export const crashChecker = {
                 } else {
                     player.lives += -dangerArray[i].damage;
                 }
-                // progressController.scoreDown();       // потеря очков при аварии отключена
+                // progressController.scoreDown();  // потеря очков при аварии отключена
                 player.invincibility = true;
                 this.invincibilityOffCall(this.invincibilityAfterCrash);
                 this.calculateTimeInInvincibilityOff(this.invincibilityAfterCrash / 1000);

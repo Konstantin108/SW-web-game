@@ -12,9 +12,10 @@ export const config = {
     lives: 5,
     maxBombsCount: 1,
     startBombsCount: 0,
+    explosionDamage: 500,
     bonusNewArrowTypeIsActivated: false,
     bonusShieldIsActivated: false,
-    superAbilityDamage: 100,
+    superAbilityDamage: 300,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
     // стрелы игрока
@@ -27,21 +28,22 @@ export const config = {
     // стрелы врагов
     enemyArrowDamage: 1,
     enemyArrowSpeed: 200,
-    enemyArrowBombDamage: 3,
+    enemyArrowBombDamage: 2,
     enemyArrowBombSpeed: 100,
-    // враги и босс
+    // враги
     blockageLives: 1,
     blockageShipDestroyedRewards: 2,
     blockageCrashDamage: 1,
     blockageBullLives: 5,
     blockageBullShipDestroyedRewards: 3,
     blockageBullCrashDamage: 1,
-    bossLives: 10000,
-    bossDestroyedReward: 10000,
+    // босс
+    bossLives: 2000,  // возможно изменить параметры босса
+    bossDestroyedReward: 2500,
     bossSpeed: 1000,
     bossCrashDamage: 3,
     bossShieldCrashDamage: 3,
-    bossShieldIsOnSecondsCount: 10000,  // возможно увеличить время действия щита
+    bossShieldIsOnSecondsCount: 12000,
     bossShieldIsOffSecondsCount: 3000,
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),

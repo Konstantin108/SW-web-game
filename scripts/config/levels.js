@@ -21,7 +21,7 @@ export const levels = {
             },
             {
                 levelNum: 2,
-                scoreCountForThisLevel: 4,
+                scoreCountForThisLevel: 200,
                 multiplier: 2,
                 blockagesCount: 5,
                 fireChance: 15,
@@ -39,7 +39,7 @@ export const levels = {
                         chanceTo: 100,
                     },
                 },
-                bossExist: true  // для теста босса
+                bossExist: false
             },
             {
                 levelNum: 3,
@@ -105,11 +105,11 @@ export const levels = {
                         chanceTo: 100,
                     },
                 },
-                bossExist: false
+                bossExist: true
             },
             {
                 levelNum: "win",
-                scoreCountForThisLevel: 1800,
+                scoreCountForThisLevel: 1600,
                 multiplier: 0,
                 blockagesCount: 0,
                 fireChance: 0,

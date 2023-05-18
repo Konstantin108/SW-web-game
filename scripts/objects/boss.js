@@ -164,23 +164,23 @@ export const boss = {
         this.callTurnType = turn;
     },
 
-    bossShieldGetDamage(damageByPlayerSuperAbility = false) {
-        renderer.renderBossShieldHit(this.shieldBody);
-        if (!damageByPlayerSuperAbility) return;
+    bossShieldGetDamage(thisPlayerWeaponTypeCanMakeDamage, hitData = null) {
+        renderer.renderBossShieldHit(this.shieldBody, hitData);
+        if (!thisPlayerWeaponTypeCanMakeDamage) return;
         this.removeShieldTimerId();
         setTimeout(() => this.offShield(), 150);
     },
 
-    // переработать метод, будет так же получение урона от explosion
-    getDamage(hitData, damageByPlayerSuperAbility = false) {
+    getDamage(hitData, thisPlayerWeaponTypeCanMakeDamage = false) {
         if (this.invincibility) return;
-        if (damageByPlayerSuperAbility) {
+        if (thisPlayerWeaponTypeCanMakeDamage) {
             this.lives += -hitData;
         } else {
             this.lives += -hitData.damage;
         }
         console.log(this);
         if (this.lives > 0) renderer.renderGetDamageBoss(this.getDamageOutlookSelectorName, this.thisSelectorOverlay);
+        if (this.lives <= 0) progressController.killBoss(this.destroyedReward);
     },
 
     returnPlayerOnStartCell() {
