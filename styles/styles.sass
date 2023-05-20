@@ -302,6 +302,9 @@ td
 .bossCreate
   animation: bossCreate 2s
 
+.bossDyingDisappears
+  animation: disappears 3s
+
 .bossShield,
 .bossShieldOff
   position: relative
@@ -349,6 +352,12 @@ td
     transform: translate(0, -40px)
   to
     transform: translate(0, 0)
+
+@keyframes disappears
+  from
+    opacity: 1
+  to
+    opacity: 0
 
 //  стили движущихся объектов
 
@@ -518,7 +527,7 @@ td
 #messageElement
   font-style: italic
   color: lawngreen
-  font-size: 140px
+  font-size: 124px
   animation: numberIn .3s, numberOut .3s .8s
 
 @keyframes numberIn

@@ -115,15 +115,17 @@ export const game = {
     },
 
     over(win = false) {
-        let result = "";
+        let showQuitMessageDelay = null;
 
         this.stopGame();
         if (win) {
-            result = `Игра пройдена! Поздравляю!\nТвой результат: кораблей уничтожено всего: ${progressController.shipDestroyer},\nНабранное количество очков всего: ${progressController.score}`
+            setTimeout(() => renderer.renderInCenterTableNotify("YOU WIN"), 2500);
+            showQuitMessageDelay = 3600;
         } else {
-            result = this.quit();
+            renderer.renderInCenterTableNotify("YOU LOSE");
+            showQuitMessageDelay = 1100;
         }
-        alert(result);
+        setTimeout(() => alert(this.quit()), showQuitMessageDelay);
     }
 }
 

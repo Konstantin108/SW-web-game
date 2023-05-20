@@ -109,14 +109,7 @@ export const levels = {
             },
             {
                 levelNum: "win",
-                scoreCountForThisLevel: 1600,
-                multiplier: 0,
-                blockagesCount: 0,
-                fireChance: 0,
-                maxBlockageSpeed: 0,
-                minBlockageSpeed: 0,
-                blockageTypes: {},
-                bossExist: false
+                scoreCountForThisLevel: 1600
             }
         ]
     }

@@ -346,6 +346,10 @@ td {
   animation: bossCreate 2s;
 }
 
+.bossDyingDisappears {
+  animation: disappears 3s;
+}
+
 .bossShield,
 .bossShieldOff {
   position: relative;
@@ -401,6 +405,14 @@ td {
   }
   to {
     transform: translate(0, 0);
+  }
+}
+@keyframes disappears {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 .blockage,
@@ -597,7 +609,7 @@ td {
 #messageElement {
   font-style: italic;
   color: lawngreen;
-  font-size: 140px;
+  font-size: 124px;
   animation: numberIn 0.3s, numberOut 0.3s 0.8s;
 }
 

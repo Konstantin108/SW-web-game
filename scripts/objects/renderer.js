@@ -70,6 +70,18 @@ export const renderer = {
         setTimeout(() => this.clear(`${selectorName}`), 40);
     },
 
+    renderKillBoss(thisSelectorOverlay) {
+        let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
+        this.renderPriorityObjects(thisSelectorOverlay);
+        bossPosition.classList.add("crash");
+        setTimeout(() => this.clear("crash"), 500);
+        setTimeout(() => bossPosition.classList.add("bossDyingDisappears"), 400);
+        setTimeout(() => {
+            this.clear("bossDyingDisappears");
+            this.clear("boss");
+        }, 3400);
+    },
+
     renderBossShieldHit(shieldBody, hitData) {
         for (let i = 0; i < shieldBody.x.length; i++) {
             let bossShieldHitPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);

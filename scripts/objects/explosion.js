@@ -17,15 +17,17 @@ export const explosion = {
         }
     },
 
-    explode() {
+    explode(playerMakeExplosion = true) {
         let blockagesArray = blockageController.blockagesArray;
 
         renderer.renderExplosion();
         for (let i = 0; i < blockagesArray.length; i++) {
             if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8);
         }
-        if (progressController.bossExist) boss.getDamage(this.damage, true);
-        if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
+        if (playerMakeExplosion) {
+            if (progressController.bossExist) boss.getDamage(this.damage, true);
+            if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
+        }
         renderer.renderStatusBar();
         renderer.renderBombBar(false);
     }

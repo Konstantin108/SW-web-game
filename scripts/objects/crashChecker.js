@@ -31,14 +31,11 @@ export const crashChecker = {
                 player.invincibility = true;
                 this.invincibilityOffCall(this.invincibilityAfterCrash);
                 this.calculateTimeInInvincibilityOff(this.invincibilityAfterCrash / 1000);
-                if (player.lives <= 0) {
-                    game.over();
-                } else {
-                    renderer.renderPlayer();
-                    renderer.renderStatusBar();
-                    renderer.renderHeartScaleAnimation();
-                    renderer.renderScullChangeColor();
-                }
+                if (player.lives <= 0) game.over();
+                renderer.renderPlayer();
+                renderer.renderStatusBar();
+                renderer.renderHeartScaleAnimation();
+                renderer.renderScullChangeColor();
             }
         }
         this.x = null;

@@ -71,10 +71,15 @@ export const progressController = {
     },
 
     killBoss(bossDestroyedReward) {
-        boss.makeStepOff();
         if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward);
         this.playerCanEnterNewLevel = true;
+        this.shipDestroyer += 1;
         renderer.renderStatusBar();
+        boss.remove();
+        setTimeout(() => {
+            explosion.explode(false);
+            bonusController.destroyAllBonuses();
+        }, 100);
     },
 
     scoreDown() {
@@ -124,7 +129,7 @@ export const progressController = {
             playerCantSopGameTime = 3000;
             setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
             setTimeout(() => {
-                explosion.explode();
+                explosion.explode(false);
                 bonusController.destroyAllBonuses();
             }, 2000);
             setTimeout(() => boss.createBoss(), 3000);

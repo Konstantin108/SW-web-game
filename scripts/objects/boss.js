@@ -68,6 +68,15 @@ export const boss = {
         setTimeout(() => this.onShield(), 1500);
     },
 
+    remove() {
+        renderer.renderKillBoss(this.thisSelectorOverlay);
+        this.removeShieldTimerId();
+        this.offShield(true);
+        this.bodyX = [];
+        this.makeStepOff();
+        this.lives = config.bossLives;
+    },
+
     step() {
         if (!game.gameIsRunning) return;
         let bodyX = this.bodyX;
@@ -123,11 +132,11 @@ export const boss = {
         this.shieldOnOrOffCall(this.shieldIsOnSecondsCount, "callTurnOff");
     },
 
-    offShield() {
+    offShield(bossDying = false) {
         renderer.renderBossShield(this.shieldBody, "off");
         this.shieldBody.x = [];
         this.shieldBody.y = null;
-        this.shieldOnOrOffCall(this.shieldIsOffSecondsCount, "callTurnOn");
+        if (!bossDying) this.shieldOnOrOffCall(this.shieldIsOffSecondsCount, "callTurnOn");
     },
 
     shieldOnOrOffCall(timer, mode) {
