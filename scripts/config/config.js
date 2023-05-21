@@ -45,6 +45,7 @@ export const config = {
     bossShieldCrashDamage: 3,
     bossShieldIsOnSecondsCount: 10000,
     bossShieldIsOffSecondsCount: 3000,
+    bossFireChance: 99,    // разобраться с выстрелами босса
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),

@@ -4,6 +4,7 @@ import {config} from "../config/config.js";
 import {game} from "../game.js";
 import {player} from "./player.js";
 import {progressController} from "../controllers/progressController.js";
+import {enemyArrowController} from "../controllers/enemyArrowController.js";        // разобраться с выстрелами босса
 
 export const boss = {
     x: helperController.getCenterMapOnX(),
@@ -14,6 +15,7 @@ export const boss = {
     speed: config.bossSpeed,
     crashDamage: config.bossCrashDamage,
     shieldCrashDamage: config.bossShieldCrashDamage,
+    fireChance: config.bossFireChance,        // разобраться с выстрелами босса
     selectorName: "boss",
     getDamageOutlookSelectorName: "bossWhite",
     offsetX: 7,
@@ -101,6 +103,7 @@ export const boss = {
             }
             if (this.x === 3) this.toTheRight = true;
         }
+        enemyArrowController.enemyArrowCreate(this.shoot("enemyArrow", this.randomChoiceGun(1), this.y + 1));       // разобраться с выстрелами босса
         renderer.clear(this.selectorName);
         renderer.renderBoss(this.selectorName, this.thisSelectorOverlay);
     },
@@ -111,6 +114,30 @@ export const boss = {
 
     makeStepOff() {
         if (progressController.bossExist) clearInterval(this.timerId);
+    },
+
+    randomChoiceGun(gunPosition) {       // разобраться с выстрелами босса
+        let choiceGunChance = 50;
+        let leftGun = this.x - gunPosition;
+        let rightGun = this.x + gunPosition;
+        let selectedGun = null;
+
+        if (helperController.randomEvent(choiceGunChance)) {
+            selectedGun = leftGun;
+        } else {
+            selectedGun = rightGun;
+        }
+        return selectedGun;
+    },
+
+    shoot(arrowTypeSelectorName, x_pos, y_pos) {       // разобраться с выстрелами босса
+        if (helperController.randomEvent(this.fireChance)) {
+            return {
+                arrowType: arrowTypeSelectorName,
+                x: x_pos,
+                y: y_pos
+            }
+        }
     },
 
     bodyCellsArrayForCrashChecker(body, y, crashDamageType) {
