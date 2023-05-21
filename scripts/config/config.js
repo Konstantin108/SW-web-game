@@ -35,7 +35,7 @@ export const config = {
     blockageShipDestroyedRewards: 2,
     blockageCrashDamage: 1,
     blockageBullLives: 5,
-    blockageBullShipDestroyedRewards: 3,
+    blockageBullShipDestroyedRewards: 5,
     blockageBullCrashDamage: 1,
     // босс
     bossLives: 2000,  // возможно изменить параметры босса
@@ -43,7 +43,7 @@ export const config = {
     bossSpeed: 1000,
     bossCrashDamage: 3,
     bossShieldCrashDamage: 3,
-    bossShieldIsOnSecondsCount: 12000,
+    bossShieldIsOnSecondsCount: 10000,
     bossShieldIsOffSecondsCount: 3000,
     // уровни и бонусы
     bonuses: bonuses.setBonusesParams(),

@@ -8,6 +8,7 @@ import {progressController} from "../controllers/progressController.js";
 export const boss = {
     x: helperController.getCenterMapOnX(),
     y: 3,
+    alive: false,
     lives: config.bossLives,
     destroyedReward: config.bossDestroyedReward,
     speed: config.bossSpeed,
@@ -64,17 +65,21 @@ export const boss = {
             this.makeStep();
             player.canMove = true;
             this.invincibility = false;
+            this.alive = true;
         }, 2000);
         setTimeout(() => this.onShield(), 1500);
     },
 
     remove(hitCoordinates) {
+        this.alive = false;
         this.makeStepOff();
         renderer.renderKillBoss(this.thisSelectorOverlay, hitCoordinates);
         this.removeShieldTimerId();
         this.offShield(true);
-        setTimeout(() => this.bodyX = [], 7600);
-        this.lives = config.bossLives;
+        setTimeout(() => {
+            this.bodyX = [];
+            this.lives = config.bossLives;
+        }, 7500);
     },
 
     step() {
@@ -182,6 +187,8 @@ export const boss = {
 
     getDamage(hitData, thisPlayerWeaponTypeCanMakeDamage = false) {
         if (this.invincibility) return;
+        if (!this.alive) return;
+
         let hitCoordinates = null;
 
         if (thisPlayerWeaponTypeCanMakeDamage) {
