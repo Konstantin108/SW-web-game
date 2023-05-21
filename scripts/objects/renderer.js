@@ -5,6 +5,7 @@ import {progressController} from "../controllers/progressController.js";
 import {crashChecker} from "./crashChecker.js";
 import {game} from "../game.js";
 import {boss} from "./boss.js";
+import {helperController} from "../controllers/helperController.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -70,16 +71,35 @@ export const renderer = {
         setTimeout(() => this.clear(`${selectorName}`), 40);
     },
 
-    renderKillBoss(thisSelectorOverlay) {
+    renderBossDyingRandomExplosions(bossExplosionsCount) {
+        let randomCoordinates = helperController.getRandomCoordinates(boss.bodyX, boss.y);
+        let randomHitPosition = document.querySelector(`[data-x="${randomCoordinates.x}"][data-y="${randomCoordinates.y}"]`);
+
+        randomHitPosition.classList.add("crash");
+        setTimeout(() => randomHitPosition.classList.remove("crash"), 500);
+        if (bossExplosionsCount > 0) {
+            setTimeout(() => {
+                return this.renderBossDyingRandomExplosions(bossExplosionsCount += -1);
+            }, 200);
+        }
+    },
+
+    renderKillBoss(thisSelectorOverlay, hitCoordinates) {
+        let bossExplosionsCount = 32;
+
+        let hitPosition = document.querySelector(`[data-x="${hitCoordinates.hit_x}"][data-y="${hitCoordinates.hit_y}"]`);
+        hitPosition.classList.add("crash");
+        setTimeout(() => hitPosition.classList.remove("crash"), 500);
+
+        setTimeout(() => this.renderBossDyingRandomExplosions(bossExplosionsCount), 200);
+
         let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
         this.renderPriorityObjects(thisSelectorOverlay);
-        bossPosition.classList.add("crash");
-        setTimeout(() => this.clear("crash"), 500);
-        setTimeout(() => bossPosition.classList.add("bossDyingDisappears"), 400);
+        setTimeout(() => bossPosition.classList.add("bossDyingDisappears"), 7500);
         setTimeout(() => {
             this.clear("bossDyingDisappears");
             this.clear("boss");
-        }, 3400);
+        }, 10500);
     },
 
     renderBossShieldHit(shieldBody, hitData) {

@@ -115,17 +115,16 @@ export const game = {
     },
 
     over(win = false) {
-        let showQuitMessageDelay = null;
+        let message = "";
 
         this.stopGame();
         if (win) {
-            setTimeout(() => renderer.renderInCenterTableNotify("YOU WIN"), 2500);
-            showQuitMessageDelay = 3600;
+            message = "YOU WIN";
         } else {
-            renderer.renderInCenterTableNotify("YOU LOSE");
-            showQuitMessageDelay = 1100;
+            message = "YOU LOSE";
         }
-        setTimeout(() => alert(this.quit()), showQuitMessageDelay);
+        renderer.renderInCenterTableNotify(message);
+        setTimeout(() => alert(this.quit()), 1100);
     }
 }
 

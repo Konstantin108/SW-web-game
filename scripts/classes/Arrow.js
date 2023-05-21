@@ -62,10 +62,14 @@ export class Arrow {
     hitBoss() {
         if (!progressController.bossExist) return;
         if (boss.bodyX.includes(this.x) && boss.y === this.y) {
+            this.hit_x = this.x;
+            this.hit_y = this.y;
             this.y = -1;
             boss.getDamage(this);
             this.remove();
         }
+        this.hit_x = null;
+        this.hit_y = null;
     }
 
     hitBossShield() {

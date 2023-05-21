@@ -68,12 +68,12 @@ export const boss = {
         setTimeout(() => this.onShield(), 1500);
     },
 
-    remove() {
-        renderer.renderKillBoss(this.thisSelectorOverlay);
+    remove(hitCoordinates) {
+        this.makeStepOff();
+        renderer.renderKillBoss(this.thisSelectorOverlay, hitCoordinates);
         this.removeShieldTimerId();
         this.offShield(true);
-        this.bodyX = [];
-        this.makeStepOff();
+        setTimeout(() => this.bodyX = [], 7600);
         this.lives = config.bossLives;
     },
 
@@ -182,14 +182,24 @@ export const boss = {
 
     getDamage(hitData, thisPlayerWeaponTypeCanMakeDamage = false) {
         if (this.invincibility) return;
+        let hitCoordinates = null;
+
         if (thisPlayerWeaponTypeCanMakeDamage) {
             this.lives += -hitData;
+            hitCoordinates = {
+                hit_x: this.x,
+                hit_y: this.y
+            }
         } else {
             this.lives += -hitData.damage;
+            hitCoordinates = {
+                hit_x: hitData.hit_x,
+                hit_y: hitData.hit_y
+            }
         }
         console.log(this);
         if (this.lives > 0) renderer.renderGetDamageBoss(this.getDamageOutlookSelectorName, this.thisSelectorOverlay);
-        if (this.lives <= 0) progressController.killBoss(this.destroyedReward);
+        if (this.lives <= 0) progressController.killBoss(this.destroyedReward, hitCoordinates);
     },
 
     returnPlayerOnStartCell() {

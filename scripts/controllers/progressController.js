@@ -70,16 +70,17 @@ export const progressController = {
         if (blockageType) blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
-    killBoss(bossDestroyedReward) {
+    killBoss(bossDestroyedReward, hitCoordinates) {
         if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward);
-        this.playerCanEnterNewLevel = true;
+        game.playerCanStopGame = false;
         this.shipDestroyer += 1;
         renderer.renderStatusBar();
-        boss.remove();
+        boss.remove(hitCoordinates);
         setTimeout(() => {
             explosion.explode(false);
             bonusController.destroyAllBonuses();
-        }, 100);
+        }, 6000);
+        setTimeout(() => this.playerCanEnterNewLevel = true, 9000);
     },
 
     scoreDown() {

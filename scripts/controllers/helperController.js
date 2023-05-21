@@ -22,6 +22,22 @@ export const helperController = {
         }
     },
 
+    getRandomCoordinates(arrayX, y) {
+        let possibleOnXArray = [];
+        let possibleOnYArray = [];
+
+        for (let j = 1; j <= arrayX.length - 2; j++) {
+            if (!isNaN(arrayX[j])) possibleOnXArray.push(arrayX[j]);
+        }
+        for (let i = 1; i <= y + 1; i++) {
+            possibleOnYArray.push(i);
+        }
+        return {
+            x: this.getRandomInt(possibleOnXArray[0], possibleOnXArray.at(-1)),
+            y: this.getRandomInt(possibleOnYArray[0], possibleOnYArray.at(-1))
+        }
+    },
+
     removeAllTimers(timersArray) {
         for (let timer = 0; timer < timersArray.length; timer++) {
             clearInterval(timersArray[timer]);
