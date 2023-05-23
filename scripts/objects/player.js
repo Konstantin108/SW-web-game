@@ -99,6 +99,8 @@ export const player = {
                         x_value += 1;
                         y_value += 1;
                         break;
+                    default:
+                        break;
                 }
                 if (x_value <= config.mapSizeX && y_value <= config.mapSizeY && x_value >= 0 && y_value >= 0) {
                     player.x = x_value;
