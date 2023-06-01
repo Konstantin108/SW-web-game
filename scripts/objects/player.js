@@ -134,12 +134,11 @@ export const player = {
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
-            if (!isPressBtn) {
-                if (shootBtnsArray.includes(event.code)) {
-                    arrowController.arrowCreate();
-                    arrowController.arrowMove();
-                    isPressBtn = true;
-                }
+            if (isPressBtn) return;
+            if (shootBtnsArray.includes(event.code)) {
+                arrowController.arrowCreate();
+                arrowController.arrowMove();
+                isPressBtn = true;
             }
         });
         document.addEventListener("keyup", function (event) {
@@ -170,21 +169,31 @@ export const player = {
 
     useBomb() {
         let useBombBtn = "ControlRight";
+        let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
-            if (useBombBtn === event.code) explosion.explosionCall();
+            if (isPressBtn) return;
+            if (useBombBtn === event.code) {
+                explosion.explosionCall();
+                isPressBtn = true;
+            }
+        });
+        document.addEventListener("keyup", function (event) {
+            if (useBombBtn === event.code) isPressBtn = false;
         });
     },
 
     useSuperAbility() {
         let blockagesArray = blockageController.blockagesArray;
         let useSuperAbilityBtn = "ControlLeft";
+        let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
+            if (isPressBtn) return;
             if (useSuperAbilityBtn === event.code) {
                 if (player.superAbilityIsActivated) {
                     for (let i = 0; i < blockagesArray.length; i++) {
@@ -213,7 +222,11 @@ export const player = {
                 } else {
                     renderer.renderSuperAbilityBar(player.superAbilityIsActivated);
                 }
+                isPressBtn = true;
             }
+        });
+        document.addEventListener("keyup", function (event) {
+            if (useSuperAbilityBtn === event.code) isPressBtn = false;
         });
     }
 }
