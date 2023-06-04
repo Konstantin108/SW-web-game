@@ -4,7 +4,7 @@ import {config} from "../config/config.js";
 import {game} from "../game.js";
 import {player} from "./player.js";
 import {progressController} from "../controllers/progressController.js";
-import {enemyArrowController} from "../controllers/enemyArrowController.js";        // разобраться с выстрелами босса
+import {enemyArrowController} from "../controllers/enemyArrowController.js";
 
 export const boss = {
     x: helperController.getCenterMapOnX(),
@@ -15,7 +15,8 @@ export const boss = {
     speed: config.bossSpeed,
     crashDamage: config.bossCrashDamage,
     shieldCrashDamage: config.bossShieldCrashDamage,
-    fireChance: config.bossFireChance,        // разобраться с выстрелами босса
+    fireChance: config.bossFireChance,
+    fireArrowBombChance: config.bossFireArrowBombChance,
     selectorName: "boss",
     getDamageOutlookSelectorName: "bossWhite",
     offsetX: 7,
@@ -103,7 +104,8 @@ export const boss = {
             }
             if (this.x === 3) this.toTheRight = true;
         }
-        enemyArrowController.enemyArrowCreate(this.shoot("enemyArrow", this.randomChoiceGun(1), this.y + 1));       // разобраться с выстрелами босса
+        enemyArrowController.enemyArrowCreate(this.shoot(this.randomChoiceGunType(), this.y + 1));
+        enemyArrowController.enemyArrowMove();
         renderer.clear(this.selectorName);
         renderer.renderBoss(this.selectorName, this.thisSelectorOverlay);
     },
@@ -116,7 +118,23 @@ export const boss = {
         if (progressController.bossExist) clearInterval(this.timerId);
     },
 
-    randomChoiceGun(gunPosition) {       // разобраться с выстрелами босса
+    randomChoiceGunType() {
+        let gunTypeAndGunPosition = {
+            gunType: null,
+            gunPosition: null
+        }
+
+        if (helperController.randomEvent(this.fireArrowBombChance)) {
+            gunTypeAndGunPosition.gunType = "enemyArrowBomb";
+            gunTypeAndGunPosition.gunPosition = 2;
+        } else {
+            gunTypeAndGunPosition.gunType = "enemyArrow";
+            gunTypeAndGunPosition.gunPosition = 1;
+        }
+        return gunTypeAndGunPosition;
+    },
+
+    randomChoiceGun(gunPosition) {
         let choiceGunChance = 50;
         let leftGun = this.x - gunPosition;
         let rightGun = this.x + gunPosition;
@@ -130,11 +148,11 @@ export const boss = {
         return selectedGun;
     },
 
-    shoot(arrowTypeSelectorName, x_pos, y_pos) {       // разобраться с выстрелами босса
+    shoot(arrowTypeSelectorNameAndGunPosition, y_pos) {
         if (helperController.randomEvent(this.fireChance)) {
             return {
-                arrowType: arrowTypeSelectorName,
-                x: x_pos,
+                arrowType: arrowTypeSelectorNameAndGunPosition.gunType,
+                x: this.randomChoiceGun(arrowTypeSelectorNameAndGunPosition.gunPosition),
                 y: y_pos
             }
         }

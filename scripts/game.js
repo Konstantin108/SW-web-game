@@ -30,6 +30,8 @@ export const game = {
         player.useSuperAbility();
     },
 
+    // добавить проверку, что игра в данный момент на паузе,
+    // если этот метод вызван при выходе с паузы
     startGameDelay(delay, resumeGame = false) {
         let message = "";
 
@@ -67,7 +69,7 @@ export const game = {
     },
 
     paused() {
-        let text = "Игра остановлена! Хотите продолжить?\n\"ОК\" - продолжить играть\n\"Отмена\" - закончить игру"
+        let text = "Игра остановлена! Хотите продолжить?\n\"ОК\" - продолжить играть\n\"Отмена\" - закончить игру";
 
         if (this.gameIsRunning) this.stopGame();
         if (confirm(text)) {
