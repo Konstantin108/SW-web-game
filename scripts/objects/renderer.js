@@ -470,5 +470,20 @@ export const renderer = {
 
         messageElement = document.querySelector("#messageContainer");
         if (messageElement) setTimeout(() => table.removeChild(messageElement), 1000);
+    },
+
+    renderCheatConsole() {
+        let cheatConsole = null;
+
+        if (document.querySelector("#cheatConsole") === null) {
+            this.container.insertAdjacentHTML("afterbegin", templatePrinter.cheatConsoleTemplatePrint());
+            cheatConsole = document.querySelector("#cheatConsole");
+            cheatConsole.classList.add("cheatConsoleIn");
+            setTimeout(() => cheatConsole.classList.remove("cheatConsoleIn"), 500);
+        } else {
+            cheatConsole = document.querySelector("#cheatConsole");
+            cheatConsole.classList.add("cheatConsoleOut");
+            setTimeout(() => this.container.removeChild(cheatConsole), 480);
+        }
     }
 }

@@ -9,6 +9,7 @@ import {arrowController} from "./controllers/arrowController.js";
 import {enemyArrowController} from "./controllers/enemyArrowController.js";
 import {config} from "./config/config.js";
 import {boss} from "./objects/boss.js";
+import {cheatsController} from "./controllers/cheatsController.js";
 
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
@@ -17,6 +18,7 @@ export const game = {
 
     init() {
         renderer.render();
+        cheatsController.callCheatConsole();
     },
 
     run() {

@@ -132,5 +132,16 @@ export const templatePrinter = {
                         </strong>
                     </div>        
                 </div>`;
+    },
+
+    // стилизовать чит-меню
+    cheatConsoleTemplatePrint() {
+        return `
+                <div id="cheatConsole">
+                    <div>
+                        >_
+                        <input type="text">
+                    </div>
+                </div>`;
     }
 }
