@@ -138,9 +138,22 @@ export const templatePrinter = {
     cheatConsoleTemplatePrint() {
         return `
                 <div id="cheatConsole">
-                    <div>
-                        >_
-                        <input type="text">
+                    <div id="cheatMessageContainer">
+                        <strong>
+                            <p id="cheatMessage">
+                                message
+                            </p>
+                        </strong>
+                    </div>
+                    <div id="cheatInputContainer">
+                        <strong>
+                            <p id="consoleSymbol">
+                                >_
+                            </p>
+                        </strong>    
+                        <strong>    
+                            <input id="cheatInput" type="text">
+                        </strong>
                     </div>
                 </div>`;
     }
