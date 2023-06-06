@@ -134,5 +134,4 @@ export const game = {
 
 game.init();
 game.startGameDelay(game.startGameDelaySecondsCount + 1);
-// game.startGameDelay(0);  // отключение отсчета перед стартом игры
 game.showPauseMenu();

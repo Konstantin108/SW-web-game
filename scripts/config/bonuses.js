@@ -17,6 +17,7 @@ export const bonuses = {
                     // chanceFrom: 0,
                     // chanceTo: 1,
                     actionTime: 20000,
+                    description: "стрелы игрока проходят сквозь врагов, наносят урон размером в 2 единицы"
                 },
                 2: {
                     name: "trinity",
@@ -29,6 +30,7 @@ export const bonuses = {
                     // chanceFrom: 2,
                     // chanceTo: 3,
                     actionTime: 20000,
+                    description: "каждый выстрел игрока создает 3 стрелы сразу, каждая наносит урон размером в 3 единицы"
                 },
                 3: {
                     name: "shield",
@@ -41,6 +43,7 @@ export const bonuses = {
                     // chanceFrom: 8,
                     // chanceTo: 100,
                     actionTime: 30000,
+                    description: "игрок получает щит и игнорирует весь урон"
                 },
                 4: {
                     name: "life",
@@ -53,6 +56,7 @@ export const bonuses = {
                     // chanceFrom: 6,
                     // chanceTo: 7,
                     actionTime: null,
+                    description: "игрок восстанавливает одну жизнь"
                 },
                 5: {
                     name: "killAll",
@@ -65,6 +69,7 @@ export const bonuses = {
                     // chanceFrom: 4,
                     // chanceTo: 5,
                     actionTime: null,
+                    description: "игрок получает бомбу, взрыв которой убивает всех врагов на экране, ее можно использовать в любой момент"
                 }
             }
         }

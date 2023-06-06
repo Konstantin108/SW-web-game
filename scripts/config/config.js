@@ -1,5 +1,6 @@
 import {bonuses} from "./bonuses.js";
 import {levels} from "./levels.js";
+import {cheats} from "./cheats.js";
 
 export const config = {
     // игра и игрок
@@ -18,6 +19,7 @@ export const config = {
     superAbilityDamage: 300,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
+    activatedCheats: [],
     // стрелы игрока
     arrowDamage: 1,
     arrowSpeed: 50,
@@ -47,7 +49,8 @@ export const config = {
     bossShieldIsOffSecondsCount: 3000,
     bossFireChance: 20,
     bossFireArrowBombChance: 10,
-    // уровни и бонусы
+    // уровни, бонусы и читы
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
+    cheats: cheats.setCheatsParams()
 }

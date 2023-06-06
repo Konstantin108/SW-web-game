@@ -143,7 +143,7 @@ export const templatePrinter = {
                             </p>
                         </strong>    
                         <strong>    
-                            <input id="cheatInput" type="text">
+                            <input id="cheatInput" type="text" autocomplete="off">
                         </strong>
                     </div>
                 </div>`;
