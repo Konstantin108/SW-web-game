@@ -1,8 +1,7 @@
 export const templatePrinter = {
 
     mapTemplatePrint(map) {
-        return `
-                <table>
+        return `<table>
                     <tbody>
                         ${map}
                     </tbody>
@@ -10,8 +9,7 @@ export const templatePrinter = {
     },
 
     statusBarTemplatePrint(level, score, shipDestroyer, livesBar) {
-        return `
-                <div id="statusBarContainer">
+        return `<div id="statusBarContainer">
                     <div id="statusBar">
                         <div id="scull" class="whiteScull"></div>
                         <div class="statusBarElement">
@@ -56,8 +54,7 @@ export const templatePrinter = {
     },
 
     livesBarTemplatePrint(lives) {
-        return `
-                <div class="statusBarElement">
+        return `<div class="statusBarElement">
                     <strong>
                         <div class="infoContainer">
                             <div class="infoLabel">
@@ -72,22 +69,19 @@ export const templatePrinter = {
     },
 
     heartsBarTemplatePrint(heartsBox) {
-        return `
-                <div id="heartsBar">
+        return `<div id="heartsBar">
                     ${heartsBox}
                 </div>`;
     },
 
     bombBarTemplatePrint(bomb) {
-        return `
-                <div id="bombBar">
+        return `<div id="bombBar">
                     ${bomb}
                 </div>`;
     },
 
     bonusBarElementTemplatePrint(bonusElement, bonusBarDivElementId, bonusTimerLabel, bonusBarDivTimer) {
-        return `
-                <div id="${bonusBarDivElementId}">
+        return `<div id="${bonusBarDivElementId}">
                     <div class="statusBarElement bonusBarElement">
                         <strong>
                             <div class="infoContainer">
@@ -110,8 +104,7 @@ export const templatePrinter = {
     },
 
     superAbilityBarTemplatePrint(sectors) {
-        return `
-                <div id="superAbilityBar">
+        return `<div id="superAbilityBar">
                     <div id="lightningElementContainer">
                         <div id="lightningElement" class="lightningIsOff"></div>
                     </div>
@@ -124,8 +117,7 @@ export const templatePrinter = {
     },
 
     inCenterTableNotifyTemplatePrint(message) {
-        return `
-                <div id="messageContainer">
+        return `<div id="messageContainer">
                     <div id="messageElement">                                                      
                         <strong>
                             ${message}
@@ -136,8 +128,7 @@ export const templatePrinter = {
 
     // стилизовать чит-меню
     cheatConsoleTemplatePrint() {
-        return `
-                <div id="cheatConsole">
+        return `<div id="cheatConsole">
                     <div id="cheatMessageContainer">
                         <strong>
                             <p id="cheatMessage">
