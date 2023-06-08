@@ -3,6 +3,7 @@ import {config} from "../config/config.js";
 
 export const cheatsController = {
     cheats: config.cheats,
+    inputElement: null,
 
     callCheatConsole() {
         let showCheatConsoleBtn = "Backquote";
@@ -14,9 +15,9 @@ export const cheatsController = {
                 playerCanCallCheatConsole = false;
                 renderer.renderCheatConsole();
                 setTimeout(() => playerCanCallCheatConsole = true, 500);
+                cheatsController.inputElement = null;
             }
         });
-        this.inputCheat();
     },
 
     inputCheat() {
@@ -25,35 +26,54 @@ export const cheatsController = {
             "NumpadEnter"
         ];
         let isPressBtn = false;
-        let input = null;
 
         document.body.addEventListener("click", function (event) {
+
+            console.log("событие по клику");
+
             if (event.target.id != "cheatInput") return;
-            if (input) return;
-            input = event.target;
-            input.addEventListener("keydown", function (event) {
+            if (cheatsController.inputElement) return;
+            cheatsController.inputElement = event.target;
+            let cheatMessageContainer = cheatsController.inputElement.closest("#cheatConsole").querySelector("#cheatMessageContainer");
+            cheatsController.inputElement.addEventListener("keydown", function (event) {
                 if (isPressBtn) return;
                 if (inputCheatBtns.includes(event.code)) {
-                    if (input.value) {
-                        cheatsController.matchPlayerInputAndCheatCode(input.value);
-                        input.value = "";
+                    if (cheatsController.inputElement.value) {
+                        cheatsController.matchPlayerInputAndCheatCode(cheatsController.inputElement.value, cheatMessageContainer);
+                        cheatsController.inputElement.value = "";
                     }
                     isPressBtn = true;
                 }
+
+                console.log("событие по нажатию  >>");
+
             });
-            input.addEventListener("keyup", function (event) {
+            cheatsController.inputElement.addEventListener("keyup", function (event) {
+
+                console.log("событие по отжатию  !!!");
+
                 if (inputCheatBtns.includes(event.code)) isPressBtn = false;
             });
         });
     },
 
-    matchPlayerInputAndCheatCode(input) {
+    matchPlayerInputAndCheatCode(input, cheatMessageContainer) {
         let message = "incorrect";
+        let messageColor = "cheatMessageRed";
 
         let activatedCheat = this.cheats.find((cheat) => cheat.code === input);
-        if (activatedCheat) message = activatedCheat.message;
-        // здесь вызывать render сообщения в чит-меню
-        // так же добавлять активный чит в массив в конфиге
-        console.log(message);
+        if (activatedCheat) {
+            message = activatedCheat.message;
+            messageColor = "cheatMessageGreen";
+        }
+        renderer.renderCheatMessage(message, messageColor, cheatMessageContainer)
+        this.activateCheat(activatedCheat);
+    },
+
+    // если чит совпал, то применять его действие
+    // использовать switch case
+    activateCheat(activatedCheat) {
+        if (!activatedCheat) return;
+        console.log(activatedCheat)
     }
 }

@@ -126,26 +126,23 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    // стилизовать чит-меню
     cheatConsoleTemplatePrint() {
         return `<div id="cheatConsole">
-                    <div id="cheatMessageContainer">
-                        <strong>
-                            <p id="cheatMessage">
-                                message
-                            </p>
-                        </strong>
-                    </div>
-                    <div id="cheatInputContainer">
-                        <strong>
+                    <strong>
+                        <div id="cheatMessageContainer"></div>
+                        <div id="cheatInputContainer">
                             <p id="consoleSymbol">
                                 >_
-                            </p>
-                        </strong>    
-                        <strong>    
-                            <input id="cheatInput" type="text" autocomplete="off">
-                        </strong>
-                    </div>
+                            </p> 
+                        <input id="cheatInput" type="text" autocomplete="off">
+                        </div>
+                    </strong>
                 </div>`;
+    },
+
+    cheatMessageTemplatePrint(message, messageColor) {
+        return `<p id="cheatMessage" class="${messageColor}">
+                    ${message}
+                </p>`;
     }
 }

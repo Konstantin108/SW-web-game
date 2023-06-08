@@ -9,12 +9,15 @@ export const explosion = {
     damage: config.explosionDamage,
 
     explosionCall() {
+        let playerHasBomb = true;
+
         if (player.bombsCount > 0) {
             this.explode();
             player.bombsCount += -1;
         } else {
-            renderer.renderBombBar(false);
+            playerHasBomb = false;
         }
+        renderer.renderBombBar(playerHasBomb);
     },
 
     explode(playerMakeExplosion = true) {
@@ -29,6 +32,5 @@ export const explosion = {
             if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
         }
         renderer.renderStatusBar();
-        renderer.renderBombBar(false);
     }
 }

@@ -19,6 +19,7 @@ export const game = {
     init() {
         renderer.render();
         cheatsController.callCheatConsole();
+        cheatsController.inputCheat();
     },
 
     run() {
@@ -40,7 +41,7 @@ export const game = {
         if (delay != 0) {
             message = delay;
         } else {
-            message = "GO";
+            message = "go";
         }
         if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
         if (delay > -1) {
@@ -123,9 +124,9 @@ export const game = {
 
         this.stopGame();
         if (win) {
-            message = "YOU WIN";
+            message = "you win";
         } else {
-            message = "YOU LOSE";
+            message = "you lose";
         }
         renderer.renderInCenterTableNotify(message);
         setTimeout(() => alert(this.quit()), 1100);

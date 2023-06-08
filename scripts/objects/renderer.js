@@ -18,6 +18,7 @@ export const renderer = {
     bonusNewArrowTypeBar: null,
     bonusShieldTimerId: null,
     bonusNewArrowTypeTimerId: null,
+    cheatMessageRemoveTimerId: null,
     container: document.querySelector("#container"),
 
     render() {
@@ -485,5 +486,16 @@ export const renderer = {
             cheatConsole.classList.add("cheatConsoleOut");
             setTimeout(() => this.container.removeChild(cheatConsole), 480);
         }
+    },
+
+    renderCheatMessage(message, messageColor, cheatMessageContainer) {
+        let messageElement = null;
+
+        cheatMessageContainer.innerHTML = '';
+        if (this.cheatMessageRemoveTimerId) clearTimeout(this.cheatMessageRemoveTimerId);
+
+        cheatMessageContainer.insertAdjacentHTML("afterbegin", templatePrinter.cheatMessageTemplatePrint(message, messageColor));
+        messageElement = document.querySelector("#cheatMessage");
+        if (messageElement) this.cheatMessageRemoveTimerId = setTimeout(() => cheatMessageContainer.removeChild(messageElement), 3000);
     }
 }

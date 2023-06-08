@@ -531,6 +531,7 @@ td
   font-style: italic
   color: lawngreen
   font-size: 124px
+  text-transform: uppercase
   animation: numberIn .3s, numberOut .3s .8s
 
 @keyframes numberIn
@@ -568,15 +569,28 @@ td
   padding: 16px
 
 #cheatMessageContainer
-    height: 80px
-    width: 220px
-    display: flex
-    justify-content: center
-    align-items: center
+  height: 80px
+  width: 220px
+  display: flex
+  justify-content: center
+  align-items: center
 
 #cheatMessage
-  font-size: 60px
+  font-size: 30px
+  text-transform: uppercase
+  animation: messageBlink .4s 2
+
+.cheatMessageGreen
   color: lawngreen
+
+.cheatMessageRed
+  color: red
+
+@keyframes messageBlink
+  from
+    opacity: 1
+  to
+    opacity: 0
 
 #cheatInputContainer
   display: flex
