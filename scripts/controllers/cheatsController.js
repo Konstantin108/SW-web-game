@@ -28,9 +28,6 @@ export const cheatsController = {
         let isPressBtn = false;
 
         document.body.addEventListener("click", function (event) {
-
-            console.log("событие по клику");
-
             if (event.target.id != "cheatInput") return;
             if (cheatsController.inputElement) return;
             cheatsController.inputElement = event.target;
@@ -44,14 +41,8 @@ export const cheatsController = {
                     }
                     isPressBtn = true;
                 }
-
-                console.log("событие по нажатию  >>");
-
             });
             cheatsController.inputElement.addEventListener("keyup", function (event) {
-
-                console.log("событие по отжатию  !!!");
-
                 if (inputCheatBtns.includes(event.code)) isPressBtn = false;
             });
         });
@@ -60,20 +51,71 @@ export const cheatsController = {
     matchPlayerInputAndCheatCode(input, cheatMessageContainer) {
         let message = "incorrect";
         let messageColor = "cheatMessageRed";
+        let enteredCombination = input;
+        let activatedCheat = null;
+        let activatedCheatParam = null;
 
-        let activatedCheat = this.cheats.find((cheat) => cheat.code === input);
-        if (activatedCheat) {
-            message = activatedCheat.message;
-            messageColor = "cheatMessageGreen";
+        let compoundCode = input.split(":");
+        if (compoundCode.length > 1) {
+            enteredCombination = compoundCode[0];
         }
+
+        let matchCheatObject = this.cheats.find((cheat) => cheat.code === enteredCombination);
+        if (matchCheatObject) {
+            if (matchCheatObject.compound && !matchCheatObject.arbitaryValue) {
+                if (matchCheatObject.options.includes(compoundCode[1])) {
+                    activatedCheat = matchCheatObject;
+                    activatedCheatParam = compoundCode[1];
+                    message = `${activatedCheat.message} ${activatedCheatParam}`;
+                }
+            }
+            if (!matchCheatObject.compound && !matchCheatObject.arbitaryValue) {
+                activatedCheat = matchCheatObject;
+                message = activatedCheat.message;
+            }
+            if (matchCheatObject.compound && matchCheatObject.arbitaryValue) {
+                let count = Number(compoundCode[1]);
+                if (Number.isInteger(count)) {
+                    activatedCheat = matchCheatObject;
+                    count <= matchCheatObject.limit ? activatedCheatParam = count : activatedCheatParam = matchCheatObject.limit;
+                    message = `${activatedCheat.message} ${activatedCheatParam}`;
+                }
+            }
+        }
+        if (activatedCheat) messageColor = "cheatMessageGreen";
         renderer.renderCheatMessage(message, messageColor, cheatMessageContainer)
-        this.activateCheat(activatedCheat);
+        this.activateCheat(activatedCheat, activatedCheatParam);
     },
 
-    // если чит совпал, то применять его действие
-    // использовать switch case
-    activateCheat(activatedCheat) {
+    activateCheat(activatedCheat, activatedCheatParam = null) {
         if (!activatedCheat) return;
-        console.log(activatedCheat)
+
+        switch (activatedCheat.code) {
+            case "lux":
+                this.colorChange(activatedCheatParam);
+                break;
+            case "testsich":
+                this.testSimpleCheat();
+                break;
+            case "adderevitam":
+                this.addLifes(activatedCheatParam);
+                break;
+            default:
+                break;
+        }
+    },
+
+    colorChange(color) {
+        console.log("colorChange()");
+        console.log(color);
+    },
+
+    testSimpleCheat() {
+        console.log("testChTwoFunction()");
+    },
+
+    addLifes(livesCount) {
+        console.log("addLifes()");
+        console.log(livesCount);
     }
 }

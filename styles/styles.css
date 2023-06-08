@@ -664,7 +664,7 @@ td {
 }
 
 #cheatMessage {
-  font-size: 30px;
+  font-size: 24px;
   text-transform: uppercase;
   animation: messageBlink 0.4s 2;
 }
