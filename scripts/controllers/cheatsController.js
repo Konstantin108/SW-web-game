@@ -20,6 +20,8 @@ export const cheatsController = {
         });
     },
 
+    // возможно вместо on использовать onfocus
+    // по вызову чит-меню сразу вешать на input focused
     inputCheat() {
         let inputCheatBtns = [
             "Enter",
@@ -105,9 +107,11 @@ export const cheatsController = {
         }
     },
 
+    // доработать сброс установленного цвета
     colorChange(color) {
-        console.log("colorChange()");
-        console.log(color);
+        config.menuColor = color;
+        renderer.renderStatusBar();
+        renderer.renderSuperAbilityBar();
     },
 
     testSimpleCheat() {

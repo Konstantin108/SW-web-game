@@ -20,6 +20,7 @@ export const config = {
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
     activatedCheats: [],
+    menuColor: "green",
     // стрелы игрока
     arrowDamage: 1,
     arrowSpeed: 50,

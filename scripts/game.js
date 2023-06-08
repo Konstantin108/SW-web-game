@@ -60,8 +60,7 @@ export const game = {
     showPauseMenu() {
         let pauseBtnsArray = [
             "Escape",
-            "Pause",
-            "KeyP"
+            "Pause"
         ];
 
         document.addEventListener("keydown", function (event) {

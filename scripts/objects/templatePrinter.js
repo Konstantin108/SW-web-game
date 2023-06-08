@@ -1,3 +1,5 @@
+import {config} from "../config/config.js";
+
 export const templatePrinter = {
 
     mapTemplatePrint(map) {
@@ -10,7 +12,7 @@ export const templatePrinter = {
 
     statusBarTemplatePrint(level, score, shipDestroyer, livesBar) {
         return `<div id="statusBarContainer">
-                    <div id="statusBar">
+                    <div id="statusBar" class="${config.menuColor}">
                         <div id="scull" class="whiteScull"></div>
                         <div class="statusBarElement">
                             <strong>
@@ -118,7 +120,7 @@ export const templatePrinter = {
 
     inCenterTableNotifyTemplatePrint(message) {
         return `<div id="messageContainer">
-                    <div id="messageElement">                                                      
+                    <div id="messageElement" class="${config.menuColor}">                                                      
                         <strong>
                             ${message}
                         </strong>
@@ -134,7 +136,7 @@ export const templatePrinter = {
                             <p id="consoleSymbol">
                                 >_
                             </p> 
-                        <input id="cheatInput" type="text" autocomplete="off">
+                        <input id="cheatInput" type="text" autocomplete="off" class="${config.menuColor}">
                         </div>
                     </strong>
                 </div>`;

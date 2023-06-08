@@ -19,8 +19,14 @@ export const cheats = {
                 help: "необходимо вводить code + : + одна из опций",
                 arbitaryValue: false,
                 options: [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "lightblue",
                     "blue",
-                    "orange"
+                    "purple",
+                    "white"
                 ]
             },
             {

@@ -350,7 +350,7 @@ export const renderer = {
         if (!timer) return;
         let timerLabel = document.querySelector(`#${bonusTimerLabel}`);
         let timerDiv = document.querySelector(`#${timerElement}`)
-        let timerData = `<div id="${timerElement}">${timer}</div>`;
+        let timerData = `<div id="${timerElement}" class="${config.menuColor}">${timer}</div>`;
         let thisTimerId = null;
         let tick = -1;
 
@@ -386,7 +386,7 @@ export const renderer = {
             shineSectorsBox += `<div class="shineSector shineSectorIsOff"></div>`;
         }
         for (let i = 0; i < shineSectorsIsOn; i++) {
-            shineSectorsBox += `<div class="shineSector shineSectorIsOn"></div>`;
+            shineSectorsBox += `<div class="shineSector ${config.menuColor}Background"></div>`;
         }
         this.superAbilityBar = templatePrinter.superAbilityBarTemplatePrint(shineSectorsBox);
         table.insertAdjacentHTML("afterbegin", this.superAbilityBar);
