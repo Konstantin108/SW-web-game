@@ -19,14 +19,14 @@ export const cheats = {
                 help: "необходимо вводить code + : + одна из опций",
                 arbitaryValue: false,
                 options: [
-                    "red",
+                    "rubrum",
                     "orange",
-                    "yellow",
-                    "green",
-                    "lightblue",
-                    "blue",
-                    "purple",
-                    "white"
+                    "aurum",
+                    "viridis",
+                    "claracaelum",
+                    "caelum",
+                    "purpura",
+                    "album"
                 ]
             },
             {

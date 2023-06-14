@@ -20,8 +20,6 @@ export const cheatsController = {
         });
     },
 
-    // возможно вместо on использовать onfocus
-    // по вызову чит-меню сразу вешать на input focused
     inputCheat() {
         let inputCheatBtns = [
             "Enter",
@@ -38,7 +36,7 @@ export const cheatsController = {
                 if (isPressBtn) return;
                 if (inputCheatBtns.includes(event.code)) {
                     if (cheatsController.inputElement.value) {
-                        cheatsController.matchPlayerInputAndCheatCode(cheatsController.inputElement.value, cheatMessageContainer);
+                        cheatsController.matchPlayerInputAndCheatCode(cheatsController.inputElement.value.trim(), cheatMessageContainer);
                         cheatsController.inputElement.value = "";
                     }
                     isPressBtn = true;
@@ -115,7 +113,7 @@ export const cheatsController = {
     },
 
     testSimpleCheat() {
-        console.log("testChTwoFunction()");
+        console.log("testSimpleCheat()");
     },
 
     addLifes(livesCount) {
