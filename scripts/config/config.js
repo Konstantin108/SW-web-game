@@ -1,6 +1,7 @@
 import {bonuses} from "./bonuses.js";
 import {levels} from "./levels.js";
 import {cheats} from "./cheats.js";
+import {localStorageController} from "../controllers/localStorageController.js";
 
 export const config = {
     // игра и игрок
@@ -19,7 +20,6 @@ export const config = {
     superAbilityDamage: 300,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
-    activatedCheats: [],
     menuColor: "viridis",
     // стрелы игрока
     arrowDamage: 1,
@@ -53,5 +53,7 @@ export const config = {
     // уровни, бонусы и читы
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
-    cheats: cheats.setCheatsParams()
+    cheats: cheats.setCheatsParams(),
+    cheatsInfinityActiveMode: localStorageController.setLocalStorageParamsToGameConfig(),
+    activatedCheats: [],  // возможно удалить, хранить читы в localStorage, а потом записывать в config
 }

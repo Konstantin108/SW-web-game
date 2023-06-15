@@ -10,6 +10,7 @@ import {enemyArrowController} from "./controllers/enemyArrowController.js";
 import {config} from "./config/config.js";
 import {boss} from "./objects/boss.js";
 import {cheatsController} from "./controllers/cheatsController.js";
+import {localStorageController} from "./controllers/localStorageController.js";
 
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
@@ -20,6 +21,7 @@ export const game = {
         renderer.render();
         cheatsController.callCheatConsole();
         cheatsController.inputCheat();
+        localStorageController.addParamToLocalStorage();
     },
 
     run() {
