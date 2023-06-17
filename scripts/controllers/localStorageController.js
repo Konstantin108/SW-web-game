@@ -1,3 +1,5 @@
+import {config} from "../config/config.js";
+
 export const localStorageController = {
 
     addParamToLocalStorage() {
@@ -6,8 +8,15 @@ export const localStorageController = {
 
     setLocalStorageParamsToGameConfig() {
         return localStorage.cheatsInfinityActiveMode;
+    },
+
+    changeLocalStorageParamsInGameConfig(toggle) {
+        localStorage.setItem("cheatsInfinityActiveMode", toggle);
+        config.cheatsInfinityActiveMode = toggle;
     }
 
-    // дописать здесь методы, которые будут записывать значения читов в localStorage,
-    // извлекать при запуске игры и записывать в config
+    // при запуске игры все изменения в localStorage записывать в config
+    // в перемнную localStoragesProperties,
+    // отдельным методом выводить localStoragesProperties,
+    // добавить чит для удаления всех или выбранного значения из localStorage
 }

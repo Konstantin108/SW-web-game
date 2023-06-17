@@ -40,7 +40,7 @@ export const game = {
     startGameDelay(delay, resumeGame = false) {
         let message = "";
 
-        if (delay != 0) {
+        if (delay !== 0) {
             message = delay;
         } else {
             message = "go";

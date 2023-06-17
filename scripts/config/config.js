@@ -20,7 +20,7 @@ export const config = {
     superAbilityDamage: 300,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
-    menuColor: "viridis",
+    menuColor: "viridis",  // доделать: при наличии измененного цвета в localStorage, возвращать в config значение цвета
     // стрелы игрока
     arrowDamage: 1,
     arrowSpeed: 50,

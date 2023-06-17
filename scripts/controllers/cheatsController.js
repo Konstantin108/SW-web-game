@@ -1,10 +1,12 @@
 import {renderer} from "../objects/renderer.js";
 import {config} from "../config/config.js";
+import {localStorageController} from "./localStorageController.js";
 
 export const cheatsController = {
     cheats: config.cheats,
     inputElement: null,
 
+    // добавить функицю проверки включен ли режим бесконечного чита в config
     callCheatConsole() {
         let showCheatConsoleBtn = "Backquote";
         let playerCanCallCheatConsole = true;
@@ -28,7 +30,7 @@ export const cheatsController = {
         let isPressBtn = false;
 
         document.body.addEventListener("click", function (event) {
-            if (event.target.id != "cheatInput") return;
+            if (event.target.id !== "cheatInput") return;
             if (cheatsController.inputElement) return;
             cheatsController.inputElement = event.target;
             let cheatMessageContainer = cheatsController.inputElement.closest("#cheatConsole").querySelector("#cheatMessageContainer");
@@ -77,9 +79,18 @@ export const cheatsController = {
                 let count = Number(compoundCode[1]);
                 if (Number.isInteger(count)) {
                     activatedCheat = matchCheatObject;
-                    count <= matchCheatObject.limit ? activatedCheatParam = count : activatedCheatParam = matchCheatObject.limit;
+                    count <= activatedCheat.limit ? activatedCheatParam = count : activatedCheatParam = activatedCheat.limit;
                     message = `${activatedCheat.message} ${activatedCheatParam}`;
                 }
+            }
+            if (matchCheatObject.toggle) {
+                activatedCheat = matchCheatObject;
+                if (config.cheatsInfinityActiveMode !== activatedCheat.toggleMessages[0]) {
+                    activatedCheatParam = activatedCheat.toggleMessages[0];
+                } else {
+                    activatedCheatParam = activatedCheat.toggleMessages[1];
+                }
+                message = `${activatedCheat.message} ${activatedCheatParam}`;
             }
         }
         if (activatedCheat) messageColor = "cheatMessageGreen";
@@ -91,6 +102,9 @@ export const cheatsController = {
         if (!activatedCheat) return;
 
         switch (activatedCheat.code) {
+            case "infinitum":
+                this.toggleCheatsInfinityActiveMode(activatedCheatParam);
+                break;
             case "lux":
                 this.colorChange(activatedCheatParam);
                 break;
@@ -103,6 +117,10 @@ export const cheatsController = {
             default:
                 break;
         }
+    },
+
+    toggleCheatsInfinityActiveMode(toggle) {
+        localStorageController.changeLocalStorageParamsInGameConfig(toggle);
     },
 
     // доработать сброс установленного цвета
