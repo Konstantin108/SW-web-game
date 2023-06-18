@@ -22,6 +22,8 @@ export const cheatsController = {
         });
     },
 
+    // вешать слушатель события на Enter по событию focused на input,
+    // focused на input вешать при нажатии ~
     inputCheat() {
         let inputCheatBtns = [
             "Enter",
@@ -56,6 +58,7 @@ export const cheatsController = {
         let enteredCombination = input;
         let activatedCheat = null;
         let activatedCheatParam = null;
+        let paramNameForLocalStorage = null;
 
         let compoundCode = input.split(":");
         if (compoundCode.length > 1) {
@@ -90,20 +93,22 @@ export const cheatsController = {
                 } else {
                     activatedCheatParam = activatedCheat.toggleMessages[1];
                 }
+                paramNameForLocalStorage = activatedCheat.paramNameForLocalStorage;
                 message = `${activatedCheat.message} ${activatedCheatParam}`;
             }
         }
         if (activatedCheat) messageColor = "cheatMessageGreen";
         renderer.renderCheatMessage(message, messageColor, cheatMessageContainer)
-        this.activateCheat(activatedCheat, activatedCheatParam);
+        this.activateCheat(activatedCheat, activatedCheatParam, paramNameForLocalStorage);
     },
 
-    activateCheat(activatedCheat, activatedCheatParam = null) {
+    activateCheat(activatedCheat, activatedCheatParam = null, paramNameForLocalStorage = null) {
         if (!activatedCheat) return;
 
+        // доработать запуск различных читов
         switch (activatedCheat.code) {
             case "infinitum":
-                this.toggleCheatsInfinityActiveMode(activatedCheatParam);
+                localStorageController.setParamsToLocalStorage(paramNameForLocalStorage, activatedCheatParam);
                 break;
             case "lux":
                 this.colorChange(activatedCheatParam);
@@ -117,10 +122,6 @@ export const cheatsController = {
             default:
                 break;
         }
-    },
-
-    toggleCheatsInfinityActiveMode(toggle) {
-        localStorageController.changeLocalStorageParamsInGameConfig(toggle);
     },
 
     // доработать сброс установленного цвета

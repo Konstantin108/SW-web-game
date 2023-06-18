@@ -1,7 +1,6 @@
 import {bonuses} from "./bonuses.js";
 import {levels} from "./levels.js";
 import {cheats} from "./cheats.js";
-import {localStorageController} from "../controllers/localStorageController.js";
 
 export const config = {
     // игра и игрок
@@ -54,6 +53,6 @@ export const config = {
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
     cheats: cheats.setCheatsParams(),
-    cheatsInfinityActiveMode: localStorageController.setLocalStorageParamsToGameConfig(),
-    activatedCheats: [],  // возможно удалить, хранить читы в localStorage, а потом записывать в config
+    cheatsInfinityActiveMode: "off",
+    paramsFromLocalStorage: []
 }

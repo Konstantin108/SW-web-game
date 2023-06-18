@@ -15,6 +15,7 @@ export const cheats = {
                     "off"
                 ],
                 toggle: true,
+                paramNameForLocalStorage: "cheatsInfinityActiveMode",
                 limit: null,
                 compound: false,
                 // action
@@ -34,6 +35,7 @@ export const cheats = {
                 message: "set color",
                 toggleMessages: null,
                 toggle: false,
+                paramNameForLocalStorage: null,  // пока не знаю
                 limit: null,
                 compound: true,
                 // action
@@ -62,6 +64,7 @@ export const cheats = {
                 message: "test simple on",
                 toggleMessages: null,
                 toggle: false,
+                paramNameForLocalStorage: null,  // пока не знаю
                 limit: null,
                 compound: false,
                 // action
@@ -81,6 +84,7 @@ export const cheats = {
                 message: "added lifes",
                 toggleMessages: null,
                 toggle: false,
+                paramNameForLocalStorage: null,  // пока не знаю
                 limit: 999,
                 compound: true,
                 // action

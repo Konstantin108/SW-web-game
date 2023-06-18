@@ -21,7 +21,9 @@ export const game = {
         renderer.render();
         cheatsController.callCheatConsole();
         cheatsController.inputCheat();
-        localStorageController.addParamToLocalStorage();
+        localStorageController.setLocalStorageParamsToGameConfig();
+        console.log(localStorage);
+        console.log(config);
     },
 
     run() {
