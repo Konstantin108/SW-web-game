@@ -12,7 +12,7 @@ import {boss} from "./boss.js";
 
 export const player = {
     lives: config.lives,
-    invincibility: false,
+    invincibility: config.invincibility,
     invincibilityTimerId: null,  // id таймера до окончания действия неуязвимости
     timeInInvincibilityOffTimerId: null,  // id таймера delay в методе calculateTimeInInvincibilityOff()
     timeInInvincibilityOff: null,  // сюда записывается цифра - количество секунд до окончания неуязвимости

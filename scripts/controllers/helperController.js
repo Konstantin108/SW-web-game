@@ -44,6 +44,14 @@ export const helperController = {
         }
     },
 
+    addItemToArray(array, item) {
+        if (!array.includes(item)) array.push(item);
+    },
+
+    removeItemFromArray(array, item) {
+        return array = array.filter(elem => elem !== item);
+    },
+
     getCenterMapOnX() {
         let center = null;
 

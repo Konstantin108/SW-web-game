@@ -1,13 +1,9 @@
 export const cheats = {
 
     setCheatsParams() {
-        // возможно сделать отдельный чит для сохранения действия читов в localStorage
-        // дописать читы, которые будут выводить в console данные из localStorage и из config
-        // дописать читы для смены фона игры
-        // возможно дописать читы для замены изображений игрока и врагов
         return [
             {
-                name: "toggleCheatsInfinityActiveMode",
+                name: "toggleInfinityActiveMode",
                 code: "infinitum",
                 message: "infinity mode",
                 toggleMessages: [
@@ -15,16 +11,29 @@ export const cheats = {
                     "off"
                 ],
                 toggle: true,
-                paramNameForLocalStorage: "cheatsInfinityActiveMode",
+                paramName: "cheatsInfinityActiveMode",
                 limit: null,
                 compound: false,
-                // action
-                // actionTime
-                // к чему применяется бонус
-                // будет ли сохраняться в localStorage
-                // возможно запись в config
-                // чит, который можно включить или выключить
+                addNoteToGameConfig: true,
                 description: "включение или выключение опции сохранения действия читов в localStorage",
+                help: "необходимо вводить только code, повторный ввод code - отключает действие чита",
+                arbitaryValue: false,
+                options: null
+            },
+            {
+                name: "toggleInvincibility",
+                code: "invulnerability",
+                message: "invincibility",
+                toggleMessages: [
+                    "on",
+                    "off"
+                ],
+                toggle: true,
+                paramName: "invincibility",
+                limit: null,
+                compound: false,
+                addNoteToGameConfig: true,
+                description: "включение или выключение неуязвимости",
                 help: "необходимо вводить только code, повторный ввод code - отключает действие чита",
                 arbitaryValue: false,
                 options: null
@@ -35,15 +44,10 @@ export const cheats = {
                 message: "set color",
                 toggleMessages: null,
                 toggle: false,
-                paramNameForLocalStorage: null,  // пока не знаю
+                paramName: "menuColor",
                 limit: null,
                 compound: true,
-                // action
-                // actionTime
-                // к чему применяется бонус
-                // будет ли сохраняться в localStorage
-                // возможно запись в config
-                // чит, который можно включить или выключить
+                addNoteToGameConfig: true,
                 description: "изменение цвета меню",
                 help: "необходимо вводить code + : + одна из опций",
                 arbitaryValue: false,
@@ -59,40 +63,30 @@ export const cheats = {
                 ]
             },
             {
-                name: "testSimpleCheat",
-                code: "testsich",
-                message: "test simple on",
+                name: "restoreLives",
+                code: "aspirin",
+                message: "lives restored",
                 toggleMessages: null,
                 toggle: false,
-                paramNameForLocalStorage: null,  // пока не знаю
+                paramName: "lives",
                 limit: null,
                 compound: false,
-                // action
-                // actionTime
-                // к чему применяется бонус
-                // будет ли сохраняться в localStorage
-                // возможно запись в config
-                // чит, который можно включить или выключить
-                description: "простой тестовый чит",
+                addNoteToGameConfig: false,
+                description: "восстановить жизни",
                 help: "необходимо вводить только code",
                 arbitaryValue: false,
                 options: null
             },
             {
-                name: "addLifes",
+                name: "addLives",
                 code: "adderevitam",
                 message: "added lifes",
                 toggleMessages: null,
                 toggle: false,
-                paramNameForLocalStorage: null,  // пока не знаю
+                paramName: "lives",
                 limit: 999,
                 compound: true,
-                // action
-                // actionTime
-                // к чему применяется бонус
-                // будет ли сохраняться в localStorage
-                // возможно запись в config
-                // чит, который можно включить или выключить
+                addNoteToGameConfig: true,
                 description: "установить количество жизней",
                 help: "необходимо вводить code + : + произвольное значение в цифрах",
                 arbitaryValue: true,

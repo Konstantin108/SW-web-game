@@ -178,12 +178,12 @@ export const boss = {
             this.shieldBody.x.push(i)
         }
         this.shieldBody.y = this.y + 1;
-        renderer.renderBossShield(this.shieldBody, "on");
+        renderer.renderBossShield(this.shieldBody, true);
         this.shieldOnOrOffCall(this.shieldIsOnSecondsCount, "callTurnOff");
     },
 
     offShield(bossDying = false) {
-        renderer.renderBossShield(this.shieldBody, "off");
+        renderer.renderBossShield(this.shieldBody, false);
         this.shieldBody.x = [];
         this.shieldBody.y = null;
         if (!bossDying) this.shieldOnOrOffCall(this.shieldIsOffSecondsCount, "callTurnOn");

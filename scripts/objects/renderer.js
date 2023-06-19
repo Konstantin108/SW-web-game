@@ -118,7 +118,7 @@ export const renderer = {
         for (let i = 0; i < shieldBody.x.length; i++) {
             let bossShieldPosition = document.querySelector(`[data-x="${shieldBody.x[i]}"][data-y="${shieldBody.y}"]`);
             if (bossShieldPosition) {
-                if (mode === "on") {
+                if (mode) {
                     bossShieldPosition.classList.add("bossShield");
                 } else {
                     bossShieldPosition.classList.remove("bossShield");

@@ -10,6 +10,7 @@ export const config = {
     missReward: 1,
     crashMulct: -100,
     invincibilityAfterCrash: 4000,
+    invincibility: false,
     lives: 5,
     maxBombsCount: 1,
     startBombsCount: 0,
@@ -19,7 +20,7 @@ export const config = {
     superAbilityDamage: 300,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
-    menuColor: "viridis",  // доделать: при наличии измененного цвета в localStorage, возвращать в config значение цвета
+    menuColor: "viridis",
     // стрелы игрока
     arrowDamage: 1,
     arrowSpeed: 50,
@@ -53,6 +54,7 @@ export const config = {
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
     cheats: cheats.setCheatsParams(),
-    cheatsInfinityActiveMode: "off",
-    paramsFromLocalStorage: []
+    cheatsInfinityActiveMode: false,
+    paramsFromLocalStorage: [],
+    cheatsActivated: []
 }

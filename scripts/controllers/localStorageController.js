@@ -1,4 +1,6 @@
 import {config} from "../config/config.js";
+import {player} from "../objects/player.js";
+import {helperController} from "./helperController.js";
 
 export const localStorageController = {
 
@@ -13,44 +15,64 @@ export const localStorageController = {
         ];
 
         if (param) {
-            config[param] = localStorage[param];
-            this.addParamToParamsFromLocalStorage(param);
+            this.dataProcessingFromLocalStorage(param);
             return;
         }
         for (let key in localStorage) {
-            if (!notUsedLocalStorageParams.includes(key)) {
-                config[key] = localStorage[key];
-                this.addParamToParamsFromLocalStorage(key);
-            }
+            if (!notUsedLocalStorageParams.includes(key)) this.dataProcessingFromLocalStorage(key, true);
         }
     },
 
-    addParamToParamsFromLocalStorage(param) {
-        if (!config.paramsFromLocalStorage.includes(param)) {
-            config.paramsFromLocalStorage.push(param);
-        }
-    },
+    dataProcessingFromLocalStorage(param, playerParamsUpdate = false) {
+        let localStorageParam = Number(localStorage[param]);
 
-    removeParamFromParamsFromLocalStorage(param) {
-        config.paramsFromLocalStorage = config.paramsFromLocalStorage.filter(item => item !== param);
-    },
-
-    setParamsToLocalStorage(param, toggle) {
-        if (!localStorage[param]) {
-            localStorage.setItem(param, toggle);
-            config[param] = toggle;
-            this.setLocalStorageParamsToGameConfig(param);
+        if (Number.isInteger(localStorageParam)) {
+            config[param] = localStorageParam
+        } else if (!Number.isInteger(localStorageParam) && localStorage[param] === "on" || localStorage[param] === "true") {
+            config[param] = true;
+        } else if (!Number.isInteger(localStorageParam) && localStorage[param] === "off" || localStorage[param] === "false") {
+            config[param] = false;
+        } else if (!Number.isInteger(localStorageParam) && param === "cheatsActivated") {
+            localStorage[param].split(",").forEach(cheat => config.cheatsActivated.push(cheat));
         } else {
-            localStorage.removeItem(param);
-            config[param] = toggle;
-            this.removeParamFromParamsFromLocalStorage(param);
+            config[param] = localStorage[param];
         }
-        console.log(localStorage);
-        console.log(config);
-    }
+        if (!playerParamsUpdate) return;
+        this.addLocalStorageParamNamesToGameConfig(param);
+        if (player.hasOwnProperty(param)) player[param] = config[param];
+    },
 
-    // при запуске игры все изменения в localStorage записывать в config
-    // в перемнную localStoragesProperties,
-    // отдельным методом выводить localStoragesProperties,
-    // добавить чит для удаления всех или выбранного значения из localStorage
+    addLocalStorageParamNamesToGameConfig(param) {
+        helperController.addItemToArray(config.paramsFromLocalStorage, param);
+    },
+
+    removeLocalStorageParamNamesFromGameConfig(param) {
+        config.paramsFromLocalStorage = helperController.removeItemFromArray(config.paramsFromLocalStorage, param);
+    },
+
+    setParamToLocalStorage(param, value, addLocalStorageParamsToGameConfig = true) {
+        localStorage.setItem(param, value);
+        if (addLocalStorageParamsToGameConfig) this.setLocalStorageParamsToGameConfig(param);
+    },
+
+    removeParamFromLocalStorage(param, value) {
+        localStorage.removeItem(param);
+        config[param] = value;
+        this.removeLocalStorageParamNamesFromGameConfig(param);
+    },
+
+    clearLocalStorage() {
+        localStorage.clear();
+    },
+
+    getParamFromLocalStorage(param) {
+        return localStorage.getItem(param);
+    },
+
+    cheatsInfinityModeIsActive(param) {
+        let value = false;
+
+        if (localStorage[param]) value = true;
+        return value;
+    }
 }

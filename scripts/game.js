@@ -18,11 +18,11 @@ export const game = {
     playerCanStopGame: true,
 
     init() {
+        localStorageController.setLocalStorageParamsToGameConfig();
         renderer.render();
         cheatsController.callCheatConsole();
         cheatsController.inputCheat();
-        localStorageController.setLocalStorageParamsToGameConfig();
-        console.log(localStorage);
+        console.log(localStorage);  // отладка
         console.log(config);
     },
 

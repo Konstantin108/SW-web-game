@@ -722,6 +722,7 @@ td {
 
 #cheatMessage {
   font-size: 24px;
+  text-align: center;
   text-transform: uppercase;
   animation: messageBlink 0.4s 2;
 }
