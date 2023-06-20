@@ -70,44 +70,43 @@ export const cheatsController = {
         let matchCheatObject = this.cheats.find((cheat) => cheat.code === enteredCombination);
 
         if (matchCheatObject) {
-            if (matchCheatObject.compound && !matchCheatObject.arbitaryValue) {
-                if (matchCheatObject.options.includes(compoundCode[1])) {
+            switch (matchCheatObject.type) {
+                case "optionsCheat":
+                    if (matchCheatObject.options.includes(compoundCode[1])) {
+                        activatedCheat = matchCheatObject;
+                        activatedCheatParam = compoundCode[1];
+                        message = `${activatedCheat.message} ${activatedCheatParam}`;
+                    }
+                    break;
+                case "simpleCheat":
                     activatedCheat = matchCheatObject;
-                    activatedCheatParam = compoundCode[1];
-                    message = `${activatedCheat.message} ${activatedCheatParam}`;
-                }
-            }
-            if (!matchCheatObject.compound && !matchCheatObject.arbitaryValue) {
-                activatedCheat = matchCheatObject;
-                message = activatedCheat.message;
-            }
-            if (matchCheatObject.compound && matchCheatObject.arbitaryValue) {
-                let count = Number(compoundCode[1]);
-                if (Number.isInteger(count) && count > 0) {
+                    message = activatedCheat.message;
+                    break;
+                case "arbitaryValueCheat":
+                    let count = Number(compoundCode[1]);
+                    if (Number.isInteger(count) && count > 0) {
+                        activatedCheat = matchCheatObject;
+                        count <= activatedCheat.limit ? activatedCheatParam = count : activatedCheatParam = activatedCheat.limit;
+                        message = `${activatedCheat.message} ${activatedCheatParam}`;
+                    }
+                    break;
+                case "toggleCheat":
                     activatedCheat = matchCheatObject;
-                    count <= activatedCheat.limit ? activatedCheatParam = count : activatedCheatParam = activatedCheat.limit;
+                    if (!config[activatedCheat.paramName]) {
+                        activatedCheatParam = activatedCheat.toggleMessages[0];
+                    } else {
+                        activatedCheatParam = activatedCheat.toggleMessages[1];
+                        removeNoteFromGameConfig = true;
+                    }
                     message = `${activatedCheat.message} ${activatedCheatParam}`;
-                }
-            }
-            if (matchCheatObject.toggle) {
-                activatedCheat = matchCheatObject;
-                if (!config[activatedCheat.paramName]) {
-                    activatedCheatParam = activatedCheat.toggleMessages[0];
-                } else {
-                    activatedCheatParam = activatedCheat.toggleMessages[1];
-                    removeNoteFromGameConfig = true;
-                }
-                message = `${activatedCheat.message} ${activatedCheatParam}`;
+                    break;
+                default:
+                    break;
             }
 
             paramName = matchCheatObject.paramName;
 
-            if (!removeNoteFromGameConfig) {
-                if (matchCheatObject.addNoteToGameConfig) this.addCheatNameToGameConfig(matchCheatObject.name);
-            } else {
-                this.removeCheatNameFromGameConfig(matchCheatObject.name);
-                this.updateCheatNamesArrayInLocalStorageAfterCheatOff();
-            }
+            this.editCheatNamesArrayInGameConfig(removeNoteFromGameConfig, matchCheatObject);
 
             if (localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
         }
@@ -142,6 +141,15 @@ export const cheatsController = {
         console.log(config);
     },
 
+    editCheatNamesArrayInGameConfig(remove, cheat) {
+        if (!remove) {
+            if (cheat.addNoteToGameConfig) this.addCheatNameToGameConfig(cheat.name);
+        } else {
+            this.removeCheatNameFromGameConfig(cheat.name);
+            this.updateCheatNamesArrayInLocalStorageAfterCheatOff();
+        }
+    },
+
     addCheatNameToGameConfig(cheat) {
         helperController.addItemToArray(config.cheatsActivated, cheat);
     },
@@ -158,6 +166,7 @@ export const cheatsController = {
 
     updateCheatNamesArrayInLocalStorageAfterCheatOn() {
         let activatedCheatNamesInLocalStorage = [];
+
         if (localStorage.cheatsActivated) {
             localStorageController.getParamFromLocalStorage("cheatsActivated").split(",").forEach(cheatName => helperController.addItemToArray(activatedCheatNamesInLocalStorage, cheatName));
         }
@@ -190,6 +199,7 @@ export const cheatsController = {
                 localStorageController.setParamToLocalStorage(paramName, toggle);
             }
             player[paramName] = config[paramName];
+            crashChecker.invincibilityOffCallCancel();
             renderer.renderPlayer();
         } else {
             toggle = false;

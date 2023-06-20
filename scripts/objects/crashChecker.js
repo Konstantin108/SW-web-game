@@ -53,8 +53,8 @@ export const crashChecker = {
     },
 
     invincibilityOffCallCancel() {
-        clearTimeout(player.invincibilityTimerId);
-        clearTimeout(player.timeInInvincibilityOffTimerId);
+        if (player.invincibilityTimerId) clearTimeout(player.invincibilityTimerId);
+        if (player.timeInInvincibilityOffTimerId) clearTimeout(player.timeInInvincibilityOffTimerId);
     },
 
     calculateTimeInInvincibilityOff(invincibilityAfterCrashActionTime) {

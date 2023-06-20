@@ -1,4 +1,10 @@
 export const cheats = {
+    helpArray: new Map([
+        ["toggleCheat", "необходимо вводить только code, повторный ввод code - отключает действие чита"],
+        ["optionsCheat", "необходимо вводить code + : + одна из опций"],
+        ["simpleCheat", "необходимо вводить только code"],
+        ["arbitaryValueCheat", "необходимо вводить code + : + произвольное значение в цифрах"]
+    ]),
 
     setCheatsParams() {
         return [
@@ -6,51 +12,45 @@ export const cheats = {
                 name: "toggleInfinityActiveMode",
                 code: "infinitum",
                 message: "infinity mode",
+                type: "toggleCheat",
                 toggleMessages: [
                     "on",
                     "off"
                 ],
-                toggle: true,
                 paramName: "cheatsInfinityActiveMode",
                 limit: null,
-                compound: false,
                 addNoteToGameConfig: true,
                 description: "включение или выключение опции сохранения действия читов в localStorage",
-                help: "необходимо вводить только code, повторный ввод code - отключает действие чита",
-                arbitaryValue: false,
+                help: this.helpArray.get("toggleCheat"),
                 options: null
             },
             {
                 name: "toggleInvincibility",
                 code: "invulnerability",
                 message: "invincibility",
+                type: "toggleCheat",
                 toggleMessages: [
                     "on",
                     "off"
                 ],
-                toggle: true,
                 paramName: "invincibility",
                 limit: null,
-                compound: false,
                 addNoteToGameConfig: true,
                 description: "включение или выключение неуязвимости",
-                help: "необходимо вводить только code, повторный ввод code - отключает действие чита",
-                arbitaryValue: false,
+                help: this.helpArray.get("toggleCheat"),
                 options: null
             },
             {
                 name: "colorChange",
                 code: "lux",
                 message: "set color",
+                type: "optionsCheat",
                 toggleMessages: null,
-                toggle: false,
                 paramName: "menuColor",
                 limit: null,
-                compound: true,
                 addNoteToGameConfig: true,
                 description: "изменение цвета меню",
-                help: "необходимо вводить code + : + одна из опций",
-                arbitaryValue: false,
+                help: this.helpArray.get("optionsCheat"),
                 options: [
                     "rubrum",
                     "orange",
@@ -59,37 +59,35 @@ export const cheats = {
                     "claracaelum",
                     "caelum",
                     "purpura",
-                    "album"
+                    "album",
+                    "ferrum",
+                    "terra"
                 ]
             },
             {
                 name: "restoreLives",
                 code: "aspirin",
                 message: "lives restored",
+                type: "simpleCheat",
                 toggleMessages: null,
-                toggle: false,
                 paramName: "lives",
                 limit: null,
-                compound: false,
                 addNoteToGameConfig: false,
                 description: "восстановить жизни",
-                help: "необходимо вводить только code",
-                arbitaryValue: false,
+                help: this.helpArray.get("simpleCheat"),
                 options: null
             },
             {
                 name: "addLives",
                 code: "adderevitam",
                 message: "added lifes",
+                type: "arbitaryValueCheat",
                 toggleMessages: null,
-                toggle: false,
                 paramName: "lives",
                 limit: 999,
-                compound: true,
                 addNoteToGameConfig: true,
                 description: "установить количество жизней",
-                help: "необходимо вводить code + : + произвольное значение в цифрах",
-                arbitaryValue: true,
+                help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
             }
         ]

@@ -12,7 +12,7 @@ export const bonusController = {
     },
 
     bonusAppearanceListenerTimerIdRemove() {
-        clearInterval(this.bonusAppearanceListenerTimerId);
+        if (this.bonusAppearanceListenerTimerId) clearInterval(this.bonusAppearanceListenerTimerId);
     },
 
     bonusCreate() {
@@ -30,8 +30,8 @@ export const bonusController = {
     },
 
     allNewPropertiesForPlayerOffCallCancel() {
-        clearTimeout(player.bonusShieldIsActivatedTimerId);
-        clearTimeout(player.bonusNewArrowTypeIsActivatedTimerId);
+        if (player.bonusShieldIsActivatedTimerId) clearTimeout(player.bonusShieldIsActivatedTimerId);
+        if (player.bonusNewArrowTypeIsActivatedTimerId) clearTimeout(player.bonusNewArrowTypeIsActivatedTimerId);
         player.bonusShieldIsActivated = false;
         player.bonusNewArrowTypeIsActivated = false;
         for (let i = 0; i < this.bonusesArray.length; i++) {

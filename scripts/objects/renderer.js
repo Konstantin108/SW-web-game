@@ -326,9 +326,9 @@ export const renderer = {
             timer = bonus.actionTime / 1000;
 
             if (elementType === "shieldBar") {
-                clearTimeout(this.bonusShieldTimerId);
+                if (this.bonusShieldTimerId) clearTimeout(this.bonusShieldTimerId);
             } else {
-                clearTimeout(this.bonusNewArrowTypeTimerId);
+                if (this.bonusNewArrowTypeTimerId) clearTimeout(this.bonusNewArrowTypeTimerId);
             }
 
             setTimeout(() => this.renderBonusTimer(timer, elementType, bonusBarDivTimer, bonusTimerLabel, bonusElementObject), 10);

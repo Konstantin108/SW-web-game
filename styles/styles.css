@@ -94,6 +94,22 @@ td {
   background-color: white;
 }
 
+.ferrum {
+  color: grey;
+}
+
+.ferrumBackground {
+  background-color: grey;
+}
+
+.terra {
+  color: saddlebrown;
+}
+
+.terraBackground {
+  background-color: saddlebrown;
+}
+
 #statusBarContainer {
   display: flex;
   justify-content: center;
