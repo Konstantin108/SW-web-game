@@ -19,7 +19,10 @@ export const localStorageController = {
             return;
         }
         for (let key in localStorage) {
-            if (!notUsedLocalStorageParams.includes(key)) this.dataProcessingFromLocalStorage(key, true);
+            if (!notUsedLocalStorageParams.includes(key)) {
+                this.dataProcessingFromLocalStorage(key, true);
+                this.addLocalStorageParamNamesToGameConfig(key);
+            }
         }
     },
 
@@ -38,7 +41,6 @@ export const localStorageController = {
             config[param] = localStorage[param];
         }
         if (!playerParamsUpdate) return;
-        this.addLocalStorageParamNamesToGameConfig(param);
         if (player.hasOwnProperty(param)) player[param] = config[param];
     },
 
