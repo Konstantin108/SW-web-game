@@ -131,11 +131,7 @@ export class Bonus {
 
     newPropertiesForPlayerOffCall(bonus) {
         let timerId = setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
-        if (bonus.playerArrowType) {
-            player.bonusNewArrowTypeIsActivatedTimerId = timerId;
-        } else {
-            player.bonusShieldIsActivatedTimerId = timerId;
-        }
+        bonus.playerArrowType ? player.bonusNewArrowTypeIsActivatedTimerId = timerId : player.bonusShieldIsActivatedTimerId = timerId;
     }
 
     newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId, calculateTimeInBonusOffTimerId) {

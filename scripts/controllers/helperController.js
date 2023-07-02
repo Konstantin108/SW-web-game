@@ -55,22 +55,14 @@ export const helperController = {
     getCenterMapOnX() {
         let center = null;
 
-        if (config.mapSizeX % 2 === 0) {
-            center = config.mapSizeX / 2;
-        } else {
-            center = (config.mapSizeX - 1) / 2 + 1;
-        }
+        config.mapSizeX % 2 === 0 ? center = config.mapSizeX / 2 : center = (config.mapSizeX - 1) / 2 + 1;
         return center;
     },
 
     getCenterMapOnY() {
         let center = null;
 
-        if (config.mapSizeY % 2 === 0) {
-            center = config.mapSizeY / 2;
-        } else {
-            center = (config.mapSizeY - 1) / 2 + 1;
-        }
+        config.mapSizeY % 2 === 0 ? center = config.mapSizeY / 2 : center = (config.mapSizeY - 1) / 2 + 1;
         return center;
     },
 
@@ -86,10 +78,7 @@ export const helperController = {
         let index = this.getRandomInt(0, array.length);
         let result = array[index];
 
-        if (result) {
-            return result;
-        } else {
-            this.findValidValueInArrayOnIndex(array);
-        }
+        if (result) return result;
+        this.findValidValueInArrayOnIndex(array);
     }
 }

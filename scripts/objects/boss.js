@@ -140,11 +140,7 @@ export const boss = {
         let rightGun = this.x + gunPosition;
         let selectedGun = null;
 
-        if (helperController.randomEvent(choiceGunChance)) {
-            selectedGun = leftGun;
-        } else {
-            selectedGun = rightGun;
-        }
+        helperController.randomEvent(choiceGunChance) ? selectedGun = leftGun : selectedGun = rightGun;
         return selectedGun;
     },
 

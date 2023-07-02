@@ -22,15 +22,18 @@ export const explosion = {
 
     explode(playerMakeExplosion = true) {
         let blockagesArray = blockageController.blockagesArray;
+        let dontCountKilledEnemies = true;
 
-        renderer.renderExplosion();
-        for (let i = 0; i < blockagesArray.length; i++) {
-            if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8);
-        }
         if (playerMakeExplosion) {
             if (progressController.bossExist) boss.getDamage(this.damage, true);
             if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
+            dontCountKilledEnemies = false;
         }
+
+        for (let i = 0; i < blockagesArray.length; i++) {
+            if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8, dontCountKilledEnemies);
+        }
+        renderer.renderExplosion();
         renderer.renderStatusBar();
     }
 }

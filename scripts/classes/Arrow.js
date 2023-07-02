@@ -15,6 +15,7 @@ export class Arrow {
     y = player.y - 1;
     damage = config.arrowDamage;
     speed = config.arrowSpeed;
+    penetration = config.arrowPenetration;
     hit_x = null;
     hit_y = null;
 
@@ -48,11 +49,9 @@ export class Arrow {
             if (blockagesArray[i].x === this.x && blockagesArray[i].y === this.y) {
                 this.hit_x = this.x;
                 this.hit_y = this.y;
-                this.y = -1;
-                renderer.clear(this.selectorName);
                 blockagesArray[i].getDamage(this, i, blockagesArray[i].shipDestroyedReward, 0);
                 renderer.renderStatusBar();
-                this.remove();
+                if (!this.penetration) this.outFromMap();
             }
         }
         this.hit_x = null;
@@ -80,6 +79,12 @@ export class Arrow {
             boss.bossShieldGetDamage(false, this);
             this.remove();
         }
+    }
+
+    outFromMap() {
+        this.y = -1;
+        renderer.clear(this.selectorName);
+        this.remove();
     }
 
     remove() {

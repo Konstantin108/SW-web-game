@@ -24,6 +24,7 @@ export const config = {
     // стрелы игрока
     arrowDamage: 1,
     arrowSpeed: 50,
+    arrowPenetration: false,
     arrowDrillDamage: 2,
     arrowDrillSpeed: 20,
     arrowTrinityDamage: 3,

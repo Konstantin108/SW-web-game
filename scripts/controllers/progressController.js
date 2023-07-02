@@ -24,6 +24,7 @@ export const progressController = {
     superAbilityCharge: 0,
     superAbilityIsCharged: config.superAbilityIsCharged,
     playerCanEnterNewLevel: true,
+    bossCalled: false,
 
     progress() {
         this.blockagesCount = this.compareBlockagesCountAndMapSizeX(config.levels[0].blockagesCount);
@@ -42,7 +43,7 @@ export const progressController = {
                     this.fireChance = this.levels[i].fireChance;
                     this.blockageTypes = this.levels[i].blockageTypes;
                     this.bossExist = this.levels[i].bossExist;
-                    if (this.bossExist) this.playerCanEnterNewLevel = false;
+                    this.bossCalled = false;
                     this.newLevelEntry(this.blockagesCount);
                     this.levels.shift();
                     levelsLeft += -1;
@@ -52,6 +53,13 @@ export const progressController = {
                     game.over(true);
                 }
             }
+            if (this.bossExist && !this.bossCalled) {
+                this.bossCalled = true;
+                game.playerCanStopGame = false;
+                this.playerCanEnterNewLevel = false;
+                setTimeout(() => game.playerCanStopGame = false, 1000);
+                this.addBossToLevel();
+            }
         }
     },
 
@@ -59,15 +67,16 @@ export const progressController = {
         return this.score += scoreType * this.multiplier;
     },
 
-    killEnemy(coordinateObject, blockage, shipDestroyedReward, y_pos) {
+    killEnemy(coordinateObject, blockage, shipDestroyedReward, y_pos, dontCountKilledEnemies = false) {
         let blockageTypes = blockageController.blockageTypesProvider();
         let blockageType = blockageController.blockageCreateOneUnit();
 
         renderer.renderHit(coordinateObject);
+        if (blockageType) blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
+        if (dontCountKilledEnemies) return;
         this.scoreUp(shipDestroyedReward);
         this.shipDestroyer += 1;
         this.superAbilityCharging();
-        if (blockageType) blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
     },
 
     killBoss(bossDestroyedReward, hitCoordinates) {
@@ -109,11 +118,7 @@ export const progressController = {
     compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {  // blockagesCount не может быть больше config.mapSizeX
         let blockagesCount = null;
 
-        if (blockagesCountOnLevel <= config.mapSizeX) {
-            blockagesCount = blockagesCountOnLevel;
-        } else {
-            blockagesCount = config.mapSizeX;
-        }
+        blockagesCountOnLevel <= config.mapSizeX ? blockagesCount = blockagesCountOnLevel : blockagesCount = config.mapSizeX;
         return blockagesCount;
     },
 
@@ -126,15 +131,18 @@ export const progressController = {
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
-        if (this.bossExist) {
-            playerCantSopGameTime = 3000;
-            setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
-            setTimeout(() => {
-                explosion.explode(false);
-                bonusController.destroyAllBonuses();
-            }, 2000);
-            setTimeout(() => boss.createBoss(), 3000);
-        }
         setTimeout(() => game.playerCanStopGame = true, playerCantSopGameTime);
     },
+
+    addBossToLevel() {
+        let playerCantSopGameTime = 6000;
+
+        setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
+        setTimeout(() => {
+            explosion.explode(false);
+            bonusController.destroyAllBonuses();
+        }, 2000);
+        setTimeout(() => boss.createBoss(), 3000);
+        setTimeout(() => game.playerCanStopGame = true, playerCantSopGameTime);
+    }
 }

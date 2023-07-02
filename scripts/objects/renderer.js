@@ -226,11 +226,7 @@ export const renderer = {
     renderTeleportation(mode) {
         let selector = null;
 
-        if (mode === "out") {
-            selector = "teleportationOut";
-        } else {
-            selector = "teleportationIn";
-        }
+        mode === "out" ? selector = "teleportationOut" : selector = "teleportationIn";
         let teleportationPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
         teleportationPosition.classList.add(`${selector}`);
         setTimeout(() => teleportationPosition.classList.remove(`${selector}`), 500);
@@ -279,11 +275,7 @@ export const renderer = {
         let bomb = null;
 
         if (bombElement) table.removeChild(bombElement);
-        if (player.bombsCount < 1) {
-            bomb = `<div class="bomb emptyBomb"></div>`;
-        } else {
-            bomb = `<div class="bomb activeBomb"></div>`;
-        }
+        player.bombsCount < 1 ? bomb = `<div class="bomb emptyBomb"></div>` : bomb = `<div class="bomb activeBomb"></div>`;
 
         if (!playerHasBomb) {
             bomb = `<div class="bomb redBomb"></div>`;
@@ -366,11 +358,7 @@ export const renderer = {
 
         if (timer <= 6) bonusElementObject.classList.add("blinkBeforeBonusOff");
 
-        if (elementType === "shieldBar") {
-            this.bonusShieldTimerId = thisTimerId;
-        } else {
-            this.bonusNewArrowTypeTimerId = thisTimerId;
-        }
+        elementType === "shieldBar" ? this.bonusShieldTimerId = thisTimerId : this.bonusNewArrowTypeTimerId = thisTimerId;
     },
 
     renderSuperAbilityBar(superAbilityIsActivated = true) {
@@ -491,7 +479,7 @@ export const renderer = {
     renderCheatMessage(message, messageColor, cheatMessageContainer) {
         let messageElement = null;
 
-        cheatMessageContainer.innerHTML = '';
+        cheatMessageContainer.innerHTML = "";
         if (this.cheatMessageRemoveTimerId) clearTimeout(this.cheatMessageRemoveTimerId);
 
         cheatMessageContainer.insertAdjacentHTML("afterbegin", templatePrinter.cheatMessageTemplatePrint(message, messageColor));

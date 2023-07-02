@@ -42,22 +42,14 @@ export const game = {
     startGameDelay(delay, resumeGame = false) {
         let message = "";
 
-        if (delay !== 0) {
-            message = delay;
-        } else {
-            message = "go";
-        }
+        delay !== 0 ? message = delay : message = "go";
         if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
         if (delay > -1) {
             setTimeout(() => {
                 return this.startGameDelay(delay += -1, resumeGame);
             }, 1000);
         } else {
-            if (resumeGame) {
-                this.resumeGame();
-            } else {
-                this.run();
-            }
+            resumeGame ? this.resumeGame() : this.run();
         }
     },
 
@@ -78,11 +70,7 @@ export const game = {
         let text = "Игра остановлена! Хотите продолжить?\n\"ОК\" - продолжить играть\n\"Отмена\" - закончить игру";
 
         if (this.gameIsRunning) this.stopGame();
-        if (confirm(text)) {
-            this.startGameDelay(this.startGameDelaySecondsCount, true);
-        } else {
-            this.quitConfirm();
-        }
+        confirm(text) ? this.startGameDelay(this.startGameDelaySecondsCount, true) : this.quitConfirm();
     },
 
     stopGame() {
@@ -111,11 +99,7 @@ export const game = {
     quitConfirm() {
         let text = "Вы уверены, что хотите закончить игру?";
 
-        if (confirm(text)) {
-            alert(this.quit());
-        } else {
-            this.paused();
-        }
+        confirm(text) ? alert(this.quit()) : this.paused();
     },
 
     quit() {
@@ -126,11 +110,7 @@ export const game = {
         let message = "";
 
         this.stopGame();
-        if (win) {
-            message = "you win";
-        } else {
-            message = "you lose";
-        }
+        win ? message = "you win" : message = "you lose";
         renderer.renderInCenterTableNotify(message);
         setTimeout(() => alert(this.quit()), 1100);
     }
