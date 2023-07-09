@@ -16,7 +16,12 @@ export const bonusController = {
     },
 
     bonusCreate() {
-        if (helperController.randomEvent(config.bonuses.bonusChance)) this.bonusesArray.push(new Bonus());
+        let objectType = helperController.getRandomType(config.bonuses.bonusTypes);
+        let actionTime = objectType.actionTime;
+        let x = helperController.getRandomInt(0, config.mapSizeX);
+        let y = 0;
+
+        if (helperController.randomEvent(config.bonuses.bonusChance)) this.bonusesArray.push(new Bonus(objectType, actionTime, x, y));
         this.bonusMove();
     },
 
@@ -27,6 +32,16 @@ export const bonusController = {
             pickedBonus = this.bonusesArray[i].getBonus(this.bonusesArray[i].picked());
         }
         if (pickedBonus) return pickedBonus;
+    },
+
+    playerBecomeBonus(bonusName, secondsCount) {
+        let objectType = helperController.getObjectByName(config.bonuses.bonusTypes, bonusName);
+        let actionTime = secondsCount * 1000;
+        let x = player.x
+        let y = player.y;
+
+        let bonus = new Bonus(objectType, actionTime, x, y);
+        bonus.getBonus(bonus);
     },
 
     allNewPropertiesForPlayerOffCallCancel() {

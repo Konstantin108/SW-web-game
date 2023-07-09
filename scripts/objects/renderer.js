@@ -46,8 +46,9 @@ export const renderer = {
 
     renderPlayer() {
         let playerPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
-        playerPosition.classList.remove("blockage", "blockageBull");
-        playerPosition.classList.remove("enemyArrowBomb");
+        if (playerPosition.classList.contains("blockage")) playerPosition.classList.remove("blockage");
+        if (playerPosition.classList.contains("blockageBull")) playerPosition.classList.remove("blockageBull");
+        if (playerPosition.classList.contains("enemyArrowBomb")) playerPosition.classList.remove("enemyArrowBomb");
         playerPosition.classList.add(player.selectorName);
         if (player.invincibility) playerPosition.classList.add("invincibility");
         if (player.extraSelectorName) playerPosition.classList.add(`${player.extraSelectorName}`);
@@ -100,7 +101,7 @@ export const renderer = {
         setTimeout(() => {
             this.clear("bossDyingDisappears");
             this.clear("boss");
-        }, 10500);
+        }, 10300);
     },
 
     renderBossShieldHit(shieldBody, hitData) {
@@ -286,7 +287,7 @@ export const renderer = {
         table.insertAdjacentHTML("afterbegin", this.bombBar);
     },
 
-    renderBonusBarElement(elementType, bonus = null) {
+    renderBonusBarElement(elementType, bonus = null, actionTime = null) {
         let table = document.querySelector("table");
         let bonusBarDivElement = null;
         let bonusBarDivTimer = null;
@@ -315,7 +316,7 @@ export const renderer = {
             bonusElement = `<div class="${bonus.pickUpImageName}"></div>`;
             setTimeout(() => bonusElementObject = document.querySelector(`.${bonus.pickUpImageName}`), 10);
 
-            timer = bonus.actionTime / 1000;
+            timer = actionTime / 1000;
 
             if (elementType === "shieldBar") {
                 if (this.bonusShieldTimerId) clearTimeout(this.bonusShieldTimerId);

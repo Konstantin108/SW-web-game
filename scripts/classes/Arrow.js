@@ -75,9 +75,8 @@ export class Arrow {
         if (!progressController.bossExist) return;
         if (!boss.shieldBody.x.length) return;
         if (boss.shieldBody.x.includes(this.x) && boss.shieldBody.y === this.y) {
-            this.y = -1;
             boss.bossShieldGetDamage(false, this);
-            this.remove();
+            if (!this.penetration) this.outFromMap();
         }
     }
 

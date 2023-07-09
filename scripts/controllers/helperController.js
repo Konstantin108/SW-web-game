@@ -22,6 +22,15 @@ export const helperController = {
         }
     },
 
+    getObjectByName(object, value) {
+        let elem = null;
+
+        for (let key in object) {
+            if (object[key].name === value) elem = object[key];
+        }
+        return elem;
+    },
+
     getRandomCoordinates(arrayX, y) {
         let possibleOnXArray = [];
         let possibleOnYArray = [];

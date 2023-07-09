@@ -1,8 +1,10 @@
 import {config} from "../config/config.js";
 import {player} from "../objects/player.js";
 import {helperController} from "./helperController.js";
+import {cheatsController} from "./cheatsController.js";
 
 export const localStorageController = {
+    bonusNamesFromLocalStorage: [],
 
     setLocalStorageParamsToGameConfig(param = null) {
         let notUsedLocalStorageParams = [
@@ -28,6 +30,7 @@ export const localStorageController = {
 
     dataProcessingFromLocalStorage(param, playerParamsUpdate = false) {
         let localStorageParam = Number(localStorage[param]);
+        let setLocalStorageParamDelay = config.startGameDelaySecondsCount * 1000 + 2100;
 
         if (Number.isInteger(localStorageParam)) {
             config[param] = localStorageParam
@@ -40,6 +43,17 @@ export const localStorageController = {
         } else {
             config[param] = localStorage[param];
         }
+
+        if (helperController.getObjectByName(config.bonuses.bonusTypes, param)) {
+            if (!this.bonusNamesFromLocalStorage.includes(param)) {
+                setTimeout(() => {
+                    cheatsController.getBonusForArbitaryTime(param, localStorage[param]);
+                    cheatsController.activatedCheatsParamsDataTempArray[param] = localStorage[param];
+                }, setLocalStorageParamDelay);
+                this.bonusNamesFromLocalStorage.push(param);
+            }
+        }
+
         if (!playerParamsUpdate) return;
         if (player.hasOwnProperty(param)) player[param] = config[param];
     },
@@ -71,10 +85,7 @@ export const localStorageController = {
         return localStorage.getItem(param);
     },
 
-    cheatsInfinityModeIsActive(param) {
-        let value = false;
-
-        if (localStorage[param]) value = true;
-        return value;
+    checkParamInLocalStorage(param) {
+        return localStorage[param];
     }
 }

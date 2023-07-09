@@ -171,7 +171,7 @@ export const boss = {
 
     onShield() {
         for (let i = 0; i <= config.mapSizeX; i++) {
-            this.shieldBody.x.push(i)
+            this.shieldBody.x.push(i);
         }
         this.shieldBody.y = this.y + 1;
         renderer.renderBossShield(this.shieldBody, true);

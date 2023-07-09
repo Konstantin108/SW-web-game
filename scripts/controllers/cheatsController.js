@@ -4,11 +4,15 @@ import {localStorageController} from "./localStorageController.js";
 import {player} from "../objects/player.js";
 import {crashChecker} from "../objects/crashChecker.js";
 import {helperController} from "./helperController.js";
+import {progressController} from "./progressController.js";
+import {boss} from "../objects/boss.js";
+import {bonusController} from "./bonusController.js";
 
 export const cheatsController = {
     cheats: config.cheats,
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
     inputElement: null,
+    activatedCheatsParamsDataTempArray: [],
 
     callCheatConsole() {
         let showCheatConsoleBtn = "Backquote";
@@ -43,7 +47,7 @@ export const cheatsController = {
                 if (isPressBtn) return;
                 if (inputCheatBtns.includes(event.code)) {
                     if (cheatsController.inputElement.value) {
-                        cheatsController.matchPlayerInputAndCheatCode(cheatsController.inputElement.value.trim(), cheatMessageContainer);
+                        cheatsController.matchPlayerInputAndCheatCode(cheatsController.inputElement.value.trim().toLowerCase(), cheatMessageContainer);
                         cheatsController.inputElement.value = "";
                     }
                     isPressBtn = true;
@@ -108,7 +112,7 @@ export const cheatsController = {
 
             this.editCheatNamesArrayInGameConfig(removeNoteFromGameConfig, matchCheatObject);
 
-            if (localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
         }
         if (activatedCheat) messageColor = "cheatMessageGreen";
         renderer.renderCheatMessage(message, messageColor, cheatMessageContainer)
@@ -134,11 +138,26 @@ export const cheatsController = {
             case "adderevitam":
                 this.addLives(paramName, activatedCheatParam);
                 break;
+            case "adventusbulla":
+                this.callBoss(paramName);
+                break;
+            case "auferspiritum":
+                this.killBoss();
+                break;
+            case "terebro":
+                this.toggleArrowPenetration(paramName, activatedCheatParam);
+                break;
+            case "utarmis":
+            case "penetravit":
+            case "trinitas":
+                this.getBonusForArbitaryTime(paramName, activatedCheatParam);
+                break;
             default:
                 break;
         }
         console.log(localStorage);  // отладка
         console.log(config);
+        console.log(this.activatedCheatsParamsDataTempArray);
     },
 
     editCheatNamesArrayInGameConfig(remove, cheat) {
@@ -159,7 +178,7 @@ export const cheatsController = {
     },
 
     updateCheatNamesArrayInLocalStorageAfterCheatOff() {
-        if (!localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) return;
+        if (!localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) return;
         if (!localStorage.cheatsActivated) return;
         localStorageController.setParamToLocalStorage("cheatsActivated", config.cheatsActivated, false);
     },
@@ -168,7 +187,9 @@ export const cheatsController = {
         let activatedCheatNamesInLocalStorage = [];
 
         if (localStorage.cheatsActivated) {
-            localStorageController.getParamFromLocalStorage("cheatsActivated").split(",").forEach(cheatName => helperController.addItemToArray(activatedCheatNamesInLocalStorage, cheatName));
+            localStorageController.getParamFromLocalStorage("cheatsActivated").split(",").forEach(cheatName => {
+                helperController.addItemToArray(activatedCheatNamesInLocalStorage, cheatName);
+            });
         }
         config.cheatsActivated.forEach(cheatName => helperController.addItemToArray(activatedCheatNamesInLocalStorage, cheatName));
         localStorageController.setParamToLocalStorage("cheatsActivated", activatedCheatNamesInLocalStorage, false);
@@ -184,7 +205,13 @@ export const cheatsController = {
             config.cheatsActivated.forEach(cheatName => {
                 cheatsArray.push(config.cheats.find(elem => elem.name === cheatName));
             });
-            cheatsArray.forEach(item => localStorageController.setParamToLocalStorage(item.paramName, config[item.paramName]));
+            cheatsArray.forEach(item => {
+                if (helperController.getObjectByName(config.bonuses.bonusTypes, item.paramName)) {
+                    localStorageController.setParamToLocalStorage(item.paramName, this.activatedCheatsParamsDataTempArray[item.paramName]);
+                } else {
+                    localStorageController.setParamToLocalStorage(item.paramName, config[item.paramName]);
+                }
+            });
         } else {
             toggle = false;
             localStorageController.removeParamFromLocalStorage(paramName, toggle);
@@ -195,7 +222,7 @@ export const cheatsController = {
     toggleInvincibility(paramName, toggle) {
         if (toggle === "on") {
             config[paramName] = true;
-            if (localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) {
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.setParamToLocalStorage(paramName, toggle);
             }
             player[paramName] = config[paramName];
@@ -203,7 +230,7 @@ export const cheatsController = {
             renderer.renderPlayer();
         } else {
             toggle = false;
-            if (localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) {
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.removeParamFromLocalStorage(paramName, toggle);
             }
             crashChecker.invincibilityOff();
@@ -211,7 +238,7 @@ export const cheatsController = {
     },
 
     colorChange(paramName, color) {
-        if (localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) {
+        if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
             localStorageController.setParamToLocalStorage(paramName, color);
         } else {
             config[paramName] = color;
@@ -226,12 +253,51 @@ export const cheatsController = {
     },
 
     addLives(paramName, livesCount) {
-        if (localStorageController.cheatsInfinityModeIsActive(this.cheatsInfinityActiveMode)) {
+        if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
             localStorageController.setParamToLocalStorage(paramName, livesCount);
         } else {
             config[paramName] = livesCount;
         }
         player[paramName] = config[paramName];
         renderer.renderStatusBar();
+    },
+
+    callBoss(paramName) {
+        progressController[paramName] = true;
+        progressController.bossKilled = false;
+    },
+
+    killBoss() {
+        if (!boss.alive) return;
+
+        let hitCoordinates = {
+            hit_x: boss.x,
+            hit_y: boss.y
+        }
+        boss.lives = 0;
+        progressController.killBoss(boss.destroyedReward, hitCoordinates);
+    },
+
+    toggleArrowPenetration(paramName, toggle) {
+        if (toggle === "on") {
+            config[paramName] = true;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.setParamToLocalStorage(paramName, toggle);
+            }
+        } else {
+            toggle = false;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.removeParamFromLocalStorage(paramName, toggle);
+            }
+            config[paramName] = toggle;
+        }
+    },
+
+    getBonusForArbitaryTime(paramName, secondsCount) {
+        bonusController.playerBecomeBonus(paramName, secondsCount);
+        this.activatedCheatsParamsDataTempArray[paramName] = secondsCount;
+        if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+            localStorageController.setParamToLocalStorage(paramName, secondsCount);
+        }
     }
 }

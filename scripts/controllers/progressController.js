@@ -25,6 +25,7 @@ export const progressController = {
     superAbilityIsCharged: config.superAbilityIsCharged,
     playerCanEnterNewLevel: true,
     bossCalled: false,
+    bossKilled: false,
 
     progress() {
         this.blockagesCount = this.compareBlockagesCountAndMapSizeX(config.levels[0].blockagesCount);
@@ -44,6 +45,7 @@ export const progressController = {
                     this.blockageTypes = this.levels[i].blockageTypes;
                     this.bossExist = this.levels[i].bossExist;
                     this.bossCalled = false;
+                    this.bossKilled = false;
                     this.newLevelEntry(this.blockagesCount);
                     this.levels.shift();
                     levelsLeft += -1;
@@ -53,7 +55,7 @@ export const progressController = {
                     game.over(true);
                 }
             }
-            if (this.bossExist && !this.bossCalled) {
+            if (this.bossExist && !this.bossCalled && !this.bossKilled) {
                 this.bossCalled = true;
                 game.playerCanStopGame = false;
                 this.playerCanEnterNewLevel = false;
@@ -89,7 +91,11 @@ export const progressController = {
             explosion.explode(false);
             bonusController.destroyAllBonuses();
         }, 6000);
-        setTimeout(() => this.playerCanEnterNewLevel = true, 9000);
+        setTimeout(() => {
+            this.playerCanEnterNewLevel = true;
+            this.bossCalled = false;
+            this.bossKilled = true;
+        }, 9000);
     },
 
     scoreDown() {

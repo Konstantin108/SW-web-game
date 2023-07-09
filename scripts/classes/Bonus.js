@@ -1,5 +1,4 @@
 import {config} from "../config/config.js";
-import {helperController} from "../controllers/helperController.js";
 import {game} from "../game.js";
 import {renderer} from "../objects/renderer.js";
 import {bonusController} from "../controllers/bonusController.js";
@@ -7,15 +6,19 @@ import {player} from "../objects/player.js";
 import {crashChecker} from "../objects/crashChecker.js";
 
 export class Bonus {
+    constructor(objectType, actionTime, x, y) {
+        this.objectType = objectType;
+        this.actionTime = actionTime;
+        this.selectorName = objectType.name;
+        this.x = x;
+        this.y = y;
+    }
+
     static id = 0;
     id = Bonus.id++;
-    objectType = helperController.getRandomType(config.bonuses.bonusTypes);
-    selectorName = this.objectType.name;
     thisSelectorOverlay = [
         "enemyArrow"
     ];
-    x = helperController.getRandomInt(0, config.mapSizeX);
-    y = 0;
     speed = config.bonuses.bonusSpeed;
     picked_x = null;
     picked_y = null;
@@ -71,7 +74,10 @@ export class Bonus {
     }
 
     getBonus(bonus) {
-        if (bonus) this.setNewPropertiesForPlayer(bonus.objectType);
+        if (bonus) {
+            this.setNewPropertiesForPlayer(bonus.objectType);
+            renderer.renderPlayer();
+        }
     }
 
     setNewPropertiesForPlayer(bonus) {
@@ -81,21 +87,20 @@ export class Bonus {
             player.arrowType = bonus.playerArrowType;
             player.bonusObjectNewArrowType = bonus;
             player.bonusNewArrowTypeIsActivated = true;
-            renderer.renderPlayer();
-            renderer.renderBonusBarElement("newArrowTypeBar", bonus);
+            renderer.renderBonusBarElement("newArrowTypeBar", bonus, this.actionTime);
             this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId, player.calculateTimeInBonusNewArrowTypeOffTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
-            this.calculateTimeInBonusOff(bonus.actionTime / 1000, "newArrowType");
+            this.calculateTimeInBonusOff(this.actionTime / 1000, "newArrowType");
         }
         if (bonus.playerExtraOutlook) {
             crashChecker.invincibilityOff();
             player.extraSelectorName = bonus.playerExtraOutlook;
             player.bonusObjectShield = bonus;
             player.bonusShieldIsActivated = true;
-            renderer.renderBonusBarElement("shieldBar", bonus);
+            renderer.renderBonusBarElement("shieldBar", bonus, this.actionTime);
             this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId, player.calculateTimeInBonusShieldOffTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
-            this.calculateTimeInBonusOff(bonus.actionTime / 1000, "shield");
+            this.calculateTimeInBonusOff(this.actionTime / 1000, "shield");
         }
         if (bonus.name === "life") {
             if (player.lives < config.lives) {
@@ -130,7 +135,7 @@ export class Bonus {
     }
 
     newPropertiesForPlayerOffCall(bonus) {
-        let timerId = setTimeout(() => this.newPropertiesForPlayerOff(bonus), bonus.actionTime);
+        let timerId = setTimeout(() => this.newPropertiesForPlayerOff(bonus), this.actionTime);
         bonus.playerArrowType ? player.bonusNewArrowTypeIsActivatedTimerId = timerId : player.bonusShieldIsActivatedTimerId = timerId;
     }
 
