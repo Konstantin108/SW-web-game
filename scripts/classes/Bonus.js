@@ -4,6 +4,7 @@ import {renderer} from "../objects/renderer.js";
 import {bonusController} from "../controllers/bonusController.js";
 import {player} from "../objects/player.js";
 import {crashChecker} from "../objects/crashChecker.js";
+import {cheatsController} from "../controllers/cheatsController.js";
 
 export class Bonus {
     constructor(objectType, actionTime, x, y) {
@@ -125,12 +126,20 @@ export class Bonus {
             player.bonusNewArrowTypeIsActivated = false;
             renderer.renderPlayer();
             renderer.renderBonusBarElement("newArrowTypeBar");
+            setTimeout(() => renderer.renderBonusBarElement("newArrowTypeBar"), 500);
+            cheatsController.activatedCheatsParamsDataTempArray.delete("drill");
+            cheatsController.activatedCheatsParamsDataTempArray.delete("trinity");
+            cheatsController.removeCheatNameFromGameConfig("getDrill");
+            cheatsController.removeCheatNameFromGameConfig("getTrinity");
         }
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);
             player.extraSelectorName = null;
             player.bonusShieldIsActivated = false;
             renderer.renderBonusBarElement("shieldBar");
+            setTimeout(() => renderer.renderBonusBarElement("shieldBar"), 500);
+            cheatsController.activatedCheatsParamsDataTempArray.delete("shield");
+            cheatsController.removeCheatNameFromGameConfig("getShield");
         }
     }
 

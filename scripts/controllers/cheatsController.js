@@ -12,7 +12,7 @@ export const cheatsController = {
     cheats: config.cheats,
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
     inputElement: null,
-    activatedCheatsParamsDataTempArray: [],
+    activatedCheatsParamsDataTempArray: new Map(),
 
     callCheatConsole() {
         let showCheatConsoleBtn = "Backquote";
@@ -157,15 +157,14 @@ export const cheatsController = {
         }
         console.log(localStorage);  // отладка
         console.log(config);
-        console.log(this.activatedCheatsParamsDataTempArray);
     },
 
     editCheatNamesArrayInGameConfig(remove, cheat) {
-        if (!remove) {
-            if (cheat.addNoteToGameConfig) this.addCheatNameToGameConfig(cheat.name);
-        } else {
+        if (remove) {
             this.removeCheatNameFromGameConfig(cheat.name);
             this.updateCheatNamesArrayInLocalStorageAfterCheatOff();
+        } else {
+            if (cheat.addNoteToGameConfig) this.addCheatNameToGameConfig(cheat.name);
         }
     },
 
@@ -207,7 +206,7 @@ export const cheatsController = {
             });
             cheatsArray.forEach(item => {
                 if (helperController.getObjectByName(config.bonuses.bonusTypes, item.paramName)) {
-                    localStorageController.setParamToLocalStorage(item.paramName, this.activatedCheatsParamsDataTempArray[item.paramName]);
+                    localStorageController.setParamToLocalStorage(item.paramName, this.activatedCheatsParamsDataTempArray.get(item.paramName));
                 } else {
                     localStorageController.setParamToLocalStorage(item.paramName, config[item.paramName]);
                 }
@@ -233,6 +232,7 @@ export const cheatsController = {
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.removeParamFromLocalStorage(paramName, toggle);
             }
+            config[paramName] = toggle;
             crashChecker.invincibilityOff();
         }
     },
@@ -294,9 +294,28 @@ export const cheatsController = {
     },
 
     getBonusForArbitaryTime(paramName, secondsCount) {
+        if (paramName === "drill") {
+            this.activatedCheatsParamsDataTempArray.delete("trinity");
+            this.removeCheatNameFromGameConfig("getTrinity");
+        }
+        if (paramName === "trinity") {
+            this.activatedCheatsParamsDataTempArray.delete("drill");
+            this.removeCheatNameFromGameConfig("getDrill");
+        }
+
         bonusController.playerBecomeBonus(paramName, secondsCount);
-        this.activatedCheatsParamsDataTempArray[paramName] = secondsCount;
+        this.activatedCheatsParamsDataTempArray.set(paramName, secondsCount);
+
         if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+            if (paramName === "drill") {
+                localStorageController.removeParamFromLocalStorage("trinity");
+                this.removeCheatNameFromGameConfig("getTrinity");
+            }
+            if (paramName === "trinity") {
+                localStorageController.removeParamFromLocalStorage("drill");
+                this.removeCheatNameFromGameConfig("getDrill");
+            }
+            this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
             localStorageController.setParamToLocalStorage(paramName, secondsCount);
         }
     }

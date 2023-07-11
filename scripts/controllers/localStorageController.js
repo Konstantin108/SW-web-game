@@ -30,7 +30,7 @@ export const localStorageController = {
 
     dataProcessingFromLocalStorage(param, playerParamsUpdate = false) {
         let localStorageParam = Number(localStorage[param]);
-        let setLocalStorageParamDelay = config.startGameDelaySecondsCount * 1000 + 2100;
+        let setLocalStorageParamsDelay = config.startGameDelaySecondsCount * 1000 + 2100;
 
         if (Number.isInteger(localStorageParam)) {
             config[param] = localStorageParam
@@ -48,8 +48,8 @@ export const localStorageController = {
             if (!this.bonusNamesFromLocalStorage.includes(param)) {
                 setTimeout(() => {
                     cheatsController.getBonusForArbitaryTime(param, localStorage[param]);
-                    cheatsController.activatedCheatsParamsDataTempArray[param] = localStorage[param];
-                }, setLocalStorageParamDelay);
+                    cheatsController.activatedCheatsParamsDataTempArray.set(param, localStorage[param]);
+                }, setLocalStorageParamsDelay);
                 this.bonusNamesFromLocalStorage.push(param);
             }
         }
@@ -71,7 +71,7 @@ export const localStorageController = {
         if (addLocalStorageParamsToGameConfig) this.setLocalStorageParamsToGameConfig(param);
     },
 
-    removeParamFromLocalStorage(param, value) {
+    removeParamFromLocalStorage(param, value = null) {
         localStorage.removeItem(param);
         config[param] = value;
         this.removeLocalStorageParamNamesFromGameConfig(param);

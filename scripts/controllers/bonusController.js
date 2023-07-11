@@ -41,7 +41,7 @@ export const bonusController = {
         let y = player.y;
 
         let bonus = new Bonus(objectType, actionTime, x, y);
-        bonus.getBonus(bonus);
+        bonus.getBonus(bonus.picked());
     },
 
     allNewPropertiesForPlayerOffCallCancel() {
