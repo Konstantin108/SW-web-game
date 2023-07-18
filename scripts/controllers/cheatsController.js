@@ -62,16 +62,13 @@ export const cheatsController = {
     matchPlayerInputAndCheatCode(input, cheatMessageContainer) {
         let message = "incorrect";
         let messageColor = "cheatMessageRed";
-        let enteredCombination = input;
         let activatedCheat = null;
         let activatedCheatParam = null;
         let paramName = null;
         let removeNoteFromGameConfig = false;
 
         let compoundCode = input.split(":");
-        if (compoundCode.length > 1) enteredCombination = compoundCode[0];
-
-        let matchCheatObject = this.cheats.find((cheat) => cheat.code === enteredCombination);
+        let matchCheatObject = this.cheats.find((cheat) => cheat.code === compoundCode[0]);
 
         if (matchCheatObject) {
             switch (matchCheatObject.type) {
@@ -83,8 +80,10 @@ export const cheatsController = {
                     }
                     break;
                 case "simpleCheat":
-                    activatedCheat = matchCheatObject;
-                    message = activatedCheat.message;
+                    if (compoundCode.length === 1) {
+                        activatedCheat = matchCheatObject;
+                        message = activatedCheat.message;
+                    }
                     break;
                 case "arbitaryValueCheat":
                     let count = Number(compoundCode[1]);
@@ -95,14 +94,16 @@ export const cheatsController = {
                     }
                     break;
                 case "toggleCheat":
-                    activatedCheat = matchCheatObject;
-                    if (!config[activatedCheat.paramName]) {
-                        activatedCheatParam = activatedCheat.toggleMessages[0];
-                    } else {
-                        activatedCheatParam = activatedCheat.toggleMessages[1];
-                        removeNoteFromGameConfig = true;
+                    if (compoundCode.length === 1) {
+                        activatedCheat = matchCheatObject;
+                        if (!config[activatedCheat.paramName]) {
+                            activatedCheatParam = activatedCheat.toggleMessages[0];
+                        } else {
+                            activatedCheatParam = activatedCheat.toggleMessages[1];
+                            removeNoteFromGameConfig = true;
+                        }
+                        message = `${activatedCheat.message} ${activatedCheatParam}`;
                     }
-                    message = `${activatedCheat.message} ${activatedCheatParam}`;
                     break;
                 default:
                     break;
@@ -151,6 +152,12 @@ export const cheatsController = {
             case "penetravit":
             case "trinitas":
                 this.getBonusForArbitaryTime(paramName, activatedCheatParam);
+                break;
+            case "mortem":
+                this.suicide(paramName);
+                break;
+            case "sagittapotens":
+                this.togglePowerfulArrow(paramName, activatedCheatParam);
                 break;
             default:
                 break;
@@ -317,6 +324,39 @@ export const cheatsController = {
             }
             this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
             localStorageController.setParamToLocalStorage(paramName, secondsCount);
+        }
+    },
+
+    suicide(paramName) {
+        let hitData = [{
+            x: player.x,
+            y: player.y,
+            crashDamage: config[paramName]
+        }]
+        crashChecker.crashCheck(hitData);
+    },
+
+    togglePowerfulArrow(paramName, toggle) {
+        let powerfulDamage = 10;
+        let standartDamage = 1;
+
+
+        // доделать
+        if (toggle === "on") {
+            config[paramName] = true;
+            config.power = powerfulDamage;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.setParamToLocalStorage(paramName, toggle);
+                localStorageController.setParamToLocalStorage("power", powerfulDamage);
+            }
+        } else {
+            toggle = false;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.removeParamFromLocalStorage(paramName, toggle);
+                localStorageController.setParamToLocalStorage("power", standartDamage);
+            }
+            config[paramName] = toggle;
+            config.power = standartDamage;
         }
     }
 }

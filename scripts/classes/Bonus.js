@@ -94,7 +94,6 @@ export class Bonus {
             this.calculateTimeInBonusOff(this.actionTime / 1000, "newArrowType");
         }
         if (bonus.playerExtraOutlook) {
-            crashChecker.invincibilityOff();
             player.extraSelectorName = bonus.playerExtraOutlook;
             player.bonusObjectShield = bonus;
             player.bonusShieldIsActivated = true;
@@ -126,7 +125,7 @@ export class Bonus {
             player.bonusNewArrowTypeIsActivated = false;
             renderer.renderPlayer();
             renderer.renderBonusBarElement("newArrowTypeBar");
-            setTimeout(() => renderer.renderBonusBarElement("newArrowTypeBar"), 500);
+            setTimeout(() => renderer.renderBonusBarElement("newArrowTypeBar"), 700);
             cheatsController.activatedCheatsParamsDataTempArray.delete("drill");
             cheatsController.activatedCheatsParamsDataTempArray.delete("trinity");
             cheatsController.removeCheatNameFromGameConfig("getDrill");
@@ -137,7 +136,7 @@ export class Bonus {
             player.extraSelectorName = null;
             player.bonusShieldIsActivated = false;
             renderer.renderBonusBarElement("shieldBar");
-            setTimeout(() => renderer.renderBonusBarElement("shieldBar"), 500);
+            setTimeout(() => renderer.renderBonusBarElement("shieldBar"), 700);
             cheatsController.activatedCheatsParamsDataTempArray.delete("shield");
             cheatsController.removeCheatNameFromGameConfig("getShield");
         }

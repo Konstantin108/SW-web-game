@@ -181,7 +181,38 @@ export const cheats = {
                 description: "получить arrowTrinity на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
-            }
+            },
+            {
+                name: "suicide",
+                code: "mortem",
+                message: "this is the end",
+                type: "simpleCheat",
+                scope: "player",
+                toggleMessages: null,
+                paramName: "lives",
+                limit: null,
+                addNoteToGameConfig: false,
+                description: "убить самого себя",
+                help: this.helpArray.get("simpleCheat"),
+                options: null
+            },
+            {
+                name: "togglePowerfulArrow",
+                code: "sagittapotens",
+                message: "power x10",
+                type: "toggleCheat",
+                scope: "config",
+                toggleMessages: [
+                    "on",
+                    "off"
+                ],
+                paramName: "powerfulArrow",
+                limit: null,
+                addNoteToGameConfig: true,
+                description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
+                help: this.helpArray.get("toggleCheat"),
+                options: null
+            },
         ]
     }
 }

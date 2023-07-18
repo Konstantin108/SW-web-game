@@ -13,7 +13,7 @@ export class Arrow {
     selectorName = "arrow";
     x = player.x;
     y = player.y - 1;
-    damage = config.arrowDamage;
+    damage = config.arrowDamage * config.power;
     speed = config.arrowSpeed;
     penetration = config.arrowPenetration;
     hit_x = null;

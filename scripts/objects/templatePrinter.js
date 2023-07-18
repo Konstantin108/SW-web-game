@@ -136,7 +136,13 @@ export const templatePrinter = {
                             <p id="consoleSymbol">
                                 >_
                             </p> 
-                        <input id="cheatInput" type="text" autocomplete="off" class="${config.menuColor}">
+                        <input id="cheatInput"
+                               class="${config.menuColor}"
+                               type="text"
+                               autocomplete="off"
+                               onpaste="return false;"
+                               onCopy="return false;"
+                               onCut="return false;">
                         </div>
                     </strong>
                 </div>`;
