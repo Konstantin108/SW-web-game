@@ -11,7 +11,7 @@ export const cheats = {
             {
                 name: "toggleInfinityActiveMode",
                 code: "infinitum",
-                message: "infinity mode",
+                message: "infinity mode ",
                 type: "toggleCheat",
                 scope: "config",
                 toggleMessages: [
@@ -28,7 +28,7 @@ export const cheats = {
             {
                 name: "toggleInvincibility",
                 code: "invulnerability",
-                message: "invincibility",
+                message: "invincibility ",
                 type: "toggleCheat",
                 scope: "config",
                 toggleMessages: [
@@ -126,7 +126,7 @@ export const cheats = {
             {
                 name: "toggleArrowPenetration",
                 code: "terebro",
-                message: "drill mode",
+                message: "drill mode ",
                 type: "toggleCheat",
                 scope: "config",
                 toggleMessages: [
@@ -199,14 +199,14 @@ export const cheats = {
             {
                 name: "togglePowerfulArrow",
                 code: "sagittapotens",
-                message: "power x10",
+                message: "power x",
                 type: "toggleCheat",
                 scope: "config",
                 toggleMessages: [
-                    "on",
-                    "off"
+                    10,
+                    1
                 ],
-                paramName: "powerfulArrow",
+                paramName: "power",
                 limit: null,
                 addNoteToGameConfig: true,
                 description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",

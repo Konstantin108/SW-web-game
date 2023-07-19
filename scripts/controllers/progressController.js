@@ -122,10 +122,7 @@ export const progressController = {
     },
 
     compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {  // blockagesCount не может быть больше config.mapSizeX
-        let blockagesCount = null;
-
-        blockagesCountOnLevel <= config.mapSizeX ? blockagesCount = blockagesCountOnLevel : blockagesCount = config.mapSizeX;
-        return blockagesCount;
+        return blockagesCountOnLevel <= config.mapSizeX ? blockagesCountOnLevel : config.mapSizeX;
     },
 
     newLevelEntry(blockagesCount) {

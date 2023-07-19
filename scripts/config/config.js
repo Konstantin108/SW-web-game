@@ -22,7 +22,6 @@ export const config = {
     superAbilityIsCharged: 5,
     menuColor: "viridis",
     // стрелы игрока
-    powerfulArrow: false,
     power: 1,
     arrowDamage: 1,
     arrowSpeed: 50,

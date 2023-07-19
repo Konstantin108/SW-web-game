@@ -62,17 +62,11 @@ export const helperController = {
     },
 
     getCenterMapOnX() {
-        let center = null;
-
-        config.mapSizeX % 2 === 0 ? center = config.mapSizeX / 2 : center = (config.mapSizeX - 1) / 2 + 1;
-        return center;
+        return config.mapSizeX % 2 === 0 ? config.mapSizeX / 2 : (config.mapSizeX - 1) / 2 + 1;
     },
 
     getCenterMapOnY() {
-        let center = null;
-
-        config.mapSizeY % 2 === 0 ? center = config.mapSizeY / 2 : center = (config.mapSizeY - 1) / 2 + 1;
-        return center;
+        return config.mapSizeY % 2 === 0 ? config.mapSizeY / 2 : (config.mapSizeY - 1) / 2 + 1;
     },
 
     findPossiblePositions(employedPositionsArray, possiblePositionsArray) {

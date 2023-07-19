@@ -138,10 +138,8 @@ export const boss = {
         let choiceGunChance = 50;
         let leftGun = this.x - gunPosition;
         let rightGun = this.x + gunPosition;
-        let selectedGun = null;
 
-        helperController.randomEvent(choiceGunChance) ? selectedGun = leftGun : selectedGun = rightGun;
-        return selectedGun;
+        return helperController.randomEvent(choiceGunChance) ? leftGun : rightGun;
     },
 
     shoot(arrowTypeSelectorNameAndGunPosition, y_pos) {

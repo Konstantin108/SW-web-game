@@ -96,13 +96,13 @@ export const cheatsController = {
                 case "toggleCheat":
                     if (compoundCode.length === 1) {
                         activatedCheat = matchCheatObject;
-                        if (!config[activatedCheat.paramName]) {
+                        if (!config[activatedCheat.paramName] || config[activatedCheat.paramName] === 1) {
                             activatedCheatParam = activatedCheat.toggleMessages[0];
                         } else {
                             activatedCheatParam = activatedCheat.toggleMessages[1];
                             removeNoteFromGameConfig = true;
                         }
-                        message = `${activatedCheat.message} ${activatedCheatParam}`;
+                        message = `${activatedCheat.message}${activatedCheatParam}`;
                     }
                     break;
                 default:
@@ -337,26 +337,17 @@ export const cheatsController = {
     },
 
     togglePowerfulArrow(paramName, toggle) {
-        let powerfulDamage = 10;
-        let standartDamage = 1;
-
-
-        // доделать
-        if (toggle === "on") {
-            config[paramName] = true;
-            config.power = powerfulDamage;
+        if (toggle === 10) {
+            config[paramName] = toggle;
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.setParamToLocalStorage(paramName, toggle);
-                localStorageController.setParamToLocalStorage("power", powerfulDamage);
             }
         } else {
-            toggle = false;
+            toggle = 1;
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.removeParamFromLocalStorage(paramName, toggle);
-                localStorageController.setParamToLocalStorage("power", standartDamage);
             }
             config[paramName] = toggle;
-            config.power = standartDamage;
         }
     }
 }
