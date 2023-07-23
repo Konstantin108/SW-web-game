@@ -12,6 +12,7 @@ export const boss = {
     alive: false,
     lives: config.bossLives,
     destroyedReward: config.bossDestroyedReward,
+    anotherDestroyedReward: config.bossAnotherDestroyedReward,
     speed: config.bossSpeed,
     crashDamage: config.bossCrashDamage,
     shieldCrashDamage: config.bossShieldCrashDamage,
@@ -58,6 +59,9 @@ export const boss = {
 
     createBoss() {
         player.canMove = false;
+
+        if (this.anotherDestroyedReward) this.destroyedReward = this.anotherDestroyedReward;
+
         this.returnPlayerOnStartCell();
         for (let i = this.x - this.getBossBodyEdgeOnX(); i <= this.offsetX + 1; i++) {
             this.bodyX.push(i);
@@ -82,6 +86,8 @@ export const boss = {
         setTimeout(() => {
             this.bodyX = [];
             this.lives = config.bossLives;
+            this.anotherDestroyedReward = config.bossAnotherDestroyedReward;
+            this.destroyedReward = config.bossDestroyedReward;
         }, 7500);
     },
 

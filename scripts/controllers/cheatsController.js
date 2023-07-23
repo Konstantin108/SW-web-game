@@ -97,9 +97,9 @@ export const cheatsController = {
                     if (compoundCode.length === 1) {
                         activatedCheat = matchCheatObject;
                         if (!config[activatedCheat.paramName] || config[activatedCheat.paramName] === 1) {
-                            activatedCheatParam = activatedCheat.toggleMessages[0];
+                            activatedCheatParam = activatedCheat.toggleOptions[0];
                         } else {
-                            activatedCheatParam = activatedCheat.toggleMessages[1];
+                            activatedCheatParam = activatedCheat.toggleOptions[1];
                             removeNoteFromGameConfig = true;
                         }
                         message = `${activatedCheat.message}${activatedCheatParam}`;
@@ -272,6 +272,7 @@ export const cheatsController = {
     callBoss(paramName) {
         progressController[paramName] = true;
         progressController.bossKilled = false;
+        boss.anotherDestroyedReward = 10;
     },
 
     killBoss() {
@@ -328,11 +329,13 @@ export const cheatsController = {
     },
 
     suicide(paramName) {
-        let hitData = [{
-            x: player.x,
-            y: player.y,
-            crashDamage: config[paramName]
-        }]
+        let hitData = [
+            {
+                x: player.x,
+                y: player.y,
+                crashDamage: config[paramName]
+            }
+        ];
         crashChecker.crashCheck(hitData);
     },
 

@@ -45,6 +45,7 @@ export const config = {
     // босс
     bossLives: 2000,  // возможно изменить параметры босса
     bossDestroyedReward: 2500,
+    bossAnotherDestroyedReward: null,
     bossSpeed: 1000,
     bossCrashDamage: 3,
     bossShieldCrashDamage: 3,

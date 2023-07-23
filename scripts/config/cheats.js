@@ -13,8 +13,10 @@ export const cheats = {
                 code: "infinitum",
                 message: "infinity mode ",
                 type: "toggleCheat",
-                scope: "config",
-                toggleMessages: [
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
                     "on",
                     "off"
                 ],
@@ -30,8 +32,10 @@ export const cheats = {
                 code: "invulnerability",
                 message: "invincibility ",
                 type: "toggleCheat",
-                scope: "config",
-                toggleMessages: [
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
                     "on",
                     "off"
                 ],
@@ -47,8 +51,10 @@ export const cheats = {
                 code: "lux",
                 message: "set color",
                 type: "optionsCheat",
-                scope: "config",
-                toggleMessages: null,
+                scope: [
+                    "config"
+                ],
+                toggleOptions: null,
                 paramName: "menuColor",
                 limit: null,
                 addNoteToGameConfig: true,
@@ -72,8 +78,10 @@ export const cheats = {
                 code: "aspirin",
                 message: "lives restored",
                 type: "simpleCheat",
-                scope: "player",
-                toggleMessages: null,
+                scope: [
+                    "player"
+                ],
+                toggleOptions: null,
                 paramName: "lives",
                 limit: null,
                 addNoteToGameConfig: false,
@@ -86,8 +94,10 @@ export const cheats = {
                 code: "adderevitam",
                 message: "added lifes",
                 type: "arbitaryValueCheat",
-                scope: "config",
-                toggleMessages: null,
+                scope: [
+                    "config"
+                ],
+                toggleOptions: null,
                 paramName: "lives",
                 limit: 999,
                 addNoteToGameConfig: true,
@@ -100,8 +110,11 @@ export const cheats = {
                 code: "adventusbulla",
                 message: "boss is coming",
                 type: "simpleCheat",
-                scope: "progressController",
-                toggleMessages: null,
+                scope: [
+                    "boss",
+                    "progressController"
+                ],
+                toggleOptions: null,
                 paramName: "bossExist",
                 limit: null,
                 addNoteToGameConfig: false,
@@ -114,8 +127,10 @@ export const cheats = {
                 code: "auferspiritum",
                 message: "boss defeated",
                 type: "simpleCheat",
-                scope: "progressController",
-                toggleMessages: null,
+                scope: [
+                    "progressController"
+                ],
+                toggleOptions: null,
                 paramName: null,
                 limit: null,
                 addNoteToGameConfig: false,
@@ -128,8 +143,10 @@ export const cheats = {
                 code: "terebro",
                 message: "drill mode ",
                 type: "toggleCheat",
-                scope: "config",
-                toggleMessages: [
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
                     "on",
                     "off"
                 ],
@@ -145,8 +162,10 @@ export const cheats = {
                 code: "utarmis",
                 message: "shield seconds",
                 type: "arbitaryValueCheat",
-                scope: "bonusController",
-                toggleMessages: null,
+                scope: [
+                    "bonusController"
+                ],
+                toggleOptions: null,
                 paramName: "shield",
                 limit: 199,
                 addNoteToGameConfig: true,
@@ -159,8 +178,10 @@ export const cheats = {
                 code: "penetravit",
                 message: "drill seconds",
                 type: "arbitaryValueCheat",
-                scope: "bonusController",
-                toggleMessages: null,
+                scope: [
+                    "bonusController"
+                ],
+                toggleOptions: null,
                 paramName: "drill",
                 limit: 199,
                 addNoteToGameConfig: true,
@@ -173,8 +194,10 @@ export const cheats = {
                 code: "trinitas",
                 message: "trinity seconds",
                 type: "arbitaryValueCheat",
-                scope: "bonusController",
-                toggleMessages: null,
+                scope: [
+                    "bonusController"
+                ],
+                toggleOptions: null,
                 paramName: "trinity",
                 limit: 199,
                 addNoteToGameConfig: true,
@@ -187,8 +210,10 @@ export const cheats = {
                 code: "mortem",
                 message: "this is the end",
                 type: "simpleCheat",
-                scope: "player",
-                toggleMessages: null,
+                scope: [
+                    "player"
+                ],
+                toggleOptions: null,
                 paramName: "lives",
                 limit: null,
                 addNoteToGameConfig: false,
@@ -201,8 +226,10 @@ export const cheats = {
                 code: "sagittapotens",
                 message: "power x",
                 type: "toggleCheat",
-                scope: "config",
-                toggleMessages: [
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
                     10,
                     1
                 ],

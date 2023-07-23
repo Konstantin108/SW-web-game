@@ -142,7 +142,9 @@ export const templatePrinter = {
                                autocomplete="off"
                                onpaste="return false;"
                                onCopy="return false;"
-                               onCut="return false;">
+                               onCut="return false;"
+                               onDrag="return false;" 
+                               onDrop="return false;">
                         </div>
                     </strong>
                 </div>`;
