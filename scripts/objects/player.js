@@ -61,65 +61,64 @@ export const player = {
             if (!player.canMove) return;
             let x_value = player.x;
             let y_value = player.y;
-            if (possibleDirections.includes(event.code)) {
-                switch (event.code) {
-                    case possibleDirections[0]:
-                    case possibleDirections[8]:
-                    case possibleDirections[12]:
-                        x_value += -1;
-                        break;
-                    case possibleDirections[1]:
-                    case possibleDirections[9]:
-                    case possibleDirections[13]:
-                        x_value += 1;
-                        break;
-                    case possibleDirections[2]:
-                    case possibleDirections[10]:
-                    case possibleDirections[14]:
-                        y_value += 1;
-                        break;
-                    case possibleDirections[3]:
-                    case possibleDirections[11]:
-                    case possibleDirections[15]:
-                        y_value += -1;
-                        break;
-                    case possibleDirections[4]:
-                        x_value += -1;
-                        y_value += -1;
-                        break;
-                    case possibleDirections[5]:
-                        x_value += 1;
-                        y_value += -1;
-                        break;
-                    case possibleDirections[6]:
-                        x_value += -1;
-                        y_value += 1;
-                        break;
-                    case possibleDirections[7]:
-                        x_value += 1;
-                        y_value += 1;
-                        break;
-                    default:
-                        break;
-                }
-                if (x_value <= config.mapSizeX && y_value <= config.mapSizeY && x_value >= 0 && y_value >= 0) {
-                    player.x = x_value;
-                    player.y = y_value;
-                } else {
-                    x_value = player.x;
-                    y_value = player.y;
-                    player.x = x_value;
-                    player.y = y_value
-                }
-                bonusController.pickedCheck();
-                crashChecker.crashCheck(blockageController.blockagesArray, true);
-                crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.bodyX, boss.y, boss.crashDamage));
-                crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.shieldBody.x, boss.shieldBody.y, boss.shieldCrashDamage));
-                if (player.invincibility) renderer.clear("invincibility");
-                renderer.clear(player.selectorName);
-                if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
-                renderer.renderPlayer();
+            if (!possibleDirections.includes(event.code)) return;
+            switch (event.code) {
+                case possibleDirections[0]:
+                case possibleDirections[8]:
+                case possibleDirections[12]:
+                    x_value += -1;
+                    break;
+                case possibleDirections[1]:
+                case possibleDirections[9]:
+                case possibleDirections[13]:
+                    x_value += 1;
+                    break;
+                case possibleDirections[2]:
+                case possibleDirections[10]:
+                case possibleDirections[14]:
+                    y_value += 1;
+                    break;
+                case possibleDirections[3]:
+                case possibleDirections[11]:
+                case possibleDirections[15]:
+                    y_value += -1;
+                    break;
+                case possibleDirections[4]:
+                    x_value += -1;
+                    y_value += -1;
+                    break;
+                case possibleDirections[5]:
+                    x_value += 1;
+                    y_value += -1;
+                    break;
+                case possibleDirections[6]:
+                    x_value += -1;
+                    y_value += 1;
+                    break;
+                case possibleDirections[7]:
+                    x_value += 1;
+                    y_value += 1;
+                    break;
+                default:
+                    break;
             }
+            if (x_value <= config.mapSizeX && y_value <= config.mapSizeY && x_value >= 0 && y_value >= 0) {
+                player.x = x_value;
+                player.y = y_value;
+            } else {
+                x_value = player.x;
+                y_value = player.y;
+                player.x = x_value;
+                player.y = y_value
+            }
+            bonusController.pickedCheck();
+            crashChecker.crashCheck(blockageController.blockagesArray, true);
+            crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.bodyX, boss.y, boss.crashDamage));
+            crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.shieldBody.x, boss.shieldBody.y, boss.shieldCrashDamage));
+            if (player.invincibility) renderer.clear("invincibility");
+            renderer.clear(player.selectorName);
+            if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
+            renderer.renderPlayer();
         });
     },
 

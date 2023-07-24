@@ -11,7 +11,6 @@ import {bonusController} from "./bonusController.js";
 export const cheatsController = {
     cheats: config.cheats,
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
-    inputElement: null,
     activatedCheatsParamsDataTempArray: new Map(),
 
     callCheatConsole() {
@@ -20,42 +19,29 @@ export const cheatsController = {
 
         document.addEventListener("keydown", function (event) {
             if (!playerCanCallCheatConsole) return;
-            if (showCheatConsoleBtn === event.code) {
-                playerCanCallCheatConsole = false;
-                renderer.renderCheatConsole();
-                setTimeout(() => playerCanCallCheatConsole = true, 500);
-                cheatsController.inputElement = null;
-            }
+            if (showCheatConsoleBtn !== event.code) return;
+            playerCanCallCheatConsole = false;
+            renderer.renderCheatConsole();
+            cheatsController.inputCheat();
+            setTimeout(() => playerCanCallCheatConsole = true, 500);
         });
     },
 
-    // вешать слушатель события на Enter по событию focused на input,
-    // focused на input вешать при нажатии ~
     inputCheat() {
-        let inputCheatBtns = [
-            "Enter",
-            "NumpadEnter"
-        ];
-        let isPressBtn = false;
+        let inputElement = document.querySelector("#cheatInput");
+        let form = document.querySelector("#cheatConsole");
+        let cheatMessageContainer = document.querySelector("#cheatMessageContainer");
 
-        document.body.addEventListener("click", function (event) {
-            if (event.target.id !== "cheatInput") return;
-            if (cheatsController.inputElement) return;
-            cheatsController.inputElement = event.target;
-            let cheatMessageContainer = cheatsController.inputElement.closest("#cheatConsole").querySelector("#cheatMessageContainer");
-            cheatsController.inputElement.addEventListener("keydown", function (event) {
-                if (isPressBtn) return;
-                if (inputCheatBtns.includes(event.code)) {
-                    if (cheatsController.inputElement.value) {
-                        cheatsController.matchPlayerInputAndCheatCode(cheatsController.inputElement.value.trim().toLowerCase(), cheatMessageContainer);
-                        cheatsController.inputElement.value = "";
-                    }
-                    isPressBtn = true;
-                }
-            });
-            cheatsController.inputElement.addEventListener("keyup", function (event) {
-                if (inputCheatBtns.includes(event.code)) isPressBtn = false;
-            });
+        helperController.returnFormattedValue(inputElement);
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let data = new FormData(this);
+            let value = data.get("cheatInput");
+
+            if (!value) return;
+            cheatsController.matchPlayerInputAndCheatCode(value.toLowerCase(), cheatMessageContainer);
+            this.reset();
         });
     },
 

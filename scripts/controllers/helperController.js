@@ -61,6 +61,19 @@ export const helperController = {
         return array = array.filter(elem => elem !== item);
     },
 
+    returnFormattedValue(input) {
+        input.oninput = () => input.value = this.removeForbiddenCharactersAndSpaces(input.value);
+    },
+
+    removeForbiddenCharactersAndSpaces(value) {
+        let forbiddenCharacters = [
+            "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "=", "-", "[", "]", "{", "}", ";", "'", "\"", "\\", "|", ",", ".", "<", ">", "/", "?", "*", "№"
+        ];
+
+        forbiddenCharacters.forEach(symbol => value = value.replace(symbol, ""));
+        return value.trim();
+    },
+
     getCenterMapOnX() {
         return config.mapSizeX % 2 === 0 ? config.mapSizeX / 2 : (config.mapSizeX - 1) / 2 + 1;
     },

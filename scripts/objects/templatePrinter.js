@@ -129,7 +129,7 @@ export const templatePrinter = {
     },
 
     cheatConsoleTemplatePrint() {
-        return `<div id="cheatConsole">
+        return `<form id="cheatConsole">
                     <strong>
                         <div id="cheatMessageContainer"></div>
                         <div id="cheatInputContainer">
@@ -137,6 +137,7 @@ export const templatePrinter = {
                                 >_
                             </p> 
                         <input id="cheatInput"
+                               name="cheatInput"
                                class="${config.menuColor}"
                                type="text"
                                autocomplete="off"
@@ -147,7 +148,7 @@ export const templatePrinter = {
                                onDrop="return false;">
                         </div>
                     </strong>
-                </div>`;
+                </form>`;
     },
 
     cheatMessageTemplatePrint(message, messageColor) {

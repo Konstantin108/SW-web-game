@@ -464,12 +464,16 @@ export const renderer = {
 
     renderCheatConsole() {
         let cheatConsole = null;
+        let cheatInput = null;
 
         if (document.querySelector("#cheatConsole") === null) {
             this.container.insertAdjacentHTML("afterbegin", templatePrinter.cheatConsoleTemplatePrint());
             cheatConsole = document.querySelector("#cheatConsole");
             cheatConsole.classList.add("cheatConsoleIn");
             setTimeout(() => cheatConsole.classList.remove("cheatConsoleIn"), 500);
+
+            cheatInput = document.querySelector("#cheatInput");
+            setTimeout(() => cheatInput.focus(), 10);
         } else {
             cheatConsole = document.querySelector("#cheatConsole");
             cheatConsole.classList.add("cheatConsoleOut");
