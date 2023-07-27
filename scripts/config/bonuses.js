@@ -1,10 +1,16 @@
 export const bonuses = {
+    bonusSpeed: 1500,
+    bonusChance: 12,
 
-    setBonusesParams() {
+    setBonusesParams(bonusChanceUsersParam = null) {
+        let bonusSpeed = this.bonusSpeed;
+        let bonusChance = this.bonusChance;
+
+        if (bonusChanceUsersParam) bonusChance = bonusChanceUsersParam;
+
         return {
-            bonusSpeed: 1500,
-            bonusChance: 12,
-            // bonusChance: 99,
+            bonusSpeed,
+            bonusChance,
             bonusTypes: {
                 1: {
                     name: "drill",
@@ -69,7 +75,7 @@ export const bonuses = {
                     // chanceFrom: 4,
                     // chanceTo: 5,
                     actionTime: null,
-                    description: "игрок получает бомбу, взрыв которой убивает всех врагов на экране, ее можно использовать в любой момент"
+                    description: "игрок получает бомбу, взрыв которой убивает всех врагов на экране и снимает щит с босса, ее можно использовать в любой момент"
                 }
             }
         }

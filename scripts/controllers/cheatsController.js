@@ -7,6 +7,9 @@ import {helperController} from "./helperController.js";
 import {progressController} from "./progressController.js";
 import {boss} from "../objects/boss.js";
 import {bonusController} from "./bonusController.js";
+import {explosion} from "../objects/explosion.js";
+import {game} from "../game.js";
+import {bonuses} from "../config/bonuses.js";
 
 export const cheatsController = {
     cheats: config.cheats,
@@ -145,6 +148,12 @@ export const cheatsController = {
             case "sagittapotens":
                 this.togglePowerfulArrow(paramName, activatedCheatParam);
                 break;
+            case "magnusmico":
+                this.explosion();
+                break;
+            case "fortuna":
+                this.setBonusChance(paramName, activatedCheatParam);
+                break;
             default:
                 break;
         }
@@ -157,7 +166,7 @@ export const cheatsController = {
             this.removeCheatNameFromGameConfig(cheat.name);
             this.updateCheatNamesArrayInLocalStorageAfterCheatOff();
         } else {
-            if (cheat.addNoteToGameConfig) this.addCheatNameToGameConfig(cheat.name);
+            if (cheat.type !== "simpleCheat") this.addCheatNameToGameConfig(cheat.name);
         }
     },
 
@@ -193,15 +202,22 @@ export const cheatsController = {
 
             this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
 
+            // добавление читов и их значений в localStorage
             let cheatsArray = [];
             config.cheatsActivated.forEach(cheatName => {
                 cheatsArray.push(config.cheats.find(elem => elem.name === cheatName));
             });
             cheatsArray.forEach(item => {
-                if (helperController.getObjectByName(config.bonuses.bonusTypes, item.paramName)) {
-                    localStorageController.setParamToLocalStorage(item.paramName, this.activatedCheatsParamsDataTempArray.get(item.paramName));
-                } else {
+                if (config.hasOwnProperty(item)) {
                     localStorageController.setParamToLocalStorage(item.paramName, config[item.paramName]);
+                } else if (helperController.getObjectByName(config.bonuses.bonusTypes, item.paramName)) {
+                    localStorageController.setParamToLocalStorage(item.paramName, this.activatedCheatsParamsDataTempArray.get(item.paramName), false);
+                } else {
+                    for (let key in config) {
+                        if (config[key] instanceof Object && config[key].hasOwnProperty(item.paramName)) {
+                            localStorageController.setParamToLocalStorage(item.paramName, config[key][item.paramName], false);
+                        }
+                    }
                 }
             });
         } else {
@@ -310,7 +326,7 @@ export const cheatsController = {
                 this.removeCheatNameFromGameConfig("getDrill");
             }
             this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
-            localStorageController.setParamToLocalStorage(paramName, secondsCount);
+            localStorageController.setParamToLocalStorage(paramName, secondsCount, false);
         }
     },
 
@@ -337,6 +353,17 @@ export const cheatsController = {
                 localStorageController.removeParamFromLocalStorage(paramName, toggle);
             }
             config[paramName] = toggle;
+        }
+    },
+
+    explosion() {
+        if (game.gameIsRunning) explosion.explode();
+    },
+
+    setBonusChance(paramName, percent) {
+        config["bonuses"] = bonuses.setBonusesParams(percent);
+        if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+            localStorageController.setParamToLocalStorage(paramName, percent, false);
         }
     }
 }

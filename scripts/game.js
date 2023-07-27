@@ -21,6 +21,8 @@ export const game = {
         localStorageController.setLocalStorageParamsToGameConfig();
         renderer.render();
         cheatsController.callCheatConsole();
+        this.startGameDelay(this.startGameDelaySecondsCount + 1);
+        this.showPauseMenu();
         console.log(localStorage);  // отладка
         console.log(config);
     },
@@ -116,5 +118,3 @@ export const game = {
 }
 
 game.init();
-game.startGameDelay(game.startGameDelaySecondsCount + 1);
-game.showPauseMenu();

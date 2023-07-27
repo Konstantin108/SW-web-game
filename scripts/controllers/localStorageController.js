@@ -2,6 +2,7 @@ import {config} from "../config/config.js";
 import {player} from "../objects/player.js";
 import {helperController} from "./helperController.js";
 import {cheatsController} from "./cheatsController.js";
+import {bonuses} from "../config/bonuses.js";
 
 export const localStorageController = {
     bonusNamesFromLocalStorage: [],
@@ -32,25 +33,31 @@ export const localStorageController = {
         let localStorageParam = Number(localStorage[param]);
         let setLocalStorageParamsDelay = config.startGameDelaySecondsCount * 1000 + 2100;
 
-        if (Number.isInteger(localStorageParam)) {
-            config[param] = localStorageParam
-        } else if (!Number.isInteger(localStorageParam) && localStorage[param] === "on" || localStorage[param] === "true") {
-            config[param] = true;
-        } else if (!Number.isInteger(localStorageParam) && localStorage[param] === "off" || localStorage[param] === "false") {
-            config[param] = false;
-        } else if (!Number.isInteger(localStorageParam) && param === "cheatsActivated") {
-            localStorage[param].split(",").forEach(cheat => config.cheatsActivated.push(cheat));
-        } else {
-            config[param] = localStorage[param];
-        }
-
-        if (helperController.getObjectByName(config.bonuses.bonusTypes, param)) {
+        if (config.hasOwnProperty(param)) {
+            if (Number.isInteger(localStorageParam)) {
+                config[param] = localStorageParam
+            } else if (!Number.isInteger(localStorageParam) && localStorage[param] === "on" || localStorage[param] === "true") {
+                config[param] = true;
+            } else if (!Number.isInteger(localStorageParam) && localStorage[param] === "off" || localStorage[param] === "false") {
+                config[param] = false;
+            } else if (!Number.isInteger(localStorageParam) && param === "cheatsActivated") {
+                localStorage[param].split(",").forEach(cheat => config.cheatsActivated.push(cheat));
+            } else {
+                config[param] = localStorage[param];
+            }
+        } else if (helperController.getObjectByName(config.bonuses.bonusTypes, param)) {
             if (!this.bonusNamesFromLocalStorage.includes(param)) {
                 setTimeout(() => {
                     cheatsController.getBonusForArbitaryTime(param, localStorage[param]);
                     cheatsController.activatedCheatsParamsDataTempArray.set(param, localStorage[param]);
                 }, setLocalStorageParamsDelay);
                 this.bonusNamesFromLocalStorage.push(param);
+            }
+        } else {
+            for (let key in config) {
+                if (config[key] instanceof Object && config[key].hasOwnProperty(param)) {
+                    config[key] = bonuses.setBonusesParams(localStorageParam);
+                }
             }
         }
 
@@ -73,7 +80,7 @@ export const localStorageController = {
 
     removeParamFromLocalStorage(param, value = null) {
         localStorage.removeItem(param);
-        config[param] = value;
+        if (value !== null) config[param] = value;
         this.removeLocalStorageParamNamesFromGameConfig(param);
     },
 

@@ -22,7 +22,6 @@ export const cheats = {
                 ],
                 paramName: "cheatsInfinityActiveMode",
                 limit: null,
-                addNoteToGameConfig: true,
                 description: "включение или выключение опции сохранения действия читов в localStorage",
                 help: this.helpArray.get("toggleCheat"),
                 options: null
@@ -41,7 +40,6 @@ export const cheats = {
                 ],
                 paramName: "invincibility",
                 limit: null,
-                addNoteToGameConfig: true,
                 description: "включение или выключение неуязвимости",
                 help: this.helpArray.get("toggleCheat"),
                 options: null
@@ -57,7 +55,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "menuColor",
                 limit: null,
-                addNoteToGameConfig: true,
                 description: "изменение цвета меню",
                 help: this.helpArray.get("optionsCheat"),
                 options: [
@@ -84,7 +81,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "lives",
                 limit: null,
-                addNoteToGameConfig: false,
                 description: "восстановить жизни",
                 help: this.helpArray.get("simpleCheat"),
                 options: null
@@ -100,7 +96,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "lives",
                 limit: 999,
-                addNoteToGameConfig: true,
                 description: "установить количество жизней",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
@@ -117,7 +112,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "bossExist",
                 limit: null,
-                addNoteToGameConfig: false,
                 description: "вызвать босса",
                 help: this.helpArray.get("simpleCheat"),
                 options: null
@@ -133,7 +127,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: null,
                 limit: null,
-                addNoteToGameConfig: false,
                 description: "убить босса",
                 help: this.helpArray.get("simpleCheat"),
                 options: null
@@ -152,7 +145,6 @@ export const cheats = {
                 ],
                 paramName: "arrowPenetration",
                 limit: null,
-                addNoteToGameConfig: true,
                 description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
                 help: this.helpArray.get("toggleCheat"),
                 options: null
@@ -168,7 +160,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "shield",
                 limit: 199,
-                addNoteToGameConfig: true,
                 description: "получить shield на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
@@ -184,7 +175,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "drill",
                 limit: 199,
-                addNoteToGameConfig: true,
                 description: "получить arrowDrill на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
@@ -200,7 +190,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "trinity",
                 limit: 199,
-                addNoteToGameConfig: true,
                 description: "получить arrowTrinity на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
@@ -216,7 +205,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "lives",
                 limit: null,
-                addNoteToGameConfig: false,
                 description: "убить самого себя",
                 help: this.helpArray.get("simpleCheat"),
                 options: null
@@ -235,11 +223,41 @@ export const cheats = {
                 ],
                 paramName: "power",
                 limit: null,
-                addNoteToGameConfig: true,
                 description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
                 help: this.helpArray.get("toggleCheat"),
                 options: null
             },
+            {
+                name: "explosion",
+                code: "magnusmico",
+                message: "big bang",
+                type: "simpleCheat",
+                scope: [
+                    "explosion"
+                ],
+                toggleOptions: null,
+                paramName: null,
+                limit: null,
+                description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
+                help: this.helpArray.get("simpleCheat"),
+                options: null
+            },
+            {
+                name: "setBonusChance",
+                code: "fortuna",
+                message: "more bonuses",
+                type: "arbitaryValueCheat",
+                scope: [
+                    "config",
+                    "bonuses"
+                ],
+                toggleOptions: null,
+                paramName: "bonusChance",
+                limit: 100,
+                description: "установить процент вероятности появления на карте бонусов",
+                help: this.helpArray.get("arbitaryValueCheat"),
+                options: null
+            }
         ]
     }
 }

@@ -7,7 +7,7 @@ export const levels = {
                 scoreCountForThisLevel: 0,
                 multiplier: 1,
                 blockagesCount: 4,
-                fireChance: 15,
+                fireChance: 50,
                 maxBlockageSpeed: 1300,
                 minBlockageSpeed: 2500,
                 blockageTypes: {
@@ -24,7 +24,7 @@ export const levels = {
                 scoreCountForThisLevel: 200,
                 multiplier: 2,
                 blockagesCount: 5,
-                fireChance: 15,
+                fireChance: 35,
                 maxBlockageSpeed: 1300,
                 minBlockageSpeed: 2500,
                 blockageTypes: {
@@ -46,7 +46,7 @@ export const levels = {
                 scoreCountForThisLevel: 600,
                 multiplier: 2,
                 blockagesCount: 5,
-                fireChance: 15,
+                fireChance: 30,
                 maxBlockageSpeed: 1100,
                 minBlockageSpeed: 2300,
                 blockageTypes: {
@@ -68,7 +68,7 @@ export const levels = {
                 scoreCountForThisLevel: 1000,
                 multiplier: 3,
                 blockagesCount: 6,
-                fireChance: 18,
+                fireChance: 20,
                 maxBlockageSpeed: 1000,
                 minBlockageSpeed: 2200,
                 blockageTypes: {
@@ -90,7 +90,7 @@ export const levels = {
                 scoreCountForThisLevel: 1500,
                 multiplier: 4,
                 blockagesCount: 6,
-                fireChance: 20,
+                fireChance: 18,
                 maxBlockageSpeed: 1000,
                 minBlockageSpeed: 2200,
                 blockageTypes: {

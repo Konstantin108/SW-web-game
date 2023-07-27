@@ -3,7 +3,6 @@ import {game} from "../game.js";
 import {renderer} from "../objects/renderer.js";
 import {bonusController} from "../controllers/bonusController.js";
 import {player} from "../objects/player.js";
-import {crashChecker} from "../objects/crashChecker.js";
 import {cheatsController} from "../controllers/cheatsController.js";
 
 export class Bonus {
