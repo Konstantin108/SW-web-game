@@ -257,7 +257,25 @@ export const cheats = {
                 description: "установить процент вероятности появления на карте бонусов",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 options: null
-            }
+            },
+            {
+                name: "superAbilityIsAlwaysCharged",
+                code: "faculta",
+                message: "super ability",
+                type: "toggleCheat",
+                scope: [
+                    "undefined"  // пока не знаю
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "undefined",  // пока не знаю
+                limit: null,
+                description: "включение или выключение всегда полного заряда для использования супер способности",
+                help: this.helpArray.get("toggleCheat"),
+                options: null
+            },
         ]
     }
 }
