@@ -154,6 +154,9 @@ export const cheatsController = {
             case "fortuna":
                 this.setBonusChance(paramName, activatedCheatParam);
                 break;
+            case "faculta":
+                this.superAbilityIsAlwaysCharged(paramName, activatedCheatParam)
+                break;
             default:
                 break;
         }
@@ -208,7 +211,7 @@ export const cheatsController = {
                 cheatsArray.push(config.cheats.find(elem => elem.name === cheatName));
             });
             cheatsArray.forEach(item => {
-                if (config.hasOwnProperty(item)) {
+                if (config.hasOwnProperty(item.paramName)) {
                     localStorageController.setParamToLocalStorage(item.paramName, config[item.paramName]);
                 } else if (helperController.getObjectByName(config.bonuses.bonusTypes, item.paramName)) {
                     localStorageController.setParamToLocalStorage(item.paramName, this.activatedCheatsParamsDataTempArray.get(item.paramName), false);
@@ -254,6 +257,7 @@ export const cheatsController = {
         }
         renderer.renderStatusBar();
         renderer.renderSuperAbilityBar();
+        renderer.renderSuperAbilityBarActivatedByCheat();
     },
 
     restoreLives(paramName) {
@@ -365,5 +369,27 @@ export const cheatsController = {
         if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
             localStorageController.setParamToLocalStorage(paramName, percent, false);
         }
-    }
+    },
+
+    superAbilityIsAlwaysCharged(paramName, toggle) {
+        if (toggle === "on") {
+            config[paramName] = true;
+            config["superAbilityIsActivated"] = true;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.setParamToLocalStorage(paramName, toggle);
+                localStorageController.setParamToLocalStorage("superAbilityIsActivated", toggle);
+            }
+            player[paramName] = config[paramName];
+            player.superAbilityStatusInit();
+            renderer.renderSuperAbilityBarActivatedByCheat();
+        } else {
+            toggle = false;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.removeParamFromLocalStorage(paramName, toggle);
+                localStorageController.removeParamFromLocalStorage("superAbilityIsActivated", toggle);
+            }
+            config[paramName] = toggle;
+            config["superAbilityIsActivated"] = toggle;
+        }
+    },
 }

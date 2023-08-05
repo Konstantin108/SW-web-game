@@ -23,6 +23,7 @@ export const game = {
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         this.showPauseMenu();
+        player.superAbilityStatusInit();
         console.log(localStorage);  // отладка
         console.log(config);
     },

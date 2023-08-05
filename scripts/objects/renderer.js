@@ -31,6 +31,7 @@ export const renderer = {
         this.renderBonusBarElement("shieldBar");
         this.renderBonusBarElement("newArrowTypeBar");
         this.renderSuperAbilityBar();
+        this.renderSuperAbilityBarActivatedByCheat();
     },
 
     renderMap() {
@@ -393,6 +394,26 @@ export const renderer = {
             lightningElement.classList.add("lightningIsOut");
             setTimeout(() => this.renderSuperAbilityBar(), 200);
         }
+    },
+
+    renderSuperAbilityBarActivatedByCheat() {
+        if (!config.superAbilityIsAlwaysCharged) return;
+
+        let table = document.querySelector("table");
+        let superAbilityBarElement = document.querySelector("#superAbilityBar");
+        let shineSectorsCount = config.superAbilityIsCharged;
+        let shineSectorsBox = "";
+
+        if (superAbilityBarElement) table.removeChild(superAbilityBarElement);
+        for (let i = 0; i < shineSectorsCount; i++) {
+            shineSectorsBox += `<div class="shineSector ${config.menuColor}Background"></div>`;
+        }
+        this.superAbilityBar = templatePrinter.superAbilityBarTemplatePrint(shineSectorsBox);
+        table.insertAdjacentHTML("afterbegin", this.superAbilityBar);
+
+        let lightningElement = document.querySelector("#lightningElement");
+        lightningElement.classList.remove("lightningIsOff");
+        lightningElement.classList.add("lightningIsOn");
     },
 
     renderLivesBar() {  // если больше 5 жизней то будет отрисовано простое табло

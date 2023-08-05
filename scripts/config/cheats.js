@@ -261,16 +261,16 @@ export const cheats = {
             {
                 name: "superAbilityIsAlwaysCharged",
                 code: "faculta",
-                message: "super ability",
+                message: "super ability ",
                 type: "toggleCheat",
                 scope: [
-                    "undefined"  // пока не знаю
+                    "config"
                 ],
                 toggleOptions: [
                     "on",
                     "off"
                 ],
-                paramName: "undefined",  // пока не знаю
+                paramName: "superAbilityIsAlwaysCharged",
                 limit: null,
                 description: "включение или выключение всегда полного заряда для использования супер способности",
                 help: this.helpArray.get("toggleCheat"),

@@ -20,6 +20,7 @@ export const config = {
     superAbilityDamage: 300,
     superAbilityIsActivated: false,
     superAbilityIsCharged: 5,
+    superAbilityIsAlwaysCharged: false,
     menuColor: "viridis",
     // стрелы игрока
     power: 1,
