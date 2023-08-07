@@ -276,6 +276,21 @@ export const cheats = {
                 help: this.helpArray.get("toggleCheat"),
                 options: null
             },
+            {
+                name: "offAllCheats",
+                code: "avertas",
+                message: "turn off all cheats",
+                type: "simpleCheat",
+                scope: [
+                    "undefined"  // пока не знаю
+                ],
+                toggleOptions: null,
+                paramName: "undefined",  // пока не знаю
+                limit: null,
+                description: "отключить действие всех читов",
+                help: this.helpArray.get("simpleCheat"),
+                options: null
+            }
         ]
     }
 }

@@ -157,6 +157,9 @@ export const cheatsController = {
             case "faculta":
                 this.superAbilityIsAlwaysCharged(paramName, activatedCheatParam)
                 break;
+            case "avertas":
+                this.offAllCheats();
+                break;
             default:
                 break;
         }
@@ -392,4 +395,8 @@ export const cheatsController = {
             config["superAbilityIsActivated"] = toggle;
         }
     },
+
+    offAllCheats() {
+        console.log("turn off all cheats");
+    }
 }

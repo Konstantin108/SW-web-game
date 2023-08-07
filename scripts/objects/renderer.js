@@ -442,16 +442,12 @@ export const renderer = {
         let lostHearts = document.querySelectorAll(".lostHeart");
 
         hearts.forEach(heart => {
-            if (heart) {
-                heart.classList.add(`${selector}`);
-                setTimeout(() => heart.classList.remove(`${selector}`), 300);
-            }
+            heart.classList.add(`${selector}`);
+            setTimeout(() => heart.classList.remove(`${selector}`), 300);
         });
         lostHearts.forEach(lostHeart => {
-            if (lostHeart) {
-                lostHeart.classList.add(`${selector}`);
-                setTimeout(() => lostHeart.classList.remove(`${selector}`), 300);
-            }
+            lostHeart.classList.add(`${selector}`);
+            setTimeout(() => lostHeart.classList.remove(`${selector}`), 300);
         });
     },
 
