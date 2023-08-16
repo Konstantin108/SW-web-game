@@ -18,6 +18,7 @@ export const game = {
     playerCanStopGame: true,
 
     init() {
+        cheatsController.saveDefaultConfigParams();
         localStorageController.setLocalStorageParamsToGameConfig();
         renderer.render();
         cheatsController.callCheatConsole();

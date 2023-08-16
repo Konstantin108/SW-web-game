@@ -15,6 +15,7 @@ export const cheatsController = {
     cheats: config.cheats,
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
     activatedCheatsParamsDataTempArray: new Map(),
+    defaultConfigParamsArray: new Map(),
 
     callCheatConsole() {
         let showCheatConsoleBtn = "Backquote";
@@ -172,7 +173,7 @@ export const cheatsController = {
             this.removeCheatNameFromGameConfig(cheat.name);
             this.updateCheatNamesArrayInLocalStorageAfterCheatOff();
         } else {
-            if (cheat.type !== "simpleCheat") this.addCheatNameToGameConfig(cheat.name);
+            if (cheat.needAddNoteToGameConfig) this.addCheatNameToGameConfig(cheat.name);
         }
     },
 
@@ -202,6 +203,12 @@ export const cheatsController = {
         localStorageController.setParamToLocalStorage("cheatsActivated", activatedCheatNamesInLocalStorage, false);
     },
 
+    saveDefaultConfigParams() {
+        this.defaultConfigParamsArray.set("lives", config.lives);
+        this.defaultConfigParamsArray.set("bonusChance", config.bonuses.bonusChance);
+    },
+
+    // методы запуска читов
     toggleInfinityActiveMode(paramName, toggle) {
         if (toggle === "on") {
             localStorageController.setParamToLocalStorage(paramName, toggle);
@@ -210,9 +217,7 @@ export const cheatsController = {
 
             // добавление читов и их значений в localStorage
             let cheatsArray = [];
-            config.cheatsActivated.forEach(cheatName => {
-                cheatsArray.push(config.cheats.find(elem => elem.name === cheatName));
-            });
+            config.cheatsActivated.forEach(cheatName => cheatsArray.push(helperController.getObjectByName(this.cheats, cheatName)));
             cheatsArray.forEach(item => {
                 if (config.hasOwnProperty(item.paramName)) {
                     localStorageController.setParamToLocalStorage(item.paramName, config[item.paramName]);
@@ -397,6 +402,29 @@ export const cheatsController = {
     },
 
     offAllCheats() {
-        console.log("turn off all cheats");
+        config.cheatsActivated.forEach(cheatName => {
+            let activatedCheat = helperController.getObjectByName(this.cheats, cheatName);
+
+            switch (activatedCheat.type) {
+                case "toggleCheat":
+                    this.activateCheat(activatedCheat, 'off', activatedCheat.paramName);
+                    break;
+                case "optionsCheat":
+                    this.activateCheat(activatedCheat, 'viridis', activatedCheat.paramName);
+                    break;
+                case "arbitaryValueCheat":
+                    if (activatedCheat.name === "addLives" || activatedCheat.name === "setBonusChance") {
+                        let param = this.defaultConfigParamsArray.get(activatedCheat.paramName);
+                        this.activateCheat(activatedCheat, param, activatedCheat.paramName);
+                    }
+                    if (activatedCheat.name === "getShield" || activatedCheat.name === "getDrill" || activatedCheat.name === "getTrinity") {
+                        this.getBonusForArbitaryTime(activatedCheat.paramName, 0)
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        config.cheatsActivated = [];
     }
 }

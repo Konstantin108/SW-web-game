@@ -6,6 +6,7 @@ export const cheats = {
         ["arbitaryValueCheat", "необходимо вводить code + : + произвольное значение в цифрах"]
     ]),
 
+    // optionsCheat для получение любого бонуса не должен записываться в config
     setCheatsParams() {
         return [
             {
@@ -24,6 +25,7 @@ export const cheats = {
                 limit: null,
                 description: "включение или выключение опции сохранения действия читов в localStorage",
                 help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -42,6 +44,7 @@ export const cheats = {
                 limit: null,
                 description: "включение или выключение неуязвимости",
                 help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -57,6 +60,7 @@ export const cheats = {
                 limit: null,
                 description: "изменение цвета меню",
                 help: this.helpArray.get("optionsCheat"),
+                needAddNoteToGameConfig: true,
                 options: [
                     "rubrum",
                     "orange",
@@ -83,6 +87,7 @@ export const cheats = {
                 limit: null,
                 description: "восстановить жизни",
                 help: this.helpArray.get("simpleCheat"),
+                needAddNoteToGameConfig: false,
                 options: null
             },
             {
@@ -98,6 +103,7 @@ export const cheats = {
                 limit: 999,
                 description: "установить количество жизней",
                 help: this.helpArray.get("arbitaryValueCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -114,6 +120,7 @@ export const cheats = {
                 limit: null,
                 description: "вызвать босса",
                 help: this.helpArray.get("simpleCheat"),
+                needAddNoteToGameConfig: false,
                 options: null
             },
             {
@@ -129,6 +136,7 @@ export const cheats = {
                 limit: null,
                 description: "убить босса",
                 help: this.helpArray.get("simpleCheat"),
+                needAddNoteToGameConfig: false,
                 options: null
             },
             {
@@ -147,6 +155,7 @@ export const cheats = {
                 limit: null,
                 description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
                 help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -162,6 +171,7 @@ export const cheats = {
                 limit: 199,
                 description: "получить shield на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -177,6 +187,7 @@ export const cheats = {
                 limit: 199,
                 description: "получить arrowDrill на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -192,6 +203,7 @@ export const cheats = {
                 limit: 199,
                 description: "получить arrowTrinity на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -207,6 +219,7 @@ export const cheats = {
                 limit: null,
                 description: "убить самого себя",
                 help: this.helpArray.get("simpleCheat"),
+                needAddNoteToGameConfig: false,
                 options: null
             },
             {
@@ -225,6 +238,7 @@ export const cheats = {
                 limit: null,
                 description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
                 help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -240,6 +254,7 @@ export const cheats = {
                 limit: null,
                 description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
                 help: this.helpArray.get("simpleCheat"),
+                needAddNoteToGameConfig: false,
                 options: null
             },
             {
@@ -256,6 +271,7 @@ export const cheats = {
                 limit: 100,
                 description: "установить процент вероятности появления на карте бонусов",
                 help: this.helpArray.get("arbitaryValueCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -274,6 +290,7 @@ export const cheats = {
                 limit: null,
                 description: "включение или выключение всегда полного заряда для использования супер способности",
                 help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
                 options: null
             },
             {
@@ -281,14 +298,13 @@ export const cheats = {
                 code: "avertas",
                 message: "turn off all cheats",
                 type: "simpleCheat",
-                scope: [
-                    "undefined"  // пока не знаю
-                ],
+                scope: null,
                 toggleOptions: null,
-                paramName: "undefined",  // пока не знаю
+                paramName: null,
                 limit: null,
                 description: "отключить действие всех читов",
                 help: this.helpArray.get("simpleCheat"),
+                needAddNoteToGameConfig: false,
                 options: null
             }
         ]
