@@ -2,6 +2,7 @@ import {helperController} from "./helperController.js";
 import {Bonus} from "../classes/Bonus.js";
 import {config} from "../config/config.js";
 import {player} from "../objects/player.js";
+import {renderer} from "../objects/renderer.js";
 
 export const bonusController = {
     bonusesArray: [],
@@ -69,6 +70,21 @@ export const bonusController = {
             for (let i = 0; i < bonusesArray.length; i++) {
                 if (this.bonusesArray[i]) this.bonusesArray[i].destroy();
             }
+        }
+    },
+
+    getLife() {
+        if (player.lives < config.lives) {
+            player.lives += 1;
+            renderer.renderStatusBar();
+            renderer.renderHeartScaleAnimation();
+        }
+    },
+
+    getBomb() {
+        if (player.bombsCount < config.maxBombsCount) {
+            player.bombsCount += 1;
+            renderer.renderBombBar();
         }
     },
 

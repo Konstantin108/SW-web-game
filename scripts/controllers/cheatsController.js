@@ -161,6 +161,9 @@ export const cheatsController = {
             case "avertas":
                 this.offAllCheats();
                 break;
+            case "praemium":
+                this.getSomeBonus(activatedCheatParam);
+                break;
             default:
                 break;
         }
@@ -343,6 +346,8 @@ export const cheatsController = {
     },
 
     suicide(paramName) {
+        if (player.invincibility) player.invincibility = false;
+
         let hitData = [
             {
                 x: player.x,
@@ -351,6 +356,9 @@ export const cheatsController = {
             }
         ];
         crashChecker.crashCheck(hitData);
+        // если перезапуск игры будет без перезагрузки страницы,
+        // то возвращать player.invincibility = true,
+        // если player.invincibility был установлен читом toggleInvincibility()
     },
 
     togglePowerfulArrow(paramName, toggle) {
@@ -407,18 +415,17 @@ export const cheatsController = {
 
             switch (activatedCheat.type) {
                 case "toggleCheat":
-                    this.activateCheat(activatedCheat, 'off', activatedCheat.paramName);
+                    this.activateCheat(activatedCheat, "off", activatedCheat.paramName);
                     break;
                 case "optionsCheat":
-                    this.activateCheat(activatedCheat, 'viridis', activatedCheat.paramName);
+                    this.activateCheat(activatedCheat, "viridis", activatedCheat.paramName);
                     break;
                 case "arbitaryValueCheat":
-                    if (activatedCheat.name === "addLives" || activatedCheat.name === "setBonusChance") {
+                    if (activatedCheat.scope.includes("bonusController")) {
+                        this.getBonusForArbitaryTime(activatedCheat.paramName, 0)
+                    } else {
                         let param = this.defaultConfigParamsArray.get(activatedCheat.paramName);
                         this.activateCheat(activatedCheat, param, activatedCheat.paramName);
-                    }
-                    if (activatedCheat.name === "getShield" || activatedCheat.name === "getDrill" || activatedCheat.name === "getTrinity") {
-                        this.getBonusForArbitaryTime(activatedCheat.paramName, 0)
                     }
                     break;
                 default:
@@ -426,5 +433,37 @@ export const cheatsController = {
             }
         });
         config.cheatsActivated = [];
+    },
+
+    getSomeBonus(bonusName) {
+        let bonus = null;
+
+        switch (bonusName) {
+            case "acus":
+                bonus = helperController.getObjectByName(config.bonuses.bonusTypes, "drill");
+                bonusController.playerBecomeBonus(bonus.name, bonus.actionTime / 1000);
+                break;
+            case "tribus":
+                bonus = helperController.getObjectByName(config.bonuses.bonusTypes, "trinity");
+                bonusController.playerBecomeBonus(bonus.name, bonus.actionTime / 1000);
+                break;
+            case "testa":
+                bonus = helperController.getObjectByName(config.bonuses.bonusTypes, "shield");
+                bonusController.playerBecomeBonus(bonus.name, bonus.actionTime / 1000);
+                break;
+            case "cor":
+                bonusController.getLife();
+                break;
+            case "micare":
+                bonusController.getBomb();
+                break;
+            case "radium":
+                config["superAbilityIsActivated"] = true;
+                player.superAbilityStatusInit();
+                renderer.renderSuperAbilityBarActivatedByCheat(true);
+                break;
+            default:
+                break;
+        }
     }
 }

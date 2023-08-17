@@ -102,17 +102,10 @@ export class Bonus {
             this.calculateTimeInBonusOff(this.actionTime / 1000, "shield");
         }
         if (bonus.name === "life") {
-            if (player.lives < config.lives) {
-                player.lives += 1;
-                renderer.renderStatusBar();
-                renderer.renderHeartScaleAnimation();
-            }
+            bonusController.getLife();
         }
         if (bonus.name === "killAll") {
-            if (player.bombsCount < config.maxBombsCount) {
-                player.bombsCount += 1;
-                renderer.renderBombBar();
-            }
+            bonusController.getBomb();
         }
     }
 

@@ -396,8 +396,8 @@ export const renderer = {
         }
     },
 
-    renderSuperAbilityBarActivatedByCheat() {
-        if (!config.superAbilityIsAlwaysCharged) return;
+    renderSuperAbilityBarActivatedByCheat(chargedByCheatForOneTime = false) {
+        if (!config.superAbilityIsAlwaysCharged && !chargedByCheatForOneTime) return;
 
         let table = document.querySelector("table");
         let superAbilityBarElement = document.querySelector("#superAbilityBar");

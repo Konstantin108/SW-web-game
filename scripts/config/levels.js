@@ -7,7 +7,7 @@ export const levels = {
                 scoreCountForThisLevel: 0,
                 multiplier: 1,
                 blockagesCount: 4,
-                fireChance: 50,
+                fireChance: 42,
                 maxBlockageSpeed: 1300,
                 minBlockageSpeed: 2500,
                 blockageTypes: {

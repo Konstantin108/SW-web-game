@@ -93,7 +93,7 @@ export const cheats = {
             {
                 name: "addLives",
                 code: "adderevitam",
-                message: "added lifes",
+                message: "set lives count",
                 type: "arbitaryValueCheat",
                 scope: [
                     "config"
@@ -260,7 +260,7 @@ export const cheats = {
             {
                 name: "setBonusChance",
                 code: "fortuna",
-                message: "more bonuses",
+                message: "set bonus chance",
                 type: "arbitaryValueCheat",
                 scope: [
                     "config",
@@ -296,7 +296,7 @@ export const cheats = {
             {
                 name: "offAllCheats",
                 code: "avertas",
-                message: "turn off all cheats",
+                message: "all cheats disabled",
                 type: "simpleCheat",
                 scope: null,
                 toggleOptions: null,
@@ -306,6 +306,30 @@ export const cheats = {
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 options: null
+            },
+            {
+                name: "getSomeBonus",
+                code: "praemium",
+                message: "get bonus",
+                type: "optionsCheat",
+                scope: [
+                    "config",
+                    "bonusController"
+                ],
+                toggleOptions: null,
+                paramName: null,
+                limit: null,
+                description: "получить любой бонус",
+                help: this.helpArray.get("optionsCheat"),
+                needAddNoteToGameConfig: false,
+                options: [
+                    "acus",
+                    "tribus",
+                    "testa",
+                    "cor",
+                    "micare",
+                    "radium"
+                ]
             }
         ]
     }
