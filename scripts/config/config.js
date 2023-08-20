@@ -6,6 +6,7 @@ export const config = {
     // игра и игрок
     mapSizeX: 10,
     mapSizeY: 13,
+    // startGameDelaySecondsCount: -1,
     startGameDelaySecondsCount: 3,
     missReward: 1,
     crashMulct: -100,
@@ -22,6 +23,7 @@ export const config = {
     superAbilityIsCharged: 5,
     superAbilityIsAlwaysCharged: false,
     menuColor: "viridis",
+    debugMode: false,
     // стрелы игрока
     power: 1,
     arrowDamage: 1,

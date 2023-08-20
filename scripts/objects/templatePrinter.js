@@ -155,5 +155,16 @@ export const templatePrinter = {
         return `<p id="cheatMessage" class="${messageColor}">
                     ${message}
                 </p>`;
+    },
+
+    debugPanelTemplatePrint(testElementsDiv) {
+        return `<div id="debugPanel">
+                    <p id="debugPanelLabel">
+                        debug panel
+                    </p>
+                    <div id="btnsBlock">
+                        ${testElementsDiv}
+                    </div>
+                </div>`;
     }
 }

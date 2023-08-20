@@ -6,7 +6,6 @@ export const cheats = {
         ["arbitaryValueCheat", "необходимо вводить code + : + произвольное значение в цифрах"]
     ]),
 
-    // optionsCheat для получение любого бонуса не должен записываться в config
     setCheatsParams() {
         return [
             {
@@ -154,6 +153,25 @@ export const cheats = {
                 paramName: "arrowPenetration",
                 limit: null,
                 description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                options: null
+            },
+            {
+                name: "toggleDebugMode",
+                code: "respiceintus",
+                message: "debug mode ",
+                type: "toggleCheat",
+                scope: [
+                    "config",
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugMode",
+                limit: null,
+                description: "включение или выключение вызова дебаг-панели по нажатию клавиши /",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 options: null

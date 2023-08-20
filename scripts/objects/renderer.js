@@ -479,6 +479,44 @@ export const renderer = {
         if (messageElement) setTimeout(() => table.removeChild(messageElement), 1000);
     },
 
+    renderDebugPanel() {
+        let debugPanel = null;
+
+        // перенести в debugPanel
+        // настроить radio buttons и checkboxes
+        // возможно добавить анимацию при наведении и изменить стили панели
+        let testArr = [
+            "localStorage",
+            "config",
+            "boss",
+            "player",
+            "player's arrows",
+            "enemy arrows",
+            "blockages",
+            "bonuses"
+        ];
+        let testElementsDiv = "";
+
+        // возможно изменить структуру дивов с параметрами
+        testArr.forEach(elem => {
+            testElementsDiv += `<div>
+                                    <input id="${elem}" type="radio" name="debug" value="${elem}" class="btnInputElement">
+                                    <label class="btnInputLabel" for="${elem}">${elem}</label>
+                                </div>`;
+        });
+
+        if (document.querySelector("#debugPanel") === null) {
+            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(testElementsDiv));
+            debugPanel = document.querySelector("#debugPanel");
+            debugPanel.classList.add("debugPanelIn");
+            setTimeout(() => debugPanel.classList.remove("debugPanelIn"), 500);
+        } else {
+            debugPanel = document.querySelector("#debugPanel");
+            debugPanel.classList.add("debugPanelOut");
+            setTimeout(() => this.container.removeChild(debugPanel), 480);
+        }
+    },
+
     renderCheatConsole() {
         let cheatConsole = null;
         let cheatInput = null;

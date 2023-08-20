@@ -11,6 +11,7 @@ import {config} from "./config/config.js";
 import {boss} from "./objects/boss.js";
 import {cheatsController} from "./controllers/cheatsController.js";
 import {localStorageController} from "./controllers/localStorageController.js";
+import {debugPanel} from "./objects/debugPanel.js";
 
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
@@ -25,6 +26,8 @@ export const game = {
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         this.showPauseMenu();
         player.superAbilityStatusInit();
+        debugPanel.debugModeStatusInit();
+        debugPanel.callDebugPanel();
         console.log(localStorage);  // отладка
         console.log(config);
     },
