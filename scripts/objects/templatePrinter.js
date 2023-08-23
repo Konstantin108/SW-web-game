@@ -157,13 +157,13 @@ export const templatePrinter = {
                 </p>`;
     },
 
-    debugPanelTemplatePrint(testElementsDiv) {
+    debugPanelTemplatePrint(debugElementsDiv) {
         return `<div id="debugPanel">
                     <p id="debugPanelLabel">
                         debug panel
                     </p>
                     <div id="btnsBlock">
-                        ${testElementsDiv}
+                        ${debugElementsDiv}
                     </div>
                 </div>`;
     }

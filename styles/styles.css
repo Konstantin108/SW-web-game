@@ -832,8 +832,7 @@ td {
 #btnsBlock {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 4px;
-  grid-row-gap: 4px;
+  gap: 4px 4px;
 }
 
 .btnInputElement {
@@ -844,11 +843,12 @@ td {
   background-color: #ffe0a6;
 }
 
-.btnInputLabel {
+.btnInputLabel,
+.btnLabel {
   display: inline-block;
   cursor: pointer;
   text-align: center;
-  width: 100px;
+  font-size: 16px;
   padding: 0 15px;
   line-height: 34px;
   border: 1px solid #999;
@@ -856,8 +856,22 @@ td {
   user-select: none;
 }
 
-.btnInputLabel:hover {
+.btnInputLabel {
+  width: 100px;
+}
+
+.btnLabel {
+  width: 100%;
+  background-color: white;
+}
+
+.btnInputLabel:hover,
+.btnLabel:hover {
   color: #666;
+}
+
+.btnLabel:active {
+  background-color: #ffe0a6;
 }
 
 .debugPanelIn {

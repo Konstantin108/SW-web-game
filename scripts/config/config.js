@@ -1,6 +1,7 @@
 import {bonuses} from "./bonuses.js";
 import {levels} from "./levels.js";
 import {cheats} from "./cheats.js";
+import {debugPanelElements} from "./debugPanelElements.js";
 
 export const config = {
     // игра и игрок
@@ -56,11 +57,12 @@ export const config = {
     bossShieldIsOffSecondsCount: 3000,
     bossFireChance: 20,
     bossFireArrowBombChance: 10,
-    // уровни, бонусы и читы
+    // уровни, бонусы, читы, элементы дебаг-панели
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
     cheats: cheats.setCheatsParams(),
     cheatsInfinityActiveMode: false,
     paramsFromLocalStorage: [],
-    cheatsActivated: []
+    cheatsActivated: [],
+    debugPanelElements: debugPanelElements.setDebugPanelElementsParams()
 }

@@ -480,33 +480,32 @@ export const renderer = {
     },
 
     renderDebugPanel() {
+        let debugElements = config.debugPanelElements;
         let debugPanel = null;
+        let debugElementsDiv = "";
 
-        // перенести в debugPanel
-        // настроить radio buttons и checkboxes
-        // возможно добавить анимацию при наведении и изменить стили панели
-        let testArr = [
-            "localStorage",
-            "config",
-            "boss",
-            "player",
-            "player's arrows",
-            "enemy arrows",
-            "blockages",
-            "bonuses"
-        ];
-        let testElementsDiv = "";
-
-        // возможно изменить структуру дивов с параметрами
-        testArr.forEach(elem => {
-            testElementsDiv += `<div>
-                                    <input id="${elem}" type="radio" name="debug" value="${elem}" class="btnInputElement">
-                                    <label class="btnInputLabel" for="${elem}">${elem}</label>
-                                </div>`;
+        debugElements.forEach(elem => {
+            if (elem.type === "button") {
+                // передавать id по клику
+                // если включен infinity mode, то сохранять данные в localStorage
+                // вызывать слушатель клика при вызове дебаг-панели
+                debugElementsDiv += `<div>
+                                        <button id="${elem.id}" attr-value="${elem.id}" class="btnLabel">
+                                            ${elem.name}
+                                        </button>
+                                     </div>`;
+            } else {
+                debugElementsDiv += `<div>
+                                        <input id="${elem.id}" type="checkbox" name="debug" value="${elem.id}" class="btnInputElement">
+                                        <label class="btnInputLabel" for="${elem.id}">
+                                            ${elem.name}
+                                        </label>
+                                    </div>`;
+            }
         });
 
         if (document.querySelector("#debugPanel") === null) {
-            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(testElementsDiv));
+            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(debugElementsDiv));
             debugPanel = document.querySelector("#debugPanel");
             debugPanel.classList.add("debugPanelIn");
             setTimeout(() => debugPanel.classList.remove("debugPanelIn"), 500);
