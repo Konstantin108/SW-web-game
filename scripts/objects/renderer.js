@@ -486,19 +486,14 @@ export const renderer = {
 
         debugElements.forEach(elem => {
             if (elem.type === "button") {
-                // передавать id по клику
-                // если включен infinity mode, то сохранять данные в localStorage
-                // вызывать слушатель клика при вызове дебаг-панели
                 debugElementsDiv += `<div>
-                                        <button id="${elem.id}" attr-value="${elem.id}" class="btnLabel">
-                                            ${elem.name}
-                                        </button>
+                                        <input id="${elem.id}" type="button" value="${elem.id}" class="debugPanelButton btnLabel">
                                      </div>`;
             } else {
                 debugElementsDiv += `<div>
-                                        <input id="${elem.id}" type="checkbox" name="debug" value="${elem.id}" class="btnInputElement">
+                                        <input id="${elem.id}" type="checkbox" name="debug" value="${elem.id}" class="debugPanelButton btnInputElement">
                                         <label class="btnInputLabel" for="${elem.id}">
-                                            ${elem.name}
+                                            ${elem.id}
                                         </label>
                                     </div>`;
             }

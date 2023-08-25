@@ -50,7 +50,7 @@ export const cheatsController = {
         });
     },
 
-    matchPlayerInputAndCheatCode(input, cheatMessageContainer) {
+    matchPlayerInputAndCheatCode(input, cheatMessageContainer = null) {
         let message = "incorrect";
         let messageColor = "cheatMessageRed";
         let activatedCheat = null;
@@ -107,7 +107,7 @@ export const cheatsController = {
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
         }
         if (activatedCheat) messageColor = "cheatMessageGreen";
-        renderer.renderCheatMessage(message, messageColor, cheatMessageContainer)
+        if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
         this.activateCheat(activatedCheat, activatedCheatParam, paramName);
     },
 
@@ -116,7 +116,7 @@ export const cheatsController = {
 
         switch (activatedCheat.code) {
             case "infinitum":
-                this.toggleInfinityActiveMode(paramName, activatedCheatParam)
+                this.toggleInfinityMode(paramName, activatedCheatParam)
                 break;
             case "invulnerability":
                 this.toggleInvincibility(paramName, activatedCheatParam)
@@ -168,6 +168,9 @@ export const cheatsController = {
             case "praemium":
                 this.getSomeBonus(activatedCheatParam);
                 break;
+            case "dbginstant":
+                this.toggleInstantStart(paramName, activatedCheatParam);
+                break;
             default:
                 break;
         }
@@ -213,6 +216,8 @@ export const cheatsController = {
     saveDefaultConfigParams() {
         this.defaultConfigParamsArray.set("lives", config.lives);
         this.defaultConfigParamsArray.set("bonusChance", config.bonuses.bonusChance);
+        this.defaultConfigParamsArray.set("power", config.power);
+        this.defaultConfigParamsArray.set("startGameDelaySecondsCount", config.startGameDelaySecondsCount);
     },
 
     standartToggleCheatAction(paramName, toggle) {
@@ -235,7 +240,7 @@ export const cheatsController = {
     },
 
     // методы запуска читов
-    toggleInfinityActiveMode(paramName, toggle) {
+    toggleInfinityMode(paramName, toggle) {
         if (toggle === "on") {
             localStorageController.setParamToLocalStorage(paramName, true);
 
@@ -257,6 +262,13 @@ export const cheatsController = {
                     }
                 }
             });
+
+            for (let paramKey of this.defaultConfigParamsArray.keys()) {
+                if (config.hasOwnProperty(paramKey) && config[paramKey] !== this.defaultConfigParamsArray.get(paramKey)) {
+                    localStorageController.setParamToLocalStorage(paramKey, config[paramKey], false);
+                }
+            }
+
         } else {
             localStorageController.removeParamFromLocalStorage(paramName, false);
             localStorageController.clearLocalStorage();
@@ -389,7 +401,7 @@ export const cheatsController = {
                 localStorageController.setParamToLocalStorage(paramName, multiplier);
             }
         } else {
-            multiplier = 1;
+            multiplier = this.defaultConfigParamsArray.get(paramName);
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.removeParamFromLocalStorage(paramName, multiplier);
             }
@@ -490,5 +502,33 @@ export const cheatsController = {
             default:
                 break;
         }
+    },
+
+    toggleInstantStart(paramName, toggle) {
+        let status = null;
+        let delay = null;
+
+        if (toggle === "on") {
+            status = true;
+            delay = -1;
+
+            config[paramName] = status;
+            config["startGameDelaySecondsCount"] = delay;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.setParamToLocalStorage(paramName, status);
+                localStorageController.setParamToLocalStorage("startGameDelaySecondsCount", delay);
+            }
+        } else {
+            status = false;
+            delay = this.defaultConfigParamsArray.get("startGameDelaySecondsCount");
+
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.removeParamFromLocalStorage(paramName, status);
+                localStorageController.removeParamFromLocalStorage("startGameDelaySecondsCount", delay);
+            }
+            config[paramName] = status;
+            config["startGameDelaySecondsCount"] = delay;
+        }
+        game.startGameDelaySet();
     }
 }

@@ -7,7 +7,7 @@ export const config = {
     // игра и игрок
     mapSizeX: 10,
     mapSizeY: 13,
-    // startGameDelaySecondsCount: -1,
+    gameInstantStart: false,
     startGameDelaySecondsCount: 3,
     missReward: 1,
     crashMulct: -100,

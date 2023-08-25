@@ -9,7 +9,7 @@ export const cheats = {
     setCheatsParams() {
         return [
             {
-                name: "toggleInfinityActiveMode",
+                name: "toggleInfinityMode",
                 code: "infinitum",
                 message: "infinity mode ",
                 type: "toggleCheat",
@@ -348,6 +348,25 @@ export const cheats = {
                     "micare",
                     "radium"
                 ]
+            },
+            {
+                name: "toggleInstantStart",
+                code: "dbginstant",
+                message: "instant start mode ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "gameInstantStart",
+                limit: null,
+                description: "включение или выключение режима запуска игры без отсчета (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                options: null
             }
         ]
     }

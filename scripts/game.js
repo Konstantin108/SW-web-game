@@ -21,6 +21,7 @@ export const game = {
     init() {
         cheatsController.saveDefaultConfigParams();
         localStorageController.setLocalStorageParamsToGameConfig();
+        this.startGameDelaySet();
         renderer.render();
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
@@ -41,6 +42,10 @@ export const game = {
         player.shoot();
         player.useBomb();
         player.useSuperAbility();
+    },
+
+    startGameDelaySet() {
+        this.startGameDelaySecondsCount = config.startGameDelaySecondsCount;
     },
 
     // добавить проверку, что игра в данный момент на паузе,

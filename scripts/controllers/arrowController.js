@@ -29,7 +29,11 @@ export const arrowController = {
         for (let i = 0; i < this.arrowsArray.length; i++) {
             if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
         }
+        // выводить в каждом контроллере данные о массивах с экземплярами
+        // сам экземпляр с индексом 0, либо вообще каждый экземпяр
+        // и отдельно длину массива
         // console.log("player\'s arrows:");
+        // console.log(this.arrowsArray[0]);
         // console.log(this.arrowsArray);
     }
 }
