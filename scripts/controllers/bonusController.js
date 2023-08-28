@@ -93,7 +93,8 @@ export const bonusController = {
         let bonus = this.bonusesArray.at(-1);
         bonus.makeStep();
         bonus.makeStepOff();
-        // console.log("bonuses:")
-        // console.log(this.bonusesArray);
+        if (!config.debugBonusesObjectsShow) return;
+        console.log(`bonuses: ${this.bonusesArray.length}`);
+        this.bonusesArray.forEach(elem => console.log(elem));
     }
 }

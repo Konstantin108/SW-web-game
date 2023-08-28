@@ -480,27 +480,10 @@ export const renderer = {
     },
 
     renderDebugPanel() {
-        let debugElements = config.debugPanelElements;
         let debugPanel = null;
-        let debugElementsDiv = "";
 
-        debugElements.forEach(elem => {
-            if (elem.type === "button") {
-                debugElementsDiv += `<div>
-                                        <input id="${elem.id}" type="button" value="${elem.id}" class="debugPanelButton btnLabel">
-                                     </div>`;
-            } else {
-                debugElementsDiv += `<div>
-                                        <input id="${elem.id}" type="checkbox" name="debug" value="${elem.id}" class="debugPanelButton btnInputElement">
-                                        <label class="btnInputLabel" for="${elem.id}">
-                                            ${elem.id}
-                                        </label>
-                                    </div>`;
-            }
-        });
-
-        if (document.querySelector("#debugPanel") === null) {
-            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(debugElementsDiv));
+        if (!document.querySelector("#debugPanel")) {
+            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(this.renderDebugPanelBtnsBlock()));
             debugPanel = document.querySelector("#debugPanel");
             debugPanel.classList.add("debugPanelIn");
             setTimeout(() => debugPanel.classList.remove("debugPanelIn"), 500);
@@ -511,11 +494,58 @@ export const renderer = {
         }
     },
 
+    renderDebugPanelBtnsBlock() {
+        let debugElements = config.debugPanelElements;
+        let debugElementsDiv = `<div id="btnsBlock">`;
+        let checked = "";
+
+        debugElements.forEach(elem => {
+            if (config.cheatsActivated.includes(elem.id)) checked = "checked";
+            if (elem.type === "button") {
+                debugElementsDiv += `<div>
+                                        <input id="${elem.id}"
+                                               type="button"
+                                               value="${elem.id}"
+                                               class="debugPanelButton btnLabel">
+                                     </div>`;
+            } else {
+                debugElementsDiv += `<div>
+                                        <input id="${elem.id}"
+                                               name="debug"
+                                               type="checkbox"
+                                               value="${elem.id}"
+                                               class="debugPanelButton btnInputElement"
+                                               ${checked}>
+                                        <label class="btnInputLabel" for="${elem.id}">
+                                            ${elem.id}
+                                        </label>
+                                    </div>`;
+            }
+            checked = "";
+        });
+        debugElementsDiv += "</div>";
+
+        return debugElementsDiv;
+    },
+
+    refreshDebugPanelBtnsBlock() {
+        let btnsBlock = document.querySelector("#btnsBlock");
+        let btnsContainer = document.querySelector("#btnsContainer");
+        let btnsBlockRefreshed = false;
+
+        if (btnsBlock) {
+            btnsContainer.removeChild(btnsBlock);
+            btnsContainer.insertAdjacentHTML("afterbegin", this.renderDebugPanelBtnsBlock());
+            btnsBlockRefreshed = true;
+        }
+        return btnsBlockRefreshed;
+    },
+
     renderCheatConsole() {
         let cheatConsole = null;
         let cheatInput = null;
 
-        if (document.querySelector("#cheatConsole") === null) {
+        if (!document.querySelector("#cheatConsole")) {
             this.container.insertAdjacentHTML("afterbegin", templatePrinter.cheatConsoleTemplatePrint());
             cheatConsole = document.querySelector("#cheatConsole");
             cheatConsole.classList.add("cheatConsoleIn");

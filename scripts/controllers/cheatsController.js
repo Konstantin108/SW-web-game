@@ -137,7 +137,11 @@ export const cheatsController = {
                 this.killBoss();
                 break;
             case "terebro":
-                this.toggleArrowPenetration(paramName, activatedCheatParam);
+            case "dbgplrarrows":
+            case "dbgenmarrows":
+            case "dbgblockages":
+            case "dbgbonuses":
+                this.standartToggleCheatAction(paramName, activatedCheatParam);
                 break;
             case "respiceintus":
                 this.toggleDebugMode(paramName, activatedCheatParam);
@@ -220,25 +224,6 @@ export const cheatsController = {
         this.defaultConfigParamsArray.set("startGameDelaySecondsCount", config.startGameDelaySecondsCount);
     },
 
-    standartToggleCheatAction(paramName, toggle) {
-        let status = null;
-
-        if (toggle === "on") {
-            status = true;
-            config[paramName] = status;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, status);
-            }
-        } else {
-            status = false;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, status);
-            }
-            config[paramName] = status;
-        }
-        return status;
-    },
-
     // методы запуска читов
     toggleInfinityMode(paramName, toggle) {
         if (toggle === "on") {
@@ -273,6 +258,8 @@ export const cheatsController = {
             localStorageController.removeParamFromLocalStorage(paramName, false);
             localStorageController.clearLocalStorage();
         }
+        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
+        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
     },
 
     toggleInvincibility(paramName, toggle) {
@@ -340,8 +327,25 @@ export const cheatsController = {
         progressController.killBoss(boss.destroyedReward, hitCoordinates);
     },
 
-    toggleArrowPenetration(paramName, toggle) {
-        this.standartToggleCheatAction(paramName, toggle);
+    standartToggleCheatAction(paramName, toggle) {
+        let status = null;
+
+        if (toggle === "on") {
+            status = true;
+            config[paramName] = status;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.setParamToLocalStorage(paramName, status);
+            }
+        } else {
+            status = false;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.removeParamFromLocalStorage(paramName, status);
+            }
+            config[paramName] = status;
+        }
+        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
+        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
+        return status;
     },
 
     toggleDebugMode(paramName, toggle) {
@@ -530,5 +534,7 @@ export const cheatsController = {
             config["startGameDelaySecondsCount"] = delay;
         }
         game.startGameDelaySet();
+        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
+        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
     }
 }

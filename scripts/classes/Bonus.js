@@ -101,12 +101,8 @@ export class Bonus {
             this.newPropertiesForPlayerOffCall(bonus);
             this.calculateTimeInBonusOff(this.actionTime / 1000, "shield");
         }
-        if (bonus.name === "life") {
-            bonusController.getLife();
-        }
-        if (bonus.name === "killAll") {
-            bonusController.getBomb();
-        }
+        if (bonus.name === "life") bonusController.getLife();
+        if (bonus.name === "killAll") bonusController.getBomb();
     }
 
     newPropertiesForPlayerOff(bonus) {

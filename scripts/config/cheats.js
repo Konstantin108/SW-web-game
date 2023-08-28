@@ -158,6 +158,82 @@ export const cheats = {
                 options: null
             },
             {
+                name: "playerArrowsObjects",
+                code: "dbgplrarrows",
+                message: "player's arrows show ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugPlayerArrowsObjectsShow",
+                limit: null,
+                description: "включение или выключение вывода в консоль объектов класса Arrow (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                options: null
+            },
+            {
+                name: "enemyArrowsObjects",
+                code: "dbgenmarrows",
+                message: "enemy arrows show ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugEnemyArrowsObjectsShow",
+                limit: null,
+                description: "включение или выключение вывода в консоль объектов класса EnemyArrow (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                options: null
+            },
+            {
+                name: "blockagesObjects",
+                code: "dbgblockages",
+                message: "blockages show ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugBlockagesObjectsShow",
+                limit: null,
+                description: "включение или выключение вывода в консоль объектов класса Blockage (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                options: null
+            },
+            {
+                name: "bonusesObjects",
+                code: "dbgbonuses",
+                message: "bonuses show ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugBonusesObjectsShow",
+                limit: null,
+                description: "включение или выключение вывода в консоль объектов класса Bonus (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                options: null
+            },
+            {
                 name: "toggleDebugMode",
                 code: "respiceintus",
                 message: "debug mode ",

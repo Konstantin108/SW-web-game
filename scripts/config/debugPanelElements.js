@@ -54,22 +54,22 @@ export const debugPanelElements = {
                 description: "убить босса"
             },
             {
-                id: "playerArrows",
+                id: "playerArrowsObjects",
                 type: "checkbox",
                 description: "выводить player's arrows в консоль постоянно"
             },
             {
-                id: "enemyArrows",
+                id: "enemyArrowsObjects",
                 type: "checkbox",
                 description: "выводить enemy arrows в консоль постоянно"
             },
             {
-                id: "blockages",
+                id: "blockagesObjects",
                 type: "checkbox",
                 description: "выводить blockages в консоль постоянно"
             },
             {
-                id: "bonuses",
+                id: "bonusesObjects",
                 type: "checkbox",
                 description: "выводить bonuses в консоль постоянно"
             },

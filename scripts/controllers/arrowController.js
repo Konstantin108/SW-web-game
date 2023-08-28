@@ -2,6 +2,7 @@ import {player} from "../objects/player.js";
 import {Arrow} from "../classes/Arrow.js";
 import {ArrowDrill} from "../classes/ArrowDrill.js";
 import {ArrowTrinity} from "../classes/ArrowTrinity.js";
+import {config} from "../config/config.js";
 
 export const arrowController = {
     arrowTypes: {
@@ -29,11 +30,8 @@ export const arrowController = {
         for (let i = 0; i < this.arrowsArray.length; i++) {
             if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
         }
-        // выводить в каждом контроллере данные о массивах с экземплярами
-        // сам экземпляр с индексом 0, либо вообще каждый экземпяр
-        // и отдельно длину массива
-        // console.log("player\'s arrows:");
-        // console.log(this.arrowsArray[0]);
-        // console.log(this.arrowsArray);
+        if (!config.debugPlayerArrowsObjectsShow) return;
+        console.log(`player\'s arrows: ${this.arrowsArray.length}`);
+        this.arrowsArray.forEach(elem => console.log(elem));
     }
 }

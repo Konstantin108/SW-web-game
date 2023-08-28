@@ -45,24 +45,31 @@ export const debugPanel = {
 
         switch (element) {
             case "localStorage":
+                console.log("localStorage:");
                 console.log(localStorage);
                 break;
             case "config":
+                console.log("config:");
                 console.log(config);
                 break;
             case "boss":
+                console.log("boss:");
                 console.log(boss);
                 break;
             case "player":
+                console.log("player:");
                 console.log(player);
                 break;
             case "game":
+                console.log("game:");
                 console.log(game);
                 break;
             case "cheatsController":
+                console.log("cheatsController:");
                 console.log(cheatsController);
                 break;
             case "progressController":
+                console.log("progressController:");
                 console.log(progressController);
                 break;
             case "clearConsole":
@@ -72,6 +79,10 @@ export const debugPanel = {
             case "killBoss":
             case "toggleInfinityMode":
             case "toggleInstantStart":
+            case "playerArrowsObjects":
+            case "enemyArrowsObjects":
+            case "blockagesObjects":
+            case "bonusesObjects":
                 let cheat = helperController.getObjectByName(this.cheats, element);
                 cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
                 break;

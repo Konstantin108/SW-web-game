@@ -162,9 +162,9 @@ export const templatePrinter = {
                     <p id="debugPanelLabel">
                         debug panel
                     </p>
-                    <div id="btnsBlock">
+                    <div id="btnsContainer">
                         ${debugElementsDiv}
-                    </div>
+                    </div>    
                 </div>`;
     }
 }

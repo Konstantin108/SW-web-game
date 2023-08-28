@@ -64,5 +64,9 @@ export const config = {
     cheatsInfinityActiveMode: false,
     paramsFromLocalStorage: [],
     cheatsActivated: [],
-    debugPanelElements: debugPanelElements.setDebugPanelElementsParams()
+    debugPanelElements: debugPanelElements.setDebugPanelElementsParams(),
+    debugPlayerArrowsObjectsShow: false,
+    debugEnemyArrowsObjectsShow: false,
+    debugBlockagesObjectsShow: false,
+    debugBonusesObjectsShow: false
 }
