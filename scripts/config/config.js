@@ -68,5 +68,7 @@ export const config = {
     debugPlayerArrowsObjectsShow: false,
     debugEnemyArrowsObjectsShow: false,
     debugBlockagesObjectsShow: false,
-    debugBonusesObjectsShow: false
+    debugBonusesObjectsShow: false,
+    debugBossGetDamageInfoShow: false,
+    debugActualParamsInfoShow: false
 }

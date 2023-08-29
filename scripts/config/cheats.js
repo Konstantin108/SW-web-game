@@ -25,6 +25,7 @@ export const cheats = {
                 description: "включение или выключение опции сохранения действия читов в localStorage",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -44,6 +45,7 @@ export const cheats = {
                 description: "включение или выключение неуязвимости",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -60,6 +62,7 @@ export const cheats = {
                 description: "изменение цвета меню",
                 help: this.helpArray.get("optionsCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: [
                     "rubrum",
                     "orange",
@@ -87,6 +90,7 @@ export const cheats = {
                 description: "восстановить жизни",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: null
             },
             {
@@ -103,6 +107,7 @@ export const cheats = {
                 description: "установить количество жизней",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -120,6 +125,7 @@ export const cheats = {
                 description: "вызвать босса",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: null
             },
             {
@@ -136,6 +142,7 @@ export const cheats = {
                 description: "убить босса",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: null
             },
             {
@@ -155,6 +162,7 @@ export const cheats = {
                 description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -174,6 +182,7 @@ export const cheats = {
                 description: "включение или выключение вывода в консоль объектов класса Arrow (для отладки)",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: true,
                 options: null
             },
             {
@@ -193,6 +202,7 @@ export const cheats = {
                 description: "включение или выключение вывода в консоль объектов класса EnemyArrow (для отладки)",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: true,
                 options: null
             },
             {
@@ -212,6 +222,7 @@ export const cheats = {
                 description: "включение или выключение вывода в консоль объектов класса Blockage (для отладки)",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: true,
                 options: null
             },
             {
@@ -231,6 +242,67 @@ export const cheats = {
                 description: "включение или выключение вывода в консоль объектов класса Bonus (для отладки)",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: true,
+                options: null
+            },
+            {
+                name: "bossGetDamageInfo",
+                code: "dbgbossinfo",
+                message: "boss info show ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugBossGetDamageInfoShow",
+                limit: null,
+                description: "включение или выключение вывода в консоль параметров босса каждый раз при нанесении ему урона (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                debugTool: true,
+                options: null
+            },
+            {
+                name: "actualParamsInfo",
+                code: "dbgactual",
+                message: "actual params show ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "debugActualParamsInfoShow",
+                limit: null,
+                description: "включение или выключение вывода в консоль localStorage и config каждый раз при активации чита и при запуске игры (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                debugTool: true,
+                options: null
+            },
+            {
+                name: "toggleInstantStart",
+                code: "dbginstant",
+                message: "instant start mode ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "gameInstantStart",
+                limit: null,
+                description: "включение или выключение режима запуска игры без отсчета (для отладки)",
+                help: this.helpArray.get("toggleCheat"),
+                needAddNoteToGameConfig: true,
+                debugTool: true,
                 options: null
             },
             {
@@ -250,6 +322,7 @@ export const cheats = {
                 description: "включение или выключение вызова дебаг-панели по нажатию клавиши /",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -266,6 +339,7 @@ export const cheats = {
                 description: "получить shield на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -282,6 +356,7 @@ export const cheats = {
                 description: "получить arrowDrill на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -298,6 +373,7 @@ export const cheats = {
                 description: "получить arrowTrinity на определенное игроком количество секунд",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -314,6 +390,7 @@ export const cheats = {
                 description: "убить самого себя",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: null
             },
             {
@@ -333,6 +410,7 @@ export const cheats = {
                 description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -349,6 +427,7 @@ export const cheats = {
                 description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: null
             },
             {
@@ -366,6 +445,7 @@ export const cheats = {
                 description: "установить процент вероятности появления на карте бонусов",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -385,6 +465,7 @@ export const cheats = {
                 description: "включение или выключение всегда полного заряда для использования супер способности",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
+                debugTool: false,
                 options: null
             },
             {
@@ -399,6 +480,7 @@ export const cheats = {
                 description: "отключить действие всех читов",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: null
             },
             {
@@ -416,6 +498,7 @@ export const cheats = {
                 description: "получить любой бонус",
                 help: this.helpArray.get("optionsCheat"),
                 needAddNoteToGameConfig: false,
+                debugTool: false,
                 options: [
                     "acus",
                     "tribus",
@@ -424,25 +507,6 @@ export const cheats = {
                     "micare",
                     "radium"
                 ]
-            },
-            {
-                name: "toggleInstantStart",
-                code: "dbginstant",
-                message: "instant start mode ",
-                type: "toggleCheat",
-                scope: [
-                    "config"
-                ],
-                toggleOptions: [
-                    "on",
-                    "off"
-                ],
-                paramName: "gameInstantStart",
-                limit: null,
-                description: "включение или выключение режима запуска игры без отсчета (для отладки)",
-                help: this.helpArray.get("toggleCheat"),
-                needAddNoteToGameConfig: true,
-                options: null
             }
         ]
     }

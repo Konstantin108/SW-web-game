@@ -74,6 +74,16 @@ export const debugPanelElements = {
                 description: "выводить bonuses в консоль постоянно"
             },
             {
+                id: "bossGetDamageInfo",
+                type: "checkbox",
+                description: "выводить boss в консоль каждый раз при нанесении ему урона"
+            },
+            {
+                id: "actualParamsInfo",
+                type: "checkbox",
+                description: "выводить localStorage и config в консоль каждый раз при активации чита и при запуске игры"
+            },
+            {
                 id: "toggleInfinityMode",
                 type: "checkbox",
                 description: "включить сохранение параметров в localStorage"

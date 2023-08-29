@@ -62,6 +62,12 @@ export const cheatsController = {
         let matchCheatObject = this.cheats.find((cheat) => cheat.code === compoundCode[0]);
 
         if (matchCheatObject) {
+
+            if (matchCheatObject.debugTool && !config.debugMode) {
+                if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
+                return;
+            }
+
             switch (matchCheatObject.type) {
                 case "optionsCheat":
                     if (matchCheatObject.options.includes(compoundCode[1])) {
@@ -106,14 +112,14 @@ export const cheatsController = {
 
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
         }
+
         if (activatedCheat) messageColor = "cheatMessageGreen";
         if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
+        if (!activatedCheat) return;
         this.activateCheat(activatedCheat, activatedCheatParam, paramName);
     },
 
     activateCheat(activatedCheat, activatedCheatParam = null, paramName = null) {
-        if (!activatedCheat) return;
-
         switch (activatedCheat.code) {
             case "infinitum":
                 this.toggleInfinityMode(paramName, activatedCheatParam)
@@ -141,7 +147,12 @@ export const cheatsController = {
             case "dbgenmarrows":
             case "dbgblockages":
             case "dbgbonuses":
+            case "dbgbossinfo":
+            case "dbgactual":
                 this.standartToggleCheatAction(paramName, activatedCheatParam);
+                break;
+            case "dbginstant":
+                this.toggleInstantStart(paramName, activatedCheatParam);
                 break;
             case "respiceintus":
                 this.toggleDebugMode(paramName, activatedCheatParam);
@@ -172,13 +183,13 @@ export const cheatsController = {
             case "praemium":
                 this.getSomeBonus(activatedCheatParam);
                 break;
-            case "dbginstant":
-                this.toggleInstantStart(paramName, activatedCheatParam);
-                break;
             default:
                 break;
         }
-        console.log(localStorage);  // отладка
+
+        if (!config.debugActualParamsInfoShow) return;
+        console.log("actual params in config and localStorage:");
+        console.log(localStorage);
         console.log(config);
     },
 
@@ -348,8 +359,42 @@ export const cheatsController = {
         return status;
     },
 
+    toggleInstantStart(paramName, toggle) {
+        let status = null;
+        let delay = null;
+
+        if (toggle === "on") {
+            status = true;
+            delay = -1;
+
+            config[paramName] = status;
+            config["startGameDelaySecondsCount"] = delay;
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.setParamToLocalStorage(paramName, status);
+                localStorageController.setParamToLocalStorage("startGameDelaySecondsCount", delay);
+            }
+        } else {
+            status = false;
+            delay = this.defaultConfigParamsArray.get("startGameDelaySecondsCount");
+
+            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
+                localStorageController.removeParamFromLocalStorage(paramName, status);
+                localStorageController.removeParamFromLocalStorage("startGameDelaySecondsCount", delay);
+            }
+            config[paramName] = status;
+            config["startGameDelaySecondsCount"] = delay;
+        }
+        game.startGameDelaySet();
+        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
+        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
+    },
+
     toggleDebugMode(paramName, toggle) {
         debugPanel[paramName] = this.standartToggleCheatAction(paramName, toggle);
+        if (debugPanel[paramName]) return;
+        let debugPanelElement = document.querySelector("#debugPanel");
+        if (!debugPanelElement) return;
+        renderer.renderDebugPanel();
     },
 
     getBonusForArbitaryTime(paramName, secondsCount) {
@@ -506,35 +551,5 @@ export const cheatsController = {
             default:
                 break;
         }
-    },
-
-    toggleInstantStart(paramName, toggle) {
-        let status = null;
-        let delay = null;
-
-        if (toggle === "on") {
-            status = true;
-            delay = -1;
-
-            config[paramName] = status;
-            config["startGameDelaySecondsCount"] = delay;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, status);
-                localStorageController.setParamToLocalStorage("startGameDelaySecondsCount", delay);
-            }
-        } else {
-            status = false;
-            delay = this.defaultConfigParamsArray.get("startGameDelaySecondsCount");
-
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, status);
-                localStorageController.removeParamFromLocalStorage("startGameDelaySecondsCount", delay);
-            }
-            config[paramName] = status;
-            config["startGameDelaySecondsCount"] = delay;
-        }
-        game.startGameDelaySet();
-        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
-        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
     }
 }

@@ -29,7 +29,10 @@ export const game = {
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
-        console.log(localStorage);  // отладка
+
+        if (!config.debugActualParamsInfoShow) return;
+        console.log("actual params in config and localStorage:");
+        console.log(localStorage);
         console.log(config);
     },
 

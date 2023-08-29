@@ -8,9 +8,11 @@ export const helperController = {
 
     randomEvent(probabilityOfAction) {
         let chance = Math.random() * 100;
+        let result = false;
 
         chance = chance.toFixed(0);
-        if (chance <= probabilityOfAction) return true;
+        if (chance <= probabilityOfAction) result = true;
+        return result;
     },
 
     getRandomType(types) {

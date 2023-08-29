@@ -83,6 +83,8 @@ export const debugPanel = {
             case "enemyArrowsObjects":
             case "blockagesObjects":
             case "bonusesObjects":
+            case "bossGetDamageInfo":
+            case "actualParamsInfo":
                 let cheat = helperController.getObjectByName(this.cheats, element);
                 cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
                 break;

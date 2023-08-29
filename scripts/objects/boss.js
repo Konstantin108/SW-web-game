@@ -249,7 +249,12 @@ export const boss = {
                 hit_y: hitData.hit_y
             }
         }
-        console.log(this);  // отладка
+
+        if (config.debugBossGetDamageInfoShow) {
+            console.log("boss get damage:");
+            console.log(this);
+        }
+
         if (this.lives > 0) renderer.renderGetDamageBoss(this.getDamageOutlookSelectorName, this.thisSelectorOverlay);
         if (this.lives <= 0) progressController.killBoss(this.destroyedReward, hitCoordinates);
     },
