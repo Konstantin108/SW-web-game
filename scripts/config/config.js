@@ -25,6 +25,7 @@ export const config = {
     superAbilityIsAlwaysCharged: false,
     menuColor: "viridis",
     debugMode: false,
+    production: false,
     // стрелы игрока
     power: 1,
     arrowDamage: 1,
@@ -61,6 +62,8 @@ export const config = {
     bonuses: bonuses.setBonusesParams(),
     levels: levels.setLevelsParams(),
     cheats: cheats.setCheatsParams(),
+    translatedColorNames: cheats.setTranslatedColorNames(),
+    bonusCodeNames: cheats.setBonusCodeNames(),
     cheatsInfinityActiveMode: false,
     paramsFromLocalStorage: [],
     cheatsActivated: [],

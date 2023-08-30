@@ -9,11 +9,12 @@ import {boss} from "../objects/boss.js";
 import {bonusController} from "./bonusController.js";
 import {explosion} from "../objects/explosion.js";
 import {game} from "../game.js";
-import {bonuses} from "../config/bonuses.js";
 import {debugPanel} from "../objects/debugPanel.js";
 
 export const cheatsController = {
     cheats: config.cheats,
+    translatedColorNames: config.translatedColorNames,
+    bonusCodeNames: config.bonusCodeNames,
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
     activatedCheatsParamsDataTempArray: new Map(),
     defaultConfigParamsArray: new Map(),
@@ -551,5 +552,39 @@ export const cheatsController = {
             default:
                 break;
         }
+    },
+
+    cheatsInfoForPlayer() {
+        if (!config.production) return;
+
+        let cheatsInfoObject = {};
+        let infoArray = null;
+        let code = "";
+
+        this.cheats.forEach(cheat => {
+            if (!cheat.debugTool) {
+                switch (cheat.type) {
+                    case "toggleCheat":
+                    case "simpleCheat":
+                        code = cheat.code;
+                        cheatsInfoObject[code] = cheat.descriptionForPlayer;
+                        break;
+                    case "optionsCheat":
+                        cheat.options.forEach(option => {
+                            code = `${cheat.code}:${option}`;
+                            infoArray = this[cheat.optionsInfo];
+                            cheatsInfoObject[code] = `${cheat.descriptionForPlayer} (${infoArray.get(option)})`;
+                        });
+                        break;
+                    case "arbitaryValueCheat":
+                        code = `${cheat.code}:199`;
+                        cheatsInfoObject[code] = cheat.descriptionForPlayer;
+                        break;
+                }
+            }
+        });
+
+        console.log("----------  Нажми клавишу ~ для вызова меню ввода читов  ----------");
+        console.table(cheatsInfoObject);
     }
 }

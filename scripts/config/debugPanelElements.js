@@ -76,7 +76,7 @@ export const debugPanelElements = {
             {
                 id: "bossGetDamageInfo",
                 type: "checkbox",
-                description: "выводить boss в консоль каждый раз при нанесении ему урона"
+                description: "выводить объект boss в консоль каждый раз при нанесении ему урона"
             },
             {
                 id: "actualParamsInfo",
@@ -91,7 +91,7 @@ export const debugPanelElements = {
             {
                 id: "toggleInstantStart",
                 type: "checkbox",
-                description: "отключить отсчет перед запуском игры"
+                description: "отключить отсчёт перед запуском игры"
             }
         ]
     }

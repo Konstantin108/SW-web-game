@@ -18,7 +18,6 @@ export class EnemyArrow {
     speed = config.enemyArrowSpeed;
     hit_x = null;
     hit_y = null;
-    needDestroyed = false;
 
     step() {
         if (!game.gameIsRunning) return;
@@ -60,6 +59,10 @@ export class EnemyArrow {
 
         for (let i = 0; i <= enemyArrowsArray.length; i++) {
             if (enemyArrowsArray[i]) {
+                let lastEnemyArrowInArray = enemyArrowsArray[enemyArrowsArray.length - 1];
+                if (lastEnemyArrowInArray) {
+                    if (lastEnemyArrowInArray.id - enemyArrowsArray[i].id > 15) enemyArrowsArray.splice(i, 1);
+                }
                 if (enemyArrowsArray[i].y >= config.mapSizeY) enemyArrowsArray.splice(i, 1);
             }
         }

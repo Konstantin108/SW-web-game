@@ -4,6 +4,7 @@ import {renderer} from "../objects/renderer.js";
 import {bonusController} from "../controllers/bonusController.js";
 import {player} from "../objects/player.js";
 import {cheatsController} from "../controllers/cheatsController.js";
+import {helperController} from "../controllers/helperController.js";
 
 export class Bonus {
     constructor(objectType, actionTime, x, y) {
@@ -41,6 +42,8 @@ export class Bonus {
         renderer.renderMovingObjects(bonusController.bonusesArray, this.thisSelectorOverlay);
         this.getBonus(this.picked());
         renderer.renderPlayer();
+
+        if (helperController.randomEvent(60)) this.removeStuckBonus(bonusController.bonusesArray);
     }
 
     makeStep() {
@@ -160,12 +163,24 @@ export class Bonus {
         }
     }
 
-    remove() {
-        let bonusArray = bonusController.bonusesArray;
+    removeStuckBonus(bonusesArray) {
+        for (let i = 0; i <= bonusesArray.length; i++) {
+            if (bonusesArray[i]) {
+                let lastBonusInArray = bonusesArray[bonusesArray.length - 1];
+                if (lastBonusInArray) {
+                    if (lastBonusInArray.id - bonusesArray[i].id > 6) bonusController.bonusesArray.splice(i, 1);
+                }
+            }
+        }
+    }
 
-        for (let i = 0; i <= bonusArray.length; i++) {
-            if (bonusArray[i]) {
-                if (bonusArray[i].id === this.id) bonusController.bonusesArray.splice(i, 1);
+    remove() {
+        let bonusesArray = bonusController.bonusesArray;
+
+        this.removeStuckBonus(bonusesArray);
+        for (let i = 0; i <= bonusesArray.length; i++) {
+            if (bonusesArray[i]) {
+                if (bonusesArray[i].y >= config.mapSizeY) bonusController.bonusesArray.splice(i, 1);
             }
         }
     }

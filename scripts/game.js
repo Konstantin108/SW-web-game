@@ -29,7 +29,7 @@ export const game = {
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
-
+        cheatsController.cheatsInfoForPlayer();
         if (!config.debugActualParamsInfoShow) return;
         console.log("actual params in config and localStorage:");
         console.log(localStorage);
