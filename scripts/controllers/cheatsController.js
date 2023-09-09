@@ -10,6 +10,7 @@ import {bonusController} from "./bonusController.js";
 import {explosion} from "../objects/explosion.js";
 import {game} from "../game.js";
 import {debugPanel} from "../objects/debugPanel.js";
+import {bonuses} from "../config/bonuses.js";
 
 export const cheatsController = {
     cheats: config.cheats,
@@ -188,10 +189,7 @@ export const cheatsController = {
                 break;
         }
 
-        if (!config.debugActualParamsInfoShow) return;
-        console.log("actual params in config and localStorage:");
-        console.log(localStorage);
-        console.log(config);
+        debugPanel.actualParamsInfoShow();
     },
 
     editCheatNamesArrayInGameConfig(remove, cheat) {
@@ -330,7 +328,6 @@ export const cheatsController = {
 
     killBoss() {
         if (!boss.alive) return;
-
         let hitCoordinates = {
             hit_x: boss.x,
             hit_y: boss.y
@@ -556,7 +553,6 @@ export const cheatsController = {
 
     cheatsInfoForPlayer() {
         if (!config.production) return;
-
         let cheatsInfoObject = {};
         let infoArray = null;
         let code = "";

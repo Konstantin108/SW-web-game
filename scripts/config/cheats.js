@@ -501,7 +501,7 @@ export const cheats = {
                 paramName: null,
                 limit: null,
                 description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
-                descriptionForPlayer: "убить всех на экране",
+                descriptionForPlayer: "убить всех врагов",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,

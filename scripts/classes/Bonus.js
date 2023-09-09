@@ -24,7 +24,7 @@ export class Bonus {
     picked_x = null;
     picked_y = null;
     timerId = null;  // id таймера интервала для метода makeStep()
-    timeBonusCanMakeStepTimerId = null;  // id таймера отсчета времени до удаления interval для отключения makeStep()
+    timeBonusCanMakeStepTimerId = null;  // id таймера отсчёта времени до удаления interval для отключения makeStep()
 
     step() {
         if (!game.gameIsRunning) return;

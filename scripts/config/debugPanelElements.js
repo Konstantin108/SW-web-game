@@ -1,6 +1,5 @@
 export const debugPanelElements = {
 
-    // возможно добавить название класса, чтобы разукрасить кнопки
     setDebugPanelElementsParams() {
         return [
             {

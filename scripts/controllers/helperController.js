@@ -8,11 +8,8 @@ export const helperController = {
 
     randomEvent(probabilityOfAction) {
         let chance = Math.random() * 100;
-        let result = false;
-
         chance = chance.toFixed(0);
-        if (chance <= probabilityOfAction) result = true;
-        return result;
+        if (chance <= probabilityOfAction) return true ?? false;
     },
 
     getRandomType(types) {
@@ -25,12 +22,9 @@ export const helperController = {
     },
 
     getObjectByName(object, value) {
-        let elem = null;
-
         for (let key in object) {
-            if (object[key].name === value) elem = object[key];
+            if (object[key].name === value) return object[key] ?? null;
         }
-        return elem;
     },
 
     getRandomCoordinates(arrayX, y) {

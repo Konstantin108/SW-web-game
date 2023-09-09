@@ -91,5 +91,12 @@ export const debugPanel = {
             default:
                 break;
         }
+    },
+
+    actualParamsInfoShow() {
+        if (!config.debugActualParamsInfoShow) return;
+        console.log("actual params in config and localStorage:");
+        console.log(localStorage);
+        console.log(config);
     }
 }

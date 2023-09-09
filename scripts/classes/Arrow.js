@@ -51,7 +51,7 @@ export class Arrow {
                 this.hit_y = this.y;
                 blockagesArray[i].getDamage(this, i, blockagesArray[i].shipDestroyedReward, 0);
                 renderer.renderStatusBar();
-                if (!this.penetration) this.outFromMap();
+                this.outFromMap();
             }
         }
         this.hit_x = null;
@@ -76,11 +76,12 @@ export class Arrow {
         if (!boss.shieldBody.x.length) return;
         if (boss.shieldBody.x.includes(this.x) && boss.shieldBody.y === this.y) {
             boss.bossShieldGetDamage(false, this);
-            if (!this.penetration) this.outFromMap();
+            this.outFromMap();
         }
     }
 
     outFromMap() {
+        if (this.penetration) return;
         this.y = -1;
         renderer.clear(this.selectorName);
         this.remove();

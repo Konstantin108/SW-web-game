@@ -30,10 +30,7 @@ export const game = {
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
         cheatsController.cheatsInfoForPlayer();
-        if (!config.debugActualParamsInfoShow) return;
-        console.log("actual params in config and localStorage:");
-        console.log(localStorage);
-        console.log(config);
+        debugPanel.actualParamsInfoShow();
     },
 
     run() {
