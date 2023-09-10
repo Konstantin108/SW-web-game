@@ -19,7 +19,8 @@ export const progressController = {
     bossExist: config.levels[0].bossExist,
     blockagesCount: 0,
     score: 0,
-    shipDestroyer: 0,
+    shipDestroyed: 0,
+    bossDestroyed: 0,
     shipDestroyedCounterForSuperAbilityCharge: 0,
     superAbilityCharge: 0,
     superAbilityIsCharged: config.superAbilityIsCharged,
@@ -77,14 +78,14 @@ export const progressController = {
         if (blockageType) blockageController.blockagesArray[blockage] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), y_pos);
         if (dontCountKilledEnemies) return;
         this.scoreUp(shipDestroyedReward);
-        this.shipDestroyer += 1;
+        this.shipDestroyed += 1;
         this.superAbilityCharging();
     },
 
     killBoss(bossDestroyedReward, hitCoordinates) {
         if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward);
         game.playerCanStopGame = false;
-        this.shipDestroyer += 1;
+        this.bossDestroyed += 1;
         renderer.renderStatusBar();
         boss.remove(hitCoordinates);
         setTimeout(() => {
@@ -127,18 +128,18 @@ export const progressController = {
 
     newLevelEntry(blockagesCount) {
         let message = `LEVEL ${progressController.level}`;
-        let playerCantSopGameTime = 1000;
+        let playerCantStopGameTime = 1000;
 
         game.playerCanStopGame = false;
         renderer.renderInCenterTableNotify(message);
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
-        setTimeout(() => game.playerCanStopGame = true, playerCantSopGameTime);
+        setTimeout(() => game.playerCanStopGame = true, playerCantStopGameTime);
     },
 
     addBossToLevel() {
-        let playerCantSopGameTime = 6000;
+        let playerCantStopGameTime = 6000;
 
         setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
         setTimeout(() => {
@@ -146,6 +147,6 @@ export const progressController = {
             bonusController.destroyAllBonuses();
         }, 2000);
         setTimeout(() => boss.createBoss(), 3000);
-        setTimeout(() => game.playerCanStopGame = true, playerCantSopGameTime);
+        setTimeout(() => game.playerCanStopGame = true, playerCantStopGameTime);
     }
 }

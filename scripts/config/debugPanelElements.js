@@ -3,93 +3,129 @@ export const debugPanelElements = {
     setDebugPanelElementsParams() {
         return [
             {
-                id: "localStorage",
+                name: "localStorage",
                 type: "button",
+                customClass: null,
+                message: "localStorage:",
                 description: "вывести localStorage в консоль"
             },
             {
-                id: "config",
+                name: "config",
                 type: "button",
+                customClass: null,
+                message: "config:",
                 description: "вывести config в консоль"
             },
             {
-                id: "boss",
+                name: "boss",
                 type: "button",
+                customClass: null,
+                message: "boss:",
                 description: "вывести boss в консоль"
             },
             {
-                id: "player",
+                name: "player",
                 type: "button",
+                customClass: null,
+                message: "player:",
                 description: "вывести player в консоль"
             },
             {
-                id: "game",
+                name: "game",
                 type: "button",
+                customClass: null,
+                message: "game:",
                 description: "вывести game в консоль"
             },
             {
-                id: "cheatsController",
+                name: "cheatsController",
                 type: "button",
+                customClass: null,
+                message: "cheatsController:",
                 description: "вывести cheatsController в консоль"
             },
             {
-                id: "progressController",
+                name: "progressController",
                 type: "button",
+                customClass: null,
+                message: "progressController:",
                 description: "вывести progressController в консоль"
             },
             {
-                id: "clearConsole",
+                name: "clearConsole",
                 type: "button",
+                customClass: "redBtn",
+                message: null,
                 description: "очистить консоль"
             },
             {
-                id: "callBoss",
+                name: "callBoss",
                 type: "button",
+                customClass: null,
+                message: null,
                 description: "вызвать босса"
             },
             {
-                id: "killBoss",
+                name: "killBoss",
                 type: "button",
+                customClass: null,
+                message: null,
                 description: "убить босса"
             },
             {
-                id: "playerArrowsObjects",
+                name: "playerArrowsObjects",
                 type: "checkbox",
+                customClass: null,
+                message: "player's arrows:",
                 description: "выводить player's arrows в консоль постоянно"
             },
             {
-                id: "enemyArrowsObjects",
+                name: "enemyArrowsObjects",
                 type: "checkbox",
+                customClass: null,
+                message: "enemy arrows:",
                 description: "выводить enemy arrows в консоль постоянно"
             },
             {
-                id: "blockagesObjects",
+                name: "blockagesObjects",
                 type: "checkbox",
+                customClass: null,
+                message: "blockages:",
                 description: "выводить blockages в консоль постоянно"
             },
             {
-                id: "bonusesObjects",
+                name: "bonusesObjects",
                 type: "checkbox",
+                customClass: null,
+                message: "bonuses: ",
                 description: "выводить bonuses в консоль постоянно"
             },
             {
-                id: "bossGetDamageInfo",
+                name: "bossGetDamageInfo",
                 type: "checkbox",
+                customClass: null,
+                message: "boss get damage:",
                 description: "выводить объект boss в консоль каждый раз при нанесении ему урона"
             },
             {
-                id: "actualParamsInfo",
+                name: "actualParamsInfo",
                 type: "checkbox",
+                customClass: null,
+                message: "actual params in config and localStorage:",
                 description: "выводить localStorage и config в консоль каждый раз при активации чита и при запуске игры"
             },
             {
-                id: "toggleInfinityMode",
+                name: "toggleInfinityMode",
                 type: "checkbox",
+                customClass: null,
+                message: null,
                 description: "включить сохранение параметров в localStorage"
             },
             {
-                id: "toggleInstantStart",
+                name: "toggleInstantStart",
                 type: "checkbox",
+                customClass: null,
+                message: null,
                 description: "отключить отсчёт перед запуском игры"
             }
         ]

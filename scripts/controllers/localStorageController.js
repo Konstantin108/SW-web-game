@@ -2,6 +2,7 @@ import {config} from "../config/config.js";
 import {player} from "../objects/player.js";
 import {helperController} from "./helperController.js";
 import {cheatsController} from "./cheatsController.js";
+import {bonuses} from "../config/bonuses.js";
 
 export const localStorageController = {
     bonusNamesFromLocalStorage: [],
@@ -55,7 +56,7 @@ export const localStorageController = {
         } else {
             for (let key in config) {
                 if (config[key] instanceof Object && config[key].hasOwnProperty(param)) {
-                    config[key] = config.bonuses.setBonusesParams(localStorageParam);
+                    config[key] = bonuses.setBonusesParams(localStorageParam);
                 }
             }
         }

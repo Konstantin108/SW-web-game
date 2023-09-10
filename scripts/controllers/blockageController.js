@@ -3,6 +3,7 @@ import {helperController} from "./helperController.js";
 import {Blockage} from "../classes/Blockage.js";
 import {BlockageBull} from "../classes/BlockageBull.js";
 import {progressController} from "./progressController.js";
+import {debugPanel} from "../objects/debugPanel.js";
 
 export const blockageController = {
     blockageTypes: {
@@ -48,7 +49,6 @@ export const blockageController = {
             this.blockageTimerIdsArray.push(setInterval(() => blockagesArray[i].step(), blockagesArray[i].speed));
         }
         if (!config.debugBlockagesObjectsShow) return;
-        console.log(`blockages: ${blockagesArray.length}`);
-        blockagesArray.forEach(elem => console.log(elem));
+        debugPanel.objectsInfoShow("blockagesObjects", blockagesArray, true);
     }
 }

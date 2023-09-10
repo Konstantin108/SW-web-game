@@ -3,6 +3,7 @@ import {Arrow} from "../classes/Arrow.js";
 import {ArrowDrill} from "../classes/ArrowDrill.js";
 import {ArrowTrinity} from "../classes/ArrowTrinity.js";
 import {config} from "../config/config.js";
+import {debugPanel} from "../objects/debugPanel.js";
 
 export const arrowController = {
     arrowTypes: {
@@ -31,7 +32,6 @@ export const arrowController = {
             if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
         }
         if (!config.debugPlayerArrowsObjectsShow) return;
-        console.log(`player\'s arrows: ${this.arrowsArray.length}`);
-        this.arrowsArray.forEach(elem => console.log(elem));
+        debugPanel.objectsInfoShow("playerArrowsObjects", this.arrowsArray, true);
     }
 }

@@ -10,7 +10,7 @@ export const templatePrinter = {
                 </table>`;
     },
 
-    statusBarTemplatePrint(level, score, shipDestroyer, livesBar) {
+    statusBarTemplatePrint(level, score, shipDestroyed, livesBar) {
         return `<div id="statusBarContainer">
                     <div id="statusBar" class="${config.menuColor}">
                         <div id="scull" class="whiteScull"></div>
@@ -45,7 +45,7 @@ export const templatePrinter = {
                                         Уничтожено противников
                                     </div>
                                     <div>
-                                        ${shipDestroyer} 
+                                        ${shipDestroyed} 
                                     </div>
                                 </div>
                             </strong>

@@ -5,6 +5,7 @@ import {game} from "../game.js";
 import {player} from "./player.js";
 import {progressController} from "../controllers/progressController.js";
 import {enemyArrowController} from "../controllers/enemyArrowController.js";
+import {debugPanel} from "./debugPanel.js";
 
 export const boss = {
     x: helperController.getCenterMapOnX(),
@@ -250,10 +251,7 @@ export const boss = {
             }
         }
 
-        if (config.debugBossGetDamageInfoShow) {
-            console.log("boss get damage:");
-            console.log(this);
-        }
+        if (config.debugBossGetDamageInfoShow) debugPanel.objectsInfoShow("bossGetDamageInfo", this);
 
         if (this.lives > 0) renderer.renderGetDamageBoss(this.getDamageOutlookSelectorName, this.thisSelectorOverlay);
         if (this.lives <= 0) progressController.killBoss(this.destroyedReward, hitCoordinates);

@@ -264,7 +264,7 @@ export const renderer = {
     },
 
     renderStatusBar() {
-        this.statusBar = templatePrinter.statusBarTemplatePrint(progressController.level, progressController.score, progressController.shipDestroyer, this.renderLivesBar());
+        this.statusBar = templatePrinter.statusBarTemplatePrint(progressController.level, progressController.score, progressController.shipDestroyed, this.renderLivesBar());
         let statusBar = document.querySelector("#statusBarContainer");
 
         if (statusBar) this.container.removeChild(statusBar);
@@ -498,30 +498,33 @@ export const renderer = {
         let debugElements = config.debugPanelElements;
         let debugElementsDiv = `<div id="btnsBlock">`;
         let checked = "";
+        let customClass = "";
 
         debugElements.forEach(elem => {
-            if (config.cheatsActivated.includes(elem.id)) checked = "checked";
+            if (config.cheatsActivated.includes(elem.name)) checked = "checked";
+            if (elem.customClass) customClass = elem.customClass;
             if (elem.type === "button") {
                 debugElementsDiv += `<div>
-                                        <input id="${elem.id}"
+                                        <input id="${elem.name}"
                                                type="button"
-                                               value="${elem.id}"
-                                               class="debugPanelButton btnLabel">
+                                               value="${elem.name}"
+                                               class="debugPanelButton btnLabel ${customClass}">
                                      </div>`;
             } else {
                 debugElementsDiv += `<div>
-                                        <input id="${elem.id}"
+                                        <input id="${elem.name}"
                                                name="debug"
                                                type="checkbox"
-                                               value="${elem.id}"
+                                               value="${elem.name}"
                                                class="debugPanelButton btnInputElement"
                                                ${checked}>
-                                        <label class="btnInputLabel" for="${elem.id}">
-                                            ${elem.id}
+                                        <label class="btnInputLabel" for="${elem.name}">
+                                            ${elem.name}
                                         </label>
                                     </div>`;
             }
             checked = "";
+            customClass = "";
         });
         debugElementsDiv += "</div>";
 

@@ -71,9 +71,9 @@ export class Bonus {
         this.picked_y = null;
     }
 
-    destroy() {
+    destroy(forceRemove = false) {
         renderer.renderPickedBonus(this, false);
-        this.remove();
+        this.remove(forceRemove);
     }
 
     getBonus(bonus) {
@@ -174,13 +174,13 @@ export class Bonus {
         }
     }
 
-    remove() {
+    remove(forceRemove = false) {
         let bonusesArray = bonusController.bonusesArray;
 
         this.removeStuckBonus(bonusesArray);
         for (let i = 0; i <= bonusesArray.length; i++) {
             if (bonusesArray[i]) {
-                if (bonusesArray[i].y >= config.mapSizeY) bonusController.bonusesArray.splice(i, 1);
+                if (bonusesArray[i].y >= config.mapSizeY || forceRemove) bonusController.bonusesArray.splice(i, 1);
             }
         }
     }

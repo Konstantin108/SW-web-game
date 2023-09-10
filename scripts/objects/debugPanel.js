@@ -45,32 +45,25 @@ export const debugPanel = {
 
         switch (element) {
             case "localStorage":
-                console.log("localStorage:");
-                console.log(localStorage);
+                this.objectsInfoShow(element, localStorage);
                 break;
             case "config":
-                console.log("config:");
-                console.log(config);
+                this.objectsInfoShow(element, config);
                 break;
             case "boss":
-                console.log("boss:");
-                console.log(boss);
+                this.objectsInfoShow(element, boss);
                 break;
             case "player":
-                console.log("player:");
-                console.log(player);
+                this.objectsInfoShow(element, player);
                 break;
             case "game":
-                console.log("game:");
-                console.log(game);
+                this.objectsInfoShow(element, game);
                 break;
             case "cheatsController":
-                console.log("cheatsController:");
-                console.log(cheatsController);
+                this.objectsInfoShow(element, cheatsController);
                 break;
             case "progressController":
-                console.log("progressController:");
-                console.log(progressController);
+                this.objectsInfoShow(element, progressController);
                 break;
             case "clearConsole":
                 console.clear();
@@ -93,10 +86,19 @@ export const debugPanel = {
         }
     },
 
-    actualParamsInfoShow() {
-        if (!config.debugActualParamsInfoShow) return;
-        console.log("actual params in config and localStorage:");
-        console.log(localStorage);
-        console.log(config);
+    objectsInfoShow(elementName, showObjects, showCount = false) {
+        let element = helperController.getObjectByName(config.debugPanelElements, elementName);
+
+        if (showCount) {
+            console.log(`${element.message} ${showObjects.length}`);
+        } else {
+            console.log(element.message);
+        }
+
+        if (Array.isArray(showObjects)) {
+            showObjects.forEach(elem => console.log(elem));
+        } else {
+            console.log(showObjects);
+        }
     }
 }

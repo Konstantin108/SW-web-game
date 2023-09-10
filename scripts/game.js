@@ -30,7 +30,8 @@ export const game = {
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
         cheatsController.cheatsInfoForPlayer();
-        debugPanel.actualParamsInfoShow();
+        if (!config.debugActualParamsInfoShow) return;
+        debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
 
     run() {
@@ -114,7 +115,7 @@ export const game = {
     },
 
     quit() {
-        return `Игра окончена! Достигнут уровень: ${progressController.level}\nКораблей уничтожено: ${progressController.shipDestroyer}, Набранное количество очков: ${progressController.score}`;
+        return `Игра окончена! Достигнут уровень: ${progressController.level}\nКораблей уничтожено: ${progressController.shipDestroyed}, Набранное количество очков: ${progressController.score}`;
     },
 
     over(win = false) {

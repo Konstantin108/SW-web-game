@@ -189,7 +189,8 @@ export const cheatsController = {
                 break;
         }
 
-        debugPanel.actualParamsInfoShow();
+        if (!config.debugActualParamsInfoShow) return;
+        debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
 
     editCheatNamesArrayInGameConfig(remove, cheat) {

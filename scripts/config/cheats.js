@@ -55,13 +55,13 @@ export const cheats = {
                 ],
                 paramName: "cheatsInfinityActiveMode",
                 limit: null,
-                description: "включение или выключение опции сохранения действия читов в localStorage",
-                descriptionForPlayer: "действие читов не будет отменяться при перезапуске игры",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение опции сохранения действия читов в localStorage",
+                descriptionForPlayer: "действие читов не будет отменяться при перезапуске игры"
             },
             {
                 name: "toggleInvincibility",
@@ -77,13 +77,13 @@ export const cheats = {
                 ],
                 paramName: "invincibility",
                 limit: null,
-                description: "включение или выключение неуязвимости",
-                descriptionForPlayer: "стать неуязвимым",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение неуязвимости",
+                descriptionForPlayer: "стать неуязвимым"
             },
             {
                 name: "colorChange",
@@ -96,8 +96,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "menuColor",
                 limit: null,
-                description: "изменить цвет интерфейса",
-                descriptionForPlayer: "изменить цвет интерфейса",
                 help: this.helpArray.get("optionsCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
@@ -114,7 +112,9 @@ export const cheats = {
                     "album",
                     "ferrum",
                     "terra"
-                ]
+                ],
+                description: "изменить цвет интерфейса",
+                descriptionForPlayer: "изменить цвет интерфейса"
             },
             {
                 name: "restoreLives",
@@ -127,13 +127,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "lives",
                 limit: null,
-                description: "восстановить жизни",
-                descriptionForPlayer: "восстановить жизни",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "восстановить жизни",
+                descriptionForPlayer: "восстановить жизни"
             },
             {
                 name: "addLives",
@@ -146,13 +146,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "lives",
                 limit: 999,
-                description: "установить количество жизней",
-                descriptionForPlayer: "установить количество жизней (от 1 до 999)",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "установить количество жизней",
+                descriptionForPlayer: "установить количество жизней (от 1 до 999)"
             },
             {
                 name: "callBoss",
@@ -166,13 +166,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "bossExist",
                 limit: null,
-                description: "вызвать босса",
-                descriptionForPlayer: "вызвать босса",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "вызвать босса",
+                descriptionForPlayer: "вызвать босса"
             },
             {
                 name: "killBoss",
@@ -185,13 +185,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: null,
                 limit: null,
-                description: "убить босса",
-                descriptionForPlayer: "убить босса",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "убить босса",
+                descriptionForPlayer: "убить босса"
             },
             {
                 name: "toggleArrowPenetration",
@@ -207,13 +207,13 @@ export const cheats = {
                 ],
                 paramName: "arrowPenetration",
                 limit: null,
-                description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
-                descriptionForPlayer: "все типы стрел будут пробивать врагов насквозь",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
+                descriptionForPlayer: "все типы стрел будут пробивать врагов насквозь"
             },
             {
                 name: "playerArrowsObjects",
@@ -229,13 +229,13 @@ export const cheats = {
                 ],
                 paramName: "debugPlayerArrowsObjectsShow",
                 limit: null,
-                description: "включение или выключение вывода в консоль объектов класса Arrow (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вывода в консоль объектов класса Arrow (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "enemyArrowsObjects",
@@ -251,13 +251,13 @@ export const cheats = {
                 ],
                 paramName: "debugEnemyArrowsObjectsShow",
                 limit: null,
-                description: "включение или выключение вывода в консоль объектов класса EnemyArrow (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вывода в консоль объектов класса EnemyArrow (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "blockagesObjects",
@@ -273,13 +273,13 @@ export const cheats = {
                 ],
                 paramName: "debugBlockagesObjectsShow",
                 limit: null,
-                description: "включение или выключение вывода в консоль объектов класса Blockage (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вывода в консоль объектов класса Blockage (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "bonusesObjects",
@@ -295,13 +295,13 @@ export const cheats = {
                 ],
                 paramName: "debugBonusesObjectsShow",
                 limit: null,
-                description: "включение или выключение вывода в консоль объектов класса Bonus (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вывода в консоль объектов класса Bonus (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "bossGetDamageInfo",
@@ -317,13 +317,13 @@ export const cheats = {
                 ],
                 paramName: "debugBossGetDamageInfoShow",
                 limit: null,
-                description: "включение или выключение вывода в консоль параметров босса каждый раз при нанесении ему урона (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вывода в консоль параметров босса каждый раз при нанесении ему урона (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "actualParamsInfo",
@@ -339,13 +339,13 @@ export const cheats = {
                 ],
                 paramName: "debugActualParamsInfoShow",
                 limit: null,
-                description: "включение или выключение вывода в консоль localStorage и config каждый раз при активации чита и при запуске игры (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вывода в консоль localStorage и config каждый раз при активации чита и при запуске игры (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "toggleInstantStart",
@@ -361,13 +361,13 @@ export const cheats = {
                 ],
                 paramName: "gameInstantStart",
                 limit: null,
-                description: "включение или выключение режима запуска игры без отсчёта (для отладки)",
-                descriptionForPlayer: null,
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: true,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение режима запуска игры без отсчёта (для отладки)",
+                descriptionForPlayer: null
             },
             {
                 name: "toggleDebugMode",
@@ -383,13 +383,13 @@ export const cheats = {
                 ],
                 paramName: "debugMode",
                 limit: null,
-                description: "включение или выключение вызова дебаг-панели по нажатию клавиши /",
-                descriptionForPlayer: "debug-mode (клавиша /)",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение вызова дебаг-панели по нажатию клавиши /",
+                descriptionForPlayer: "debug-mode (клавиша /)"
             },
             {
                 name: "getShield",
@@ -402,13 +402,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "shield",
                 limit: 199,
-                description: "получить shield на определенное игроком количество секунд",
-                descriptionForPlayer: "получить щит (от 1 до 199 секунд)",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "получить shield на определенное игроком количество секунд",
+                descriptionForPlayer: "получить щит (от 1 до 199 секунд)"
             },
             {
                 name: "getDrill",
@@ -421,13 +421,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "drill",
                 limit: 199,
-                description: "получить arrowDrill на определенное игроком количество секунд",
-                descriptionForPlayer: "получить стрелы типа Дрель (от 1 до 199 секунд)",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "получить arrowDrill на определенное игроком количество секунд",
+                descriptionForPlayer: "получить стрелы типа Дрель (от 1 до 199 секунд)"
             },
             {
                 name: "getTrinity",
@@ -440,13 +440,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "trinity",
                 limit: 199,
-                description: "получить arrowTrinity на определённое игроком количество секунд",
-                descriptionForPlayer: "получить стрелы типа Тринити (от 1 до 199 секунд)",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "получить arrowTrinity на определённое игроком количество секунд",
+                descriptionForPlayer: "получить стрелы типа Тринити (от 1 до 199 секунд)"
             },
             {
                 name: "suicide",
@@ -459,13 +459,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "lives",
                 limit: null,
-                description: "убить самого себя",
-                descriptionForPlayer: "убить самого себя",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "убить самого себя",
+                descriptionForPlayer: "убить самого себя"
             },
             {
                 name: "togglePowerfulArrow",
@@ -481,13 +481,13 @@ export const cheats = {
                 ],
                 paramName: "power",
                 limit: null,
-                description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
-                descriptionForPlayer: "урон от всех типов стрел увеличен в 10 раз",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
+                descriptionForPlayer: "урон от всех типов стрел увеличен в 10 раз"
             },
             {
                 name: "explosion",
@@ -500,13 +500,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: null,
                 limit: null,
-                description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
-                descriptionForPlayer: "убить всех врагов",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
+                descriptionForPlayer: "убить всех врагов"
             },
             {
                 name: "setBonusChance",
@@ -520,13 +520,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: "bonusChance",
                 limit: 100,
-                description: "установить процент вероятности появления на карте бонусов",
-                descriptionForPlayer: "увеличить вероятность появления бонусов (от 1 до 100 процентов)",
                 help: this.helpArray.get("arbitaryValueCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "установить процент вероятности появления на карте бонусов",
+                descriptionForPlayer: "увеличить вероятность появления бонусов (от 1 до 100 процентов)"
             },
             {
                 name: "superAbilityIsAlwaysCharged",
@@ -542,13 +542,13 @@ export const cheats = {
                 ],
                 paramName: "superAbilityIsAlwaysCharged",
                 limit: null,
-                description: "включение или выключение всегда полного заряда для использования суперспособности",
-                descriptionForPlayer: "суперспособность всегда заряжена",
                 help: this.helpArray.get("toggleCheat"),
                 needAddNoteToGameConfig: true,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "включение или выключение всегда полного заряда для использования суперспособности",
+                descriptionForPlayer: "суперспособность всегда заряжена"
             },
             {
                 name: "offAllCheats",
@@ -559,13 +559,13 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: null,
                 limit: null,
-                description: "отключить действие всех читов",
-                descriptionForPlayer: "отключить действие всех читов",
                 help: this.helpArray.get("simpleCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
                 optionsInfo: null,
-                options: null
+                options: null,
+                description: "отключить действие всех читов",
+                descriptionForPlayer: "отключить действие всех читов"
             },
             {
                 name: "getSomeBonus",
@@ -579,8 +579,6 @@ export const cheats = {
                 toggleOptions: null,
                 paramName: null,
                 limit: null,
-                description: "получить любой бонус",
-                descriptionForPlayer: "получить бонус",
                 help: this.helpArray.get("optionsCheat"),
                 needAddNoteToGameConfig: false,
                 debugTool: false,
@@ -592,7 +590,9 @@ export const cheats = {
                     "cor",
                     "micare",
                     "radium"
-                ]
+                ],
+                description: "получить любой бонус",
+                descriptionForPlayer: "получить бонус"
             }
         ]
     }

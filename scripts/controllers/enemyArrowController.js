@@ -1,6 +1,7 @@
 import {EnemyArrow} from "../classes/EnemyArrow.js";
 import {EnemyArrowBomb} from "../classes/EnemyArrowBomb.js";
 import {config} from "../config/config.js";
+import {debugPanel} from "../objects/debugPanel.js";
 
 export const enemyArrowController = {
     arrowTypes: {
@@ -18,7 +19,6 @@ export const enemyArrowController = {
         let enemyArrow = this.enemyArrowsArray.at(-1);
         enemyArrow.makeStep();
         if (!config.debugEnemyArrowsObjectsShow) return;
-        console.log(`enemy arrows: ${this.enemyArrowsArray.length}`);
-        this.enemyArrowsArray.forEach(elem => console.log(elem));
+        debugPanel.objectsInfoShow("playerArrowsObjects", this.enemyArrowsArray, true);
     }
 }

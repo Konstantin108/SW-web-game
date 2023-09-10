@@ -3,6 +3,7 @@ import {Bonus} from "../classes/Bonus.js";
 import {config} from "../config/config.js";
 import {player} from "../objects/player.js";
 import {renderer} from "../objects/renderer.js";
+import {debugPanel} from "../objects/debugPanel.js";
 
 export const bonusController = {
     bonusesArray: [],
@@ -64,12 +65,8 @@ export const bonusController = {
     },
 
     destroyAllBonuses() {
-        let bonusesArray = this.bonusesArray;
-
-        while (bonusesArray.length) {
-            for (let i = 0; i < bonusesArray.length; i++) {
-                if (this.bonusesArray[i]) this.bonusesArray[i].destroy();
-            }
+        while (this.bonusesArray.length) {
+            this.bonusesArray.forEach(bonus => bonus.destroy(true));
         }
     },
 
@@ -94,7 +91,6 @@ export const bonusController = {
         bonus.makeStep();
         bonus.makeStepOff();
         if (!config.debugBonusesObjectsShow) return;
-        console.log(`bonuses: ${this.bonusesArray.length}`);
-        this.bonusesArray.forEach(elem => console.log(elem));
+        debugPanel.objectsInfoShow("bonusesObjects", this.bonusesArray, true);
     }
 }
