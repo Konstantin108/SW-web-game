@@ -29,7 +29,7 @@ export const game = {
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
-        cheatsController.cheatsInfoForPlayer();
+        if (config.production) cheatsController.cheatsInfoForPlayer();
         if (!config.debugActualParamsInfoShow) return;
         debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },

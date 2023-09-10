@@ -127,7 +127,14 @@ export const debugPanelElements = {
                 customClass: null,
                 message: null,
                 description: "отключить отсчёт перед запуском игры"
-            }
+            },
+            {
+                name: "cheatsInfo",
+                type: "button",
+                customClass: null,
+                message: null,
+                description: "вывести в консоль таблицу с информацией о читах"
+            },
         ]
     }
 }

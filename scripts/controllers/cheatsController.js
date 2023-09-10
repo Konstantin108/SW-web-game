@@ -117,8 +117,12 @@ export const cheatsController = {
 
         if (activatedCheat) messageColor = "cheatMessageGreen";
         if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
-        if (!activatedCheat) return;
-        this.activateCheat(activatedCheat, activatedCheatParam, paramName);
+        if (activatedCheat) this.activateCheat(activatedCheat, activatedCheatParam, paramName);
+        if (config.production) {
+            console.clear();
+            this.cheatsInfoForPlayer();
+        }
+        return message;
     },
 
     activateCheat(activatedCheat, activatedCheatParam = null, paramName = null) {
@@ -553,9 +557,9 @@ export const cheatsController = {
     },
 
     cheatsInfoForPlayer() {
-        if (!config.production) return;
         let cheatsInfoObject = {};
         let infoArray = null;
+        let cheatActivated = " [активирован]";
         let code = "";
 
         this.cheats.forEach(cheat => {
@@ -564,17 +568,28 @@ export const cheatsController = {
                     case "toggleCheat":
                     case "simpleCheat":
                         code = cheat.code;
+                        if (config.cheatsActivated.includes(cheat.name)) code += cheatActivated;
                         cheatsInfoObject[code] = cheat.descriptionForPlayer;
                         break;
                     case "optionsCheat":
                         cheat.options.forEach(option => {
                             code = `${cheat.code}:${option}`;
+                            if (config.cheatsActivated.includes(cheat.name)) {
+                                if (config[cheat.paramName] === option) code += cheatActivated;
+                            }
                             infoArray = this[cheat.optionsInfo];
                             cheatsInfoObject[code] = `${cheat.descriptionForPlayer} (${infoArray.get(option)})`;
                         });
                         break;
                     case "arbitaryValueCheat":
-                        code = `${cheat.code}:199`;
+                        code = `${cheat.code}:${cheat.limit}`;
+                        if (config.cheatsActivated.includes(cheat.name)) {
+                            if (cheat.paramName === "drill" || cheat.paramName === "trinity") {
+                                if (this.activatedCheatsParamsDataTempArray.get(cheat.paramName)) code += cheatActivated;
+                            } else {
+                                code += cheatActivated;
+                            }
+                        }
                         cheatsInfoObject[code] = cheat.descriptionForPlayer;
                         break;
                 }
