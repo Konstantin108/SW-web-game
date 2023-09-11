@@ -12,6 +12,7 @@ import {boss} from "./objects/boss.js";
 import {cheatsController} from "./controllers/cheatsController.js";
 import {localStorageController} from "./controllers/localStorageController.js";
 import {debugPanel} from "./objects/debugPanel.js";
+import {pause} from "./objects/pause.js";
 
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
@@ -26,6 +27,7 @@ export const game = {
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         this.showPauseMenu();
+        pause.testPause();  // в разработке
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();

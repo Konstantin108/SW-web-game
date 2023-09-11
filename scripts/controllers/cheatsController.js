@@ -26,7 +26,7 @@ export const cheatsController = {
 
         document.addEventListener("keydown", function (event) {
             if (!playerCanCallCheatConsole) return;
-            if (showCheatConsoleBtn !== event.code) return;
+            if (event.code !== showCheatConsoleBtn) return;
             playerCanCallCheatConsole = false;
             renderer.renderCheatConsole();
             cheatsController.inputCheat();

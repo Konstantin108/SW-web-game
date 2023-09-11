@@ -94,6 +94,7 @@ export const progressController = {
         }, 6000);
         setTimeout(() => {
             this.playerCanEnterNewLevel = true;
+            game.playerCanStopGame = true;
             this.bossCalled = false;
             this.bossKilled = true;
         }, 9000);

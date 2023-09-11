@@ -71,11 +71,6 @@ export class Bonus {
         this.picked_y = null;
     }
 
-    destroy(forceRemove = false) {
-        renderer.renderPickedBonus(this, false);
-        this.remove(forceRemove);
-    }
-
     getBonus(bonus) {
         if (bonus) {
             this.setNewPropertiesForPlayer(bonus.objectType);
@@ -180,7 +175,10 @@ export class Bonus {
         this.removeStuckBonus(bonusesArray);
         for (let i = 0; i <= bonusesArray.length; i++) {
             if (bonusesArray[i]) {
-                if (bonusesArray[i].y >= config.mapSizeY || forceRemove) bonusController.bonusesArray.splice(i, 1);
+                if (bonusesArray[i].y >= config.mapSizeY || forceRemove) {
+                    renderer.renderPickedBonus(bonusesArray[i], false);
+                    bonusController.bonusesArray.splice(i, 1);
+                }
             }
         }
     }

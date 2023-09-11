@@ -479,6 +479,22 @@ export const renderer = {
         if (messageElement) setTimeout(() => table.removeChild(messageElement), 1000);
     },
 
+    renderPauseMenuBackground() {
+        let body = document.querySelector("body");
+        let backgroundElement = null;
+
+        if (!document.querySelector("#pauseMenuBackground")) {
+            body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuBackgroundPrint());
+            backgroundElement = document.querySelector("#pauseMenuBackground");
+            backgroundElement.classList.add("pauseOn");
+            setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
+        } else {
+            backgroundElement = document.querySelector("#pauseMenuBackground");
+            backgroundElement.classList.add("pauseOff");
+            setTimeout(() => body.removeChild(backgroundElement), 180);
+        }
+    },
+
     renderDebugPanel() {
         let debugPanel = null;
 

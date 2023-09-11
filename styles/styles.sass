@@ -563,14 +563,14 @@ td
     opacity: 1
 
 .flash
-  background-color: rgba(255, 255, 255)
+  background-color: rgba(255, 255, 255, 1)
   box-shadow: 0 0 360px white
 
 .explosion
   background-image: url("../images/explosion.png")
   background-position: center
   background-repeat: no-repeat
-  background-color: rgba(255, 255, 255)
+  background-color: rgba(255, 255, 255, 1)
   box-shadow: 0 0 320px #e1601d
   animation: explosion .8s
 
@@ -777,3 +777,35 @@ td
     transform: translate(0, 0)
   to
     transform: translate(380px, 0)
+
+// стили меню паузы
+
+#pauseMenuBackground
+  position: absolute
+  z-index: 3
+  height: 99%
+  width: 99%
+  background-color: rgba(0, 0, 0, 0.3)
+  backdrop-filter: blur(7px)
+
+.pauseOn
+  animation: pauseMenuBackgroundOn .2s
+
+.pauseOff
+  animation: pauseMenuBackgroundOff .2s
+
+@keyframes pauseMenuBackgroundOn
+  from
+    background-color: rgba(0, 0, 0, 0)
+    backdrop-filter: blur(0)
+  to
+    background-color: rgba(0, 0, 0, 0.3)
+    backdrop-filter: blur(7px)
+
+@keyframes pauseMenuBackgroundOff
+  from
+    background-color: rgba(0, 0, 0, 0.3)
+    backdrop-filter: blur(7px)
+  to
+    background-color: rgba(0, 0, 0, 0)
+    backdrop-filter: blur(0)

@@ -66,7 +66,7 @@ export const bonusController = {
 
     destroyAllBonuses() {
         while (this.bonusesArray.length) {
-            this.bonusesArray.forEach(bonus => bonus.destroy(true));
+            this.bonusesArray[0].remove(true);
         }
     },
 

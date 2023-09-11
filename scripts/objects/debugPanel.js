@@ -22,7 +22,7 @@ export const debugPanel = {
         document.addEventListener("keydown", function (event) {
             if (!debugPanel.debugMode) return;
             if (!playerCanCallDebugPanel) return;
-            if (showDebugPanelBtn !== event.code) return;
+            if (event.code !== showDebugPanelBtn) return;
             playerCanCallDebugPanel = false;
             renderer.renderDebugPanel();
             debugPanel.clickOnDebugPanelElementBtn();

@@ -166,5 +166,10 @@ export const templatePrinter = {
                         ${debugElementsDiv}
                     </div>    
                 </div>`;
+    },
+
+    // возможно объединить с функцией отрисовки самого меню
+    pauseMenuBackgroundPrint() {
+        return `<div id="pauseMenuBackground"></div>`;
     }
 }
