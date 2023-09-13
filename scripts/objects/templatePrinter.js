@@ -168,8 +168,55 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    // возможно объединить с функцией отрисовки самого меню
+    // пункты меню должны меняться динамически, анимация при появлении меню
+    // анимация при нажатии
     pauseMenuBackgroundPrint() {
-        return `<div id="pauseMenuBackground"></div>`;
+        return `<div id="pauseMenuBackground">
+                    <div id="pauseMenuContainer">
+                        <div id="pauseMenuLeftBlock">
+                            <div class="pauseSideOptionBlock">
+                                <div id="pauseLetfOptionDisplay">
+                                    <button class="pauseMenuSideBtn">
+                                        <i id="pauseMenuBack" class="fas fa-angle-double-left"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pauseMenuSideBorder"></div>
+                            <div class="pauseMenuSideBottomBracing"></div>
+                        </div>
+                        <div>
+                            <div class="pauseMenuHorizontalBorder"></div>
+                            <ul id="pauseMenuList">
+                                <li class="pauseMenuOneList">
+                                    <button class="pauseMenuBtn">
+                                        Продолжить
+                                    </button>
+                                </li>
+                                <li class="pauseMenuOneList">
+                                    <button class="pauseMenuBtn">
+                                        Перезапустить
+                                    </button>
+                                </li>
+                                <li class="pauseMenuOneList">
+                                    <button class="pauseMenuBtn">
+                                        Выйти
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="pauseMenuHorizontalBorder"></div>
+                        </div>
+                        <div id="pauseMenuRightBlock">
+                            <div class="pauseSideOptionBlock">
+                                <div id="pauseRightOptionDisplay">
+                                    <button class="pauseMenuSideBtn">
+                                        <i id="pauseMenuCross" class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pauseMenuSideBorder"></div>
+                            <div class="pauseMenuSideBottomBracing"></div>
+                        </div>
+                    </div>
+                </div>`;
     }
 }

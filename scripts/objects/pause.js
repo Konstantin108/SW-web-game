@@ -3,6 +3,7 @@ import {game} from "../game.js";
 
 export const pause = {
 
+    // переименовать метод
     testPause() {
         let pauseBtn = "NumpadAdd";  // заменить клавиши
         let animationIsNotRunning = true;
@@ -13,7 +14,7 @@ export const pause = {
             if (!animationIsNotRunning) return;
             if (event.code !== pauseBtn) return;
             animationIsNotRunning = false;
-            renderer.renderPauseMenuBackground();
+            renderer.renderPauseMenuBackground();  // переименовать метод
             setTimeout(() => animationIsNotRunning = true, 200);
         });
     }
