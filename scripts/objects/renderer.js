@@ -479,20 +479,42 @@ export const renderer = {
         if (messageElement) setTimeout(() => table.removeChild(messageElement), 1000);
     },
 
-    renderPauseMenuBackground() {
+    renderPauseMenu() {
         let body = document.querySelector("body");
         let backgroundElement = null;
+        let pauseMenuContainer = null;
 
         if (!document.querySelector("#pauseMenuBackground")) {
-            body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuBackgroundPrint());
+            body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint(this.renderPauseMenuOptions()));
             backgroundElement = document.querySelector("#pauseMenuBackground");
             backgroundElement.classList.add("pauseOn");
             setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
         } else {
             backgroundElement = document.querySelector("#pauseMenuBackground");
+            pauseMenuContainer = document.querySelector("#pauseMenuContainer");
             backgroundElement.classList.add("pauseOff");
+            pauseMenuContainer.classList.remove("menuContainerAdd");
+            pauseMenuContainer.classList.add("menuContainerRemove");
             setTimeout(() => body.removeChild(backgroundElement), 180);
         }
+    },
+
+    renderPauseMenuOptions() {
+        let options = config.pauseMenuOptions;
+        let optionsBlock = `<ul id="pauseMenuList">`
+
+        options.forEach(option => {
+            if (option.renderSector === "mainMenuSector") {
+                optionsBlock += `<li class="pauseMenuOneList">
+                                    <button class="pauseMenuBtn">
+                                        ${option.title}
+                                    </button>
+                                 </li>`
+            }
+        });
+
+        optionsBlock += "</ul>";
+        return optionsBlock;
     },
 
     renderDebugPanel() {
@@ -537,7 +559,7 @@ export const renderer = {
                                         <label class="btnInputLabel" for="${elem.name}">
                                             ${elem.name}
                                         </label>
-                                    </div>`;
+                                     </div>`;
             }
             checked = "";
             customClass = "";

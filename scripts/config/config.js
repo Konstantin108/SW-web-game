@@ -2,6 +2,7 @@ import {bonuses} from "./bonuses.js";
 import {levels} from "./levels.js";
 import {cheats} from "./cheats.js";
 import {debugPanelElements} from "./debugPanelElements.js";
+import {pauseMenuOptions} from "./pauseMenuOptions.js";
 
 export const config = {
     // игра и игрок
@@ -73,5 +74,7 @@ export const config = {
     debugBlockagesObjectsShow: false,
     debugBonusesObjectsShow: false,
     debugBossGetDamageInfoShow: false,
-    debugActualParamsInfoShow: false
+    debugActualParamsInfoShow: false,
+    // меню паузы
+    pauseMenuOptions: pauseMenuOptions.setPauseMenuOptions()
 }

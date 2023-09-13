@@ -170,9 +170,10 @@ export const templatePrinter = {
 
     // пункты меню должны меняться динамически, анимация при появлении меню
     // анимация при нажатии
-    pauseMenuBackgroundPrint() {
+    // для блока с опциями возможно задать минимальные высоту и ширину
+    pauseMenuPrint(options) {
         return `<div id="pauseMenuBackground">
-                    <div id="pauseMenuContainer">
+                    <div id="pauseMenuContainer" class="menuContainerAdd">
                         <div id="pauseMenuLeftBlock">
                             <div class="pauseSideOptionBlock">
                                 <div id="pauseLetfOptionDisplay">
@@ -186,23 +187,7 @@ export const templatePrinter = {
                         </div>
                         <div>
                             <div class="pauseMenuHorizontalBorder"></div>
-                            <ul id="pauseMenuList">
-                                <li class="pauseMenuOneList">
-                                    <button class="pauseMenuBtn">
-                                        Продолжить
-                                    </button>
-                                </li>
-                                <li class="pauseMenuOneList">
-                                    <button class="pauseMenuBtn">
-                                        Перезапустить
-                                    </button>
-                                </li>
-                                <li class="pauseMenuOneList">
-                                    <button class="pauseMenuBtn">
-                                        Выйти
-                                    </button>
-                                </li>
-                            </ul>
+                            ${options}
                             <div class="pauseMenuHorizontalBorder"></div>
                         </div>
                         <div id="pauseMenuRightBlock">

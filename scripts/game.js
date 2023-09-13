@@ -27,7 +27,7 @@ export const game = {
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         this.showPauseMenu();
-        pause.testPause();  // в разработке
+        pause.showPauseMenu2();  // в разработке
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();

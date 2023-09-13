@@ -718,6 +718,7 @@ td
   font-size: 24px
   text-transform: uppercase
   font-weight: 900
+  margin-bottom: 16px
 
 #btnsBlock
   display: grid
@@ -819,6 +820,28 @@ td
   display: flex
   align-items: center
 
+.menuContainerAdd
+  animation: menuContainerAdd .2s
+
+@keyframes menuContainerAdd
+  from
+    scale: .98
+    opacity: 0
+  to
+    scale: 1
+    opacity: 1
+
+.menuContainerRemove
+  animation: menuContainerRemove .2s
+
+@keyframes menuContainerRemove
+  from
+    scale: 1
+    opacity: 1
+  to
+    scale: .98
+    opacity: 0
+
 #pauseMenuLeftBlock
   display: flex
   flex-direction: column
@@ -901,6 +924,7 @@ td
   cursor: pointer
   background-color: black
   font-size: 30px
+  text-transform: capitalize
   border: none
 
 #pauseMenuRightBlock
