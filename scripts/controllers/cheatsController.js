@@ -308,6 +308,9 @@ export const cheatsController = {
         renderer.renderStatusBar();
         renderer.renderSuperAbilityBar();
         renderer.renderSuperAbilityBarActivatedByCheat();
+        renderer.renderPauseMenuOptions();
+        renderer.renderPauseMenuSideBlocksBtn("back");
+        renderer.renderPauseMenuSideBlocksBtn("cross");
     },
 
     restoreLives(paramName) {
@@ -333,6 +336,7 @@ export const cheatsController = {
 
     killBoss() {
         if (!boss.alive) return;
+        game.playerCanStopGame = false;
         let hitCoordinates = {
             hit_x: boss.x,
             hit_y: boss.y

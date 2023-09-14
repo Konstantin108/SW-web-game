@@ -17,7 +17,7 @@ import {pause} from "./objects/pause.js";
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
     gameIsRunning: false,
-    playerCanStopGame: true,
+    playerCanStopGame: false,
 
     init() {
         cheatsController.saveDefaultConfigParams();
@@ -27,7 +27,7 @@ export const game = {
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         this.showPauseMenu();
-        pause.showPauseMenu2();  // в разработке
+        pause.pauseBtnClickHandler();  // в разработке
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
@@ -38,6 +38,7 @@ export const game = {
 
     run() {
         this.gameIsRunning = true;
+        this.playerCanStopGame = true;
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -55,8 +56,8 @@ export const game = {
     // если этот метод вызван при выходе с паузы
     startGameDelay(delay, resumeGame = false) {
         let message = "";
-
         delay !== 0 ? message = delay : message = "go";
+        this.playerCanStopGame = false;
         if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
         if (delay > -1) {
             setTimeout(() => {
@@ -99,6 +100,7 @@ export const game = {
 
     resumeGame() {
         this.gameIsRunning = true;
+        this.playerCanStopGame = true
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         bonusController.resumeGameMakeStepOffCall();

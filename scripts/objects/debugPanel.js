@@ -6,6 +6,7 @@ import {cheatsController} from "../controllers/cheatsController.js";
 import {helperController} from "../controllers/helperController.js";
 import {game} from "../game.js";
 import {progressController} from "../controllers/progressController.js";
+import {pause} from "./pause.js";
 
 export const debugPanel = {
     cheats: config.cheats,
@@ -66,6 +67,12 @@ export const debugPanel = {
             case "progressController":
                 this.objectsInfoShow(element, progressController);
                 break;
+            case "pause":
+                this.objectsInfoShow(element, pause);
+                break;
+            case "cheatsInfo":
+                cheatsController.cheatsInfoForPlayer();
+                break;
             case "clearConsole":
                 console.clear();
                 break;
@@ -85,9 +92,6 @@ export const debugPanel = {
             case "actualParamsInfo":
                 cheat = helperController.getObjectByName(this.cheats, element);
                 cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
-                break;
-            case "cheatsInfo":
-                cheatsController.cheatsInfoForPlayer();
                 break;
             default:
                 break;

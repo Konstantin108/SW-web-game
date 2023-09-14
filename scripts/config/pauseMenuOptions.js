@@ -1,5 +1,6 @@
 export const pauseMenuOptions = {
 
+    // возможно передавать value в обработчик будет не нужно
     setPauseMenuOptions() {
         return [
             {
@@ -7,41 +8,110 @@ export const pauseMenuOptions = {
                 title: "продолжить",
                 actionType: "actionOnGameSiteOption",
                 renderSector: "mainMenuSector",
-                value: null,
-                needConfirm: false
+                id: "continueGame",
+                classes: [
+                    "pauseMenuBtn",
+                    "blackOption",
+                    "continueGame"
+                ],
+                containerBlockId: "optionsContainer",
+                value: "",
+                needConfirm: false,
+                valueTransfer: false
             },
             {
                 name: "restartGame",
                 title: "перезапустить",
                 actionType: "actionOnGameSiteOption",
                 renderSector: "mainMenuSector",
+                id: "restartGame",
+                classes: [
+                    "pauseMenuBtn",
+                    "blackOption"
+                ],
+                containerBlockId: "optionsContainer",
                 value: "startNewGame",  // здесь будет вызов метода PHP для перехода на страницу с игрой
-                needConfirm: true
+                needConfirm: true,
+                valueTransfer: false
             },
             {
                 name: "leaveGame",
                 title: "выйти",
                 actionType: "actionOnGameSiteOption",
                 renderSector: "mainMenuSector",
+                id: "leaveGame",
+                classes: [
+                    "pauseMenuBtn",
+                    "blackOption"
+                ],
+                containerBlockId: "optionsContainer",
                 value: "goToIndex",  // здесь будет вызов метода PHP для перехода на страницу с игрой
-                needConfirm: true
+                needConfirm: true,
+                valueTransfer: false
             },
             {
                 name: "confirmСhoice",
                 title: "да",
                 actionType: "requestToServerOption",
                 renderSector: "confirmSector",
-                value: null,  // сюда передается значение из опции выбранной в mainMenuSector
-                needConfirm: false
+                id: "confirmСhoice",
+                classes: [
+                    "pauseMenuBtn",
+                    "blackOption"
+                ],
+                containerBlockId: "optionsContainer",
+                value: "",
+                needConfirm: false,
+                valueTransfer: true
             },
             {
                 name: "cancelСhoice",
                 title: "нет",
                 actionType: "actionOnGameSiteOption",
                 renderSector: "confirmSector",
-                value: null,
-                needConfirm: false
-            }
-        ]
+                id: "cancelСhoice",
+                classes: [
+                    "pauseMenuBtn",
+                    "blackOption",
+                    "cancelСhoice"
+                ],
+                containerBlockId: "optionsContainer",
+                value: "",
+                needConfirm: false,
+                valueTransfer: false
+            },
+            {
+                name: "back",
+                title: null,
+                actionType: "actionOnGameSiteOption",
+                renderSector: "sideBlocksSector",
+                id: "pauseMenuBack",
+                classes: [
+                    "fas",
+                    "fa-angle-double-left",
+                    "cancelСhoice"
+                ],
+                containerBlockId: "pauseLeftOptionDisplay",
+                value: "",
+                needConfirm: false,
+                valueTransfer: false
+            },
+            {
+                name: "cross",
+                title: null,
+                actionType: "actionOnGameSiteOption",
+                renderSector: "sideBlocksSector",
+                id: "pauseMenuCross",
+                classes: [
+                    "fas",
+                    "fa-times",
+                    "continueGame"
+                ],
+                containerBlockId: "pauseRightOptionDisplay",
+                value: "",
+                needConfirm: false,
+                valueTransfer: false
+            },
+        ];
     }
 }

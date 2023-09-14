@@ -6,6 +6,7 @@ import {crashChecker} from "./crashChecker.js";
 import {game} from "../game.js";
 import {boss} from "./boss.js";
 import {helperController} from "../controllers/helperController.js";
+import {pause} from "./pause.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -204,8 +205,12 @@ export const renderer = {
         let table = document.querySelector("table");
 
         table.classList.add("flash");
+        game.playerCanStopGame = false;
         setTimeout(() => table.classList.add("explosion"), 500);
-        setTimeout(() => table.classList.remove("flash"), 2000);
+        setTimeout(() => {
+            table.classList.remove("flash");
+            game.playerCanStopGame = true;
+        }, 2000);
         setTimeout(() => table.classList.remove("explosion"), 1800);
     },
 
@@ -485,10 +490,14 @@ export const renderer = {
         let pauseMenuContainer = null;
 
         if (!document.querySelector("#pauseMenuBackground")) {
-            body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint(this.renderPauseMenuOptions()));
+            body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint());
             backgroundElement = document.querySelector("#pauseMenuBackground");
             backgroundElement.classList.add("pauseOn");
             setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
+
+            this.renderPauseMenuOptions();
+            setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross"), 200);
+
         } else {
             backgroundElement = document.querySelector("#pauseMenuBackground");
             pauseMenuContainer = document.querySelector("#pauseMenuContainer");
@@ -499,22 +508,102 @@ export const renderer = {
         }
     },
 
+    // если кнопка back добавить логику в какой момент кнопку не надо отрисовывать
+    renderPauseMenuSideBlocksBtn(btnName) {
+        if (btnName === "back" && pause.activeMenuSector !== "confirmSector") return;
+        if (game.gameIsRunning) return;
+
+        let btn = helperController.getObjectByName(config.pauseMenuOptions, btnName);
+        let container = document.querySelector(`#${btn.containerBlockId}`);
+        let btnDiv = null;
+        let classes = "";
+
+        if (btn.classes) btn.classes.forEach(className => classes += className + " ");
+        classes += config.menuColor;
+        let btnElement = `<div class="pauseMenuSideBtn">
+                            <i id="${btn.id}" class="${classes.trim()}"></i>
+                          </div>`;
+
+        btnDiv = document.querySelector(`#${btn.id}`);
+        if (btnDiv) container.removeChild(btnDiv.parentElement);
+        container.insertAdjacentHTML("afterbegin", btnElement);
+
+        pause.continueGameAction();
+    },
+
+    renderPauseMenuOneOptionAddClassOn(pauseMenuOptions, pauseMenuOptionsCount, index) {
+        if (!pauseMenuOptions) return;
+        if (game.gameIsRunning) return;
+
+        pauseMenuOptions[index].classList.add("pauseMenuBtnOn", `${config.menuColor}`);
+        if (index < pauseMenuOptionsCount - 1) {
+            setTimeout(() => {
+                return this.renderPauseMenuOneOptionAddClassOn(pauseMenuOptions, pauseMenuOptionsCount, index += 1);
+            }, 50);
+        }
+    },
+
     renderPauseMenuOptions() {
+        if (game.gameIsRunning) return;
+        let activeMenuSector = pause.activeMenuSector;
         let options = config.pauseMenuOptions;
-        let optionsBlock = `<ul id="pauseMenuList">`
+        let menuList = null;
+        let container = null;
+        let pauseMenuOptions = null;
+        let classes = "";
+        let value = "";
+        let menuListClasses = "";
+        let optionsBlock = `<ul id="pauseMenuList">`;
+
+        if (activeMenuSector === "confirmSector") {
+            menuListClasses = "listFlexStyle";
+            optionsBlock += `<div id="confirmTitle" class="${config.menuColor}">
+                                вы уверены?
+                             </div>`;
+
+            this.renderPauseMenuSideBlocksBtn("back");
+            // setTimeout(() => pause.cancelChoiceAction(), 100);  // написать новый метод
+        } else {
+            let backBtn = document.querySelector("#pauseMenuBack");
+            if (backBtn) {
+                let backBtnContainer = document.querySelector("#pauseLeftOptionDisplay");
+                backBtn.classList.add("pauseMenuBackRemove");
+                setTimeout(() => backBtnContainer.removeChild(backBtn.parentElement), 200);
+            }
+        }
+
+        optionsBlock += `<div class="${menuListClasses}">`;
 
         options.forEach(option => {
-            if (option.renderSector === "mainMenuSector") {
+            if (option.renderSector === activeMenuSector) {
+                container = document.querySelector(`#${option.containerBlockId}`);
+                if (option.classes) option.classes.forEach(className => classes += className + " ");
+                if (option.needConfirm) classes += "needConfirm";
+
+                option.valueTransfer ? value = pause.thisActionNeedConfirmNow : value = option.value;
+
                 optionsBlock += `<li class="pauseMenuOneList">
-                                    <button class="pauseMenuBtn">
+                                    <button id="${option.id}"
+                                            class="${classes.trim()}"
+                                            value="${value}">
                                         ${option.title}
                                     </button>
-                                 </li>`
+                                 </li>`;
             }
+            classes = "";
         });
 
-        optionsBlock += "</ul>";
-        return optionsBlock;
+        optionsBlock += "</div></ul>";
+
+        menuList = document.querySelector("#pauseMenuList");
+        if (menuList) container.removeChild(menuList);
+        container.insertAdjacentHTML("afterbegin", optionsBlock);
+
+        setTimeout(() => {
+            pauseMenuOptions = document.querySelectorAll(".blackOption");
+            this.renderPauseMenuOneOptionAddClassOn(pauseMenuOptions, pauseMenuOptions.length, 0);
+            pause.needConfirmAction();
+        }, 150);
     },
 
     renderDebugPanel() {

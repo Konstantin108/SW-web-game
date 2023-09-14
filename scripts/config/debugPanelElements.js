@@ -52,6 +52,20 @@ export const debugPanelElements = {
                 description: "вывести progressController в консоль"
             },
             {
+                name: "pause",
+                type: "button",
+                customClass: null,
+                message: "pause:",
+                description: "вывести pause в консоль"
+            },
+            {
+                name: "cheatsInfo",
+                type: "button",
+                customClass: null,
+                message: null,
+                description: "вывести в консоль таблицу с информацией о читах"
+            },
+            {
                 name: "clearConsole",
                 type: "button",
                 customClass: "redBtn",
@@ -127,14 +141,7 @@ export const debugPanelElements = {
                 customClass: null,
                 message: null,
                 description: "отключить отсчёт перед запуском игры"
-            },
-            {
-                name: "cheatsInfo",
-                type: "button",
-                customClass: null,
-                message: null,
-                description: "вывести в консоль таблицу с информацией о читах"
-            },
-        ]
+            }
+        ];
     }
 }

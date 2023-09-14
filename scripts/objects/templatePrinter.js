@@ -171,32 +171,24 @@ export const templatePrinter = {
     // пункты меню должны меняться динамически, анимация при появлении меню
     // анимация при нажатии
     // для блока с опциями возможно задать минимальные высоту и ширину
-    pauseMenuPrint(options) {
+    pauseMenuPrint() {
         return `<div id="pauseMenuBackground">
                     <div id="pauseMenuContainer" class="menuContainerAdd">
                         <div id="pauseMenuLeftBlock">
                             <div class="pauseSideOptionBlock">
-                                <div id="pauseLetfOptionDisplay">
-                                    <button class="pauseMenuSideBtn">
-                                        <i id="pauseMenuBack" class="fas fa-angle-double-left"></i>
-                                    </button>
-                                </div>
+                                <div id="pauseLeftOptionDisplay"></div>
                             </div>
                             <div class="pauseMenuSideBorder"></div>
                             <div class="pauseMenuSideBottomBracing"></div>
                         </div>
                         <div>
                             <div class="pauseMenuHorizontalBorder"></div>
-                            ${options}
+                                <div id="optionsContainer"></div>
                             <div class="pauseMenuHorizontalBorder"></div>
                         </div>
                         <div id="pauseMenuRightBlock">
                             <div class="pauseSideOptionBlock">
-                                <div id="pauseRightOptionDisplay">
-                                    <button class="pauseMenuSideBtn">
-                                        <i id="pauseMenuCross" class="fas fa-times"></i>
-                                    </button>
-                                </div>
+                                <div id="pauseRightOptionDisplay"></div>
                             </div>
                             <div class="pauseMenuSideBorder"></div>
                             <div class="pauseMenuSideBottomBracing"></div>

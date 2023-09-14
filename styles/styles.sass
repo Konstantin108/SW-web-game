@@ -185,7 +185,7 @@ td
   background-color: saddlebrown
   position: absolute
   left: 100%
-  top: 58%
+  top: 57.7%
   border-top-right-radius: 12px
   transition: .2s
 
@@ -858,7 +858,7 @@ td
   justify-content: center
   align-items: center
 
-#pauseLetfOptionDisplay
+#pauseLeftOptionDisplay
   background-color: black
   border-radius: 12px
   width: 50px
@@ -879,13 +879,30 @@ td
   align-items: center
 
 .pauseMenuSideBtn
-  border: none
-  background-color: black
   cursor: pointer
 
 #pauseMenuBack
-  color: lawngreen
   font-size: 30px
+  animation: backBtnAdd .2s
+
+.pauseMenuBackRemove
+  animation: backBtnRemove .2s
+
+@keyframes backBtnAdd
+  from
+    transform: translate(4px, 0)
+    opacity: 0
+  to
+    transform: translate(0, 0)
+    opacity: 1
+
+@keyframes backBtnRemove
+  from
+    transform: translate(0, 0)
+    opacity: 1
+  to
+    transform: translate(-4px, 0)
+    opacity: 0
 
 .pauseMenuSideBorder
   background-color: saddlebrown
@@ -908,6 +925,8 @@ td
 #pauseMenuList
   list-style-type: none
   border-radius: 12px
+  min-width: 202px
+  min-height: 135px
   scale: 1.1
   background-color: black
   text-align: center
@@ -916,16 +935,30 @@ td
   padding-right: 46px
   padding-left: 46px
 
+.listFlexStyle
+  display: flex
+  justify-content: space-around
+
+#confirmTitle,
+.pauseMenuBtn
+  font-size: 30px
+
+#confirmTitle
+  margin-bottom: 20px
+
+#confirmTitle::first-letter
+  text-transform: uppercase
+
 .pauseMenuOneList
   margin: 6px
 
 .pauseMenuBtn
-  color: lawngreen
-  cursor: pointer
-  background-color: black
-  font-size: 30px
   text-transform: capitalize
+  background-color: black
   border: none
+
+.pauseMenuBtnOn
+  cursor: pointer
 
 #pauseMenuRightBlock
   display: flex
@@ -935,3 +968,12 @@ td
 #pauseMenuCross
   color: red
   font-size: 30px
+  animation: crossBtnAdd .2s
+
+@keyframes crossBtnAdd
+  from
+    transform: rotate(-90deg)
+    opacity: 0
+  to
+    transform: rotate(0)
+    opacity: 1

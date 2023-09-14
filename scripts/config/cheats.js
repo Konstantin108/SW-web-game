@@ -594,6 +594,6 @@ export const cheats = {
                 description: "получить любой бонус",
                 descriptionForPlayer: "получить бонус"
             }
-        ]
+        ];
     }
 }

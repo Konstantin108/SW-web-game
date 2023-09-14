@@ -111,6 +111,6 @@ export const levels = {
                 levelNum: "win",
                 scoreCountForThisLevel: 1600
             }
-        ]
+        ];
     }
 }
