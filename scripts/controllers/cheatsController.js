@@ -329,6 +329,7 @@ export const cheatsController = {
     },
 
     callBoss(paramName) {
+        game.playerCanStopGame = false;  // изменение
         progressController[paramName] = true;
         progressController.bossKilled = false;
         boss.anotherDestroyedReward = 10;

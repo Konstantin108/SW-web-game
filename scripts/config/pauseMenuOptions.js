@@ -89,6 +89,7 @@ export const pauseMenuOptions = {
                 classes: [
                     "fas",
                     "fa-angle-double-left",
+                    "pauseMenuBackAdd",
                     "cancelСhoice"
                 ],
                 containerBlockId: "pauseLeftOptionDisplay",

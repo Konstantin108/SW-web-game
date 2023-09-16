@@ -168,9 +168,6 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    // пункты меню должны меняться динамически, анимация при появлении меню
-    // анимация при нажатии
-    // для блока с опциями возможно задать минимальные высоту и ширину
     pauseMenuPrint() {
         return `<div id="pauseMenuBackground">
                     <div id="pauseMenuContainer" class="menuContainerAdd">

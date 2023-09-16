@@ -140,6 +140,7 @@ export const progressController = {
     },
 
     addBossToLevel() {
+        if(!game.gameIsRunning) return;  // изменение
         let playerCantStopGameTime = 6000;
 
         setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);

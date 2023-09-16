@@ -496,7 +496,7 @@ export const renderer = {
             setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
 
             this.renderPauseMenuOptions();
-            setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross"), 200);
+            setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross", true), 200);
 
         } else {
             backgroundElement = document.querySelector("#pauseMenuBackground");
@@ -508,8 +508,7 @@ export const renderer = {
         }
     },
 
-    // если кнопка back добавить логику в какой момент кнопку не надо отрисовывать
-    renderPauseMenuSideBlocksBtn(btnName) {
+    renderPauseMenuSideBlocksBtn(btnName, pauseOn = false) {
         if (btnName === "back" && pause.activeMenuSector !== "confirmSector") return;
         if (game.gameIsRunning) return;
 
@@ -520,6 +519,7 @@ export const renderer = {
 
         if (btn.classes) btn.classes.forEach(className => classes += className + " ");
         classes += config.menuColor;
+        if (btnName === "cross" && pauseOn) classes += " pauseMenuCrossAdd";
         let btnElement = `<div class="pauseMenuSideBtn">
                             <i id="${btn.id}" class="${classes.trim()}"></i>
                           </div>`;
@@ -562,13 +562,14 @@ export const renderer = {
                              </div>`;
 
             this.renderPauseMenuSideBlocksBtn("back");
-            // setTimeout(() => pause.cancelChoiceAction(), 100);  // написать новый метод
+            setTimeout(() => pause.cancelChoiceAction(), 10);
         } else {
             let backBtn = document.querySelector("#pauseMenuBack");
             if (backBtn) {
                 let backBtnContainer = document.querySelector("#pauseLeftOptionDisplay");
+                backBtn.classList.remove("pauseMenuBackAdd");
                 backBtn.classList.add("pauseMenuBackRemove");
-                setTimeout(() => backBtnContainer.removeChild(backBtn.parentElement), 200);
+                setTimeout(() => backBtnContainer.removeChild(backBtn.parentElement), 180);
             }
         }
 
@@ -604,6 +605,8 @@ export const renderer = {
             this.renderPauseMenuOneOptionAddClassOn(pauseMenuOptions, pauseMenuOptions.length, 0);
             pause.needConfirmAction();
         }, 150);
+
+        setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross"), 200);
     },
 
     renderDebugPanel() {

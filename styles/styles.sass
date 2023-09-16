@@ -883,10 +883,9 @@ td
 
 #pauseMenuBack
   font-size: 30px
-  animation: backBtnAdd .2s
 
-.pauseMenuBackRemove
-  animation: backBtnRemove .2s
+.pauseMenuBackAdd
+  animation: backBtnAdd .2s
 
 @keyframes backBtnAdd
   from
@@ -895,6 +894,9 @@ td
   to
     transform: translate(0, 0)
     opacity: 1
+
+.pauseMenuBackRemove
+  animation: backBtnRemove .2s
 
 @keyframes backBtnRemove
   from
@@ -968,6 +970,8 @@ td
 #pauseMenuCross
   color: red
   font-size: 30px
+
+.pauseMenuCrossAdd
   animation: crossBtnAdd .2s
 
 @keyframes crossBtnAdd

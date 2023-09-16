@@ -2,34 +2,38 @@ import {renderer} from "./renderer.js";
 import {game} from "../game.js";
 
 export const pause = {
-    animationIsNotRunning: true,
+    animationRunningNow: false,
     activeMenuSector: null,
     thisActionNeedConfirmNow: null,
+    menuStructure: [
+        "mainMenuSector",
+        "confirmSector"
+    ],
 
     pauseBtnClickHandler() {
         let pauseBtn = "NumpadAdd";  // заменить клавиши
 
         document.addEventListener("keydown", function (event) {
             if (!game.playerCanStopGame) return;
-            if (!pause.animationIsNotRunning) return;
+            if (pause.animationRunningNow) return;
             if (event.code !== pauseBtn) return;
             pause.showOrHidePauseMenu();
         });
     },
 
     showOrHidePauseMenu() {
-        this.animationIsNotRunning = true;
+        if (pause.animationRunningNow) return;
 
         if (game.gameIsRunning) {
             game.stopGame();
-            this.activeMenuSector = "mainMenuSector";
+            this.activeMenuSector = this.menuStructure[0];
         } else {
             game.startGameDelay(game.startGameDelaySecondsCount, true);
             this.activeMenuSector = null;
         }
 
-        this.animationIsNotRunning = false;
-        setTimeout(() => this.animationIsNotRunning = true, 200);
+        this.animationRunningNow = true;
+        setTimeout(() => this.animationRunningNow = false, 200);
         renderer.renderPauseMenu();
     },
 
@@ -48,22 +52,26 @@ export const pause = {
 
         needConfirmBtns.forEach(btn => {
             btn.addEventListener("click", () => {
-                this.activeMenuSector = "confirmSector";
+                this.activeMenuSector = this.menuStructure[1];
                 this.thisActionNeedConfirmNow = btn.value;
                 renderer.renderPauseMenuOptions();
             });
         });
     },
 
-    // не работает
-    // попробовать сначала с одной кнопкой
     cancelChoiceAction() {
         let cancelChoiceBtns = document.querySelectorAll(".cancelСhoice");
         if (!cancelChoiceBtns) return;
+        let activeMenuSectorIndex = null;
+        let activeMenuSectorIndexNew = null;
 
         cancelChoiceBtns.forEach(btn => {
             btn.addEventListener("click", () => {
-                this.activeMenuSector = "mainSector";
+
+                activeMenuSectorIndex = this.menuStructure.indexOf(this.activeMenuSector);
+                activeMenuSectorIndexNew = activeMenuSectorIndex += -1;
+
+                this.activeMenuSector = this.menuStructure[activeMenuSectorIndexNew];
                 renderer.renderPauseMenuOptions("optionsContainer");
             });
         });

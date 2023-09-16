@@ -1036,11 +1036,10 @@ td {
 
 #pauseMenuBack {
   font-size: 30px;
-  animation: backBtnAdd 0.2s;
 }
 
-.pauseMenuBackRemove {
-  animation: backBtnRemove 0.2s;
+.pauseMenuBackAdd {
+  animation: backBtnAdd 0.2s;
 }
 
 @keyframes backBtnAdd {
@@ -1053,6 +1052,10 @@ td {
     opacity: 1;
   }
 }
+.pauseMenuBackRemove {
+  animation: backBtnRemove 0.2s;
+}
+
 @keyframes backBtnRemove {
   from {
     transform: translate(0, 0);
@@ -1139,6 +1142,9 @@ td {
 #pauseMenuCross {
   color: red;
   font-size: 30px;
+}
+
+.pauseMenuCrossAdd {
   animation: crossBtnAdd 0.2s;
 }
 

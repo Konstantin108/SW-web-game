@@ -49,7 +49,7 @@ export const config = {
     blockageBullShipDestroyedRewards: 5,
     blockageBullCrashDamage: 1,
     // босс
-    bossLives: 2000,  // возможно изменить параметры босса
+    bossLives: 2000,
     bossDestroyedReward: 2500,
     bossAnotherDestroyedReward: null,
     bossSpeed: 1000,
