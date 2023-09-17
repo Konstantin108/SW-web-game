@@ -529,13 +529,16 @@ export const renderer = {
         let internalClasses = "";
 
         if (btn.classes) btn.classes.forEach(className => classes += className + " ");
-        if (btn.internalClasses) btn.internalClasses.forEach(internaClassName => internalClasses += internaClassName + " ");
         classes += config.menuColor;
+
+        if (btn.internalClasses) btn.internalClasses.forEach(internaClassName => internalClasses += internaClassName + " ");
         if (btnName === "cross" && pauseOn) classes += " pauseMenuCrossAdd";
         if (btn.referer) value = pause.previousMenuSector;
-        let btnElement = `<div class="pauseMenuSideBtn">
-                            <button id="${btn.id}" class="${classes.trim()}" value="${value}">
-                                <i class="fa-angle-double-left fas"></i>
+        let btnElement = `<div class="pauseMenuSideBtnBlock">
+                            <button id="${btn.id}"
+                                    class="${classes.trim()}"
+                                    value="${value}">
+                                <i class="${internalClasses.trim()}"></i>
                             </button>
                           </div>`;
 
@@ -614,8 +617,6 @@ export const renderer = {
         optionsBlock += "</div></ul>";
 
         if (defaultContainer) container = document.querySelector(`#${defaultContainer}`);
-
-        console.log(pause.activeMenuSector);
 
         menuList = document.querySelector("#pauseMenuList");
         if (menuList) container.removeChild(menuList);

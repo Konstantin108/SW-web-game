@@ -110,6 +110,7 @@ export const pauseMenuOptions = {
                 ],
                 id: "pauseMenuBack",
                 classes: [
+                    "pauseMenuSideBtn",
                     "pauseMenuBackAdd",
                     "cancelСhoice"
                 ],
@@ -132,6 +133,7 @@ export const pauseMenuOptions = {
                 ],
                 id: "pauseMenuCross",
                 classes: [
+                    "pauseMenuSideBtn",
                     "continueGame"
                 ],
                 internalClasses: [

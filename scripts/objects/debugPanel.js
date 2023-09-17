@@ -44,6 +44,7 @@ export const debugPanel = {
     showDebugPanelElementInfo(element) {
         let cheatMessageContainer = document.querySelector("#cheatMessageContainer");
         let cheat = null;
+        let message = null;
 
         switch (element) {
             case "localStorage":
@@ -86,7 +87,7 @@ export const debugPanel = {
             case "bonusesObjects":
             case "bossGetDamageInfo":
                 cheat = helperController.getObjectByName(this.cheats, element);
-                let message = cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
+                message = cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
                 console.log(message);
                 break;
             case "actualParamsInfo":

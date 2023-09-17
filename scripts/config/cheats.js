@@ -449,6 +449,8 @@ export const cheats = {
                 descriptionForPlayer: "получить стрелы типа Тринити (от 1 до 199 секунд)"
             },
             {
+                // настроить выход с паузы
+                // и вызов окончания игры
                 name: "suicide",
                 code: "mortem",
                 message: "this is the end",

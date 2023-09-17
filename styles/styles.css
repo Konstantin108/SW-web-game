@@ -1034,11 +1034,11 @@ td {
 }
 
 .pauseMenuSideBtn {
-  cursor: pointer;
-}
-
-#pauseMenuBack {
+  background-color: black;
   font-size: 30px;
+  padding-top: 1px;
+  border: none;
+  cursor: pointer;
 }
 
 .pauseMenuBackAdd {
@@ -1145,7 +1145,6 @@ td {
 
 #pauseMenuCross {
   color: red;
-  font-size: 30px;
 }
 
 .pauseMenuCrossAdd {

@@ -74,10 +74,8 @@ export const pause = {
         if (!cancelChoiceBtns) return;
         let previousMenuSectorIndex = null;
 
-
         cancelChoiceBtns.forEach(btn => {
             btn.addEventListener("click", () => {
-                console.log(btn);
                 previousMenuSectorIndex = this.menuStructure.indexOf(String(btn.value));
 
                 this.activeMenuSector = this.menuStructure[previousMenuSectorIndex];
