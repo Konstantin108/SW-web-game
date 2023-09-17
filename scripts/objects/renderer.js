@@ -79,6 +79,7 @@ export const renderer = {
         let randomCoordinates = helperController.getRandomCoordinates(boss.bodyX, boss.y);
         let randomHitPosition = document.querySelector(`[data-x="${randomCoordinates.x}"][data-y="${randomCoordinates.y}"]`);
 
+        game.playerCanStopGame = false;
         randomHitPosition.classList.add("crash");
         setTimeout(() => randomHitPosition.classList.remove("crash"), 500);
         if (bossExplosionsCount > 0) {
@@ -91,6 +92,8 @@ export const renderer = {
     renderKillBoss(thisSelectorOverlay, hitCoordinates) {
         let bossExplosionsCount = 32;
 
+        game.playerCanStopGame = false;
+
         let hitPosition = document.querySelector(`[data-x="${hitCoordinates.hit_x}"][data-y="${hitCoordinates.hit_y}"]`);
         hitPosition.classList.add("crash");
         setTimeout(() => hitPosition.classList.remove("crash"), 500);
@@ -99,11 +102,15 @@ export const renderer = {
 
         let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
         this.renderPriorityObjects(thisSelectorOverlay);
-        setTimeout(() => bossPosition.classList.add("bossDyingDisappears"), 7500);
+        setTimeout(() => {
+            bossPosition.classList.add("bossDyingDisappears");
+            game.playerCanStopGame = false;
+        }, 7500);
         setTimeout(() => {
             this.clear("bossDyingDisappears");
             this.clear("boss");
         }, 10300);
+        setTimeout(() => game.playerCanStopGame = true, 13000);
     },
 
     renderBossShieldHit(shieldBody, hitData) {
@@ -209,7 +216,7 @@ export const renderer = {
         setTimeout(() => table.classList.add("explosion"), 500);
         setTimeout(() => {
             table.classList.remove("flash");
-            game.playerCanStopGame = true;
+            setTimeout(() => game.playerCanStopGame = true, 1500);
         }, 2000);
         setTimeout(() => table.classList.remove("explosion"), 1800);
     },
@@ -509,19 +516,27 @@ export const renderer = {
     },
 
     renderPauseMenuSideBlocksBtn(btnName, pauseOn = false) {
-        if (btnName === "back" && pause.activeMenuSector !== "confirmSector") return;
+        if (btnName === "back" && String(pause.activeMenuSector) !== "confirmSector") return;
+        if (btnName === "cross" && String(pause.activeMenuSector) === "gameOverMenuSector") return;
         if (game.gameIsRunning) return;
 
         let btn = helperController.getObjectByName(config.pauseMenuOptions, btnName);
+
         let container = document.querySelector(`#${btn.containerBlockId}`);
-        let btnDiv = null;
+        let btnDiv = null
+        let value = "";
         let classes = "";
+        let internalClasses = "";
 
         if (btn.classes) btn.classes.forEach(className => classes += className + " ");
+        if (btn.internalClasses) btn.internalClasses.forEach(internaClassName => internalClasses += internaClassName + " ");
         classes += config.menuColor;
         if (btnName === "cross" && pauseOn) classes += " pauseMenuCrossAdd";
+        if (btn.referer) value = pause.previousMenuSector;
         let btnElement = `<div class="pauseMenuSideBtn">
-                            <i id="${btn.id}" class="${classes.trim()}"></i>
+                            <button id="${btn.id}" class="${classes.trim()}" value="${value}">
+                                <i class="fa-angle-double-left fas"></i>
+                            </button>
                           </div>`;
 
         btnDiv = document.querySelector(`#${btn.id}`);
@@ -543,7 +558,7 @@ export const renderer = {
         }
     },
 
-    renderPauseMenuOptions() {
+    renderPauseMenuOptions(defaultContainer = null) {
         if (game.gameIsRunning) return;
         let activeMenuSector = pause.activeMenuSector;
         let options = config.pauseMenuOptions;
@@ -555,7 +570,7 @@ export const renderer = {
         let menuListClasses = "";
         let optionsBlock = `<ul id="pauseMenuList">`;
 
-        if (activeMenuSector === "confirmSector") {
+        if (String(activeMenuSector) === "confirmSector") {
             menuListClasses = "listFlexStyle";
             optionsBlock += `<div id="confirmTitle" class="${config.menuColor}">
                                 вы уверены?
@@ -576,12 +591,14 @@ export const renderer = {
         optionsBlock += `<div class="${menuListClasses}">`;
 
         options.forEach(option => {
-            if (option.renderSector === activeMenuSector) {
+            if (option.renderSector.includes(activeMenuSector)) {
                 container = document.querySelector(`#${option.containerBlockId}`);
                 if (option.classes) option.classes.forEach(className => classes += className + " ");
                 if (option.needConfirm) classes += "needConfirm";
 
-                option.valueTransfer ? value = pause.thisActionNeedConfirmNow : value = option.value;
+                value = option.value;
+                if (option.valueTransfer) value = pause.thisActionNeedConfirmNow;
+                if (option.referer) value = pause.previousMenuSector;
 
                 optionsBlock += `<li class="pauseMenuOneList">
                                     <button id="${option.id}"
@@ -595,6 +612,10 @@ export const renderer = {
         });
 
         optionsBlock += "</div></ul>";
+
+        if (defaultContainer) container = document.querySelector(`#${defaultContainer}`);
+
+        console.log(pause.activeMenuSector);
 
         menuList = document.querySelector("#pauseMenuList");
         if (menuList) container.removeChild(menuList);

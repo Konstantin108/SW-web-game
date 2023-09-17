@@ -4,9 +4,11 @@ import {game} from "../game.js";
 export const pause = {
     animationRunningNow: false,
     activeMenuSector: null,
+    previousMenuSector: null,
     thisActionNeedConfirmNow: null,
     menuStructure: [
         "mainMenuSector",
+        "gameOverMenuSector",
         "confirmSector"
     ],
 
@@ -14,15 +16,22 @@ export const pause = {
         let pauseBtn = "NumpadAdd";  // заменить клавиши
 
         document.addEventListener("keydown", function (event) {
-            if (!game.playerCanStopGame) return;
             if (pause.animationRunningNow) return;
+            if (game.gameOver) return;
             if (event.code !== pauseBtn) return;
             pause.showOrHidePauseMenu();
         });
     },
 
-    showOrHidePauseMenu() {
+    showOrHidePauseMenu(resumeGameForce = false) {
         if (pause.animationRunningNow) return;
+
+        let delay = 1500;
+
+        if (!resumeGameForce) {
+            if (!game.playerCanStopGame) return;
+            delay = 200;
+        }
 
         if (game.gameIsRunning) {
             game.stopGame();
@@ -33,7 +42,7 @@ export const pause = {
         }
 
         this.animationRunningNow = true;
-        setTimeout(() => this.animationRunningNow = false, 200);
+        setTimeout(() => this.animationRunningNow = false, delay);
         renderer.renderPauseMenu();
     },
 
@@ -52,7 +61,8 @@ export const pause = {
 
         needConfirmBtns.forEach(btn => {
             btn.addEventListener("click", () => {
-                this.activeMenuSector = this.menuStructure[1];
+                this.previousMenuSector = this.activeMenuSector;
+                this.activeMenuSector = this.menuStructure[2];
                 this.thisActionNeedConfirmNow = btn.value;
                 renderer.renderPauseMenuOptions();
             });
@@ -62,16 +72,15 @@ export const pause = {
     cancelChoiceAction() {
         let cancelChoiceBtns = document.querySelectorAll(".cancelСhoice");
         if (!cancelChoiceBtns) return;
-        let activeMenuSectorIndex = null;
-        let activeMenuSectorIndexNew = null;
+        let previousMenuSectorIndex = null;
+
 
         cancelChoiceBtns.forEach(btn => {
             btn.addEventListener("click", () => {
+                console.log(btn);
+                previousMenuSectorIndex = this.menuStructure.indexOf(String(btn.value));
 
-                activeMenuSectorIndex = this.menuStructure.indexOf(this.activeMenuSector);
-                activeMenuSectorIndexNew = activeMenuSectorIndex += -1;
-
-                this.activeMenuSector = this.menuStructure[activeMenuSectorIndexNew];
+                this.activeMenuSector = this.menuStructure[previousMenuSectorIndex];
                 renderer.renderPauseMenuOptions("optionsContainer");
             });
         });

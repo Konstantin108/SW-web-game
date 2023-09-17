@@ -19,7 +19,7 @@ export const crashChecker = {
                 this.x = player.x;
                 this.y = player.y;
                 if (player.invincibility) return;
-                if (player.extraSelectorName === "player-shield") return;
+                if (String(player.extraSelectorName) === "player-shield") return;
                 renderer.renderCrash();
                 if (createNewBlockage) dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
                 dangerArray[i].crashDamage ? player.lives += -dangerArray[i].crashDamage : player.lives += -dangerArray[i].damage;

@@ -59,6 +59,7 @@ export const boss = {
     },
 
     createBoss() {
+        if (this.alive) return;
         player.canMove = false;
 
         if (this.anotherDestroyedReward) this.destroyedReward = this.anotherDestroyedReward;
@@ -207,7 +208,7 @@ export const boss = {
 
     setShieldTimerIdOnResumeGame() {
         if (!progressController.bossExist) return;
-        if (this.callTurnType === "callTurnOff") {
+        if (String(this.callTurnType) === "callTurnOff") {
             this.shieldOnOrOffCall((this.calculateTime - 1) * 1000, "callTurnOff");
         } else {
             this.shieldOnOrOffCall((this.calculateTime - 1) * 1000, "callTurnOn");

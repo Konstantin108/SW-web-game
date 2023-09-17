@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:500,500i,600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 * {
   font-family: Roboto Condensed;
   margin: 0;
@@ -784,12 +785,13 @@ td {
 
 #cheatInput {
   width: 164px;
-  height: 24px;
+  height: 22px;
   border-radius: 12px;
+  border: 2px solid black;
   outline: none;
   padding-left: 10px;
   padding-right: 10px;
-  font-size: 26px;
+  font-size: 25px;
   font-weight: 900;
   text-transform: uppercase;
   color: lawngreen;
@@ -879,6 +881,7 @@ td {
 .btnLabel {
   width: 100%;
   background-color: white;
+  outline: none;
 }
 
 .btnInputLabel:hover,
@@ -1090,7 +1093,7 @@ td {
 #pauseMenuList {
   list-style-type: none;
   border-radius: 12px;
-  min-width: 202px;
+  min-width: 222px;
   min-height: 135px;
   scale: 1.1;
   background-color: black;
@@ -1124,6 +1127,7 @@ td {
 }
 
 .pauseMenuBtn {
+  font-family: Ubuntu;
   text-transform: capitalize;
   background-color: black;
   border: none;

@@ -28,12 +28,9 @@ export const bonusController = {
     },
 
     pickedCheck() {
-        let pickedBonus = null;
-
         for (let i = 0; i < this.bonusesArray.length; i++) {
-            pickedBonus = this.bonusesArray[i].getBonus(this.bonusesArray[i].picked());
+            this.bonusesArray[i].getBonus(this.bonusesArray[i].picked());
         }
-        if (pickedBonus) return pickedBonus;
     },
 
     playerBecomeBonus(bonusName, secondsCount) {

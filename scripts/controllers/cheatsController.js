@@ -11,6 +11,7 @@ import {explosion} from "../objects/explosion.js";
 import {game} from "../game.js";
 import {debugPanel} from "../objects/debugPanel.js";
 import {bonuses} from "../config/bonuses.js";
+import {pause} from "../objects/pause.js";
 
 export const cheatsController = {
     cheats: config.cheats,
@@ -264,7 +265,7 @@ export const cheatsController = {
             });
 
             for (let paramKey of this.defaultConfigParamsArray.keys()) {
-                if (config.hasOwnProperty(paramKey) && config[paramKey] !== this.defaultConfigParamsArray.get(paramKey)) {
+                if (config.hasOwnProperty(String(paramKey)) && config[paramKey] !== this.defaultConfigParamsArray.get(paramKey)) {
                     localStorageController.setParamToLocalStorage(paramKey, config[paramKey], false);
                 }
             }
@@ -329,21 +330,42 @@ export const cheatsController = {
     },
 
     callBoss(paramName) {
-        game.playerCanStopGame = false;  // изменение
-        progressController[paramName] = true;
-        progressController.bossKilled = false;
-        boss.anotherDestroyedReward = 10;
+        if (game.cooldown) return;
+        let delay = 0;
+
+        game.playerCanStopGame = false;
+        if (!game.gameIsRunning) {
+            delay = 5000;
+            pause.showOrHidePauseMenu(true);
+        }
+        if (progressController[paramName]) progressController[paramName] = false;
+        setTimeout(() => game.playerCanStopGame = false, game.startGameDelaySecondsCount * 1000 - 2120);
+        setTimeout(() => {
+            progressController[paramName] = true;
+            progressController.bossKilled = false;
+            boss.anotherDestroyedReward = 10;
+        }, delay);
     },
 
     killBoss() {
+        if (game.cooldown) return;
         if (!boss.alive) return;
+        let delay = 0;
+
         game.playerCanStopGame = false;
-        let hitCoordinates = {
-            hit_x: boss.x,
-            hit_y: boss.y
+        if (!game.gameIsRunning) {
+            delay = 5000;
+            pause.showOrHidePauseMenu(true);
         }
-        boss.lives = 0;
-        progressController.killBoss(boss.destroyedReward, hitCoordinates);
+        setTimeout(() => game.playerCanStopGame = false, game.startGameDelaySecondsCount * 1000 - 2120);
+        setTimeout(() => {
+            let hitCoordinates = {
+                hit_x: boss.x,
+                hit_y: boss.y
+            }
+            boss.lives = 0;
+            progressController.killBoss(boss.destroyedReward, hitCoordinates);
+        }, delay);
     },
 
     standartToggleCheatAction(paramName, toggle) {

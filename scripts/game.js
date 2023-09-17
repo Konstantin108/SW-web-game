@@ -17,7 +17,9 @@ import {pause} from "./objects/pause.js";
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
     gameIsRunning: false,
+    gameOver: false,
     playerCanStopGame: false,
+    cooldown: false,
 
     init() {
         cheatsController.saveDefaultConfigParams();
@@ -39,6 +41,7 @@ export const game = {
     run() {
         this.gameIsRunning = true;
         this.playerCanStopGame = true;
+        this.cooldown = false;
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -52,10 +55,10 @@ export const game = {
         this.startGameDelaySecondsCount = config.startGameDelaySecondsCount;
     },
 
-    // добавить проверку, что игра в данный момент на паузе,
-    // если этот метод вызван при выходе с паузы
     startGameDelay(delay, resumeGame = false) {
         let message = "";
+
+        this.cooldown = true;
         delay !== 0 ? message = delay : message = "go";
         this.playerCanStopGame = false;
         if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
@@ -100,7 +103,8 @@ export const game = {
 
     resumeGame() {
         this.gameIsRunning = true;
-        this.playerCanStopGame = true
+        this.cooldown = false;
+        this.playerCanStopGame = true;
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         bonusController.resumeGameMakeStepOffCall();
@@ -126,9 +130,13 @@ export const game = {
         let message = "";
 
         this.stopGame();
+        this.gameOver = true;
         win ? message = "you win" : message = "you lose";
         renderer.renderInCenterTableNotify(message);
         setTimeout(() => alert(this.quit()), 1100);
+        // доработать game over
+        // новое уведомление о набранных очках
+        // удалить старый вариант паузы
     }
 }
 

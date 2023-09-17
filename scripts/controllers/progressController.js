@@ -29,6 +29,7 @@ export const progressController = {
     bossKilled: false,
 
     progress() {
+        if (!game.gameIsRunning) return;
         this.blockagesCount = this.compareBlockagesCountAndMapSizeX(config.levels[0].blockagesCount);
         let levelsLeft = config.levels.length;
 
@@ -61,7 +62,7 @@ export const progressController = {
                 game.playerCanStopGame = false;
                 this.playerCanEnterNewLevel = false;
                 setTimeout(() => game.playerCanStopGame = false, 1000);
-                this.addBossToLevel();
+                if (!boss.alive) this.addBossToLevel();
             }
         }
     },
@@ -90,14 +91,15 @@ export const progressController = {
         boss.remove(hitCoordinates);
         setTimeout(() => {
             explosion.explode(false);
+            game.playerCanStopGame = false;
             bonusController.destroyAllBonuses();
         }, 6000);
         setTimeout(() => {
             this.playerCanEnterNewLevel = true;
-            game.playerCanStopGame = true;
-            this.bossCalled = false;
             this.bossKilled = true;
-        }, 9000);
+            this.bossCalled = false;
+            this.bossExist = false;
+        }, 10500);
     },
 
     scoreDown() {
@@ -129,7 +131,7 @@ export const progressController = {
 
     newLevelEntry(blockagesCount) {
         let message = `LEVEL ${progressController.level}`;
-        let playerCantStopGameTime = 1000;
+        let playerCantStopGameTime = 2000;
 
         game.playerCanStopGame = false;
         renderer.renderInCenterTableNotify(message);
@@ -140,8 +142,7 @@ export const progressController = {
     },
 
     addBossToLevel() {
-        if(!game.gameIsRunning) return;  // изменение
-        let playerCantStopGameTime = 6000;
+        if (!game.gameIsRunning) return;
 
         setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
         setTimeout(() => {
@@ -149,6 +150,5 @@ export const progressController = {
             bonusController.destroyAllBonuses();
         }, 2000);
         setTimeout(() => boss.createBoss(), 3000);
-        setTimeout(() => game.playerCanStopGame = true, playerCantStopGameTime);
     }
 }
