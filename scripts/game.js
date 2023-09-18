@@ -28,8 +28,7 @@ export const game = {
         renderer.render();
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
-        this.showPauseMenu();
-        pause.pauseBtnClickHandler();  // в разработке
+        pause.pauseBtnClickHandler();
         player.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
@@ -71,26 +70,6 @@ export const game = {
         }
     },
 
-    showPauseMenu() {
-        let pauseBtnsArray = [
-            "Escape",
-            "Pause"
-        ];
-
-        document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRunning) return;
-            if (!game.playerCanStopGame) return;
-            if (pauseBtnsArray.includes(event.code)) game.paused();
-        });
-    },
-
-    paused() {
-        let text = "Игра остановлена! Хотите продолжить?\n\"ОК\" - продолжить играть\n\"Отмена\" - закончить игру";
-
-        if (this.gameIsRunning) this.stopGame();
-        confirm(text) ? this.startGameDelay(this.startGameDelaySecondsCount, true) : this.quitConfirm();
-    },
-
     stopGame() {
         this.gameIsRunning = false;
         bonusController.bonusAppearanceListenerTimerIdRemove();
@@ -116,28 +95,13 @@ export const game = {
         player.offBonusCall();
     },
 
-    quitConfirm() {
-        let text = "Вы уверены, что хотите закончить игру?";
-
-        confirm(text) ? alert(this.quit()) : this.paused();
-    },
-
-    quit() {
-        return `Игра окончена! Достигнут уровень: ${progressController.level}\nКораблей уничтожено: ${progressController.shipDestroyed}, Набранное количество очков: ${progressController.score}`;
-    },
-
     over(win = false) {
         let message = "";
 
-        this.stopGame();
         this.gameOver = true;
         win ? message = "you win" : message = "you lose";
         renderer.renderInCenterTableNotify(message);
-        setTimeout(() => alert(this.quit()), 1100);
-        // доработать game over
-        // новое уведомление о набранных очках
-        // удалить старый вариант паузы
-        // возможно сделать широкое меню паузы
+        setTimeout(() => pause.showStatistics(), 1100);
     }
 }
 

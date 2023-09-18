@@ -1,5 +1,6 @@
 import {renderer} from "./renderer.js";
 import {game} from "../game.js";
+import {progressController} from "../controllers/progressController.js";
 
 export const pause = {
     animationRunningNow: false,
@@ -13,12 +14,16 @@ export const pause = {
     ],
 
     pauseBtnClickHandler() {
-        let pauseBtn = "NumpadAdd";  // заменить клавиши
+        let pauseBtnsArray = [
+            "Escape",
+            "Pause"
+        ];
 
         document.addEventListener("keydown", function (event) {
             if (pause.animationRunningNow) return;
             if (game.gameOver) return;
-            if (event.code !== pauseBtn) return;
+            if (!pauseBtnsArray.includes(event.code)) return;
+            pause.activeMenuSector = pause.menuStructure[0];
             pause.showOrHidePauseMenu();
         });
     },
@@ -35,7 +40,6 @@ export const pause = {
 
         if (game.gameIsRunning) {
             game.stopGame();
-            this.activeMenuSector = this.menuStructure[0];
         } else {
             game.startGameDelay(game.startGameDelaySecondsCount, true);
             this.activeMenuSector = null;
@@ -77,10 +81,35 @@ export const pause = {
         cancelChoiceBtns.forEach(btn => {
             btn.addEventListener("click", () => {
                 previousMenuSectorIndex = this.menuStructure.indexOf(String(btn.value));
-
                 this.activeMenuSector = this.menuStructure[previousMenuSectorIndex];
                 renderer.renderPauseMenuOptions("optionsContainer");
             });
         });
     },
+
+    showStatistics() {
+        this.activeMenuSector = this.menuStructure[1];
+        this.showOrHidePauseMenu();
+    },
+
+    getStatisticsData() {
+        return [
+            {
+                "name": "достигнут уровень",
+                "data": progressController.level
+            },
+            {
+                "name": "противников уничтожено",
+                "data": progressController.shipDestroyed
+            },
+            {
+                "name": "босс уровня уничтожен",
+                "data": progressController.bossDestroyed
+            },
+            {
+                "name": "очков набрано",
+                "data": progressController.score
+            }
+        ];
+    }
 }

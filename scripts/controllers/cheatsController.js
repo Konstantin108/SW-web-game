@@ -116,13 +116,19 @@ export const cheatsController = {
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
         }
 
-        if (activatedCheat) messageColor = "cheatMessageGreen";
-        if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
-        if (activatedCheat) this.activateCheat(activatedCheat, activatedCheatParam, paramName);
-        if (config.production) {
-            console.clear();
-            this.cheatsInfoForPlayer();
+        if (activatedCheat) {
+            if (game.gameOver && !matchCheatObject.playerCanUseThisCheatAfterGameOver) {
+                message = "you are dead";
+            } else {
+                messageColor = "cheatMessageGreen";
+                this.activateCheat(activatedCheat, activatedCheatParam, paramName);
+                if (config.production) {
+                    console.clear();
+                    this.cheatsInfoForPlayer();
+                }
+            }
         }
+        if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
         return message;
     },
 
@@ -454,9 +460,15 @@ export const cheatsController = {
         }
     },
 
+    // исправить запуск чита во время отсчёта
     suicide(paramName) {
-        if (player.invincibility) player.invincibility = false;
+        let delay = 0;
 
+        if (!game.gameIsRunning) {
+            delay = (game.startGameDelaySecondsCount + 1) * 1000;
+            pause.showOrHidePauseMenu();
+        }
+        if (player.invincibility) player.invincibility = false;
         let hitData = [
             {
                 x: player.x,
@@ -464,7 +476,7 @@ export const cheatsController = {
                 crashDamage: config[paramName]
             }
         ];
-        crashChecker.crashCheck(hitData);
+        setTimeout(() => crashChecker.crashCheck(hitData), delay);
         // если перезапуск игры будет без перезагрузки страницы,
         // то возвращать player.invincibility = true,
         // если player.invincibility был установлен читом toggleInvincibility()

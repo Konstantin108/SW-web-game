@@ -517,7 +517,7 @@ export const renderer = {
 
     renderPauseMenuSideBlocksBtn(btnName, pauseOn = false) {
         if (btnName === "back" && String(pause.activeMenuSector) !== "confirmSector") return;
-        if (btnName === "cross" && String(pause.activeMenuSector) === "gameOverMenuSector") return;
+        if (btnName === "cross" && game.gameOver) return;
         if (game.gameIsRunning) return;
 
         let btn = helperController.getObjectByName(config.pauseMenuOptions, btnName);
@@ -561,23 +561,35 @@ export const renderer = {
         }
     },
 
-    renderPauseMenuOptions(defaultContainer = null) {
-        if (game.gameIsRunning) return;
-        let activeMenuSector = pause.activeMenuSector;
-        let options = config.pauseMenuOptions;
-        let menuList = null;
-        let container = null;
-        let pauseMenuOptions = null;
-        let classes = "";
-        let value = "";
+    renderPauseMenuStatisticsBlock(activeMenuSector, optionsBlock) {
+        let data = null;
+        let dataForPrinter = "";
+
+        if (game.gameOver) {
+            data = pause.getStatisticsData();
+            if (data) {
+                data.forEach(elem => {
+                    dataForPrinter += `<div class="statisticsColumn statisticsLeftColumn">
+                                            ${elem.name}
+                                       </div>
+                                       <div class="statisticsColumn statisticsRightColumn">
+                                            ${elem.data}
+                                       </div>`;
+                });
+            }
+            optionsBlock += templatePrinter.statisticsBlockPrint(dataForPrinter);
+        }
+        optionsBlock += `<div>`;
+
+        return optionsBlock;
+    },
+
+    renderOrRemovePauseMenuConfirmBlock(activeMenuSector, optionsBlock) {
         let menuListClasses = "";
-        let optionsBlock = `<ul id="pauseMenuList">`;
 
         if (String(activeMenuSector) === "confirmSector") {
             menuListClasses = "listFlexStyle";
-            optionsBlock += `<div id="confirmTitle" class="${config.menuColor}">
-                                вы уверены?
-                             </div>`;
+            optionsBlock += templatePrinter.confirmBlockLabelPrint();
 
             this.renderPauseMenuSideBlocksBtn("back");
             setTimeout(() => pause.cancelChoiceAction(), 10);
@@ -590,8 +602,35 @@ export const renderer = {
                 setTimeout(() => backBtnContainer.removeChild(backBtn.parentElement), 180);
             }
         }
-
         optionsBlock += `<div class="${menuListClasses}">`;
+
+        return optionsBlock;
+    },
+
+    renderBigPauseMenu() {
+        if (!game.gameOver) return;
+        let optionsBlock = document.querySelector("#pauseMenuList");
+        let horizontalBorders = document.querySelectorAll(".pauseMenuHorizontalBorder");
+        let sideBorders = document.querySelectorAll(".pauseMenuSideBorder");
+
+        if (optionsBlock) optionsBlock.classList.add("pauseMenuListBigSize");
+        if (horizontalBorders) horizontalBorders.forEach(elem => elem.classList.add("pauseMenuHorizontalBorderBigSize"));
+        if (sideBorders) sideBorders.forEach(elem => elem.classList.add("pauseMenuSideBorderBigSize"));
+    },
+
+    renderPauseMenuOptions(defaultContainer = null) {
+        if (game.gameIsRunning) return;
+        let activeMenuSector = pause.activeMenuSector;
+        let options = config.pauseMenuOptions;
+        let menuList = null;
+        let container = null;
+        let pauseMenuOptions = null;
+        let classes = "";
+        let value = "";
+        let optionsBlock = `<ul id="pauseMenuList">`;
+
+        optionsBlock = this.renderPauseMenuStatisticsBlock(activeMenuSector, optionsBlock);
+        optionsBlock = this.renderOrRemovePauseMenuConfirmBlock(activeMenuSector, optionsBlock);
 
         options.forEach(option => {
             if (option.renderSector.includes(activeMenuSector)) {
@@ -629,6 +668,8 @@ export const renderer = {
         }, 150);
 
         setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross"), 200);
+
+        this.renderBigPauseMenu();
     },
 
     renderDebugPanel() {

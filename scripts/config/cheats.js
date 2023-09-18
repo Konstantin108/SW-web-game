@@ -60,6 +60,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение опции сохранения действия читов в localStorage",
                 descriptionForPlayer: "действие читов не будет отменяться при перезапуске игры"
             },
@@ -82,6 +83,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "включение или выключение неуязвимости",
                 descriptionForPlayer: "стать неуязвимым"
             },
@@ -113,6 +115,7 @@ export const cheats = {
                     "ferrum",
                     "terra"
                 ],
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "изменить цвет интерфейса",
                 descriptionForPlayer: "изменить цвет интерфейса"
             },
@@ -132,6 +135,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "восстановить жизни",
                 descriptionForPlayer: "восстановить жизни"
             },
@@ -151,6 +155,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "установить количество жизней",
                 descriptionForPlayer: "установить количество жизней (от 1 до 999)"
             },
@@ -171,6 +176,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "вызвать босса",
                 descriptionForPlayer: "вызвать босса"
             },
@@ -190,6 +196,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "убить босса",
                 descriptionForPlayer: "убить босса"
             },
@@ -212,6 +219,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "включение или выключение свойства arrowPenetration для всех типов стрел игрока",
                 descriptionForPlayer: "все типы стрел будут пробивать врагов насквозь"
             },
@@ -234,6 +242,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вывода в консоль объектов класса Arrow (для отладки)",
                 descriptionForPlayer: null
             },
@@ -256,6 +265,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вывода в консоль объектов класса EnemyArrow (для отладки)",
                 descriptionForPlayer: null
             },
@@ -278,6 +288,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вывода в консоль объектов класса Blockage (для отладки)",
                 descriptionForPlayer: null
             },
@@ -300,6 +311,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вывода в консоль объектов класса Bonus (для отладки)",
                 descriptionForPlayer: null
             },
@@ -322,6 +334,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вывода в консоль параметров босса каждый раз при нанесении ему урона (для отладки)",
                 descriptionForPlayer: null
             },
@@ -344,6 +357,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вывода в консоль localStorage и config каждый раз при активации чита и при запуске игры (для отладки)",
                 descriptionForPlayer: null
             },
@@ -366,6 +380,7 @@ export const cheats = {
                 debugTool: true,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение режима запуска игры без отсчёта (для отладки)",
                 descriptionForPlayer: null
             },
@@ -388,6 +403,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение вызова дебаг-панели по нажатию клавиши /",
                 descriptionForPlayer: "debug-mode (клавиша /)"
             },
@@ -407,6 +423,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "получить shield на определенное игроком количество секунд",
                 descriptionForPlayer: "получить щит (от 1 до 199 секунд)"
             },
@@ -426,6 +443,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "получить arrowDrill на определенное игроком количество секунд",
                 descriptionForPlayer: "получить стрелы типа Дрель (от 1 до 199 секунд)"
             },
@@ -445,12 +463,11 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "получить arrowTrinity на определённое игроком количество секунд",
                 descriptionForPlayer: "получить стрелы типа Тринити (от 1 до 199 секунд)"
             },
             {
-                // настроить выход с паузы
-                // и вызов окончания игры
                 name: "suicide",
                 code: "mortem",
                 message: "this is the end",
@@ -466,6 +483,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "убить самого себя",
                 descriptionForPlayer: "убить самого себя"
             },
@@ -488,6 +506,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "включение или выключение увеличенного в 10 раз урона от всех типов стрел игрока",
                 descriptionForPlayer: "урон от всех типов стрел увеличен в 10 раз"
             },
@@ -507,6 +526,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "вызвать взрыв, который убивает всех врагов на экране и снимает щит с босса",
                 descriptionForPlayer: "убить всех врагов"
             },
@@ -527,6 +547,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "установить процент вероятности появления на карте бонусов",
                 descriptionForPlayer: "увеличить вероятность появления бонусов (от 1 до 100 процентов)"
             },
@@ -549,6 +570,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "включение или выключение всегда полного заряда для использования суперспособности",
                 descriptionForPlayer: "суперспособность всегда заряжена"
             },
@@ -566,6 +588,7 @@ export const cheats = {
                 debugTool: false,
                 optionsInfo: null,
                 options: null,
+                playerCanUseThisCheatAfterGameOver: true,
                 description: "отключить действие всех читов",
                 descriptionForPlayer: "отключить действие всех читов"
             },
@@ -593,6 +616,7 @@ export const cheats = {
                     "micare",
                     "radium"
                 ],
+                playerCanUseThisCheatAfterGameOver: false,
                 description: "получить любой бонус",
                 descriptionForPlayer: "получить бонус"
             }

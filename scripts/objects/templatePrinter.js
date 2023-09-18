@@ -18,7 +18,7 @@ export const templatePrinter = {
                             <strong>
                                 <div class="infoContainer">
                                     <div class="infoLabel">
-                                        Уровень
+                                        уровень
                                     </div>
                                     <div>
                                         ${level}
@@ -30,7 +30,7 @@ export const templatePrinter = {
                             <strong>
                                 <div class="infoContainer">
                                     <div class="infoLabel">
-                                        Очки
+                                        очки
                                     </div>
                                     <div>
                                         ${score}
@@ -42,7 +42,7 @@ export const templatePrinter = {
                             <strong>
                                 <div class="infoContainer">
                                     <div class="infoLabel">
-                                        Уничтожено противников
+                                        уничтожено противников
                                     </div>
                                     <div>
                                         ${shipDestroyed} 
@@ -60,7 +60,7 @@ export const templatePrinter = {
                     <strong>
                         <div class="infoContainer">
                             <div class="infoLabel">
-                                Жизни
+                                жизни
                             </div>
                             <div>
                                 ${lives}
@@ -190,6 +190,23 @@ export const templatePrinter = {
                             <div class="pauseMenuSideBorder"></div>
                             <div class="pauseMenuSideBottomBracing"></div>
                         </div>
+                    </div>
+                </div>`;
+    },
+
+    confirmBlockLabelPrint() {
+        return `<div id="confirmTitle" class="${config.menuColor}">
+                    вы уверены?
+                </div>`;
+    },
+
+    statisticsBlockPrint(data) {
+        return `<div id="statisticsBlock" class="${config.menuColor}">
+                    <div id="statisticsTitle">
+                        игра окончена
+                    </div>
+                    <div id="statisticsGridContainer">
+                        ${data}
                     </div>
                 </div>`;
     }
