@@ -16,6 +16,7 @@ export class Blockage {
     shipDestroyedReward = config.blockageShipDestroyedRewards;
     speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
     crashDamage = config.blockageCrashDamage;
+    missReward = config.missReward;
     selectorName = "blockage";
     getDamageOutlookSelectorName = "blockageWhite";
     arrowTypeSelectorName = "enemyArrow";
@@ -63,7 +64,7 @@ export class Blockage {
         } else if (y_pos === config.mapSizeY + 1) {
             y_pos = config.mapSizeY + 2;
             this.y = y_pos;
-            progressController.scoreUp(config.missReward);
+            progressController.scoreUp(this.missReward);
             x_pos = helperController.getRandomInt(0, config.mapSizeX);
             y_pos = 0;
             this.x = x_pos;

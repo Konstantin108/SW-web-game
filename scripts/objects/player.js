@@ -24,7 +24,7 @@ export const player = {
     canMove: true,
     bombsCount: config.startBombsCount,
     superAbilityDamage: config.superAbilityDamage,
-    superAbilityIsActivated: null,
+    superAbilityIsActivated: config.superAbilityIsActivated,
     bonusNewArrowTypeIsActivated: config.bonusNewArrowTypeIsActivated,
     bonusShieldIsActivated: config.bonusShieldIsActivated,
     bonusNewArrowTypeIsActivatedTimerId: null,  // id таймера, который отменит действие бонуса усиление оружия
@@ -35,10 +35,6 @@ export const player = {
     calculateTimeInBonusShieldOffTimerId: null,  // id таймера delay в методе calculateTimeInBonusOff() для бонуса щит
     bonusObjectNewArrowType: null,  // данные подобраного бонуса усиление оружия для возобновления действия после снятия игры с паузы
     bonusObjectShield: null,  // данные подобраного бонуса щит для возобновления действия после снятия игры с паузы,
-
-    superAbilityStatusInit() {
-        config.superAbilityIsAlwaysCharged ? this.superAbilityIsActivated = config.superAbilityIsAlwaysCharged : this.superAbilityIsActivated = config.superAbilityIsActivated;
-    },
 
     move() {
         let possibleDirections = [

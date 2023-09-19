@@ -523,7 +523,7 @@ export const cheatsController = {
                 localStorageController.setParamToLocalStorage("superAbilityIsActivated", status);
             }
             player[paramName] = config[paramName];
-            player.superAbilityStatusInit();
+            game.superAbilityStatusInit();
             renderer.renderSuperAbilityBarActivatedByCheat();
         } else {
             status = false;
@@ -587,7 +587,7 @@ export const cheatsController = {
                 break;
             case "radium":
                 config["superAbilityIsActivated"] = true;
-                player.superAbilityStatusInit();
+                game.superAbilityStatusInit();
                 renderer.renderSuperAbilityBarActivatedByCheat(true);
                 break;
             default:
@@ -635,7 +635,7 @@ export const cheatsController = {
             }
         });
 
-        console.log("----------  Нажми клавишу ~ для вызова меню ввода читов  ----------");
+        console.log("Нажми клавишу ~ для вызова меню ввода читов");
         console.table(cheatsInfoObject);
     }
 }

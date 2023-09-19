@@ -17,6 +17,7 @@ export const progressController = {
     fireChance: config.levels[0].fireChance,
     blockageTypes: config.levels[0].blockageTypes,
     bossExist: config.levels[0].bossExist,
+    crashMulct: config.crashMulct,
     blockagesCount: 0,
     score: 0,
     shipDestroyed: 0,
@@ -105,7 +106,7 @@ export const progressController = {
     scoreDown() {
         let score = this.score;
 
-        score += config.crashMulct * this.multiplier;
+        score += this.crashMulct * this.multiplier;
         if (score < 0) score = 0;
         this.score = score;
         return this.score;
@@ -130,7 +131,7 @@ export const progressController = {
     },
 
     newLevelEntry(blockagesCount) {
-        let message = `LEVEL ${progressController.level}`;
+        let message = `level ${this.level}`;
         let playerCantStopGameTime = 2000;
 
         game.playerCanStopGame = false;

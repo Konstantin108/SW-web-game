@@ -29,12 +29,21 @@ export const game = {
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         pause.pauseBtnClickHandler();
-        player.superAbilityStatusInit();
+        this.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (!config.debugActualParamsInfoShow) return;
         debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
+    },
+
+    superAbilityStatusInit() {
+        if (config.superAbilityIsAlwaysCharged) {
+            config.superAbilityIsActivated = config.superAbilityIsAlwaysCharged;
+            player.superAbilityIsActivated = config.superAbilityIsAlwaysCharged;
+        } else {
+            player.superAbilityIsActivated = config.superAbilityIsActivated;
+        }
     },
 
     run() {
@@ -58,8 +67,8 @@ export const game = {
         let message = "";
 
         this.cooldown = true;
-        delay !== 0 ? message = delay : message = "go";
         this.playerCanStopGame = false;
+        delay !== 0 ? message = delay : message = "go";
         if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
         if (delay > -1) {
             setTimeout(() => {
