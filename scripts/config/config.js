@@ -76,5 +76,6 @@ export const config = {
     debugBossGetDamageInfoShow: false,
     debugActualParamsInfoShow: false,
     // меню паузы
-    pauseMenuOptions: pauseMenuOptions.setPauseMenuOptions()
+    pauseMenuOptions: pauseMenuOptions.setPauseMenuOptions(),
+    pauseMenuStructure: pauseMenuOptions.setPauseMenuStructure()
 }

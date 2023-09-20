@@ -1,17 +1,14 @@
 import {renderer} from "./renderer.js";
 import {game} from "../game.js";
 import {progressController} from "../controllers/progressController.js";
+import {config} from "../config/config.js";
 
 export const pause = {
+    menuStructure: config.pauseMenuStructure,
     animationRunningNow: false,
     activeMenuSector: null,
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
-    menuStructure: [
-        "mainMenuSector",
-        "gameOverMenuSector",
-        "confirmSector"
-    ],
 
     pauseBtnClickHandler() {
         let pauseBtnsArray = [

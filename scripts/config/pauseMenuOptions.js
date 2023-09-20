@@ -1,5 +1,13 @@
 export const pauseMenuOptions = {
 
+    setPauseMenuStructure() {
+        return [
+            "mainMenuSector",
+            "gameOverMenuSector",
+            "confirmSector"
+        ]
+    },
+
     setPauseMenuOptions() {
         return [
             {
