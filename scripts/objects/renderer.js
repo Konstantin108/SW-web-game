@@ -662,7 +662,7 @@ export const renderer = {
         container.insertAdjacentHTML("afterbegin", optionsBlock);
 
         setTimeout(() => {
-            pauseMenuOptions = document.querySelectorAll(".blackOption");
+            pauseMenuOptions = document.querySelectorAll(".pauseMenuBtn");
             this.renderPauseMenuOneOptionAddClassOn(pauseMenuOptions, pauseMenuOptions.length, 0);
             pause.needConfirmAction();
         }, 150);

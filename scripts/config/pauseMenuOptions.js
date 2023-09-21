@@ -20,7 +20,6 @@ export const pauseMenuOptions = {
                 id: "continueGame",
                 classes: [
                     "pauseMenuBtn",
-                    "blackOption",
                     "continueGame"
                 ],
                 internalClasses: null,
@@ -40,8 +39,7 @@ export const pauseMenuOptions = {
                 ],
                 id: "restartGame",
                 classes: [
-                    "pauseMenuBtn",
-                    "blackOption"
+                    "pauseMenuBtn"
                 ],
                 internalClasses: null,
                 containerBlockId: "optionsContainer",
@@ -60,8 +58,7 @@ export const pauseMenuOptions = {
                 ],
                 id: "leaveGame",
                 classes: [
-                    "pauseMenuBtn",
-                    "blackOption"
+                    "pauseMenuBtn"
                 ],
                 internalClasses: null,
                 containerBlockId: "optionsContainer",
@@ -79,8 +76,7 @@ export const pauseMenuOptions = {
                 ],
                 id: "confirmСhoice",
                 classes: [
-                    "pauseMenuBtn",
-                    "blackOption"
+                    "pauseMenuBtn"
                 ],
                 internalClasses: null,
                 containerBlockId: "optionsContainer",
@@ -99,7 +95,6 @@ export const pauseMenuOptions = {
                 id: "cancelСhoice",
                 classes: [
                     "pauseMenuBtn",
-                    "blackOption",
                     "cancelСhoice"
                 ],
                 internalClasses: null,
