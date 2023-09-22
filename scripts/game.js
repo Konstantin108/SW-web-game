@@ -33,8 +33,7 @@ export const game = {
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
         if (config.production) cheatsController.cheatsInfoForPlayer();
-        if (!config.debugActualParamsInfoShow) return;
-        debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
+        if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
 
     superAbilityStatusInit() {

@@ -47,9 +47,10 @@ export const cheatsController = {
             let data = new FormData(this);
             let value = data.get("cheatInput");
 
-            if (!value) return;
-            cheatsController.matchPlayerInputAndCheatCode(value.toLowerCase(), cheatMessageContainer);
-            this.reset();
+            if (value) {
+                cheatsController.matchPlayerInputAndCheatCode(value.toLowerCase(), cheatMessageContainer);
+                this.reset();
+            }
         });
     },
 
@@ -200,8 +201,7 @@ export const cheatsController = {
                 break;
         }
 
-        if (!config.debugActualParamsInfoShow) return;
-        debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
+        if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
 
     editCheatNamesArrayInGameConfig(remove, cheat) {
@@ -426,11 +426,21 @@ export const cheatsController = {
     },
 
     toggleDebugMode(paramName, toggle) {
+        let debugPanelElement = null;
+        let activatedCheat = null;
+
         debugPanel[paramName] = this.standartToggleCheatAction(paramName, toggle);
-        if (debugPanel[paramName]) return;
-        let debugPanelElement = document.querySelector("#debugPanel");
-        if (!debugPanelElement) return;
-        renderer.renderDebugPanel();
+        if (!debugPanel[paramName]) {
+            config.cheatsActivated.forEach(cheatName => {
+                activatedCheat = helperController.getObjectByName(this.cheats, cheatName);
+                if (activatedCheat.debugTool) {
+                    this.activateCheat(activatedCheat, "off", activatedCheat.paramName);
+                    this.editCheatNamesArrayInGameConfig(true, activatedCheat);
+                }
+            });
+            debugPanelElement = document.querySelector("#debugPanel");
+            if (debugPanelElement) renderer.renderDebugPanel();
+        }
     },
 
     getBonusForArbitaryTime(paramName, secondsCount) {
@@ -460,7 +470,6 @@ export const cheatsController = {
         }
     },
 
-    // исправить запуск чита во время отсчёта
     suicide(paramName) {
         let delay = 0;
 
@@ -537,8 +546,10 @@ export const cheatsController = {
     },
 
     offAllCheats() {
+        let activatedCheat = null;
+
         config.cheatsActivated.forEach(cheatName => {
-            let activatedCheat = helperController.getObjectByName(this.cheats, cheatName);
+            activatedCheat = helperController.getObjectByName(this.cheats, cheatName);
 
             switch (activatedCheat.type) {
                 case "toggleCheat":

@@ -48,7 +48,6 @@ export const blockageController = {
         for (let i = 0; i < blockagesArray.length; i++) {
             this.blockageTimerIdsArray.push(setInterval(() => blockagesArray[i].step(), blockagesArray[i].speed));
         }
-        if (!config.debugBlockagesObjectsShow) return;
-        debugPanel.objectsInfoShow("blockagesObjects", blockagesArray, true);
+        if (config.debugBlockagesObjectsShow) debugPanel.objectsInfoShow("blockagesObjects", blockagesArray, true);
     }
 }

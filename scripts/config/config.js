@@ -26,7 +26,7 @@ export const config = {
     superAbilityIsAlwaysCharged: false,
     menuColor: "viridis",
     debugMode: false,
-    production: true,
+    production: false,
     // стрелы игрока
     power: 1,
     arrowPenetration: false,

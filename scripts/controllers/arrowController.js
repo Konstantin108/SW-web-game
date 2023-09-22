@@ -31,7 +31,6 @@ export const arrowController = {
         for (let i = 0; i < this.arrowsArray.length; i++) {
             if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
         }
-        if (!config.debugPlayerArrowsObjectsShow) return;
-        debugPanel.objectsInfoShow("playerArrowsObjects", this.arrowsArray, true);
+        if (config.debugPlayerArrowsObjectsShow) debugPanel.objectsInfoShow("playerArrowsObjects", this.arrowsArray, true);
     }
 }

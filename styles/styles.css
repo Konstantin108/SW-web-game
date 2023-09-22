@@ -158,6 +158,11 @@ td {
   align-items: center;
 }
 
+.widePadding {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 .infoLabel {
   text-align: center;
 }
@@ -789,9 +794,9 @@ td {
   border-radius: 12px;
   border: 2px solid black;
   outline: none;
-  padding-top: 1px;
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 1px;
   font-size: 25px;
   font-weight: 900;
   text-transform: uppercase;
@@ -1108,10 +1113,10 @@ td {
   scale: 1.1;
   background-color: black;
   text-align: center;
+  padding-left: 46px;
+  padding-right: 46px;
   padding-top: 28px;
   padding-bottom: 28px;
-  padding-right: 46px;
-  padding-left: 46px;
 }
 
 .pauseMenuListBigSize {

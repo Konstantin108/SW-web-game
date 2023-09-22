@@ -55,14 +55,11 @@ export const localStorageController = {
             }
         } else {
             for (let key in config) {
-                if (config[key] instanceof Object && config[key].hasOwnProperty(param)) {
-                    config[key] = bonuses.setBonusesParams(localStorageParam);
-                }
+                if (config[key] instanceof Object && config[key].hasOwnProperty(param)) config[key] = bonuses.setBonusesParams(localStorageParam);
             }
         }
 
-        if (!playerParamsUpdate) return;
-        if (player.hasOwnProperty(param)) player[param] = config[param];
+        if (playerParamsUpdate && player.hasOwnProperty(param)) player[param] = config[param];
     },
 
     addLocalStorageParamNamesToGameConfig(param) {

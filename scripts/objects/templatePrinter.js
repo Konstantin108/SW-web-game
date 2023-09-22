@@ -16,7 +16,7 @@ export const templatePrinter = {
                         <div id="scull" class="whiteScull"></div>
                         <div class="statusBarElement">
                             <strong>
-                                <div class="infoContainer">
+                                <div class="infoContainer widePadding">
                                     <div class="infoLabel">
                                         уровень
                                     </div>
@@ -28,7 +28,7 @@ export const templatePrinter = {
                         </div>
                         <div class="statusBarElement">
                             <strong>
-                                <div class="infoContainer">
+                                <div class="infoContainer widePadding">
                                     <div class="infoLabel">
                                         очки
                                     </div>
@@ -40,7 +40,7 @@ export const templatePrinter = {
                         </div>
                         <div class="statusBarElement">
                             <strong>
-                                <div class="infoContainer">
+                                <div class="infoContainer widePadding">
                                     <div class="infoLabel">
                                         уничтожено противников
                                     </div>
@@ -58,7 +58,7 @@ export const templatePrinter = {
     livesBarTemplatePrint(lives) {
         return `<div class="statusBarElement">
                     <strong>
-                        <div class="infoContainer">
+                        <div class="infoContainer widePadding">
                             <div class="infoLabel">
                                 жизни
                             </div>

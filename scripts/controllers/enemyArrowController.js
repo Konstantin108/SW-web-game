@@ -18,7 +18,6 @@ export const enemyArrowController = {
         if (!this.enemyArrowsArray.length) return;
         let enemyArrow = this.enemyArrowsArray.at(-1);
         enemyArrow.makeStep();
-        if (!config.debugEnemyArrowsObjectsShow) return;
-        debugPanel.objectsInfoShow("playerArrowsObjects", this.enemyArrowsArray, true);
+        if (config.debugEnemyArrowsObjectsShow) debugPanel.objectsInfoShow("playerArrowsObjects", this.enemyArrowsArray, true);
     }
 }

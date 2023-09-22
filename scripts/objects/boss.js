@@ -227,9 +227,10 @@ export const boss = {
 
     bossShieldGetDamage(thisPlayerWeaponTypeCanMakeDamage, hitData = null) {
         renderer.renderBossShieldHit(this.shieldBody, hitData);
-        if (!thisPlayerWeaponTypeCanMakeDamage) return;
-        this.removeShieldTimerId();
-        setTimeout(() => this.offShield(), 150);
+        if (thisPlayerWeaponTypeCanMakeDamage) {
+            this.removeShieldTimerId();
+            setTimeout(() => this.offShield(), 150);
+        }
     },
 
     getDamage(hitData, thisPlayerWeaponTypeCanMakeDamage = false) {
