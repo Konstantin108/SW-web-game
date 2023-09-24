@@ -7,6 +7,11 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow: hidden;
+}
+
 body {
   background-image: url("../images/background-space.jpg");
   background-repeat: no-repeat;
@@ -321,7 +326,7 @@ td {
 #superAbilityBar {
   position: absolute;
   right: 100%;
-  top: 57.1%;
+  top: 57.3%;
 }
 
 #shineSectorsContainer {
