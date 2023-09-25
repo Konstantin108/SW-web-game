@@ -790,7 +790,7 @@ td {
 }
 
 #consoleSymbol {
-  font-size: 30px;
+  font-size: 31px;
 }
 
 #cheatInput {
@@ -802,6 +802,7 @@ td {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 1px;
+  padding-bottom: 1px;
   font-size: 25px;
   font-weight: 900;
   text-transform: uppercase;

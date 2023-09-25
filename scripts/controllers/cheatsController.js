@@ -478,6 +478,7 @@ export const cheatsController = {
             pause.showOrHidePauseMenu();
         }
         if (player.invincibility) player.invincibility = false;
+        if (player.bonusShieldIsActivated) player.bonusShieldIsActivated = false;
         let hitData = [
             {
                 x: player.x,
