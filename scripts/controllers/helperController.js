@@ -7,24 +7,25 @@ export const helperController = {
     },
 
     randomEvent(probabilityOfAction) {
-        let chance = Math.random() * 100;
-        chance = chance.toFixed(0);
-        if (chance <= probabilityOfAction) return true ?? false;
+        let result = false;
+        let chance = (Math.random() * 100).toFixed(0);
+        if (chance <= probabilityOfAction) result = true;
+        return result;
     },
 
     getRandomType(types) {
-        let chance = Math.random() * 100;
-
-        chance = chance.toFixed(0);
+        let chance = (Math.random() * 100).toFixed(0);
         for (let key in types) {
             if (chance >= types[key].chanceFrom && chance <= types[key].chanceTo) return types[key];
         }
     },
 
     getObjectByName(object, value) {
+        let result = null;
         for (let key in object) {
-            if (object[key].name === value) return object[key] ?? null;
+            if (object[key].name === value) result = object[key];
         }
+        return result;
     },
 
     getRandomCoordinates(arrayX, y) {

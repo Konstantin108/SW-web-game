@@ -13,6 +13,7 @@ import {boss} from "./boss.js";
 export const player = {
     lives: config.lives,
     invincibility: config.invincibility,
+    gameControl: config.gameControl,
     invincibilityTimerId: null,  // id таймера до окончания действия неуязвимости
     timeInInvincibilityOffTimerId: null,  // id таймера delay в методе calculateTimeInInvincibilityOff()
     timeInInvincibilityOff: null,  // сюда записывается цифра - количество секунд до окончания неуязвимости
@@ -37,24 +38,7 @@ export const player = {
     bonusObjectShield: null,  // данные подобраного бонуса щит для возобновления действия после снятия игры с паузы,
 
     move() {
-        let possibleDirections = [
-            "Numpad4",
-            "Numpad6",
-            "Numpad2",
-            "Numpad8",
-            "Numpad7",
-            "Numpad9",
-            "Numpad1",
-            "Numpad3",
-            "ArrowLeft",
-            "ArrowRight",
-            "ArrowDown",
-            "ArrowUp",
-            "KeyA",
-            "KeyD",
-            "KeyS",
-            "KeyW"
-        ];
+        let possibleDirections = helperController.getObjectByName(this.gameControl, "possibleDirections").btns;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
@@ -123,11 +107,7 @@ export const player = {
     },
 
     shoot() {
-        let shootBtnsArray = [
-            "Space",
-            "Numpad5",
-            "Numpad0",
-        ];
+        let shootBtnsArray = helperController.getObjectByName(this.gameControl, "shootBtnsArray").btns;
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
@@ -166,32 +146,32 @@ export const player = {
     },
 
     useBomb() {
-        let useBombBtn = "ControlRight";
+        let useBombBtn = helperController.getObjectByName(this.gameControl, "useBombBtn").btns;
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
             if (isPressBtn) return;
-            if (event.code !== useBombBtn) return;
+            if (!useBombBtn.includes(event.code)) return;
             explosion.explosionCall();
             isPressBtn = true;
         });
         document.addEventListener("keyup", function (event) {
-            if (event.code === useBombBtn) isPressBtn = false;
+            if (useBombBtn.includes(event.code)) isPressBtn = false;
         });
     },
 
     useSuperAbility() {
         let blockagesArray = blockageController.blockagesArray;
-        let useSuperAbilityBtn = "ControlLeft";
+        let useSuperAbilityBtn = helperController.getObjectByName(this.gameControl, "useSuperAbilityBtn").btns;
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
             if (isPressBtn) return;
-            if (event.code !== useSuperAbilityBtn) return;
+            if (!useSuperAbilityBtn.includes(event.code)) return;
             if (player.superAbilityIsActivated) {
                 for (let i = 0; i < blockagesArray.length; i++) {
                     if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
@@ -224,7 +204,7 @@ export const player = {
             isPressBtn = true;
         });
         document.addEventListener("keyup", function (event) {
-            if (event.code === useSuperAbilityBtn) isPressBtn = false;
+            if (useSuperAbilityBtn.includes(event.code)) isPressBtn = false;
         });
     }
 }

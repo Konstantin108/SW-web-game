@@ -3,6 +3,7 @@ import {levels} from "./levels.js";
 import {cheats} from "./cheats.js";
 import {debugPanelElements} from "./debugPanelElements.js";
 import {pauseMenuOptions} from "./pauseMenuOptions.js";
+import {gameControl} from "./gameControl.js";
 
 export const config = {
     // игра и игрок
@@ -75,7 +76,8 @@ export const config = {
     debugBonusesObjectsShow: false,
     debugBossGetDamageInfoShow: false,
     debugActualParamsInfoShow: false,
-    // меню паузы
+    // меню паузы и клавиши управления игрой
     pauseMenuOptions: pauseMenuOptions.setPauseMenuOptions(),
-    pauseMenuStructure: pauseMenuOptions.setPauseMenuStructure()
+    pauseMenuStructure: pauseMenuOptions.setPauseMenuStructure(),
+    gameControl: gameControl.setGameControl()
 }

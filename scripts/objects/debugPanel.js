@@ -10,6 +10,7 @@ import {pause} from "./pause.js";
 
 export const debugPanel = {
     cheats: config.cheats,
+    gameControl: config.gameControl,
     debugMode: null,
 
     debugModeStatusInit() {
@@ -17,13 +18,13 @@ export const debugPanel = {
     },
 
     callDebugPanel() {
-        let showDebugPanelBtn = "Slash";
+        let showDebugPanelBtn = helperController.getObjectByName(this.gameControl, "showDebugPanelBtn").btns;
         let playerCanCallDebugPanel = true;
 
         document.addEventListener("keydown", function (event) {
             if (!debugPanel.debugMode) return;
             if (!playerCanCallDebugPanel) return;
-            if (event.code !== showDebugPanelBtn) return;
+            if (!showDebugPanelBtn.includes(event.code)) return;
             playerCanCallDebugPanel = false;
             renderer.renderDebugPanel();
             debugPanel.clickOnDebugPanelElementBtn();

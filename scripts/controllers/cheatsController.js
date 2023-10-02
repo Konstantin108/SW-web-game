@@ -17,17 +17,18 @@ export const cheatsController = {
     cheats: config.cheats,
     translatedColorNames: config.translatedColorNames,
     bonusCodeNames: config.bonusCodeNames,
+    gameControl: config.gameControl,
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
     activatedCheatsParamsDataTempArray: new Map(),
     defaultConfigParamsArray: new Map(),
 
     callCheatConsole() {
-        let showCheatConsoleBtn = "Backquote";
+        let showCheatConsoleBtn = helperController.getObjectByName(this.gameControl, "showCheatConsoleBtn").btns;
         let playerCanCallCheatConsole = true;
 
         document.addEventListener("keydown", function (event) {
             if (!playerCanCallCheatConsole) return;
-            if (event.code !== showCheatConsoleBtn) return;
+            if (!showCheatConsoleBtn.includes(event.code)) return;
             playerCanCallCheatConsole = false;
             renderer.renderCheatConsole();
             cheatsController.inputCheat();

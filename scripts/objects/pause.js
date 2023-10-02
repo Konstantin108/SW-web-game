@@ -2,19 +2,18 @@ import {renderer} from "./renderer.js";
 import {game} from "../game.js";
 import {progressController} from "../controllers/progressController.js";
 import {config} from "../config/config.js";
+import {helperController} from "../controllers/helperController.js";
 
 export const pause = {
     menuStructure: config.pauseMenuStructure,
+    gameControl: config.gameControl,
     animationRunningNow: false,
     activeMenuSector: null,
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
 
     pauseBtnClickHandler() {
-        let pauseBtnsArray = [
-            "Escape",
-            "Pause"
-        ];
+        let pauseBtnsArray = helperController.getObjectByName(this.gameControl, "pauseBtnsArray").btns;
 
         document.addEventListener("keydown", function (event) {
             if (pause.animationRunningNow) return;
