@@ -16,5 +16,9 @@ export const utilities = {
         let unit = .001;
         if (this.randomEvent(chance)) unit = -.001;
         return unit;
+    },
+
+    getRandomPosition(min, max, specialValue) {
+        return Math.floor(Math.random() * ((max + specialValue) - (min - specialValue) + 1)) + (min - specialValue);
     }
 }

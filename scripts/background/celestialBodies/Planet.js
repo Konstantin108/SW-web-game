@@ -2,7 +2,7 @@ import {utilities} from "../utilities.js";
 
 // вынести типы тел
 export class Planet {
-    constructor(x, y, canvasHeight, context, possiblePoitionsOnX) {
+    constructor(x, y, canvasHeight, context, possiblePoitionsOnX, possiblePoitionsOnY) {
         this.x = x;
         this.y = y;
         this.canvasHeight = canvasHeight;

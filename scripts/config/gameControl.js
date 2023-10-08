@@ -70,6 +70,6 @@ export const gameControl = {
                 ],
                 description: "вызов дебаг-панели"
             }
-        ]
+        ];
     }
 }

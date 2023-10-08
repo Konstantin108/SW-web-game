@@ -1,7 +1,7 @@
 import {utilities} from "../utilities.js";
 
 export class Galaxy {
-    constructor(x, y, canvasHeight, context, possiblePoitionsOnX) {
+    constructor(x, y, canvasHeight, context, possiblePoitionsOnX, possiblePoitionsOnY) {
         this.x = x;
         this.y = y;
         this.canvasHeight = canvasHeight;

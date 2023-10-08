@@ -79,5 +79,11 @@ export const config = {
     // меню паузы и клавиши управления игрой
     pauseMenuOptions: pauseMenuOptions.setPauseMenuOptions(),
     pauseMenuStructure: pauseMenuOptions.setPauseMenuStructure(),
-    gameControl: gameControl.setGameControl()
+    gameControl: gameControl.setGameControl(),
+    // объекты canvas (движущийся задний фон)
+    galaxiesCount: 3,
+    planetsCount: 2,
+    slowStarsCount: 30,
+    starsCount: 40,
+    meteorsCount: 6
 }
