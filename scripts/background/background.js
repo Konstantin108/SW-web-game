@@ -5,13 +5,17 @@ import {Meteor} from "./celestialBodies/Meteor.js";
 import {Galaxy} from "./celestialBodies/Galaxy.js";
 import {utilities} from "./utilities.js";
 import {config} from "../config/config.js";
-
-// background находится в отдельной папке и подключается в Space Shooter.html,
-// так же надо подключать в game.js для связи с pause.js
-
-// создать отдельный импортируемый объект для связи с game.js
+import {game} from "../game.js";
 
 // создать чит для вывода объектов canvas
+export const background = {
+    gameIsInitialized: false,
+    timer: null,
+
+    startOrStopCanvas() {
+        animate();
+    }
+}
 
 let canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
@@ -23,13 +27,10 @@ let possiblePoitionsOnX = {
     "min": -200,
     "max": canvas.width + 200
 }
-
 let possiblePoitionsOnY = {
     "min": -200,
     "max": canvas.height + 200
 }
-
-let timer = null;
 
 
 let galaxiesArray = createCelestialBody(Galaxy, config.galaxiesCount);
@@ -55,7 +56,13 @@ function createCelestialBody(bodyType, bodiesCount, specialValue = 0) {
 }
 
 function animate() {
-    context.fillStyle = "black";
+    if (background.gameIsInitialized) {
+        if (!game.gameIsRunning) {
+            clearTimeout(background.timer);
+            return;
+        }
+    }
+
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     galaxiesArray.forEach(galaxy => galaxy.draw());
@@ -64,25 +71,5 @@ function animate() {
     starsArray.forEach(star => star.draw());
     meteorsArray.forEach(meteor => meteor.draw());
 
-    timer = setTimeout(() => requestAnimationFrame(animate), 1);
+    background.timer = setTimeout(() => requestAnimationFrame(animate), 1);
 }
-
-
-let toggle = 0;
-
-function pauseTest() {
-    document.addEventListener("keydown", function (eb) {
-        if (eb.code === "hjskjhdslk") {
-            console.log("sd");
-            if (!toggle) {
-                clearTimeout(timer);
-                toggle = 1;
-            } else {
-                animate();
-                toggle = 0;
-            }
-        }
-    });
-}
-
-pauseTest();

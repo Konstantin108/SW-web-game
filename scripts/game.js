@@ -13,6 +13,7 @@ import {cheatsController} from "./controllers/cheatsController.js";
 import {localStorageController} from "./controllers/localStorageController.js";
 import {debugPanel} from "./objects/debugPanel.js";
 import {pause} from "./objects/pause.js";
+import {background} from "./background/background.js";
 
 export const game = {
     startGameDelaySecondsCount: config.startGameDelaySecondsCount,
@@ -25,6 +26,7 @@ export const game = {
         cheatsController.saveDefaultConfigParams();
         localStorageController.setLocalStorageParamsToGameConfig();
         this.startGameDelaySet();
+        background.gameIsInitialized = true;
         renderer.render();
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
@@ -49,6 +51,7 @@ export const game = {
         this.gameIsRunning = true;
         this.playerCanStopGame = true;
         this.cooldown = false;
+        background.startOrStopCanvas();
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -80,6 +83,7 @@ export const game = {
 
     stopGame() {
         this.gameIsRunning = false;
+        background.startOrStopCanvas();
         bonusController.bonusAppearanceListenerTimerIdRemove();
         bonusController.allNewPropertiesForPlayerOffCallCancel();
         helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
@@ -92,6 +96,7 @@ export const game = {
         this.gameIsRunning = true;
         this.cooldown = false;
         this.playerCanStopGame = true;
+        background.startOrStopCanvas();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         bonusController.resumeGameMakeStepOffCall();
@@ -118,5 +123,5 @@ export const game = {
 // после запуска игры останавливать canvas до тех пор пока gameIsRunning: false,
 // останавливать canvas вместе с паузой
 // если canvas отключен, то игра включается сразу же без загрузки
-// setTimeout(() => game.init(), 4000);
-game.init();
+setTimeout(() => game.init(), 3200);
+// game.init();
