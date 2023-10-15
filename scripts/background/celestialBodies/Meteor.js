@@ -12,7 +12,7 @@ export class Meteor {
         this.imageName = utilities.getRandomElementInArray(this.imageNames);
 
         this.image = new Image();
-        this.image.src = `../images/${this.type}-${this.imageName}.png`;
+        this.image.src = `./images/${this.type}-${this.imageName}.png`;
         this.imageWidth = this.size;
         this.imageHeight = this.size;
 
@@ -47,10 +47,9 @@ export class Meteor {
     ];
     maxSize = 60;
     minSize = 40;
-    chance = 10000;
-    chanceOut = 5;
+    appearanceChance = 5;
 
-    size = Math.floor(Math.random() * (this.maxSize - this.minSize + 1)) + this.minSize;
+    size = utilities.getRandomValue(this.minSize, this.maxSize);
 
     speedLimit = 20;
     speed = this.speedLimit / this.size;
@@ -69,13 +68,11 @@ export class Meteor {
     draw() {
         this.selfRotate();
 
-        if (this.y === -this.size && (Math.random() * this.chance).toFixed(0) < this.chance - this.chanceOut) return;
+        if (this.y === -this.size && utilities.randomAppearanceCelestialBody(this.appearanceChance)) return;
 
         if (this.y > this.canvasHeight) {
-
-            this.x = Math.floor(Math.random() * (this.possiblePoitionsOnXMax - this.possiblePoitionsOnXMin + 1)) + this.possiblePoitionsOnXMin;
-
-            this.size = Math.floor(Math.random() * (this.maxSize - this.minSize + 1)) + this.minSize;
+            this.x = utilities.getRandomValue(this.possiblePoitionsOnXMin, this.possiblePoitionsOnXMax);
+            this.size = utilities.getRandomValue(this.minSize, this.maxSize);
             this.y = -this.size;
 
             this.speed = this.speedLimit / this.size;
@@ -83,13 +80,13 @@ export class Meteor {
             this.imageName = utilities.getRandomElementInArray(this.imageNames);
 
             this.image = new Image();
-            this.image.src = `../images/${this.type}-${this.imageName}.png`;
+            this.image.src = `./images/${this.type}-${this.imageName}.png`;
             this.imageWidth = this.size;
             this.imageHeight = this.size;
 
             if (this.noRotateNames.includes(this.imageName)) {
                 if (utilities.randomEvent(50)) {
-                    this.y = Math.floor(Math.random() * (this.possiblePoitionsOnYMax - this.possiblePoitionsOnYMin + 1)) + this.possiblePoitionsOnYMin;
+                    this.y = utilities.getRandomValue(this.possiblePoitionsOnYMin, this.possiblePoitionsOnYMax);
                     if (this.imageName.split("-")[0] === "left") this.x = this.possiblePoitionsOnXMax;
                     if (this.imageName.split("-")[0] === "right") this.x = this.possiblePoitionsOnXMin;
                 }

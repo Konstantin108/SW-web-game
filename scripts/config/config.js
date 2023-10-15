@@ -10,7 +10,7 @@ export const config = {
     mapSizeX: 10,
     mapSizeY: 13,
     gameInstantStart: false,
-    startGameDelaySecondsCount: 3,
+    startGameDelaySecondsCount: 3,  // указывается в секундах
     missReward: 1,
     crashMulct: -100,
     invincibilityAfterCrash: 4000,
@@ -28,6 +28,7 @@ export const config = {
     menuColor: "viridis",
     debugMode: false,
     production: false,
+    gameLoadingSecondsCount: 3000,
     // стрелы игрока
     power: 1,
     arrowPenetration: false,

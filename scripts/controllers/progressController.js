@@ -126,8 +126,13 @@ export const progressController = {
         }
     },
 
-    compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {  // blockagesCount не может быть больше config.mapSizeX
-        return blockagesCountOnLevel <= config.mapSizeX ? blockagesCountOnLevel : config.mapSizeX;
+    // blockagesCount не может быть больше config.mapSizeX и меньше 1
+    compareBlockagesCountAndMapSizeX(blockagesCountOnLevel) {
+        let blockagesCount = blockagesCountOnLevel;
+
+        if (!blockagesCount) blockagesCount = 1;
+        blockagesCount = blockagesCount <= config.mapSizeX ? blockagesCount : config.mapSizeX;
+        return blockagesCount;
     },
 
     newLevelEntry(blockagesCount) {

@@ -16,18 +16,22 @@ import {pause} from "./objects/pause.js";
 import {background} from "./background/background.js";
 
 export const game = {
-    startGameDelaySecondsCount: config.startGameDelaySecondsCount,
+    gameLoadingSecondsCount: config.gameLoadingSecondsCount,
+    startGameDelaySecondsCount: null,
     gameIsRunning: false,
     gameOver: false,
     playerCanStopGame: false,
-    cooldown: false,
+    animationBan: false,
 
     init() {
         cheatsController.saveDefaultConfigParams();
         localStorageController.setLocalStorageParamsToGameConfig();
         this.startGameDelaySet();
         background.gameIsInitialized = true;
+        background.celestialBodiesInit();
         renderer.render();
+        // экран загрузки должен быть отключен, если отключен canvas
+        renderer.hideLoadingScreen();
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         pause.pauseBtnClickHandler();
@@ -50,7 +54,7 @@ export const game = {
     run() {
         this.gameIsRunning = true;
         this.playerCanStopGame = true;
-        this.cooldown = false;
+        this.animationBan = false;
         background.startOrStopCanvas();
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
@@ -68,7 +72,7 @@ export const game = {
     startGameDelay(delay, resumeGame = false) {
         let message = "";
 
-        this.cooldown = true;
+        this.animationBan = true;
         this.playerCanStopGame = false;
         delay !== 0 ? message = delay : message = "go";
         if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
@@ -94,7 +98,7 @@ export const game = {
 
     resumeGame() {
         this.gameIsRunning = true;
-        this.cooldown = false;
+        this.animationBan = false;
         this.playerCanStopGame = true;
         background.startOrStopCanvas();
         blockageController.blockageMove(blockageController.blockagesArray);
@@ -118,10 +122,7 @@ export const game = {
     }
 }
 
-// игра начинается после загрузки всех элементов canvas
-// надо на это время закрыть экран (черный фон и надпись loading... с анимацией)
-// после запуска игры останавливать canvas до тех пор пока gameIsRunning: false,
-// останавливать canvas вместе с паузой
 // если canvas отключен, то игра включается сразу же без загрузки
-setTimeout(() => game.init(), 3200);
+// отключение canvas
+setTimeout(() => game.init(), game.gameLoadingSecondsCount);
 // game.init();

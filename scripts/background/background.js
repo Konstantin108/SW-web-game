@@ -7,13 +7,21 @@ import {utilities} from "./utilities.js";
 import {config} from "../config/config.js";
 import {game} from "../game.js";
 
-// создать чит для вывода объектов canvas
 export const background = {
     gameIsInitialized: false,
     timer: null,
+    galaxiesArray: null,
+    planetsArray: null,
+    slowStarsArray: null,
+    starsArray: null,
+    meteorsArray: null,
 
     startOrStopCanvas() {
         animate();
+    },
+
+    celestialBodiesInit() {
+        setBackgroundCelestialBodies();
     }
 }
 
@@ -42,20 +50,23 @@ let meteorsArray = createCelestialBody(Meteor, config.meteorsCount);
 animate();
 
 
-function createCelestialBody(bodyType, bodiesCount, specialValue = 0) {
+function createCelestialBody(bodyType, bodiesCount) {
     let bodiesArray = [];
     let x = null;
     let y = null;
 
     for (let i = 0; i < bodiesCount; i++) {
-        x = utilities.getRandomPosition(possiblePoitionsOnX.max, possiblePoitionsOnX.min, specialValue);
-        y = utilities.getRandomPosition(possiblePoitionsOnY.max, possiblePoitionsOnY.min, specialValue);
+        x = utilities.getRandomValue(possiblePoitionsOnX.max, possiblePoitionsOnX.min);
+        y = utilities.getRandomValue(possiblePoitionsOnY.max, possiblePoitionsOnY.min);
         bodiesArray.push(new bodyType(x, y, canvas.height, context, possiblePoitionsOnX, possiblePoitionsOnY));
     }
     return bodiesArray;
 }
 
 function animate() {
+    // отключение canvas
+    // return;
+
     if (background.gameIsInitialized) {
         if (!game.gameIsRunning) {
             clearTimeout(background.timer);
@@ -72,4 +83,12 @@ function animate() {
     meteorsArray.forEach(meteor => meteor.draw());
 
     background.timer = setTimeout(() => requestAnimationFrame(animate), 1);
+}
+
+function setBackgroundCelestialBodies() {
+    background.galaxiesArray = galaxiesArray;
+    background.planetsArray = planetsArray;
+    background.slowStarsArray = slowStarsArray;
+    background.starsArray = starsArray;
+    background.meteorsArray = meteorsArray;
 }

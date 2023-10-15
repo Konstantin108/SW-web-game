@@ -17,6 +17,7 @@ export const renderer = {
     bombBar: null,
     bonusShieldBar: null,
     bonusNewArrowTypeBar: null,
+    bossLivesBar: null,
     bonusShieldTimerId: null,
     bonusNewArrowTypeTimerId: null,
     cheatMessageRemoveTimerId: null,
@@ -46,6 +47,11 @@ export const renderer = {
         return templatePrinter.mapTemplatePrint(this.map);
     },
 
+    hideLoadingScreen() {
+        let loadingScreen = document.querySelector("#loadingScreen");
+        if (loadingScreen) loadingScreen.parentElement.removeChild(loadingScreen);
+    },
+
     renderPlayer() {
         let playerPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
         if (playerPosition.classList.contains("blockage")) playerPosition.classList.remove("blockage");
@@ -66,6 +72,7 @@ export const renderer = {
         let bossPosition = document.querySelector(`[data-x="${boss.x}"][data-y="${boss.y}"]`);
         bossPosition.classList.add("bossCreate");
         setTimeout(() => bossPosition.classList.remove("bossCreate"), 2000);
+        setTimeout(() => this.renderBossLivesBar(), 1800);
     },
 
     renderGetDamageBoss(selectorName, thisSelectorOverlay) {
@@ -73,6 +80,8 @@ export const renderer = {
         this.renderPriorityObjects(thisSelectorOverlay);
         bossPosition.classList.add(`${selectorName}`);
         setTimeout(() => this.clear(`${selectorName}`), 40);
+
+        this.renderBossLivesBar(true);
     },
 
     renderBossDyingRandomExplosions(bossExplosionsCount) {
@@ -111,6 +120,8 @@ export const renderer = {
             this.clear("boss");
         }, 10300);
         setTimeout(() => game.playerCanStopGame = true, 13000);
+
+        this.hideBossLivesBar();
     },
 
     renderBossShieldHit(shieldBody, hitData) {
@@ -136,6 +147,76 @@ export const renderer = {
                     setTimeout(() => bossShieldPosition.classList.remove("bossShieldOff"), 300);
                 }
             }
+        }
+    },
+
+    renderBossLivesBar(getDamage = false) {
+        let table = document.querySelector("table");
+        let bossLivesBarElement = document.querySelector("#bossLivesBar");
+        let shineSectorsBox = "";
+        let bossLivesBarShineSectorOnHide = "";
+        let bossLivesBarSmoothAppearance = "";
+
+        let remainder = config.bossLives % 20;
+        let shineSectorsCount = (config.bossLives - remainder) / 20;
+        if (remainder) shineSectorsCount += 1;
+
+        let livesLeftCount = config.bossLives - boss.lives;
+        let shineSectorsIsOff = Math.floor(livesLeftCount / 20);
+
+        let shineSectorsIsOn = shineSectorsCount - shineSectorsIsOff;
+
+        if (bossLivesBarElement) table.removeChild(bossLivesBarElement);
+
+        if (!getDamage) {
+            bossLivesBarShineSectorOnHide = "bossLivesBarShineSectorOnHide";
+            bossLivesBarSmoothAppearance = "bossLivesBarSmoothAppearance";
+        }
+
+        for (let i = 0; i < shineSectorsIsOn - 1; i++) {
+            shineSectorsBox += `<div class="bossLivesBarShineSectorOn ${bossLivesBarShineSectorOnHide}"></div>`;
+        }
+
+        shineSectorsBox += `<div class="bossLivesBarShineSectorOnLastElement bossLivesBarShineSectorOn ${bossLivesBarShineSectorOnHide}"></div>`;
+
+        for (let i = 0; i < shineSectorsIsOff; i++) {
+            shineSectorsBox += `<div class="bossLivesBarShineSectorOff"></div>`;
+        }
+
+        this.bossLivesBar = templatePrinter.bossLivesBarTemplatePrint(shineSectorsBox, bossLivesBarSmoothAppearance);
+        table.insertAdjacentHTML("afterbegin", this.bossLivesBar);
+
+        if (getDamage) this.renderGetDamageBossLivesBar();
+    },
+
+    renderGetDamageBossLivesBar() {
+        let lastShineSector = document.querySelector(".bossLivesBarShineSectorOnLastElement");
+
+        if (lastShineSector) {
+            lastShineSector.classList.remove("bossLivesBarShineSectorOn");
+            lastShineSector.classList.add("bossLivesBarShineSectorHit");
+            setTimeout(() => {
+                lastShineSector.classList.remove("bossLivesBarShineSectorHit");
+                lastShineSector.classList.add("bossLivesBarShineSectorOn");
+            }, 100);
+        }
+    },
+
+    hideBossLivesBar() {
+        let table = document.querySelector("table");
+        let bossLivesBarElement = document.querySelector("#bossLivesBar");
+        let bossLivesBarShineSectorOn = document.querySelectorAll(".bossLivesBarShineSectorOn");
+
+        if (bossLivesBarShineSectorOn) {
+            bossLivesBarShineSectorOn.forEach(elem => {
+                elem.classList.remove("bossLivesBarShineSectorOn");
+                elem.classList.add("bossLivesBarShineSectorOff");
+            });
+        }
+
+        if (bossLivesBarElement) {
+            setTimeout(() => bossLivesBarElement.classList.add("bossLivesBarHide"), 6800);
+            setTimeout(() => table.removeChild(bossLivesBarElement), 7000);
         }
     },
 

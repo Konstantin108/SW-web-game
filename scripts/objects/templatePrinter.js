@@ -209,5 +209,17 @@ export const templatePrinter = {
                         ${data}
                     </div>
                 </div>`;
+    },
+
+    bossLivesBarTemplatePrint(sectors, extraClass) {
+        return `<div id="bossLivesBar" class="${extraClass}">
+                    <img src="../../images/disk.png" alt="disk" class="disk">
+                    <div id="bossLivesBarMetalElement">
+                        <div id="bossLivesBarBlackElement">
+                            ${sectors}
+                        </div>  
+                    </div>
+                    <img src="../../images/disk.png" alt="disk" class="disk">                            
+                </div>`;
     }
 }

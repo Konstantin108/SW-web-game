@@ -1,6 +1,5 @@
 import {utilities} from "../utilities.js";
 
-// вынести типы тел
 export class Planet {
     constructor(x, y, canvasHeight, context, possiblePoitionsOnX, possiblePoitionsOnY) {
         this.x = x;
@@ -11,7 +10,7 @@ export class Planet {
         this.imageName = utilities.getRandomElementInArray(this.imageNames);
 
         this.image = new Image();
-        this.image.src = `../images/${this.type}-${this.imageName}.png`;
+        this.image.src = `./images/${this.type}-${this.imageName}.png`;
         this.imageWidth = this.size;
         this.imageHeight = this.size;
 
@@ -30,31 +29,31 @@ export class Planet {
     ];
     maxSize = 1000;
     minSize = 500;
-    chance = 10000;
-    chanceOut = 5;
+    appearanceChance = 30;
 
-    size = Math.floor(Math.random() * (this.maxSize - this.minSize + 1)) + this.minSize;
+    size = utilities.getRandomValue(this.minSize, this.maxSize);
 
     speedLimit = 50;
     speed = this.speedLimit / this.size;
+    // speed = 10;
 
     draw() {
-        if (this.y === -this.size && (Math.random() * this.chance).toFixed(0) < this.chance - this.chanceOut) return;
+        if (this.y === -this.size && utilities.randomAppearanceCelestialBody(this.appearanceChance)) return;
 
         this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
 
         if (this.y > this.canvasHeight) {
-            this.x = Math.floor(Math.random() * (this.possiblePoitionsOnXMax - this.possiblePoitionsOnXMin + 1)) + this.possiblePoitionsOnXMin;
-
-            this.size = Math.floor(Math.random() * (this.maxSize - this.minSize + 1)) + this.minSize;
+            this.x = utilities.getRandomValue(this.possiblePoitionsOnXMin, this.possiblePoitionsOnXMax);
+            this.size = utilities.getRandomValue(this.minSize, this.maxSize);
             this.y = -this.size;
 
             this.speed = this.speedLimit / this.size;
+            // this.speed = 10;
 
             this.imageName = utilities.getRandomElementInArray(this.imageNames);
 
             this.image = new Image();
-            this.image.src = `../images/${this.type}-${this.imageName}.png`;
+            this.image.src = `./images/${this.type}-${this.imageName}.png`;
             this.imageWidth = this.size;
             this.imageHeight = this.size;
 

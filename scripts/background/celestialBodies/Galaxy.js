@@ -10,7 +10,7 @@ export class Galaxy {
         this.imageName = utilities.getRandomElementInArray(this.imageNames);
 
         this.image = new Image();
-        this.image.src = `../images/${this.type}-${this.imageName}.png`;
+        this.image.src = `./images/${this.type}-${this.imageName}.png`;
         this.imageWidth = this.size;
         this.imageHeight = this.size;
 
@@ -34,29 +34,26 @@ export class Galaxy {
     minSize = 1800;
     // maxSize = 500;
     // minSize = 460;
-    chance = 10000;
-    chanceOut = 5;
-    // chanceOut = 9900;
-    // speed = 4;
+    appearanceChance = 12;
     speed = .01;
+    // speed = 4;
 
-    size = Math.floor(Math.random() * (this.maxSize - this.minSize + 1)) + this.minSize;
+    size = utilities.getRandomValue(this.minSize, this.maxSize);
 
     draw() {
-        if (this.y === -this.size && (Math.random() * this.chance).toFixed(0) < this.chance - this.chanceOut) return;
+        if (this.y === -this.size && utilities.randomAppearanceCelestialBody(this.appearanceChance)) return;
 
         this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
 
         if (this.y > this.canvasHeight) {
-            this.x = Math.floor(Math.random() * (this.possiblePoitionsOnXMax - this.possiblePoitionsOnXMin + 1)) + this.possiblePoitionsOnXMin;
-
-            this.size = Math.floor(Math.random() * (this.maxSize - this.minSize + 1)) + this.minSize;
+            this.x = utilities.getRandomValue(this.possiblePoitionsOnXMin, this.possiblePoitionsOnXMax);
+            this.size = utilities.getRandomValue(this.minSize, this.maxSize);
             this.y = -this.size;
 
             this.imageName = utilities.getRandomElementInArray(this.imageNames);
 
             this.image = new Image();
-            this.image.src = `../images/${this.type}-${this.imageName}.png`;
+            this.image.src = `./images/${this.type}-${this.imageName}.png`;
             this.imageWidth = this.size;
             this.imageHeight = this.size;
 

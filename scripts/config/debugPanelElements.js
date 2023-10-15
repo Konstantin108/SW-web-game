@@ -141,6 +141,13 @@ export const debugPanelElements = {
                 customClass: null,
                 message: null,
                 description: "отключить отсчёт перед запуском игры"
+            },
+            {
+                name: "background",
+                type: "button",
+                customClass: null,
+                message: "background:",
+                description: "вывести background в консоль"
             }
         ];
     }

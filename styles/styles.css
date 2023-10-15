@@ -22,6 +22,48 @@ body {
   height: 100%;
 }
 
+#loadingScreen {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loadingScreenTitle {
+  color: lawngreen;
+  font-style: italic;
+  font-size: 110px;
+  text-transform: uppercase;
+}
+
+.dot {
+  opacity: 0;
+  transition: 0.3s;
+}
+
+#dotFirst {
+  animation: appearance 1s infinite;
+}
+
+#dotSecond {
+  animation: appearance 1s 0.2s infinite;
+}
+
+#dotThird {
+  animation: appearance 1s 0.3s infinite;
+}
+
+@keyframes appearance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 #container {
   position: relative;
 }
@@ -46,7 +88,8 @@ td {
   color: red;
 }
 
-.rubrumBackground {
+.rubrumBackground,
+.bossLivesBarShineSectorOff {
   background-color: red;
 }
 
@@ -70,7 +113,8 @@ td {
   color: lawngreen;
 }
 
-.viridisBackground {
+.viridisBackground,
+.bossLivesBarShineSectorOn {
   background-color: lawngreen;
 }
 
@@ -110,7 +154,8 @@ td {
   color: white;
 }
 
-.albumBackground {
+.albumBackground,
+.bossLivesBarShineSectorHit {
   background-color: white;
 }
 
@@ -519,6 +564,76 @@ td {
     opacity: 0;
   }
 }
+#bossLivesBar {
+  width: 570px;
+  position: absolute;
+  z-index: 1;
+  left: 6px;
+  top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+#bossLivesBarMetalElement {
+  display: flex;
+  align-items: center;
+  background-image: url("../images/background-metal.jpg");
+  background-color: dimgrey;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#bossLivesBarBlackElement {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.bossLivesBarShineSectorOn,
+.bossLivesBarShineSectorOff,
+.bossLivesBarShineSectorHit {
+  width: 6px;
+  height: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.disk {
+  width: 14px;
+  height: 40px;
+  scale: 1.3;
+}
+
+.bossLivesBarShineSectorOnHide {
+  animation: bossLivesBarShineSectorOnShow 1s;
+}
+
+@keyframes bossLivesBarShineSectorOnShow {
+  from {
+    width: 0;
+    height: 0;
+  }
+  to {
+    width: 6px;
+    height: 20px;
+  }
+}
+.bossLivesBarSmoothAppearance {
+  animation: appearance 0.5s;
+}
+
+.bossLivesBarHide {
+  animation: fromTopOut 1s;
+}
+
 .blockage,
 .blockageWhite,
 .blockageBull,
@@ -814,10 +929,10 @@ td {
 }
 
 .cheatConsoleIn {
-  animation: cheatConsoleIn 0.5s;
+  animation: fromTopIn 0.5s;
 }
 
-@keyframes cheatConsoleIn {
+@keyframes fromTopIn {
   from {
     transform: translate(0, -176px);
   }
@@ -826,10 +941,10 @@ td {
   }
 }
 .cheatConsoleOut {
-  animation: cheatConsoleOut 0.5s;
+  animation: fromTopOut 0.5s;
 }
 
-@keyframes cheatConsoleOut {
+@keyframes fromTopOut {
   from {
     transform: translate(0, 0);
   }

@@ -40,6 +40,7 @@ export const boss = {
         "player",
         "player-drill",
         "player-trinity",
+        "invincibility",
         "blockage",
         "blockageWhite",
         "blockageBull",
@@ -264,12 +265,12 @@ export const boss = {
         renderer.renderTeleportation("out");
         player.x = helperController.getCenterMapOnX();
         player.y = config.mapSizeY;
-        if (player.invincibility) renderer.clear("invincibility");
         renderer.clear(player.selectorName);
         if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
+        if (player.invincibility) renderer.clear("invincibility");
         setTimeout(() => {
             renderer.renderTeleportation("in");
             renderer.renderPlayer();
         }, 500);
-    },
+    }
 }

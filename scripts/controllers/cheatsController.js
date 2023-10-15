@@ -337,7 +337,7 @@ export const cheatsController = {
     },
 
     callBoss(paramName) {
-        if (game.cooldown) return;
+        if (game.animationBan) return;
         let delay = 0;
 
         game.playerCanStopGame = false;
@@ -355,7 +355,7 @@ export const cheatsController = {
     },
 
     killBoss() {
-        if (game.cooldown) return;
+        if (game.animationBan) return;
         if (!boss.alive) return;
         let delay = 0;
 
