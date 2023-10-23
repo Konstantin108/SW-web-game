@@ -8,6 +8,7 @@ import {game} from "../game.js";
 import {progressController} from "../controllers/progressController.js";
 import {pause} from "./pause.js";
 import {background} from "../background/background.js";
+import {tooltipController} from "../controllers/tooltipController.js";
 
 export const debugPanel = {
     cheats: config.cheats,
@@ -70,11 +71,14 @@ export const debugPanel = {
             case "progressController":
                 this.objectsInfoShow(element, progressController);
                 break;
-            case "pause":
-                this.objectsInfoShow(element, pause);
+            case "tooltipController":
+                this.objectsInfoShow(element, tooltipController);
                 break;
             case "background":
                 this.objectsInfoShow(element, background);
+                break;
+            case "pause":
+                this.objectsInfoShow(element, pause);
                 break;
             case "cheatsInfo":
                 cheatsController.cheatsInfoForPlayer();

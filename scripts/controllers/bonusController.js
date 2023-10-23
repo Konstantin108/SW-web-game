@@ -4,8 +4,10 @@ import {config} from "../config/config.js";
 import {player} from "../objects/player.js";
 import {renderer} from "../objects/renderer.js";
 import {debugPanel} from "../objects/debugPanel.js";
+import {tooltipController} from "./tooltipController.js";
 
 export const bonusController = {
+    useBombBtnShowDelaySeconds: config.useBombBtnShowDelaySeconds,
     bonusesArray: [],
     bonusAppearanceListenerTimerId: null,
 
@@ -68,18 +70,21 @@ export const bonusController = {
     },
 
     getLife() {
-        if (player.lives < config.lives) {
-            player.lives += 1;
-            renderer.renderStatusBar();
-            renderer.renderHeartScaleAnimation();
-        }
+        if (player.lives >= config.lives) return;
+        player.lives += 1;
+        renderer.renderStatusBar();
+        renderer.renderHeartScaleAnimation();
     },
 
     getBomb() {
-        if (player.bombsCount < config.maxBombsCount) {
-            player.bombsCount += 1;
-            renderer.renderBombBar();
-        }
+        if (player.bombsCount >= config.maxBombsCount) return;
+        let useBombBtnGameControlObject = helperController.getObjectByName(config.gameControl, "useBombBtn");
+
+        player.bombsCount += 1;
+        renderer.renderBombBar();
+        tooltipController.tooltipCreateTimerIdsArray.push(setTimeout(() => {
+            tooltipController.tooltipCreateAndDestroy(useBombBtnGameControlObject);
+        }, this.useBombBtnShowDelaySeconds));
     },
 
     bonusMove() {

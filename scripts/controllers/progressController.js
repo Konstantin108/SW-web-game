@@ -7,6 +7,7 @@ import {player} from "../objects/player.js";
 import {bonusController} from "./bonusController.js";
 import {boss} from "../objects/boss.js";
 import {explosion} from "../objects/explosion.js";
+import {tooltipController} from "./tooltipController.js";
 
 export const progressController = {
     levels: config.levels,
@@ -25,6 +26,7 @@ export const progressController = {
     shipDestroyedCounterForSuperAbilityCharge: 0,
     superAbilityCharge: 0,
     superAbilityIsCharged: config.superAbilityIsCharged,
+    useSuperAbilityBtnShowDelaySeconds: config.useSuperAbilityBtnShowDelaySeconds,
     playerCanEnterNewLevel: true,
     bossCalled: false,
     bossKilled: false,
@@ -86,6 +88,7 @@ export const progressController = {
 
     killBoss(bossDestroyedReward, hitCoordinates) {
         if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward);
+        boss.bossAnimationIsRunningNow = true;
         game.playerCanStopGame = false;
         this.bossDestroyed += 1;
         renderer.renderStatusBar();
@@ -100,6 +103,7 @@ export const progressController = {
             this.bossKilled = true;
             this.bossCalled = false;
             this.bossExist = false;
+            boss.bossAnimationIsRunningNow = false;
         }, 10500);
     },
 
@@ -114,15 +118,23 @@ export const progressController = {
 
     superAbilityCharging() {
         if (player.superAbilityIsActivated) return;
+        let useSuperAbilityBtnGameControlObject = helperController.getObjectByName(config.gameControl, "useSuperAbilityBtn");
+
         this.shipDestroyedCounterForSuperAbilityCharge += 1;
         if (this.shipDestroyedCounterForSuperAbilityCharge % 10 === 0) {
             this.superAbilityCharge += 1;
             renderer.renderSuperAbilityBar();
+            tooltipController.tooltipCreateTimerIdsArray.push(setTimeout(() => {
+                tooltipController.tooltipCreateAndDestroy(useSuperAbilityBtnGameControlObject);
+            }, this.useSuperAbilityBtnShowDelaySeconds));
         }
         if (this.superAbilityCharge === this.superAbilityIsCharged) {
             player.superAbilityIsActivated = true;
             this.shipDestroyedCounterForSuperAbilityCharge = 0;
             this.superAbilityCharge = 0;
+            tooltipController.tooltipCreateTimerIdsArray.push(setTimeout(() => {
+                tooltipController.tooltipCreateAndDestroy(useSuperAbilityBtnGameControlObject);
+            }, this.useSuperAbilityBtnShowDelaySeconds));
         }
     },
 
@@ -141,7 +153,7 @@ export const progressController = {
 
         game.playerCanStopGame = false;
         renderer.renderInCenterTableNotify(message);
-        helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
+        helperController.removeAllIntervalTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
         setTimeout(() => game.playerCanStopGame = true, playerCantStopGameTime);
@@ -150,7 +162,8 @@ export const progressController = {
     addBossToLevel() {
         if (!game.gameIsRunning) return;
 
-        setTimeout(() => renderer.renderInCenterTableNotify("BOSS"), 1000);
+        boss.bossAnimationIsRunningNow = true;
+        setTimeout(() => renderer.renderInCenterTableNotify("boss"), 1000);
         setTimeout(() => {
             explosion.explode(false);
             bonusController.destroyAllBonuses();

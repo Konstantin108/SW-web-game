@@ -36,6 +36,7 @@ export const boss = {
     shieldIsOnSecondsCount: config.bossShieldIsOnSecondsCount,
     shieldIsOffSecondsCount: config.bossShieldIsOffSecondsCount,
     invincibility: true,
+    bossAnimationIsRunningNow: false,
     thisSelectorOverlay: [
         "player",
         "player-drill",
@@ -76,6 +77,7 @@ export const boss = {
             player.canMove = true;
             this.invincibility = false;
             this.alive = true;
+            this.bossAnimationIsRunningNow = false;
         }, 2000);
         setTimeout(() => this.onShield(), 1500);
     },

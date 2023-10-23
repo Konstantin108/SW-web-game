@@ -12,9 +12,9 @@ body
 body
   // отключение canvas
   background-color: black
+  //background-color: #453d4c
   //background-image: url("../images/background-space.jpg")
   //background-repeat: no-repeat
-  //background-color: #453d4c
 
 // экран загрузки и wrapper
 
@@ -499,6 +499,8 @@ td
   display: flex
   align-items: center
   background-image: url("../images/background-metal.jpg")
+  background-size: 100%
+  background-repeat: no-repeat
   background-color: dimgrey
   padding-left: 6px
   padding-right: 6px
@@ -903,6 +905,12 @@ td
 
 // стили меню паузы и экрана статистики
 
+.pauseSideOptionBlock,
+.pauseMenuSideBorder,
+.pauseMenuSideBottomBracing,
+.pauseMenuHorizontalBorder
+  background-color: saddlebrown
+
 #pauseMenuBackground
   position: absolute
   z-index: 3
@@ -940,10 +948,10 @@ td
   display: flex
   align-items: center
 
-.menuContainerAdd
-  animation: menuContainerAdd .2s
+.pauseElementAdd
+  animation: pauseElementAdd .2s
 
-@keyframes menuContainerAdd
+@keyframes pauseElementAdd
   from
     scale: .98
     opacity: 0
@@ -951,10 +959,10 @@ td
     scale: 1
     opacity: 1
 
-.menuContainerRemove
-  animation: menuContainerRemove .2s
+.pauseElementRemove
+  animation: pauseElementRemove .2s
 
-@keyframes menuContainerRemove
+@keyframes pauseElementRemove
   from
     scale: 1
     opacity: 1
@@ -968,7 +976,6 @@ td
   align-items: end
 
 .pauseSideOptionBlock
-  background-color: saddlebrown
   background-image: url("../images/background-rusty-iron2.jpg")
   width: 80px
   height: 70px
@@ -1027,7 +1034,6 @@ td
     opacity: 0
 
 .pauseMenuSideBorder
-  background-color: saddlebrown
   background-image: url("../images/background-rusty-iron2.jpg")
   width: 22px
   height: 120px
@@ -1037,7 +1043,6 @@ td
   height: 265px
 
 .pauseMenuSideBottomBracing
-  background-color: saddlebrown
   background-image: url("../images/background-rusty-iron2.jpg")
   width: 34px
   height: 51px
@@ -1045,7 +1050,6 @@ td
 
 .pauseMenuHorizontalBorder
   height: 15px
-  background-color: saddlebrown
   background-image: url("../images/background-rusty-iron2.jpg")
 
 .pauseMenuHorizontalBorderBigSize
@@ -1132,3 +1136,170 @@ td
   to
     transform: rotate(0)
     opacity: 1
+
+// стили tooltip
+
+#tooltipControlPanel,
+#circle
+  background-color: saddlebrown
+
+.tooltip
+  position: absolute
+  z-index: 2
+  padding: 12px
+  background-color: rgba(0, 0, 0, .5)
+  border: 1px solid #b6926c
+  border-radius: 6px
+  transition: .2s
+
+.oneKeyboardBlockGrid
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+
+.keyboardsBlockFlexColumn
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.keyboardsBlockFlex
+  display: flex
+  align-items: center
+
+.tooltipAnimationIn
+  animation: tooltipIn .2s
+
+.tooltipAnimationOut
+  animation: tooltipOut .2s
+
+.tooltipElement
+  margin: 6px
+
+.tooltipElementText
+  margin-left: 6px
+  margin-right: 6px
+  margin-top: 18px
+  margin-bottom: 6px
+
+.keyboardLabelDiv
+  display: flex
+  align-items: end
+
+.keyboardLabel
+  text-transform: uppercase
+  margin-right: 10px
+  font-size: 20px
+
+@keyframes tooltipIn
+  from
+    scale: .9
+    opacity: 0
+  to
+    scale: 1
+    opacity: 1
+
+@keyframes tooltipOut
+  from
+    scale: 1
+    opacity: 1
+  to
+    scale: .9
+    opacity: 0
+
+#possibleDirections
+  left: -30%
+  top: 20%
+
+#pauseBtnsArray
+  right: -30%
+  top: 11%
+
+#shootBtnsArray
+  right: -56%
+  top: 29%
+
+#useSuperAbilityBtn
+  left: -44%
+  top: 55%
+
+#useBombBtn
+  right: -50%
+  top: 56%
+
+#tooltipControlPanel
+  background-image: url("../images/background-rusty-iron.jpg")
+  background-size: 100%
+  background-repeat: no-repeat
+  position: fixed
+  left: 21px
+  bottom: 21px
+  z-index: 4
+  padding: 3px
+  border-radius: 8px
+
+.tooltipControlPanelIn
+  animation: fromBottomIn .2s
+
+@keyframes fromBottomIn
+  from
+    transform: translate(0, 120px)
+  to
+    transform: translate(0, 0)
+
+.tooltipControlPanelOut
+  animation: fromBottomOut .2s
+
+@keyframes fromBottomOut
+  from
+    transform: translate(0, 0)
+  to
+    transform: translate(0, 120px)
+
+#tooltipControlPanelBox
+  display: flex
+
+#circle
+  background-image: url("../images/background-rusty-iron2.jpg")
+  border-radius: 100px
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 36px
+  height: 36px
+  scale: 1.7
+  padding: 3px
+
+#circleDisplay
+  background-color: black
+  border-radius: 100px
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 33px
+  height: 33px
+  scale: 1.1
+
+#bulbOn,
+#bulbOff
+  font-size: 20px
+
+#bulbOn
+  color: yellow
+
+#bulbOff
+  color: grey
+
+.hideBulb
+  display: none !important
+
+#tooltipControlPanelBtn
+  font-family: Ubuntu
+  font-size: 20px
+  background-color: black
+  border: none
+  cursor: pointer
+  border-radius: 8px
+  width: 270px
+  padding-left: 25px
+  padding-right: 20px
+  padding-top: 5px
+  padding-bottom: 7px

@@ -52,6 +52,20 @@ export const debugPanelElements = {
                 description: "вывести progressController в консоль"
             },
             {
+                name: "tooltipController",
+                type: "button",
+                customClass: null,
+                message: "tooltipController:",
+                description: "вывести tooltipController в консоль"
+            },
+            {
+                name: "background",
+                type: "button",
+                customClass: null,
+                message: "background:",
+                description: "вывести background в консоль"
+            },
+            {
                 name: "pause",
                 type: "button",
                 customClass: null,
@@ -141,13 +155,6 @@ export const debugPanelElements = {
                 customClass: null,
                 message: null,
                 description: "отключить отсчёт перед запуском игры"
-            },
-            {
-                name: "background",
-                type: "button",
-                customClass: null,
-                message: "background:",
-                description: "вывести background в консоль"
             }
         ];
     }

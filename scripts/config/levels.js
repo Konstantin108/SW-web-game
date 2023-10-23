@@ -37,7 +37,7 @@ export const levels = {
                         name: "blockageBull",
                         chanceFrom: 91,
                         chanceTo: 100,
-                    },
+                    }
                 },
                 bossExist: false
             },
@@ -59,7 +59,7 @@ export const levels = {
                         name: "blockageBull",
                         chanceFrom: 86,
                         chanceTo: 100,
-                    },
+                    }
                 },
                 bossExist: false
             },
@@ -81,7 +81,7 @@ export const levels = {
                         name: "blockageBull",
                         chanceFrom: 81,
                         chanceTo: 100,
-                    },
+                    }
                 },
                 bossExist: false
             },
@@ -103,7 +103,7 @@ export const levels = {
                         name: "blockageBull",
                         chanceFrom: 76,
                         chanceTo: 100,
-                    },
+                    }
                 },
                 bossExist: true
             },

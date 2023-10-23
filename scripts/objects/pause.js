@@ -7,7 +7,7 @@ import {helperController} from "../controllers/helperController.js";
 export const pause = {
     menuStructure: config.pauseMenuStructure,
     gameControl: config.gameControl,
-    animationRunningNow: false,
+    animationIsRunningNow: false,
     activeMenuSector: null,
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
@@ -16,7 +16,7 @@ export const pause = {
         let pauseBtnsArray = helperController.getObjectByName(this.gameControl, "pauseBtnsArray").btns;
 
         document.addEventListener("keydown", function (event) {
-            if (pause.animationRunningNow) return;
+            if (pause.animationIsRunningNow) return;
             if (game.gameOver) return;
             if (!pauseBtnsArray.includes(event.code)) return;
             pause.activeMenuSector = pause.menuStructure[0];
@@ -25,7 +25,7 @@ export const pause = {
     },
 
     showOrHidePauseMenu(resumeGameForce = false) {
-        if (pause.animationRunningNow) return;
+        if (pause.animationIsRunningNow) return;
 
         let delay = 1500;
 
@@ -41,8 +41,8 @@ export const pause = {
             this.activeMenuSector = null;
         }
 
-        this.animationRunningNow = true;
-        setTimeout(() => this.animationRunningNow = false, delay);
+        this.animationIsRunningNow = true;
+        setTimeout(() => this.animationIsRunningNow = false, delay);
         renderer.renderPauseMenu();
     },
 

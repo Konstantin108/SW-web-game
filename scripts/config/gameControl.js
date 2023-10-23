@@ -1,4 +1,120 @@
 export const gameControl = {
+    btnsSrc: new Map(
+        [
+            [
+                "KeyW",
+                {
+                    label: null,
+                    src: "./images/w.png",
+                    alt: "w.png"
+                }
+            ],
+            [
+                "KeyA",
+                {
+                    label: null,
+                    src: "./images/a.png",
+                    alt: "a.png"
+                }
+            ],
+            [
+                "KeyS",
+                {
+                    label: null,
+                    src: "./images/s.png",
+                    alt: "s.png"
+                }
+            ],
+            [
+                "KeyD",
+                {
+                    label: null,
+                    src: "./images/d.png",
+                    alt: "d.png"
+                }
+            ],
+            [
+                "ArrowUp",
+                {
+                    label: null,
+                    src: "./images/up.png",
+                    alt: "up.png"
+                }
+            ],
+            [
+                "ArrowLeft",
+                {
+                    label: null,
+                    src: "./images/left.png",
+                    alt: "left.png"
+                }
+            ],
+            [
+                "ArrowDown",
+                {
+                    label: null,
+                    src: "./images/down.png",
+                    alt: "down.png"
+                }
+            ],
+            [
+                "ArrowRight",
+                {
+                    label: null,
+                    src: "./images/right.png",
+                    alt: "right.png"
+                }
+            ],
+            [
+                "Numpad0",
+                {
+                    label: "num",
+                    src: "./images/null.png",
+                    alt: "null.png"
+                }
+            ],
+            [
+                "Space",
+                {
+                    label: null,
+                    src: "./images/space.png",
+                    alt: "space.png"
+                }
+            ],
+            [
+                "ControlLeft",
+                {
+                    label: "left",
+                    src: "./images/ctrl.png",
+                    alt: "ctrl.png"
+                }
+            ],
+            [
+                "ControlRight",
+                {
+                    label: "right",
+                    src: "./images/ctrl.png",
+                    alt: "ctrl.png"
+                }
+            ],
+            [
+                "Escape",
+                {
+                    label: null,
+                    src: "./images/esc.png",
+                    alt: "esc.png"
+                }
+            ],
+            [
+                "Pause",
+                {
+                    label: null,
+                    src: "./images/pause.png",
+                    alt: "pause.png"
+                }
+            ]
+        ]
+    ),
 
     // возможно добавить пункт для вывода игроку в разделе "управление и подсказки"
     setGameControl() {
@@ -23,6 +139,29 @@ export const gameControl = {
                     "KeyS",
                     "KeyW"
                 ],
+                tooltip: {
+                    keyboardsBlockClass: "",
+                    gridBlock: true,
+                    keyboards: [
+                        {
+                            units: [
+                                this.btnsSrc.get("KeyW"),
+                                this.btnsSrc.get("KeyA"),
+                                this.btnsSrc.get("KeyS"),
+                                this.btnsSrc.get("KeyD")
+                            ]
+                        },
+                        {
+                            units: [
+                                this.btnsSrc.get("ArrowUp"),
+                                this.btnsSrc.get("ArrowLeft"),
+                                this.btnsSrc.get("ArrowDown"),
+                                this.btnsSrc.get("ArrowRight")
+                            ]
+                        }
+                    ],
+                    text: "перемещение",
+                },
                 description: "перемещение корабля игрока на карте"
             },
             {
@@ -32,6 +171,23 @@ export const gameControl = {
                     "Numpad5",
                     "Numpad0",
                 ],
+                tooltip: {
+                    keyboardsBlockClass: "keyboardsBlockFlexColumn",
+                    gridBlock: false,
+                    keyboards: [
+                        {
+                            units: [
+                                this.btnsSrc.get("Numpad0")
+                            ]
+                        },
+                        {
+                            units: [
+                                this.btnsSrc.get("Space")
+                            ]
+                        }
+                    ],
+                    text: "выстрел",
+                },
                 description: "выстрел"
             },
             {
@@ -39,6 +195,18 @@ export const gameControl = {
                 btns: [
                     "ControlLeft"
                 ],
+                tooltip: {
+                    keyboardsBlockClass: "keyboardsBlockFlexColumn",
+                    gridBlock: false,
+                    keyboards: [
+                        {
+                            units: [
+                                this.btnsSrc.get("ControlLeft")
+                            ]
+                        }
+                    ],
+                    text: "суперспособность",
+                },
                 description: "использовать суперспособность"
             },
             {
@@ -46,6 +214,18 @@ export const gameControl = {
                 btns: [
                     "ControlRight"
                 ],
+                tooltip: {
+                    keyboardsBlockClass: "keyboardsBlockFlexColumn",
+                    gridBlock: false,
+                    keyboards: [
+                        {
+                            units: [
+                                this.btnsSrc.get("ControlRight")
+                            ]
+                        }
+                    ],
+                    text: "использовать бомбу",
+                },
                 description: "использовать бомбу"
             },
             {
@@ -54,6 +234,23 @@ export const gameControl = {
                     "Escape",
                     "Pause"
                 ],
+                tooltip: {
+                    keyboardsBlockClass: "keyboardsBlockFlex",
+                    gridBlock: false,
+                    keyboards: [
+                        {
+                            units: [
+                                this.btnsSrc.get("Escape")
+                            ]
+                        },
+                        {
+                            units: [
+                                this.btnsSrc.get("Pause")
+                            ]
+                        }
+                    ],
+                    text: "остановить игру",
+                },
                 description: "вызов меню паузы"
             },
             {
@@ -61,6 +258,7 @@ export const gameControl = {
                 btns: [
                     "Backquote"
                 ],
+                tooltip: null,
                 description: "вызов меню ввода читов"
             },
             {
@@ -68,6 +266,7 @@ export const gameControl = {
                 btns: [
                     "Slash"
                 ],
+                tooltip: null,
                 description: "вызов дебаг-панели"
             }
         ];

@@ -28,6 +28,12 @@ export const helperController = {
         return result;
     },
 
+    getPropByNameAndReset(object, value) {
+        for (let key in object) {
+            if (key.includes(value)) object[key] = false;
+        }
+    },
+
     getRandomCoordinates(arrayX, y) {
         let possibleOnXArray = [];
         let possibleOnYArray = [];
@@ -44,10 +50,12 @@ export const helperController = {
         }
     },
 
-    removeAllTimers(timersArray) {
-        for (let timer = 0; timer < timersArray.length; timer++) {
-            clearInterval(timersArray[timer]);
-        }
+    removeAllIntervalTimers(timerIdsArray) {
+        if (timerIdsArray) timerIdsArray.forEach(timerId => clearInterval(timerId));
+    },
+
+    removeAllTimeoutTimers(timerIdsArray) {
+        if (timerIdsArray) timerIdsArray.forEach(timerId => clearTimeout(timerId));
     },
 
     addItemToArray(array, item) {
@@ -73,6 +81,21 @@ export const helperController = {
 
     getCenterMapOnX() {
         return config.mapSizeX % 2 === 0 ? config.mapSizeX / 2 : (config.mapSizeX - 1) / 2 + 1;
+    },
+
+    getRandomElementInArray(array) {
+        let index = Math.floor(Math.random() * array.length);
+        return array[index];
+    },
+
+    randomAppearanceCelestialBody(appearanceChance) {
+        return (Math.random() * 10000).toFixed(0) < 10000 - appearanceChance;
+    },
+
+    getRandomDirectionOfRotation(chance) {
+        let unit = .001;
+        if (this.randomEvent(chance)) unit = -.001;
+        return unit;
     },
 
     getCenterMapOnY() {

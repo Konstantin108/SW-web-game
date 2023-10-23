@@ -170,7 +170,7 @@ export const templatePrinter = {
 
     pauseMenuPrint() {
         return `<div id="pauseMenuBackground">
-                    <div id="pauseMenuContainer" class="menuContainerAdd">
+                    <div id="pauseMenuContainer" class="pauseElementAdd">
                         <div id="pauseMenuLeftBlock">
                             <div class="pauseSideOptionBlock">
                                 <div id="pauseLeftOptionDisplay"></div>
@@ -213,13 +213,34 @@ export const templatePrinter = {
 
     bossLivesBarTemplatePrint(sectors, extraClass) {
         return `<div id="bossLivesBar" class="${extraClass}">
-                    <img src="../../images/disk.png" alt="disk" class="disk">
+                    <img src="../../images/disk.png" alt="disk.png" class="disk">
                     <div id="bossLivesBarMetalElement">
                         <div id="bossLivesBarBlackElement">
                             ${sectors}
                         </div>  
                     </div>
-                    <img src="../../images/disk.png" alt="disk" class="disk">                            
+                    <img src="../../images/disk.png" alt="disk.png" class="disk">                            
+                </div>`;
+    },
+
+    tooltipTemplatePrint(element, name, tooltipClasses) {
+        return `<div id="${name}" class="${tooltipClasses}">
+                    ${element}
+                </div>`;
+    },
+
+    tooltipControlPanelTemplatePrint(text, bulb, animationClass) {
+        return `<div id="tooltipControlPanel" class="${animationClass}">
+                    <div id="tooltipControlPanelBox">
+                        <div id="circle">
+                            <div id="circleDisplay">
+                                ${bulb}
+                            </div>
+                        </div>
+                        <button id="tooltipControlPanelBtn" class="${config.menuColor}">
+                            ${text} подсказки
+                        </button>
+                    </div>
                 </div>`;
     }
 }

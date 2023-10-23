@@ -3,9 +3,9 @@ import {Star} from "./celestialBodies/Star.js";
 import {SlowStar} from "./celestialBodies/SlowStar.js";
 import {Meteor} from "./celestialBodies/Meteor.js";
 import {Galaxy} from "./celestialBodies/Galaxy.js";
-import {utilities} from "./utilities.js";
 import {config} from "../config/config.js";
 import {game} from "../game.js";
+import {helperController} from "../controllers/helperController.js";
 
 export const background = {
     gameIsInitialized: false,
@@ -56,8 +56,8 @@ function createCelestialBody(bodyType, bodiesCount) {
     let y = null;
 
     for (let i = 0; i < bodiesCount; i++) {
-        x = utilities.getRandomValue(possiblePoitionsOnX.max, possiblePoitionsOnX.min);
-        y = utilities.getRandomValue(possiblePoitionsOnY.max, possiblePoitionsOnY.min);
+        x = helperController.getRandomInt(possiblePoitionsOnX.max, possiblePoitionsOnX.min);
+        y = helperController.getRandomInt(possiblePoitionsOnY.max, possiblePoitionsOnY.min);
         bodiesArray.push(new bodyType(x, y, canvas.height, context, possiblePoitionsOnX, possiblePoitionsOnY));
     }
     return bodiesArray;

@@ -14,6 +14,7 @@ import {localStorageController} from "./controllers/localStorageController.js";
 import {debugPanel} from "./objects/debugPanel.js";
 import {pause} from "./objects/pause.js";
 import {background} from "./background/background.js";
+import {tooltipController} from "./controllers/tooltipController.js";
 
 export const game = {
     gameLoadingSecondsCount: config.gameLoadingSecondsCount,
@@ -59,6 +60,7 @@ export const game = {
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
+        tooltipController.showMainGameControlTooltips(true);
         player.move();
         player.shoot();
         player.useBomb();
@@ -90,7 +92,9 @@ export const game = {
         background.startOrStopCanvas();
         bonusController.bonusAppearanceListenerTimerIdRemove();
         bonusController.allNewPropertiesForPlayerOffCallCancel();
-        helperController.removeAllTimers(blockageController.blockageTimerIdsArray);
+        helperController.removeAllIntervalTimers(blockageController.blockageTimerIdsArray);
+        helperController.removeAllTimeoutTimers(tooltipController.tooltipCreateTimerIdsArray);
+        helperController.removeAllTimeoutTimers(tooltipController.tooltipDestroyTimerIdsArray);
         crashChecker.invincibilityOffCallCancel();
         boss.makeStepOff();
         boss.removeShieldTimerId();
@@ -107,6 +111,8 @@ export const game = {
         arrowController.arrowMove();
         enemyArrowController.enemyArrowMove();
         crashChecker.invincibilityOffCall(player.timeInInvincibilityOff * 1000);
+        tooltipController.showMainGameControlTooltips();
+        tooltipController.destroyAllTooltipsOnResumGame();
         boss.makeStep();
         boss.setShieldTimerIdOnResumeGame();
         player.offBonusCall();

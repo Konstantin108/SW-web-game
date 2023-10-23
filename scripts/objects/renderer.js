@@ -7,6 +7,7 @@ import {game} from "../game.js";
 import {boss} from "./boss.js";
 import {helperController} from "../controllers/helperController.js";
 import {pause} from "./pause.js";
+import {tooltipController} from "../controllers/tooltipController.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -17,11 +18,13 @@ export const renderer = {
     bombBar: null,
     bonusShieldBar: null,
     bonusNewArrowTypeBar: null,
-    bossLivesBar: null,
     bonusShieldTimerId: null,
     bonusNewArrowTypeTimerId: null,
     cheatMessageRemoveTimerId: null,
+    tooltipControlPanelInTimerId: null,
+    tooltipControlPanelOutTimerId: null,
     container: document.querySelector("#container"),
+    body: document.querySelector("body"),
 
     render() {
         let renderedMap = this.renderMap();
@@ -49,7 +52,7 @@ export const renderer = {
 
     hideLoadingScreen() {
         let loadingScreen = document.querySelector("#loadingScreen");
-        if (loadingScreen) loadingScreen.parentElement.removeChild(loadingScreen);
+        if (loadingScreen) setTimeout(() => loadingScreen.parentElement.removeChild(loadingScreen), 500);
     },
 
     renderPlayer() {
@@ -153,6 +156,7 @@ export const renderer = {
     renderBossLivesBar(getDamage = false) {
         let table = document.querySelector("table");
         let bossLivesBarElement = document.querySelector("#bossLivesBar");
+        let bossLivesBar = null;
         let shineSectorsBox = "";
         let bossLivesBarShineSectorOnHide = "";
         let bossLivesBarSmoothAppearance = "";
@@ -183,8 +187,8 @@ export const renderer = {
             shineSectorsBox += `<div class="bossLivesBarShineSectorOff"></div>`;
         }
 
-        this.bossLivesBar = templatePrinter.bossLivesBarTemplatePrint(shineSectorsBox, bossLivesBarSmoothAppearance);
-        table.insertAdjacentHTML("afterbegin", this.bossLivesBar);
+        bossLivesBar = templatePrinter.bossLivesBarTemplatePrint(shineSectorsBox, bossLivesBarSmoothAppearance);
+        table.insertAdjacentHTML("afterbegin", bossLivesBar);
 
         if (getDamage) this.renderGetDamageBossLivesBar();
     },
@@ -573,12 +577,11 @@ export const renderer = {
     },
 
     renderPauseMenu() {
-        let body = document.querySelector("body");
         let backgroundElement = null;
         let pauseMenuContainer = null;
 
         if (!document.querySelector("#pauseMenuBackground")) {
-            body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint());
+            this.body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint());
             backgroundElement = document.querySelector("#pauseMenuBackground");
             backgroundElement.classList.add("pauseOn");
             setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
@@ -586,13 +589,16 @@ export const renderer = {
             this.renderPauseMenuOptions();
             setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross", true), 200);
 
+            tooltipController.tooltipOnOrOff(false, false, false, true);
         } else {
             backgroundElement = document.querySelector("#pauseMenuBackground");
             pauseMenuContainer = document.querySelector("#pauseMenuContainer");
             backgroundElement.classList.add("pauseOff");
-            pauseMenuContainer.classList.remove("menuContainerAdd");
-            pauseMenuContainer.classList.add("menuContainerRemove");
-            setTimeout(() => body.removeChild(backgroundElement), 180);
+            pauseMenuContainer.classList.remove("pauseElementAdd");
+            pauseMenuContainer.classList.add("pauseElementRemove");
+            setTimeout(() => this.body.removeChild(backgroundElement), 180);
+
+            this.hideTooltipControlPanel(true);
         }
     },
 
@@ -846,5 +852,114 @@ export const renderer = {
         cheatMessageContainer.insertAdjacentHTML("afterbegin", templatePrinter.cheatMessageTemplatePrint(message, messageColor));
         messageElement = document.querySelector("#cheatMessage");
         if (messageElement) this.cheatMessageRemoveTimerId = setTimeout(() => cheatMessageContainer.removeChild(messageElement), 3000);
+    },
+
+    renderTooltip(data, animation) {
+        let table = document.querySelector("table");
+        let tooltipKeyboardsCount = data.tooltip.keyboards.length;
+        let tooltipDiv = null;
+        let tooltipElement = "";
+        let gridBlock = "";
+        let tooltipClasses = "tooltip ";
+
+        if (data.tooltip.gridBlock) gridBlock = "oneKeyboardBlockGrid";
+
+        tooltipClasses += `${config.menuColor} `;
+        if (animation) tooltipClasses += "tooltipAnimationIn";
+
+        tooltipElement += `<div class="${data.tooltip.keyboardsBlockClass}">`;
+
+        if (tooltipKeyboardsCount) {
+            for (let i = 0; i < tooltipKeyboardsCount; i++) {
+                tooltipElement += `<div class="tooltipElement ${gridBlock}">
+                                        <div></div>`;
+
+                if (data.tooltip.keyboards) {
+                    for (let j = 0; j < data.tooltip.keyboards[i].units.length; j++) {
+
+                        if (data.tooltip.keyboards[i].units[j].label) tooltipElement += `<div class="keyboardLabelDiv">
+                                                                                            <p class="keyboardLabel">
+                                                                                                ${data.tooltip.keyboards[i].units[j].label}
+                                                                                            </p>`;
+
+                        tooltipElement += `<img src="${data.tooltip.keyboards[i].units[j].src}" alt="${data.tooltip.keyboards[i].units[j].alt}">`;
+
+                        if (data.tooltip.keyboards[i].units[j].label) tooltipElement += "</div>";
+
+                        if (!j) tooltipElement += "<div></div>";
+                    }
+                }
+
+                tooltipElement += "</div>";
+                if (tooltipKeyboardsCount > 1 && i + 1 < tooltipKeyboardsCount) tooltipElement += `<p class="infoLabel tooltipElement">
+                                                                                                        или
+                                                                                                   </p>`;
+            }
+        }
+
+        tooltipElement += "</div>";
+
+        tooltipElement += `<p class="infoLabel tooltipElementText">
+                                ${data.tooltip.text}
+                           </p>`;
+
+        tooltipDiv = document.querySelector(`#${data.name}`);
+        if (tooltipDiv) table.removeChild(tooltipDiv);
+        table.insertAdjacentHTML("afterbegin", templatePrinter.tooltipTemplatePrint(tooltipElement, data.name, tooltipClasses.trim()));
+    },
+
+    hideTooltip(tooltip) {
+        let table = document.querySelector("table");
+        let tooltipDiv = document.querySelector(`#${tooltip.data.name}`);
+
+        if (!tooltipDiv) return;
+        if (tooltipDiv.classList.contains("tooltipAnimationIn")) tooltipDiv.classList.remove("tooltipAnimationIn");
+        tooltipDiv.classList.add("tooltipAnimationOut");
+        setTimeout(() => table.removeChild(tooltipDiv), 150);
+    },
+
+    renderTooltipControlPanel(animation, toggle, changeColorCheat, pause) {
+        let tooltipControlPanel = null;
+        let bulb = null;
+        let text = "";
+        let animationClass = "";
+
+        tooltipControlPanel = document.querySelector("#tooltipControlPanel");
+        if (changeColorCheat && !tooltipControlPanel) return;
+
+        if (tooltipControlPanel) this.body.removeChild(tooltipControlPanel);
+
+        if (config.tips) {
+            text = "выключить";
+            bulb = `<i id="bulbOn" class="fas fa-lightbulb"></i>`;
+        } else {
+            text = "включить";
+            bulb = `<i id="bulbOff" class="far fa-lightbulb"></i>`;
+        }
+
+        if (!toggle && !changeColorCheat && !pause) this.tooltipControlPanelOutTimerId = setTimeout(() => this.hideTooltipControlPanel(), 7000);
+
+        if (animation) animationClass = "tooltipControlPanelIn";
+        if (pause) {
+            animationClass = "pauseElementAdd";
+            if (this.tooltipControlPanelInTimerId) clearTimeout(this.tooltipControlPanelInTimerId);
+            if (this.tooltipControlPanelOutTimerId) clearTimeout(this.tooltipControlPanelOutTimerId);
+        }
+
+        this.body.insertAdjacentHTML("afterbegin", templatePrinter.tooltipControlPanelTemplatePrint(text, bulb, animationClass));
+    },
+
+    hideTooltipControlPanel(pause = false) {
+        let animationClass = "";
+
+        let tooltipControlPanel = document.querySelector("#tooltipControlPanel");
+        if (!tooltipControlPanel) return;
+
+        !pause ? animationClass = "tooltipControlPanelOut" : animationClass = "pauseElementRemove";
+
+        tooltipControlPanel.classList.remove("tooltipControlPanelIn");
+        tooltipControlPanel.classList.add(animationClass);
+        if (tooltipController.hideTooltipControlPanelAnimationTimerId) clearTimeout(tooltipController.hideTooltipControlPanelAnimationTimerId);
+        tooltipController.hideTooltipControlPanelAnimationTimerId = setTimeout(() => this.body.removeChild(tooltipControlPanel), 180);
     }
 }

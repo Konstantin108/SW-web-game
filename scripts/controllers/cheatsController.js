@@ -12,6 +12,7 @@ import {game} from "../game.js";
 import {debugPanel} from "../objects/debugPanel.js";
 import {bonuses} from "../config/bonuses.js";
 import {pause} from "../objects/pause.js";
+import {tooltipController} from "./tooltipController.js";
 
 export const cheatsController = {
     cheats: config.cheats,
@@ -319,6 +320,8 @@ export const cheatsController = {
         renderer.renderPauseMenuOptions();
         renderer.renderPauseMenuSideBlocksBtn("back");
         renderer.renderPauseMenuSideBlocksBtn("cross");
+        tooltipController.tooltipOnOrOff(false, false, true);
+        tooltipController.tooltipsArray.forEach(tooltip => tooltip.show(false));
     },
 
     restoreLives(paramName) {
