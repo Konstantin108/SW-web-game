@@ -9,6 +9,7 @@ import {progressController} from "../controllers/progressController.js";
 import {pause} from "./pause.js";
 import {background} from "../background/background.js";
 import {tooltipController} from "../controllers/tooltipController.js";
+import {localStorageController} from "../controllers/localStorageController.js";
 
 export const debugPanel = {
     cheats: config.cheats,
@@ -82,6 +83,10 @@ export const debugPanel = {
                 break;
             case "cheatsInfo":
                 cheatsController.cheatsInfoForPlayer();
+                break;
+            case "clearLocalStorage":
+                localStorageController.clearLocalStorage();
+                console.log(helperController.getObjectByName(config.debugPanelElements, element).message);
                 break;
             case "clearConsole":
                 console.clear();

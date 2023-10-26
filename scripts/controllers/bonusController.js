@@ -92,6 +92,8 @@ export const bonusController = {
         let bonus = this.bonusesArray.at(-1);
         bonus.makeStep();
         bonus.makeStepOff();
-        if (config.debugBonusesObjectsShow) debugPanel.objectsInfoShow("bonusesObjects", this.bonusesArray, true);
+        if (config.debugBonusesObjectsShow) {
+            debugPanel.objectsInfoShow("bonusesObjects", this.bonusesArray, true);
+        }
     }
 }

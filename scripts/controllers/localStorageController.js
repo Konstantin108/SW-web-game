@@ -5,24 +5,23 @@ import {cheatsController} from "./cheatsController.js";
 import {bonuses} from "../config/bonuses.js";
 
 export const localStorageController = {
+    notUsedLocalStorageParams: [
+        "length",
+        "clear",
+        "getItem",
+        "key",
+        "removeItem",
+        "setItem"
+    ],
     bonusNamesFromLocalStorage: [],
 
     setLocalStorageParamsToGameConfig(param = null) {
-        let notUsedLocalStorageParams = [
-            "length",
-            "clear",
-            "getItem",
-            "key",
-            "removeItem",
-            "setItem"
-        ];
-
         if (param) {
             this.dataProcessingFromLocalStorage(param);
             return;
         }
         for (let key in localStorage) {
-            if (!notUsedLocalStorageParams.includes(key)) {
+            if (!this.notUsedLocalStorageParams.includes(key)) {
                 this.dataProcessingFromLocalStorage(key, true);
                 this.addLocalStorageParamNamesToGameConfig(key);
             }
@@ -81,8 +80,14 @@ export const localStorageController = {
         this.removeLocalStorageParamNamesFromGameConfig(param);
     },
 
-    clearLocalStorage() {
-        localStorage.clear();
+    clearLocalStorage(notRemoveParamsArray = []) {
+        if (notRemoveParamsArray) {
+            for (let key in localStorage) {
+                if (!notRemoveParamsArray.includes(key)) localStorage.removeItem(key);
+            }
+        } else {
+            localStorage.clear();
+        }
     },
 
     getParamFromLocalStorage(param) {

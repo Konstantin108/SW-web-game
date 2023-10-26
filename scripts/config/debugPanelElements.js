@@ -59,11 +59,11 @@ export const debugPanelElements = {
                 description: "вывести tooltipController в консоль"
             },
             {
-                name: "background",
+                name: "cheatsInfo",
                 type: "button",
                 customClass: null,
-                message: "background:",
-                description: "вывести background в консоль"
+                message: null,
+                description: "вывести в консоль таблицу с информацией о читах"
             },
             {
                 name: "pause",
@@ -73,11 +73,11 @@ export const debugPanelElements = {
                 description: "вывести pause в консоль"
             },
             {
-                name: "cheatsInfo",
+                name: "clearLocalStorage",
                 type: "button",
                 customClass: null,
-                message: null,
-                description: "вывести в консоль таблицу с информацией о читах"
+                message: "localStorage was cleared",
+                description: "очистить localStorage"
             },
             {
                 name: "clearConsole",
@@ -155,6 +155,13 @@ export const debugPanelElements = {
                 customClass: null,
                 message: null,
                 description: "отключить отсчёт перед запуском игры"
+            },
+            {
+                name: "background",
+                type: "button",
+                customClass: null,
+                message: "background:",
+                description: "вывести background в консоль"
             }
         ];
     }

@@ -3,6 +3,7 @@ import {config} from "../config/config.js";
 import {renderer} from "../objects/renderer.js";
 import {game} from "../game.js";
 import {helperController} from "./helperController.js";
+import {localStorageController} from "./localStorageController.js";
 
 export const tooltipController = {
     gameControl: config.gameControl,
@@ -78,20 +79,19 @@ export const tooltipController = {
     },
 
     tooltipOnOrOff(animation, toggle, changeColorCheat, pause = false) {
+        if (game.gameOver) return;
         if (game.gameIsRunning && !config.tips && !toggle) return;
 
         if (toggle) {
             helperController.getPropByNameAndReset(config, "tip_");
-            this.tooltipsArray.forEach(tooltip => {
-                tooltip.destroy();
-            });
+            this.tooltipsArray.forEach(tooltip => tooltip.destroy());
             if (config.tips) {
                 helperController.removeAllTimeoutTimers(this.tooltipCreateTimerIdsArray);
                 helperController.removeAllTimeoutTimers(this.tooltipDestroyTimerIdsArray);
-                config.tips = false;
+                localStorageController.setParamToLocalStorage("tips", false);
             } else {
                 if (game.gameIsRunning) this.showMainGameControlTooltips();
-                config.tips = true;
+                localStorageController.removeParamFromLocalStorage("tips", true);
             }
         }
 

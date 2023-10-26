@@ -11,13 +11,17 @@ export const enemyArrowController = {
     enemyArrowsArray: [],
 
     enemyArrowCreate(shootingBlockageData) {
-        if (shootingBlockageData) this.enemyArrowsArray.push(new this.arrowTypes[shootingBlockageData.arrowType](shootingBlockageData.x, shootingBlockageData.y));
+        if (shootingBlockageData) {
+            this.enemyArrowsArray.push(new this.arrowTypes[shootingBlockageData.arrowType](shootingBlockageData.x, shootingBlockageData.y));
+        }
     },
 
     enemyArrowMove() {
         if (!this.enemyArrowsArray.length) return;
         let enemyArrow = this.enemyArrowsArray.at(-1);
         enemyArrow.makeStep();
-        if (config.debugEnemyArrowsObjectsShow) debugPanel.objectsInfoShow("playerArrowsObjects", this.enemyArrowsArray, true);
+        if (config.debugEnemyArrowsObjectsShow) {
+            debugPanel.objectsInfoShow("playerArrowsObjects", this.enemyArrowsArray, true);
+        }
     }
 }

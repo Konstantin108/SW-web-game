@@ -280,7 +280,7 @@ export const cheatsController = {
 
         } else {
             localStorageController.removeParamFromLocalStorage(paramName, false);
-            localStorageController.clearLocalStorage();
+            localStorageController.clearLocalStorage(["tips"]);
         }
         let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
         if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
