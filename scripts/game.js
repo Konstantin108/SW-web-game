@@ -29,7 +29,6 @@ export const game = {
         localStorageController.setLocalStorageParamsToGameConfig();
         this.startGameDelaySet();
         background.gameIsInitialized = true;
-        background.celestialBodiesInit();
         renderer.render();
         // экран загрузки должен быть отключен, если отключен canvas
         renderer.hideLoadingScreen();
@@ -56,7 +55,7 @@ export const game = {
         this.gameIsRunning = true;
         this.playerCanStopGame = true;
         this.animationBan = false;
-        background.startOrStopCanvas();
+        background.animate();
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
@@ -89,7 +88,7 @@ export const game = {
 
     stopGame() {
         this.gameIsRunning = false;
-        background.startOrStopCanvas();
+        background.animate();
         bonusController.bonusAppearanceListenerTimerIdRemove();
         bonusController.allNewPropertiesForPlayerOffCallCancel();
         helperController.removeAllIntervalTimers(blockageController.blockageTimerIdsArray);
@@ -104,7 +103,7 @@ export const game = {
         this.gameIsRunning = true;
         this.animationBan = false;
         this.playerCanStopGame = true;
-        background.startOrStopCanvas();
+        background.animate();
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         bonusController.resumeGameMakeStepOffCall();

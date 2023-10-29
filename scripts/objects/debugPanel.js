@@ -23,15 +23,18 @@ export const debugPanel = {
     callDebugPanel() {
         let showDebugPanelBtn = helperController.getObjectByName(this.gameControl, "showDebugPanelBtn").btns;
         let playerCanCallDebugPanel = true;
+        let mobileMode = false;
 
         document.addEventListener("keydown", function (event) {
             if (!debugPanel.debugMode) return;
             if (!playerCanCallDebugPanel) return;
             if (!showDebugPanelBtn.includes(event.code)) return;
+            if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
             playerCanCallDebugPanel = false;
-            renderer.renderDebugPanel();
+            renderer.renderDebugPanel(mobileMode);
             debugPanel.clickOnDebugPanelElementBtn();
             setTimeout(() => playerCanCallDebugPanel = true, 500);
+            mobileMode = false;
         });
     },
 

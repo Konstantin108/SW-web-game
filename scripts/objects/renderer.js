@@ -759,11 +759,14 @@ export const renderer = {
         this.renderBigPauseMenu();
     },
 
-    renderDebugPanel() {
+    renderDebugPanel(mobileMode) {
         let debugPanel = null;
+        let sizeClass = "debugPanelDesktopMode";
+
+        if (mobileMode) sizeClass = "debugPanelMobileMode";
 
         if (!document.querySelector("#debugPanel")) {
-            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(this.renderDebugPanelBtnsBlock()));
+            this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(this.renderDebugPanelBtnsBlock(), sizeClass));
             debugPanel = document.querySelector("#debugPanel");
             debugPanel.classList.add("debugPanelIn");
             setTimeout(() => debugPanel.classList.remove("debugPanelIn"), 500);
@@ -824,12 +827,15 @@ export const renderer = {
         return btnsBlockRefreshed;
     },
 
-    renderCheatConsole() {
+    renderCheatConsole(mobileMode) {
         let cheatConsole = null;
         let cheatInput = null;
+        let sizeClass = "cheatConsoleDesktopMode";
+
+        if (mobileMode) sizeClass = "cheatConsoleMobileMode";
 
         if (!document.querySelector("#cheatConsole")) {
-            this.container.insertAdjacentHTML("afterbegin", templatePrinter.cheatConsoleTemplatePrint());
+            this.container.insertAdjacentHTML("afterbegin", templatePrinter.cheatConsoleTemplatePrint(sizeClass));
             cheatConsole = document.querySelector("#cheatConsole");
             cheatConsole.classList.add("cheatConsoleIn");
             setTimeout(() => cheatConsole.classList.remove("cheatConsoleIn"), 500);
@@ -854,37 +860,51 @@ export const renderer = {
         if (messageElement) this.cheatMessageRemoveTimerId = setTimeout(() => cheatMessageContainer.removeChild(messageElement), 3000);
     },
 
-    renderTooltip(data, animation) {
-        let table = document.querySelector("table");
-        let tooltipKeyboardsCount = data.tooltip.keyboards.length;
+    renderTooltip(data, animation, mobileMode) {
+        let placeForTooltip = null;
+        let dataTooltip = null;
         let tooltipDiv = null;
         let tooltipElement = "";
-        let gridBlock = "";
         let tooltipClasses = "tooltip ";
 
-        if (data.tooltip.gridBlock) gridBlock = "oneKeyboardBlockGrid";
+        if (mobileMode) {
+            placeForTooltip = document.querySelector("#blockForTooltipsInMobilMode");
+            dataTooltip = data.tooltipMobileMode;
+        } else {
+            placeForTooltip = document.querySelector("table");
+            dataTooltip = data.tooltip;
+        }
+
+        let tooltipKeyboardsCount = dataTooltip.keyboards.length;
 
         tooltipClasses += `${config.menuColor} `;
-        if (animation) tooltipClasses += "tooltipAnimationIn";
+        tooltipClasses += dataTooltip.positionClass;
+        if (animation) tooltipClasses += " tooltipAnimationIn";
 
-        tooltipElement += `<div class="${data.tooltip.keyboardsBlockClass}">`;
+        if (dataTooltip.prologue) tooltipElement = `<p class="infoLabel tooltipElementText">
+                                                        ${dataTooltip.prologue}
+                                                    </p>`;
+
+        tooltipElement += `<div class="${dataTooltip.keyboardsBlockClass}">`;
 
         if (tooltipKeyboardsCount) {
             for (let i = 0; i < tooltipKeyboardsCount; i++) {
-                tooltipElement += `<div class="tooltipElement ${gridBlock}">
+                tooltipElement += `<div class="tooltipElement ${dataTooltip.tooltipBlockClass}">
                                         <div></div>`;
 
-                if (data.tooltip.keyboards) {
-                    for (let j = 0; j < data.tooltip.keyboards[i].units.length; j++) {
+                if (dataTooltip.keyboards) {
+                    for (let j = 0; j < dataTooltip.keyboards[i].units.length; j++) {
 
-                        if (data.tooltip.keyboards[i].units[j].label) tooltipElement += `<div class="keyboardLabelDiv">
+                        if (dataTooltip.keyboards[i].units[j].label) tooltipElement += `<div class="keyboardLabelDiv">
                                                                                             <p class="keyboardLabel">
-                                                                                                ${data.tooltip.keyboards[i].units[j].label}
+                                                                                                ${dataTooltip.keyboards[i].units[j].label}
                                                                                             </p>`;
 
-                        tooltipElement += `<img src="${data.tooltip.keyboards[i].units[j].src}" alt="${data.tooltip.keyboards[i].units[j].alt}">`;
+                        tooltipElement += `<img src="${dataTooltip.keyboards[i].units[j].src}"
+                                                alt="${dataTooltip.keyboards[i].units[j].alt}"
+                                                class="${dataTooltip.imageClass}">`;
 
-                        if (data.tooltip.keyboards[i].units[j].label) tooltipElement += "</div>";
+                        if (dataTooltip.keyboards[i].units[j].label) tooltipElement += "</div>";
 
                         if (!j) tooltipElement += "<div></div>";
                     }
@@ -900,22 +920,27 @@ export const renderer = {
         tooltipElement += "</div>";
 
         tooltipElement += `<p class="infoLabel tooltipElementText">
-                                ${data.tooltip.text}
+                                ${dataTooltip.text}
                            </p>`;
 
         tooltipDiv = document.querySelector(`#${data.name}`);
-        if (tooltipDiv) table.removeChild(tooltipDiv);
-        table.insertAdjacentHTML("afterbegin", templatePrinter.tooltipTemplatePrint(tooltipElement, data.name, tooltipClasses.trim()));
+        if (tooltipDiv) placeForTooltip.removeChild(tooltipDiv);
+        placeForTooltip.insertAdjacentHTML("afterbegin", templatePrinter.tooltipTemplatePrint(tooltipElement, data.name, tooltipClasses.trim()));
+    },
+
+    renderBlockForTooltipsInMobilModeTemplatePrint() {
+        if (!document.querySelector("#blockForTooltipsInMobilMode")) {
+            this.container.insertAdjacentHTML("afterend", templatePrinter.blockForTooltipsInMobilModeTemplatePrint());
+        }
     },
 
     hideTooltip(tooltip) {
-        let table = document.querySelector("table");
         let tooltipDiv = document.querySelector(`#${tooltip.data.name}`);
 
         if (!tooltipDiv) return;
         if (tooltipDiv.classList.contains("tooltipAnimationIn")) tooltipDiv.classList.remove("tooltipAnimationIn");
         tooltipDiv.classList.add("tooltipAnimationOut");
-        setTimeout(() => table.removeChild(tooltipDiv), 150);
+        setTimeout(() => tooltipDiv.parentElement.removeChild(tooltipDiv), 150);
     },
 
     renderTooltipControlPanel(animation, toggle, changeColorCheat, pause) {

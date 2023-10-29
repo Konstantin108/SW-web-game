@@ -26,14 +26,17 @@ export const cheatsController = {
     callCheatConsole() {
         let showCheatConsoleBtn = helperController.getObjectByName(this.gameControl, "showCheatConsoleBtn").btns;
         let playerCanCallCheatConsole = true;
+        let mobileMode = false;
 
         document.addEventListener("keydown", function (event) {
             if (!playerCanCallCheatConsole) return;
             if (!showCheatConsoleBtn.includes(event.code)) return;
+            if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
             playerCanCallCheatConsole = false;
-            renderer.renderCheatConsole();
+            renderer.renderCheatConsole(mobileMode);
             cheatsController.inputCheat();
             setTimeout(() => playerCanCallCheatConsole = true, 500);
+            mobileMode = false;
         });
     },
 
@@ -321,7 +324,7 @@ export const cheatsController = {
         renderer.renderPauseMenuSideBlocksBtn("back");
         renderer.renderPauseMenuSideBlocksBtn("cross");
         tooltipController.tooltipOnOrOff(false, false, true);
-        tooltipController.tooltipsArray.forEach(tooltip => tooltip.show(false));
+        tooltipController.tooltipsArray.forEach(tooltip => tooltip.show(false, true));
     },
 
     restoreLives(paramName) {

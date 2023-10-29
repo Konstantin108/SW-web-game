@@ -7,9 +7,18 @@ export class Tooltip {
         this.data = data;
     }
 
-    show(animation) {
-        if (config[`tip_${this.data.name}Shown`]) return;
-        renderer.renderTooltip(this.data, animation);
+    show(animation, colorChange = false) {
+        if (!colorChange) {
+            if (config[`tip_${this.data.name}Shown`]) return;
+        }
+
+        let mobileMode = false;
+        if (navigator.userAgent.toLowerCase().match(/mobile/i)) {
+            if (!this.data.tooltipMobileMode) return;
+            mobileMode = true;
+            renderer.renderBlockForTooltipsInMobilModeTemplatePrint();
+        }
+        renderer.renderTooltip(this.data, animation, mobileMode);
         config[`tip_${this.data.name}Shown`] = true;
     }
 

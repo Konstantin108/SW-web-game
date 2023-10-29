@@ -128,8 +128,8 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    cheatConsoleTemplatePrint() {
-        return `<form id="cheatConsole">
+    cheatConsoleTemplatePrint(sizeClass) {
+        return `<form id="cheatConsole" class="${sizeClass}">
                     <strong>
                         <div id="cheatMessageContainer"></div>
                         <div id="cheatInputContainer">
@@ -157,8 +157,8 @@ export const templatePrinter = {
                 </p>`;
     },
 
-    debugPanelTemplatePrint(debugElementsDiv) {
-        return `<div id="debugPanel">
+    debugPanelTemplatePrint(debugElementsDiv, sizeClass) {
+        return `<div id="debugPanel" class="${sizeClass}">
                     <p id="debugPanelLabel">
                         debug panel
                     </p>
@@ -168,9 +168,9 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    pauseMenuPrint() {
+    pauseMenuPrint(sizeClass) {
         return `<div id="pauseMenuBackground">
-                    <div id="pauseMenuContainer" class="pauseElementAdd">
+                    <div id="pauseMenuContainer" class="pauseElementAdd ${sizeClass}">
                         <div id="pauseMenuLeftBlock">
                             <div class="pauseSideOptionBlock">
                                 <div id="pauseLeftOptionDisplay"></div>
@@ -227,6 +227,10 @@ export const templatePrinter = {
         return `<div id="${name}" class="${tooltipClasses}">
                     ${element}
                 </div>`;
+    },
+
+    blockForTooltipsInMobilModeTemplatePrint() {
+        return `<div id="blockForTooltipsInMobilMode"></div>`;
     },
 
     tooltipControlPanelTemplatePrint(text, bulb, animationClass) {
