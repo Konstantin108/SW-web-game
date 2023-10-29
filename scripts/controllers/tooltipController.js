@@ -22,7 +22,7 @@ export const tooltipController = {
 
         this.tooltipsArray.push(tooltip);
         tooltip.show(true);
-        // if (game.gameIsRunning) this.tooltipDestroyTimerIdsArray.push(setTimeout(() => tooltip.destroy(), 7800));
+        if (game.gameIsRunning) this.tooltipDestroyTimerIdsArray.push(setTimeout(() => tooltip.destroy(), 7800));
     },
 
     showMainGameControlTooltips(startGame = false) {
