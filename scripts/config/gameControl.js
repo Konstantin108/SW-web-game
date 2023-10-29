@@ -241,7 +241,7 @@ export const gameControl = {
                 tooltipMobileMode: {
                     keyboardsBlockClass: "",
                     positionClass: "anyTooltipMobileMode",
-                    imageClass: "tooltipImage",
+                    imageClass: "tooltipImageBig",
                     tooltipBlockClass: "",
                     keyboards: [{units: [this.touchesSrc.get("touchUseBombBtn")]}],
                     prologue: "коснитесь иконки",

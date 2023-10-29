@@ -1549,6 +1549,10 @@ td {
   width: 45px;
 }
 
+.tooltipImageBig {
+  width: 80px;
+}
+
 #bulbOn,
 #bulbOff {
   font-size: 20px;
