@@ -124,9 +124,6 @@ export const progressController = {
         if (this.shipDestroyedCounterForSuperAbilityCharge % 10 === 0) {
             this.superAbilityCharge += 1;
             renderer.renderSuperAbilityBar();
-            tooltipController.tooltipCreateTimerIdsArray.push(setTimeout(() => {
-                tooltipController.tooltipCreateAndDestroy(useSuperAbilityBtnGameControlObject);
-            }, this.useSuperAbilityBtnShowDelaySeconds));
         }
         if (this.superAbilityCharge === this.superAbilityIsCharged) {
             player.superAbilityIsActivated = true;
