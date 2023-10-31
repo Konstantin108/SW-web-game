@@ -19,6 +19,8 @@ export const player = {
     timeInInvincibilityOff: null,  // сюда записывается цифра - количество секунд до окончания неуязвимости
     x: helperController.getCenterMapOnX(),
     y: config.mapSizeY,
+    x_current: null,
+    y_current: null,
     selectorName: "player",
     extraSelectorName: null,
     arrowType: "arrow",
@@ -37,91 +39,118 @@ export const player = {
     bonusObjectNewArrowType: null,  // данные подобраного бонуса усиление оружия для возобновления действия после снятия игры с паузы
     bonusObjectShield: null,  // данные подобраного бонуса щит для возобновления действия после снятия игры с паузы,
 
-    move() {
+    moveKeyDownHandler() {
         let possibleDirections = helperController.getObjectByName(this.gameControl, "possibleDirections").btns;
+        this.x_current = this.x;
+        this.y_current = this.y;
 
         document.addEventListener("keydown", function (event) {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
-            let x_value = player.x;
-            let y_value = player.y;
             if (!possibleDirections.includes(event.code)) return;
             switch (event.code) {
                 case possibleDirections[0]:
                 case possibleDirections[8]:
                 case possibleDirections[12]:
-                    x_value += -1;
+                    player.moveLeft();
                     break;
                 case possibleDirections[1]:
                 case possibleDirections[9]:
                 case possibleDirections[13]:
-                    x_value += 1;
+                    player.moveRight();
                     break;
                 case possibleDirections[2]:
                 case possibleDirections[10]:
                 case possibleDirections[14]:
-                    y_value += 1;
+                    player.moveDown();
                     break;
                 case possibleDirections[3]:
                 case possibleDirections[11]:
                 case possibleDirections[15]:
-                    y_value += -1;
+                    player.moveUp();
                     break;
                 case possibleDirections[4]:
-                    x_value += -1;
-                    y_value += -1;
+                    player.moveLeft();
+                    player.moveUp();
                     break;
                 case possibleDirections[5]:
-                    x_value += 1;
-                    y_value += -1;
+                    player.moveRight();
+                    player.moveUp();
                     break;
                 case possibleDirections[6]:
-                    x_value += -1;
-                    y_value += 1;
+                    player.moveLeft();
+                    player.moveDown();
                     break;
                 case possibleDirections[7]:
-                    x_value += 1;
-                    y_value += 1;
+                    player.moveRight();
+                    player.moveDown();
                     break;
                 default:
                     break;
             }
-            if (x_value <= config.mapSizeX && y_value <= config.mapSizeY && x_value >= 0 && y_value >= 0) {
-                player.x = x_value;
-                player.y = y_value;
-            } else {
-                x_value = player.x;
-                y_value = player.y;
-                player.x = x_value;
-                player.y = y_value
-            }
-            bonusController.pickedCheck();
-            crashChecker.crashCheck(blockageController.blockagesArray, true);
-            crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.bodyX, boss.y, boss.crashDamage));
-            crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.shieldBody.x, boss.shieldBody.y, boss.shieldCrashDamage));
-            if (player.invincibility) renderer.clear("invincibility");
-            renderer.clear(player.selectorName);
-            if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
-            renderer.renderPlayer();
+            player.move();
         });
     },
 
-    shoot() {
+    move() {
+        if (this.x_current <= config.mapSizeX && this.y_current <= config.mapSizeY && this.x_current >= 0 && this.y_current >= 0) {
+            player.x = this.x_current;
+            player.y = this.y_current;
+        } else {
+            this.x_current = player.x;
+            this.y_current = player.y;
+        }
+        bonusController.pickedCheck();
+        crashChecker.crashCheck(blockageController.blockagesArray, true);
+        crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.bodyX, boss.y, boss.crashDamage));
+        crashChecker.crashCheck(boss.bodyCellsArrayForCrashChecker(boss.shieldBody.x, boss.shieldBody.y, boss.shieldCrashDamage));
+        if (player.invincibility) renderer.clear("invincibility");
+        renderer.clear(player.selectorName);
+        if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
+        renderer.renderPlayer();
+    },
+
+    moveLeft() {
+        this.x_current += -1;
+    },
+
+    moveRight() {
+        this.x_current += 1;
+    },
+
+    moveDown() {
+        this.y_current += 1;
+    },
+
+    moveUp() {
+        this.y_current += -1;
+    },
+
+    shootClickHandler() {
+        let touchPanel = document.querySelector("#touchPanel");
+        if (touchPanel) touchPanel.addEventListener("click", () => this.shoot());
+    },
+
+    shootKeyDownHandler() {
         let shootBtnsArray = helperController.getObjectByName(this.gameControl, "shootBtnsArray").btns;
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRunning) return;
-            if (!player.canMove) return;
             if (isPressBtn) return;
             if (!shootBtnsArray.includes(event.code)) return;
-            arrowController.arrowCreate();
-            arrowController.arrowMove();
+            player.shoot();
             isPressBtn = true;
         });
         document.addEventListener("keyup", function (event) {
             if (shootBtnsArray.includes(event.code)) isPressBtn = false;
         });
+    },
+
+    shoot() {
+        if (!game.gameIsRunning) return;
+        if (!player.canMove) return;
+        arrowController.arrowCreate();
+        arrowController.arrowMove();
     },
 
     offBonusNewArrowType() {
@@ -141,8 +170,12 @@ export const player = {
     },
 
     offBonusCall() {
-        if (this.bonusObjectNewArrowType) this.bonusNewArrowTypeIsActivatedTimerId = setTimeout(() => this.offBonusNewArrowType(), this.calculateTimeInBonusNewArrowTypeOff * 1000);
-        if (this.bonusObjectShield) this.bonusShieldIsActivatedTimerId = setTimeout(() => this.offBonusShield(), this.calculateTimeInBonusShieldOff * 1000);
+        if (this.bonusObjectNewArrowType) {
+            this.bonusNewArrowTypeIsActivatedTimerId = setTimeout(() => this.offBonusNewArrowType(), this.calculateTimeInBonusNewArrowTypeOff * 1000);
+        }
+        if (this.bonusObjectShield) {
+            this.bonusShieldIsActivatedTimerId = setTimeout(() => this.offBonusShield(), this.calculateTimeInBonusShieldOff * 1000);
+        }
     },
 
     useBomb() {

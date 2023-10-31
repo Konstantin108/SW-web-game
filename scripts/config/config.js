@@ -37,10 +37,10 @@ export const config = {
     tip_useBombBtnShown: false,
     tip_pauseBtnsArrayShown: false,
     possibleDirectionsShowDelaySeconds: 2000,
-    shootBtnsArrayShowDelaySeconds: 10000,
+    shootBtnsArrayShowDelaySeconds: 3000,
     useSuperAbilityBtnShowDelaySeconds: 1000,
     useBombBtnShowDelaySeconds: 1000,
-    pauseBtnsArrayShowDelaySeconds: 18000,
+    pauseBtnsArrayShowDelaySeconds: 11000,
     tooltipControlPanelShowDelaySeconds: 2200,
     // стрелы игрока
     power: 1,

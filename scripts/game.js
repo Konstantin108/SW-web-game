@@ -15,6 +15,7 @@ import {debugPanel} from "./objects/debugPanel.js";
 import {pause} from "./objects/pause.js";
 import {background} from "./background/background.js";
 import {tooltipController} from "./controllers/tooltipController.js";
+import {touchController} from "./controllers/touchController.js";
 
 export const game = {
     gameLoadingSecondsCount: config.gameLoadingSecondsCount,
@@ -38,6 +39,7 @@ export const game = {
         this.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();
+        touchController.initTouch();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
@@ -60,8 +62,9 @@ export const game = {
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         tooltipController.showMainGameControlTooltips(true);
-        player.move();
-        player.shoot();
+        player.moveKeyDownHandler();
+        player.shootKeyDownHandler();
+        player.shootClickHandler();
         player.useBomb();
         player.useSuperAbility();
     },
