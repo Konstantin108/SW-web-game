@@ -383,6 +383,8 @@ export const renderer = {
 
         this.bombBar = templatePrinter.bombBarTemplatePrint(bomb);
         table.insertAdjacentHTML("afterbegin", this.bombBar);
+
+        player.useBombClickHandler();
     },
 
     renderBonusBarElement(elementType, bonus = null, actionTime = null) {

@@ -15,7 +15,7 @@ let context = canvas.getContext("2d");
 
 export const background = {
     gameIsInitialized: false,
-    timer: null,
+    timerId: null,
     galaxiesArray: null,
     planetsArray: null,
     slowStarsArray: null,
@@ -57,7 +57,7 @@ export const background = {
 
         if (background.gameIsInitialized) {
             if (!game.gameIsRunning) {
-                clearTimeout(background.timer);
+                clearTimeout(background.timerId);
                 return;
             }
         }
@@ -70,7 +70,7 @@ export const background = {
         background.starsArray.forEach(star => star.draw());
         background.meteorsArray.forEach(meteor => meteor.draw());
 
-        background.timer = setTimeout(() => requestAnimationFrame(background.animate), 1);
+        background.timerId = setTimeout(() => requestAnimationFrame(background.animate), 1);
     },
 
     canvasSizeOnWindowResizeInit() {

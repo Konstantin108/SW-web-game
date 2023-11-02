@@ -64,9 +64,8 @@ export const game = {
         tooltipController.showMainGameControlTooltips(true);
         player.moveKeyDownHandler();
         player.shootKeyDownHandler();
-        player.shootClickHandler();
-        player.useBomb();
-        player.useSuperAbility();
+        player.useSuperAbilityKeyDownHandler();
+        player.useBombKeyDownHandler();
     },
 
     startGameDelaySet() {
@@ -126,6 +125,7 @@ export const game = {
         this.gameOver = true;
         win ? message = "you win" : message = "you lose";
         renderer.renderInCenterTableNotify(message);
+        touchController.disableTouch();
         setTimeout(() => pause.showStatistics(), 1100);
     }
 }

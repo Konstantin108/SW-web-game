@@ -1,42 +1,36 @@
 export const cheats = {
-    helpArray: new Map(
-        [
-            ["toggleCheat", "необходимо вводить только code, повторный ввод code - отключает действие чита"],
-            ["optionsCheat", "необходимо вводить code + : + одна из опций"],
-            ["simpleCheat", "необходимо вводить только code"],
-            ["arbitaryValueCheat", "необходимо вводить code + : + произвольное значение в цифрах"]
-        ]
-    ),
+    helpArray: new Map([
+        ["toggleCheat", "необходимо вводить только code, повторный ввод code - отключает действие чита"],
+        ["optionsCheat", "необходимо вводить code + : + одна из опций"],
+        ["simpleCheat", "необходимо вводить только code"],
+        ["arbitaryValueCheat", "необходимо вводить code + : + произвольное значение в цифрах"]
+    ]),
 
     setTranslatedColorNames() {
-        return new Map(
-            [
-                ["rubrum", "красный"],
-                ["orange", "оранжевый"],
-                ["aurum", "жёлтый"],
-                ["viridis", "зелёный"],
-                ["claracaelum", "голубой"],
-                ["caelum", "синий"],
-                ["violaceum", "фиолетовый"],
-                ["purpura", "розовый"],
-                ["album", "белый"],
-                ["ferrum", "серый"],
-                ["terra", "коричневый"]
-            ]
-        );
+        return new Map([
+            ["rubrum", "красный"],
+            ["orange", "оранжевый"],
+            ["aurum", "жёлтый"],
+            ["viridis", "зелёный"],
+            ["claracaelum", "голубой"],
+            ["caelum", "синий"],
+            ["violaceum", "фиолетовый"],
+            ["purpura", "розовый"],
+            ["album", "белый"],
+            ["ferrum", "серый"],
+            ["terra", "коричневый"]
+        ]);
     },
 
     setBonusCodeNames() {
-        return new Map(
-            [
-                ["acus", "стрелы типа Дрель"],
-                ["tribus", "стрелы типа Тринити"],
-                ["testa", "щит"],
-                ["cor", "одна жизнь"],
-                ["micare", "бомба"],
-                ["radium", "суперспособность"]
-            ]
-        );
+        return new Map([
+            ["acus", "стрелы типа Дрель"],
+            ["tribus", "стрелы типа Тринити"],
+            ["testa", "щит"],
+            ["cor", "одна жизнь"],
+            ["micare", "бомба"],
+            ["radium", "суперспособность"]
+        ]);
     },
 
     setCheatsParams() {

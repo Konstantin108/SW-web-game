@@ -5,6 +5,7 @@ import {bonusController} from "../controllers/bonusController.js";
 import {player} from "../objects/player.js";
 import {cheatsController} from "../controllers/cheatsController.js";
 import {helperController} from "../controllers/helperController.js";
+import {touchController} from "../controllers/touchController.js";
 
 export class Bonus {
     constructor(objectType, actionTime, x, y) {
@@ -89,6 +90,7 @@ export class Bonus {
             this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId, player.calculateTimeInBonusNewArrowTypeOffTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
             this.calculateTimeInBonusOff(this.actionTime / 1000, "newArrowType");
+            touchController.autoShoot();
         }
         if (bonus.playerExtraOutlook) {
             player.extraSelectorName = bonus.playerExtraOutlook;
@@ -107,6 +109,7 @@ export class Bonus {
         if (bonus.playerArrowType) {
             renderer.clear(player.selectorName);
             player.selectorName = "player";
+            player.bonusObjectNewArrowType = null;
             player.arrowType = "arrow";
             player.bonusNewArrowTypeIsActivated = false;
             renderer.renderPlayer();
@@ -116,10 +119,12 @@ export class Bonus {
             cheatsController.activatedCheatsParamsDataTempArray.delete("trinity");
             cheatsController.removeCheatNameFromGameConfig("getDrill");
             cheatsController.removeCheatNameFromGameConfig("getTrinity");
+            touchController.autoShoot();
         }
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);
             player.extraSelectorName = null;
+            player.bonusObjectShield = null;
             player.bonusShieldIsActivated = false;
             renderer.renderBonusBarElement("shieldBar");
             setTimeout(() => renderer.renderBonusBarElement("shieldBar"), 700);

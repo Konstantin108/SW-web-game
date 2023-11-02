@@ -47,10 +47,13 @@ export const config = {
     arrowPenetration: false,
     arrowDamage: 1,
     arrowSpeed: 50,
+    arrowAutoShootSpeed: 350,
     arrowDrillDamage: 2,
     arrowDrillSpeed: 20,
+    arrowDrillAutoShootSpeed: 200,
     arrowTrinityDamage: 3,
     arrowTrinitySpeed: 80,
+    arrowTrinityAutoShootSpeed: 350,
     // стрелы врагов
     enemyArrowDamage: 1,
     enemyArrowSpeed: 200,

@@ -1600,11 +1600,4 @@ td {
   position: absolute;
 }
 
-#touchPanel {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  z-index: 4;
-}
-
 /*# sourceMappingURL=styles.css.map */

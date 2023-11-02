@@ -30,7 +30,7 @@ export const localStorageController = {
 
     dataProcessingFromLocalStorage(param, playerParamsUpdate = false) {
         let localStorageParam = Number(localStorage[param]);
-        let setLocalStorageParamsDelay = config.startGameDelaySecondsCount * 1000 + 2100;
+        let setLocalStorageParamsDelay = this.getStartGameDelaySecondsCount();
 
         if (config.hasOwnProperty(param)) {
             if (Number.isInteger(localStorageParam)) {
@@ -59,6 +59,17 @@ export const localStorageController = {
         }
 
         if (playerParamsUpdate && player.hasOwnProperty(param)) player[param] = config[param];
+    },
+
+    getStartGameDelaySecondsCount() {
+        let startGameDelaySecondsCount = null;
+
+        if (localStorage.hasOwnProperty("startGameDelaySecondsCount")) {
+            startGameDelaySecondsCount = 1000;
+        } else {
+            startGameDelaySecondsCount = config.startGameDelaySecondsCount * 1000 + 2100;
+        }
+        return startGameDelaySecondsCount;
     },
 
     addLocalStorageParamNamesToGameConfig(param) {

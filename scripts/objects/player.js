@@ -126,11 +126,6 @@ export const player = {
         this.y_current += -1;
     },
 
-    shootClickHandler() {
-        let touchPanel = document.querySelector("#touchPanel");
-        if (touchPanel) touchPanel.addEventListener("click", () => this.shoot());
-    },
-
     shootKeyDownHandler() {
         let shootBtnsArray = helperController.getObjectByName(this.gameControl, "shootBtnsArray").btns;
         let isPressBtn = false;
@@ -178,7 +173,7 @@ export const player = {
         }
     },
 
-    useBomb() {
+    useBombKeyDownHandler() {
         let useBombBtn = helperController.getObjectByName(this.gameControl, "useBombBtn").btns;
         let isPressBtn = false;
 
@@ -195,8 +190,12 @@ export const player = {
         });
     },
 
-    useSuperAbility() {
-        let blockagesArray = blockageController.blockagesArray;
+    useBombClickHandler() {
+        let bombBar = document.querySelector("#bombBar");
+        if (bombBar) bombBar.addEventListener("click", () => explosion.explosionCall());
+    },
+
+    useSuperAbilityKeyDownHandler() {
         let useSuperAbilityBtn = helperController.getObjectByName(this.gameControl, "useSuperAbilityBtn").btns;
         let isPressBtn = false;
 
@@ -205,39 +204,45 @@ export const player = {
             if (!player.canMove) return;
             if (isPressBtn) return;
             if (!useSuperAbilityBtn.includes(event.code)) return;
-            if (player.superAbilityIsActivated) {
-                for (let i = 0; i < blockagesArray.length; i++) {
-                    if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x === player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x === player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                        blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
-                        progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -3);
-                        renderer.renderStatusBar();
-                    }
-                }
-                if (progressController.bossExist) {
-                    if (boss.bodyX.includes(player.x) ||
-                        boss.bodyX.includes(player.x - 1) ||
-                        boss.bodyX.includes(player.x - 2) ||
-                        boss.bodyX.includes(player.x + 1) ||
-                        boss.bodyX.includes(player.x + 2)) {
-                        boss.getDamage(player.superAbilityDamage, true);
-                    }
-                }
-                if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
-                if (!config.superAbilityIsAlwaysCharged) {
-                    player.superAbilityIsActivated = false;
-                    renderer.renderSuperAbilityBar();
-                }
-                renderer.renderSuperAbility();
-            } else {
-                renderer.renderSuperAbilityBar(player.superAbilityIsActivated);
-            }
+            player.useSuperAbility();
             isPressBtn = true;
         });
         document.addEventListener("keyup", function (event) {
             if (useSuperAbilityBtn.includes(event.code)) isPressBtn = false;
         });
+    },
+
+    useSuperAbility() {
+        let blockagesArray = blockageController.blockagesArray;
+
+        if (player.superAbilityIsActivated) {
+            for (let i = 0; i < blockagesArray.length; i++) {
+                if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
+                    blockagesArray[i].x === player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                    blockagesArray[i].x === player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
+                    blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
+                    blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
+                    progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -3);
+                    renderer.renderStatusBar();
+                }
+            }
+            if (progressController.bossExist) {
+                if (boss.bodyX.includes(player.x) ||
+                    boss.bodyX.includes(player.x - 1) ||
+                    boss.bodyX.includes(player.x - 2) ||
+                    boss.bodyX.includes(player.x + 1) ||
+                    boss.bodyX.includes(player.x + 2)) {
+                    boss.getDamage(player.superAbilityDamage, true);
+                }
+            }
+            if (boss.shieldBody.x.length) boss.bossShieldGetDamage(true);
+            if (!config.superAbilityIsAlwaysCharged) {
+                player.superAbilityIsActivated = false;
+                renderer.renderSuperAbilityBar();
+            }
+            renderer.renderSuperAbility();
+        } else {
+            renderer.renderSuperAbilityBar(player.superAbilityIsActivated);
+        }
     }
 }
