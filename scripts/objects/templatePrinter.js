@@ -213,13 +213,13 @@ export const templatePrinter = {
 
     bossLivesBarTemplatePrint(sectors, extraClass) {
         return `<div id="bossLivesBar" class="${extraClass}">
-                    <img src="../../images/disk.png" alt="disk.png" class="disk">
+                    <img src="../../src/images/disk.png" alt="disk.png" class="disk">
                     <div id="bossLivesBarMetalElement">
                         <div id="bossLivesBarBlackElement">
                             ${sectors}
                         </div>  
                     </div>
-                    <img src="../../images/disk.png" alt="disk.png" class="disk">                            
+                    <img src="../../src/images/disk.png" alt="disk.png" class="disk">                            
                 </div>`;
     },
 

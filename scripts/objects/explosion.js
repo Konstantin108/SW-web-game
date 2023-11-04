@@ -4,13 +4,16 @@ import {renderer} from "./renderer.js";
 import {progressController} from "../controllers/progressController.js";
 import {boss} from "./boss.js";
 import {config} from "../config/config.js";
+import {game} from "../game.js";
 
 export const explosion = {
     damage: config.explosionDamage,
 
     explosionCall() {
-        let playerHasBomb = true;
+        if (!game.gameIsRunning) return;
+        if (!player.canMove) return;
 
+        let playerHasBomb = true;
         if (player.bombsCount > 0) {
             this.explode();
             player.bombsCount += -1;

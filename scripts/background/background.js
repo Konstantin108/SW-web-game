@@ -53,7 +53,7 @@ export const background = {
 
     animate() {
         // отключение canvas
-        // return;
+        return;
 
         if (background.gameIsInitialized) {
             if (!game.gameIsRunning) {

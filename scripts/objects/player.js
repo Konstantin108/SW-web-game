@@ -52,44 +52,63 @@ export const player = {
                 case possibleDirections[0]:
                 case possibleDirections[8]:
                 case possibleDirections[12]:
-                    player.moveLeft();
+                    player.setDirection("left");
                     break;
                 case possibleDirections[1]:
                 case possibleDirections[9]:
                 case possibleDirections[13]:
-                    player.moveRight();
+                    player.setDirection("right");
                     break;
                 case possibleDirections[2]:
                 case possibleDirections[10]:
                 case possibleDirections[14]:
-                    player.moveDown();
+                    player.setDirection("down");
                     break;
                 case possibleDirections[3]:
                 case possibleDirections[11]:
                 case possibleDirections[15]:
-                    player.moveUp();
+                    player.setDirection("up");
                     break;
                 case possibleDirections[4]:
-                    player.moveLeft();
-                    player.moveUp();
+                    player.setDirection("left");
+                    player.setDirection("up");
                     break;
                 case possibleDirections[5]:
-                    player.moveRight();
-                    player.moveUp();
+                    player.setDirection("right");
+                    player.setDirection("up");
                     break;
                 case possibleDirections[6]:
-                    player.moveLeft();
-                    player.moveDown();
+                    player.setDirection("left");
+                    player.setDirection("down");
                     break;
                 case possibleDirections[7]:
-                    player.moveRight();
-                    player.moveDown();
+                    player.setDirection("right");
+                    player.setDirection("down");
                     break;
                 default:
                     break;
             }
             player.move();
         });
+    },
+
+    setDirection(direction) {
+        switch (direction) {
+            case "left":
+                this.x_current += -1;
+                break;
+            case "right":
+                this.x_current += 1;
+                break;
+            case "down":
+                this.y_current += 1;
+                break;
+            case "up":
+                this.y_current += -1;
+                break;
+            default:
+                break
+        }
     },
 
     move() {
@@ -108,22 +127,6 @@ export const player = {
         renderer.clear(player.selectorName);
         if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
         renderer.renderPlayer();
-    },
-
-    moveLeft() {
-        this.x_current += -1;
-    },
-
-    moveRight() {
-        this.x_current += 1;
-    },
-
-    moveDown() {
-        this.y_current += 1;
-    },
-
-    moveUp() {
-        this.y_current += -1;
     },
 
     shootKeyDownHandler() {
@@ -178,8 +181,6 @@ export const player = {
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRunning) return;
-            if (!player.canMove) return;
             if (isPressBtn) return;
             if (!useBombBtn.includes(event.code)) return;
             explosion.explosionCall();
@@ -200,8 +201,6 @@ export const player = {
         let isPressBtn = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!game.gameIsRunning) return;
-            if (!player.canMove) return;
             if (isPressBtn) return;
             if (!useSuperAbilityBtn.includes(event.code)) return;
             player.useSuperAbility();
@@ -212,7 +211,14 @@ export const player = {
         });
     },
 
+    useSuperAbilityClickHandler() {
+        let lightningElementContainer = document.querySelector("#lightningElementContainer");
+        if (lightningElementContainer) lightningElementContainer.addEventListener("click", () => this.useSuperAbility());
+    },
+
     useSuperAbility() {
+        if (!game.gameIsRunning) return;
+        if (!player.canMove) return;
         let blockagesArray = blockageController.blockagesArray;
 
         if (player.superAbilityIsActivated) {

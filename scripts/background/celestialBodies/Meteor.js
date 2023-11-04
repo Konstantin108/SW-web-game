@@ -12,7 +12,7 @@ export class Meteor {
         this.imageName = helperController.getRandomElementInArray(this.imageNames);
 
         this.image = new Image();
-        this.image.src = `./images/${this.type}-${this.imageName}.png`;
+        this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
         this.imageWidth = this.size;
         this.imageHeight = this.size;
 
@@ -80,7 +80,7 @@ export class Meteor {
             this.imageName = helperController.getRandomElementInArray(this.imageNames);
 
             this.image = new Image();
-            this.image.src = `./images/${this.type}-${this.imageName}.png`;
+            this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
             this.imageWidth = this.size;
             this.imageHeight = this.size;
 

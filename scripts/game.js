@@ -132,5 +132,5 @@ export const game = {
 
 // если canvas отключен, то игра включается сразу же без загрузки
 // отключение canvas
-setTimeout(() => game.init(), game.gameLoadingSecondsCount);
-// game.init();
+// setTimeout(() => game.init(), game.gameLoadingSecondsCount);
+game.init();

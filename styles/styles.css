@@ -8,7 +8,6 @@
   touch-action: manipulation;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -20,7 +19,9 @@ body {
 }
 
 body {
-  background-color: black;
+  background-color: #453d4c;
+  background-image: url("../src/images/background-space.jpg");
+  background-repeat: no-repeat;
 }
 
 #wrapper {
@@ -192,7 +193,7 @@ td {
   display: flex;
   align-items: center;
   padding: 10px;
-  background-image: url("../images/background-rusty-iron.jpg");
+  background-image: url("../src/images/background-rusty-iron.jpg");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   background-size: 100%;
@@ -237,11 +238,11 @@ td {
 }
 
 .whiteScull {
-  background-image: url("../images/scull.png");
+  background-image: url("../src/images/scull.png");
 }
 
 .redScull {
-  background-image: url("../images/red-scull.png");
+  background-image: url("../src/images/red-scull.png");
   margin-bottom: 3px;
   scale: 1.1;
 }
@@ -259,11 +260,11 @@ td {
 }
 
 .availableHeart {
-  background-image: url("../images/heart.png");
+  background-image: url("../src/images/heart.png");
 }
 
 .lostHeart {
-  background-image: url("../images/lost-heart.png");
+  background-image: url("../src/images/lost-heart.png");
 }
 
 .heartScale {
@@ -279,7 +280,7 @@ td {
   }
 }
 #bombBar {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   position: absolute;
@@ -298,15 +299,15 @@ td {
 }
 
 .activeBomb {
-  background-image: url("../images/bomb.png");
+  background-image: url("../src/images/bomb.png");
 }
 
 .emptyBomb {
-  background-image: url("../images/empty-bomb.png");
+  background-image: url("../src/images/empty-bomb.png");
 }
 
 .redBomb {
-  background-image: url("../images/red-bomb.png");
+  background-image: url("../src/images/red-bomb.png");
 }
 
 #bonusShieldBar,
@@ -324,14 +325,14 @@ td {
 }
 
 #bonusShieldBar {
-  background-image: url("../images/background-rusty-iron.jpg");
+  background-image: url("../src/images/background-rusty-iron.jpg");
   background-color: saddlebrown;
   top: 66.1%;
   border-top-right-radius: 12px;
 }
 
 #bonusNewArrowTypeBar {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   background-color: saddlebrown;
   top: 82.5%;
   border-bottom-right-radius: 12px;
@@ -368,15 +369,15 @@ td {
 }
 
 .drillPickUpImage {
-  background-image: url("../images/bonus-drill.png");
+  background-image: url("../src/images/bonus-drill.png");
 }
 
 .trinityPickUpImage {
-  background-image: url("../images/bonus-trinity.png");
+  background-image: url("../src/images/bonus-trinity.png");
 }
 
 .shieldPickUpImage {
-  background-image: url("../images/bonus-shield.png");
+  background-image: url("../src/images/bonus-shield.png");
 }
 
 #superAbilityBar {
@@ -391,7 +392,7 @@ td {
 }
 
 #shineSectorsBox {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   display: block;
@@ -412,7 +413,7 @@ td {
 }
 
 #lightningElementContainer {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   border-bottom-left-radius: 12px;
@@ -433,15 +434,15 @@ td {
 }
 
 .lightningIsOn {
-  background-image: url("../images/lightning.png");
+  background-image: url("../src/images/lightning.png");
 }
 
 .lightningIsOff {
-  background-image: url("../images/empty-lightning.png");
+  background-image: url("../src/images/empty-lightning.png");
 }
 
 .lightningIsOut {
-  background-image: url("../images/red-lightning.png");
+  background-image: url("../src/images/red-lightning.png");
 }
 
 .player,
@@ -453,15 +454,15 @@ td {
 }
 
 .player {
-  background-image: url("../images/player.png");
+  background-image: url("../src/images/player.png");
 }
 
 .player-drill {
-  background-image: url("../images/player-drill.png");
+  background-image: url("../src/images/player-drill.png");
 }
 
 .player-trinity {
-  background-image: url("../images/player-trinity.png");
+  background-image: url("../src/images/player-trinity.png");
 }
 
 .player-shield {
@@ -491,11 +492,11 @@ td {
 }
 
 .boss {
-  background-image: url("../images/boss.png");
+  background-image: url("../src/images/boss.png");
 }
 
 .bossWhite {
-  background-image: url("../images/boss-white.png");
+  background-image: url("../src/images/boss-white.png");
 }
 
 .bossCreate {
@@ -586,7 +587,7 @@ td {
 #bossLivesBarMetalElement {
   display: flex;
   align-items: center;
-  background-image: url("../images/background-metal.jpg");
+  background-image: url("../src/images/background-metal.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-color: dimgrey;
@@ -662,74 +663,74 @@ td {
 }
 
 .blockage {
-  background-image: url("../images/blockage.png");
+  background-image: url("../src/images/blockage.png");
   opacity: 1;
   scale: 1;
 }
 
 .blockageWhite {
-  background-image: url("../images/blockage-white.png");
+  background-image: url("../src/images/blockage-white.png");
   opacity: 1;
   scale: 1;
 }
 
 .blockageBull {
-  background-image: url("../images/blockage-bull.png");
+  background-image: url("../src/images/blockage-bull.png");
   opacity: 1;
   scale: 2.2;
 }
 
 .blockageWhiteBull {
-  background-image: url("../images/blockage-white-bull.png");
+  background-image: url("../src/images/blockage-white-bull.png");
   opacity: 1;
   scale: 2.2;
 }
 
 .arrow {
-  background-image: url("../images/arrow.png");
+  background-image: url("../src/images/arrow.png");
 }
 
 .arrow-drill {
-  background-image: url("../images/arrow-drill.png");
+  background-image: url("../src/images/arrow-drill.png");
 }
 
 .arrow-trinity {
-  background-image: url("../images/arrow-trinity.png");
+  background-image: url("../src/images/arrow-trinity.png");
 }
 
 .enemyArrow {
-  background-image: url("../images/enemy-arrow.png");
+  background-image: url("../src/images/enemy-arrow.png");
   transition: 0.3s;
   transform: scale(0.2);
 }
 
 .enemyArrowBomb {
-  background-image: url("../images/enemy-arrow-bomb.png");
+  background-image: url("../src/images/enemy-arrow-bomb.png");
   transition: 0.3s;
 }
 
 .drill {
-  background-image: url("../images/bonus-drill.png");
+  background-image: url("../src/images/bonus-drill.png");
   scale: 1;
 }
 
 .trinity {
-  background-image: url("../images/bonus-trinity.png");
+  background-image: url("../src/images/bonus-trinity.png");
   scale: 1;
 }
 
 .shield {
-  background-image: url("../images/bonus-shield.png");
+  background-image: url("../src/images/bonus-shield.png");
   scale: 1;
 }
 
 .life {
-  background-image: url("../images/bonus-life.png");
+  background-image: url("../src/images/bonus-life.png");
   scale: 1;
 }
 
 .killAll {
-  background-image: url("../images/bonus-kill-all.png");
+  background-image: url("../src/images/bonus-kill-all.png");
   scale: 1;
 }
 
@@ -745,14 +746,14 @@ td {
 }
 
 .picked {
-  background-image: url("../images/picked.png");
+  background-image: url("../src/images/picked.png");
   background-color: rgba(0, 0, 0, 0);
   transform: scale(2);
 }
 
 .teleportationOut,
 .teleportationIn {
-  background-image: url("../images/teleportation.png");
+  background-image: url("../src/images/teleportation.png");
 }
 
 .teleportationOut {
@@ -764,12 +765,12 @@ td {
 }
 
 .hit {
-  background-image: url("../images/hit.png");
+  background-image: url("../src/images/hit.png");
   transform: scale(2);
 }
 
 .crash {
-  background-image: url("../images/crash.png");
+  background-image: url("../src/images/crash.png");
   transform: scale(1.8);
 }
 
@@ -808,7 +809,7 @@ td {
 }
 
 .explosion {
-  background-image: url("../images/explosion.png");
+  background-image: url("../src/images/explosion.png");
   background-position: center;
   background-repeat: no-repeat;
   background-color: rgb(255, 255, 255);
@@ -1166,7 +1167,7 @@ td {
 }
 
 .pauseSideOptionBlock {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   width: 80px;
   height: 70px;
   border-radius: 12px;
@@ -1234,7 +1235,7 @@ td {
   }
 }
 .pauseMenuSideBorder {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   width: 22px;
   height: 120px;
 }
@@ -1245,7 +1246,7 @@ td {
 }
 
 .pauseMenuSideBottomBracing {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   width: 34px;
   height: 51px;
   border-radius: 12px;
@@ -1253,7 +1254,7 @@ td {
 
 .pauseMenuHorizontalBorder {
   height: 15px;
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
 }
 
 .pauseMenuHorizontalBorderBigSize {
@@ -1388,7 +1389,7 @@ td {
   align-items: center;
 }
 
-.keyboardsBlockFlex {
+.flexBox {
   display: flex;
   align-items: center;
 }
@@ -1478,10 +1479,15 @@ td {
 }
 
 .anyTooltipMobileMode {
-  display: flex;
-  align-items: center;
   margin-top: 20px;
-  font-size: 35px;
+  font-size: 34px;
+}
+
+.tooltipAdditionalMessage {
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
 }
 
 .anyTooltipMobileMode > .tooltipElementText {
@@ -1490,7 +1496,7 @@ td {
 }
 
 #tooltipControlPanel {
-  background-image: url("../images/background-rusty-iron.jpg");
+  background-image: url("../src/images/background-rusty-iron.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   position: fixed;
@@ -1530,7 +1536,7 @@ td {
 }
 
 #circle {
-  background-image: url("../images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.jpg");
   border-radius: 100px;
   display: flex;
   justify-content: center;

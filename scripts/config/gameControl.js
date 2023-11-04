@@ -2,72 +2,72 @@ export const gameControl = {
     btnsSrc: new Map([
         ["KeyW", {
             label: null,
-            src: "./images/w.png",
+            src: "./src/images/w.png",
             alt: "w.png"
         }],
         ["KeyA", {
             label: null,
-            src: "./images/a.png",
+            src: "./src/images/a.png",
             alt: "a.png"
         }],
         ["KeyS", {
             label: null,
-            src: "./images/s.png",
+            src: "./src/images/s.png",
             alt: "s.png"
         }],
         ["KeyD", {
             label: null,
-            src: "./images/d.png",
+            src: "./src/images/d.png",
             alt: "d.png"
         }],
         ["ArrowUp", {
             label: null,
-            src: "./images/up.png",
+            src: "./src/images/up.png",
             alt: "up.png"
         }],
         ["ArrowLeft", {
             label: null,
-            src: "./images/left.png",
+            src: "./src/images/left.png",
             alt: "left.png"
         }],
         ["ArrowDown", {
             label: null,
-            src: "./images/down.png",
+            src: "./src/images/down.png",
             alt: "down.png"
         }],
         ["ArrowRight", {
             label: null,
-            src: "./images/right.png",
+            src: "./src/images/right.png",
             alt: "right.png"
         }],
         ["Numpad0", {
             label: "num",
-            src: "./images/null.png",
+            src: "./src/images/null.png",
             alt: "null.png"
         }],
         ["Space", {
             label: null,
-            src: "./images/space.png",
+            src: "./src/images/space.png",
             alt: "space.png"
         }],
         ["ControlLeft", {
             label: "left",
-            src: "./images/ctrl.png",
+            src: "./src/images/ctrl.png",
             alt: "ctrl.png"
         }],
         ["ControlRight", {
             label: "right",
-            src: "./images/ctrl.png",
+            src: "./src/images/ctrl.png",
             alt: "ctrl.png"
         }],
         ["Escape", {
             label: null,
-            src: "./images/esc.png",
+            src: "./src/images/esc.png",
             alt: "esc.png"
         }],
         ["Pause", {
             label: null,
-            src: "./images/pause.png",
+            src: "./src/images/pause.png",
             alt: "pause.png"
         }]
     ]),
@@ -75,37 +75,37 @@ export const gameControl = {
     touchesSrc: new Map([
         ["touchArrowUp", {
             label: null,
-            src: "./images/touch-arrow-up.png",
+            src: "./src/images/touch-arrow-up.png",
             alt: "touch-arrow-up.png"
         }],
         ["touchArrowLeft", {
             label: null,
-            src: "./images/touch-arrow-left.png",
+            src: "./src/images/touch-arrow-left.png",
             alt: "touch-arrow-left.png"
         }],
         ["touchArrowDown", {
             label: null,
-            src: "./images/touch-arrow-down.png",
+            src: "./src/images/touch-arrow-down.png",
             alt: "touch-arrow-down.png"
         }],
         ["touchArrowRight", {
             label: null,
-            src: "./images/touch-arrow-right.png",
+            src: "./src/images/touch-arrow-right.png",
             alt: "touch-arrow-right.png"
         }],
-        ["touchFinger", {
+        ["touchFingerLeft", {
             label: null,
-            src: "./images/touch-finger.png",
-            alt: "touch-finger.png"
+            src: "./src/images/touch-finger-left.png",
+            alt: "touch-finger-left.png"
         }],
         ["touchUseSuperAbilityBtn", {
             label: null,
-            src: "./images/lightning.png",
+            src: "./src/images/lightning.png",
             alt: "lightning.png"
         }],
         ["touchUseBombBtn", {
             label: null,
-            src: "./images/bomb.png",
+            src: "./src/images/bomb.png",
             alt: "bomb.png"
         }]
     ]),
@@ -138,6 +138,7 @@ export const gameControl = {
                     positionClass: "possibleDirectionsDesktopMode",
                     imageClass: "",
                     tooltipBlockClass: "oneKeyboardBlockGrid",
+                    allBlockStyle: "",
                     keyboards: [
                         {
                             units: [
@@ -157,13 +158,15 @@ export const gameControl = {
                         }
                     ],
                     prologue: null,
-                    text: "перемещение"
+                    text: "перемещение",
+                    additionalMessage: null,
                 },
                 tooltipMobileMode: {
                     keyboardsBlockClass: "",
                     positionClass: "anyTooltipMobileMode",
                     imageClass: "tooltipImage",
                     tooltipBlockClass: "oneKeyboardBlockFlex",
+                    allBlockStyle: "flexBox",
                     keyboards: [{
                         units: [
                             this.touchesSrc.get("touchArrowUp"),
@@ -173,9 +176,10 @@ export const gameControl = {
                         ]
                     }],
                     prologue: "используйте свайпы",
-                    text: "для перемещения"
+                    text: "для перемещения",
+                    additionalMessage: "при движении работает автострельба",
                 },
-                description: "перемещение корабля игрока по карте"
+                description: "перемещение корабля игрока по карте",
             },
             {
                 name: "shootBtnsArray",
@@ -185,21 +189,25 @@ export const gameControl = {
                     positionClass: "shootBtnsArrayDesktopMode",
                     imageClass: "",
                     tooltipBlockClass: "",
+                    allBlockStyle: "",
                     keyboards: [
                         {units: [this.btnsSrc.get("Numpad0")]},
                         {units: [this.btnsSrc.get("Space")]}
                     ],
                     prologue: null,
-                    text: "выстрел"
+                    text: "выстрел",
+                    additionalMessage: null,
                 },
                 tooltipMobileMode: {
                     keyboardsBlockClass: "",
                     positionClass: "anyTooltipMobileMode",
                     imageClass: "tooltipImage",
                     tooltipBlockClass: "",
-                    keyboards: [{units: [this.touchesSrc.get("touchFinger")]}],
-                    prologue: "коснитесь экрана",
-                    text: "чтобы выстрелить"
+                    allBlockStyle: "flexBox",
+                    keyboards: [{units: [this.touchesSrc.get("touchFingerLeft")]}],
+                    prologue: "или коснитесь экрана",
+                    text: "чтобы выстрелить",
+                    additionalMessage: null,
                 },
                 description: "выстрел"
             },
@@ -211,18 +219,22 @@ export const gameControl = {
                     positionClass: "useSuperAbilityBtnDesktopMode",
                     imageClass: "",
                     tooltipBlockClass: "",
+                    allBlockStyle: "",
                     keyboards: [{units: [this.btnsSrc.get("ControlLeft")]}],
                     prologue: null,
-                    text: "суперспособность"
+                    text: "суперспособность",
+                    additionalMessage: null,
                 },
                 tooltipMobileMode: {
                     keyboardsBlockClass: "",
                     positionClass: "anyTooltipMobileMode",
                     imageClass: "tooltipImage",
                     tooltipBlockClass: "",
+                    allBlockStyle: "flexBox",
                     keyboards: [{units: [this.touchesSrc.get("touchUseSuperAbilityBtn")]}],
                     prologue: "коснитесь иконки",
-                    text: "чтобы использовать суперспособность"
+                    text: "или используйте двойной тап",
+                    additionalMessage: "чтобы активировать суперспособность",
                 },
                 description: "использовать суперспособность"
             },
@@ -234,18 +246,22 @@ export const gameControl = {
                     positionClass: "useBombBtnDesktopMode",
                     imageClass: "",
                     tooltipBlockClass: "",
+                    allBlockStyle: "",
                     keyboards: [{units: [this.btnsSrc.get("ControlRight")]}],
                     prologue: null,
-                    text: "использовать бомбу"
+                    text: "использовать бомбу",
+                    additionalMessage: null,
                 },
                 tooltipMobileMode: {
                     keyboardsBlockClass: "",
                     positionClass: "anyTooltipMobileMode",
                     imageClass: "tooltipImageBig",
                     tooltipBlockClass: "",
+                    allBlockStyle: "flexBox",
                     keyboards: [{units: [this.touchesSrc.get("touchUseBombBtn")]}],
                     prologue: "коснитесь иконки",
-                    text: "для активации бомбы"
+                    text: "или коснитесь экрана двумя пальцами",
+                    additionalMessage: "для активации бомбы",
                 },
                 description: "использовать бомбу"
             },
@@ -253,16 +269,18 @@ export const gameControl = {
                 name: "pauseBtnsArray",
                 btns: ["Escape", "Pause"],
                 tooltip: {
-                    keyboardsBlockClass: "keyboardsBlockFlex",
+                    keyboardsBlockClass: "flexBox",
                     positionClass: "pauseBtnsArrayDesktopMode",
                     imageClass: "",
                     tooltipBlockClass: "",
+                    allBlockStyle: "",
                     keyboards: [
                         {units: [this.btnsSrc.get("Escape")]},
                         {units: [this.btnsSrc.get("Pause")]}
                     ],
                     prologue: null,
-                    text: "остановить игру"
+                    text: "остановить игру",
+                    additionalMessage: null,
                 },
                 tooltipMobileMode: null,
                 description: "вызов меню паузы"

@@ -37,7 +37,7 @@ export const config = {
     tip_useBombBtnShown: false,
     tip_pauseBtnsArrayShown: false,
     possibleDirectionsShowDelaySeconds: 2000,
-    shootBtnsArrayShowDelaySeconds: 3000,
+    shootBtnsArrayShowDelaySeconds: 4000,
     useSuperAbilityBtnShowDelaySeconds: 1000,
     useBombBtnShowDelaySeconds: 1000,
     pauseBtnsArrayShowDelaySeconds: 11000,

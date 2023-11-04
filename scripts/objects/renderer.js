@@ -493,6 +493,8 @@ export const renderer = {
             lightningElement.classList.add("lightningIsOut");
             setTimeout(() => this.renderSuperAbilityBar(), 200);
         }
+
+        player.useSuperAbilityClickHandler();
     },
 
     renderSuperAbilityBarActivatedByCheat(chargedByCheatForOneTime = false) {
@@ -513,6 +515,13 @@ export const renderer = {
         let lightningElement = document.querySelector("#lightningElement");
         lightningElement.classList.remove("lightningIsOff");
         lightningElement.classList.add("lightningIsOn");
+
+        player.useSuperAbilityClickHandler();
+
+        let useSuperAbilityBtnGameControlObject = helperController.getObjectByName(config.gameControl, "useSuperAbilityBtn");
+        tooltipController.tooltipCreateTimerIdsArray.push(setTimeout(() => {
+            tooltipController.tooltipCreateAndDestroy(useSuperAbilityBtnGameControlObject);
+        }, this.useSuperAbilityBtnShowDelaySeconds));
     },
 
     renderLivesBar() {  // если больше 5 жизней то будет отрисовано простое табло
@@ -866,6 +875,7 @@ export const renderer = {
         let placeForTooltip = null;
         let dataTooltip = null;
         let tooltipDiv = null;
+        let tooltipKeyboardsCount = null;
         let tooltipElement = "";
         let tooltipClasses = "tooltip ";
 
@@ -877,13 +887,15 @@ export const renderer = {
             dataTooltip = data.tooltip;
         }
 
-        let tooltipKeyboardsCount = dataTooltip.keyboards.length;
+        if (dataTooltip.keyboards) tooltipKeyboardsCount = dataTooltip.keyboards.length;
 
         tooltipClasses += `${config.menuColor} `;
         tooltipClasses += dataTooltip.positionClass;
         if (animation) tooltipClasses += " tooltipAnimationIn";
 
-        if (dataTooltip.prologue) tooltipElement = `<p class="infoLabel tooltipElementText">
+        tooltipElement = `<div class="${dataTooltip.allBlockStyle}">`;
+
+        if (dataTooltip.prologue) tooltipElement += `<p class="infoLabel tooltipElementText">
                                                         ${dataTooltip.prologue}
                                                     </p>`;
 
@@ -924,6 +936,12 @@ export const renderer = {
         tooltipElement += `<p class="infoLabel tooltipElementText">
                                 ${dataTooltip.text}
                            </p>`;
+
+        tooltipElement += "</div>";
+
+        if (dataTooltip.additionalMessage) tooltipElement += `<p class="infoLabel tooltipAdditionalMessage">
+                                                                   ${dataTooltip.additionalMessage}
+                                                              </p>`;
 
         tooltipDiv = document.querySelector(`#${data.name}`);
         if (tooltipDiv) placeForTooltip.removeChild(tooltipDiv);
