@@ -1,7 +1,7 @@
 import {helperController} from "../../controllers/helperController.js";
 
 export class Star {
-    constructor(x, y, canvasHeight, context, possiblePoitionsOnX, possiblePoitionsOnY) {
+    constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
         this.x = x;
         this.y = y;
         this.canvasHeight = canvasHeight;
@@ -14,8 +14,8 @@ export class Star {
         this.imageWidth = this.size;
         this.imageHeight = this.size;
 
-        this.possiblePoitionsOnXMin = possiblePoitionsOnX.min;
-        this.possiblePoitionsOnXMax = possiblePoitionsOnX.max;
+        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
     }
 
     type = "star";
@@ -56,7 +56,7 @@ export class Star {
         this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
 
         if (this.y > this.canvasHeight) {
-            this.x = helperController.getRandomInt(this.possiblePoitionsOnXMin, this.possiblePoitionsOnXMax);
+            this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
             this.size = helperController.getRandomInt(this.minSize, this.maxSize);
             this.y = -this.size;
 

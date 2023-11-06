@@ -118,9 +118,9 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    inCenterTableNotifyTemplatePrint(message) {
+    inCenterTableNotifyTemplatePrint(message, className) {
         return `<div id="messageContainer">
-                    <div id="messageElement" class="${config.menuColor}">                                                      
+                    <div id="${className}" class="${config.menuColor}">                                                      
                         <strong>
                             ${message}
                         </strong>

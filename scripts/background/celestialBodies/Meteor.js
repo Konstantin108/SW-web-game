@@ -1,7 +1,7 @@
 import {helperController} from "../../controllers/helperController.js";
 
 export class Meteor {
-    constructor(x, y, canvasHeight, context, possiblePoitionsOnX, possiblePoitionsOnY) {
+    constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
         this.x = x;
         this.y = y;
         this.canvasHeight = canvasHeight;
@@ -16,11 +16,11 @@ export class Meteor {
         this.imageWidth = this.size;
         this.imageHeight = this.size;
 
-        this.possiblePoitionsOnXMin = possiblePoitionsOnX.min;
-        this.possiblePoitionsOnXMax = possiblePoitionsOnX.max;
+        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
 
-        this.possiblePoitionsOnYMin = possiblePoitionsOnY.min;
-        this.possiblePoitionsOnYMax = possiblePoitionsOnY.max;
+        this.possiblePositionsOnYMin = possiblePositionsOnY.min;
+        this.possiblePositionsOnYMax = possiblePositionsOnY.max;
     }
 
     type = "meteor";
@@ -71,7 +71,7 @@ export class Meteor {
         if (this.y === -this.size && helperController.randomAppearanceCelestialBody(this.appearanceChance)) return;
 
         if (this.y > this.canvasHeight) {
-            this.x = helperController.getRandomInt(this.possiblePoitionsOnXMin, this.possiblePoitionsOnXMax);
+            this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
             this.size = helperController.getRandomInt(this.minSize, this.maxSize);
             this.y = -this.size;
 
@@ -86,9 +86,9 @@ export class Meteor {
 
             if (this.noRotateNames.includes(this.imageName)) {
                 if (helperController.randomEvent(50)) {
-                    this.y = helperController.getRandomInt(this.possiblePoitionsOnYMin, this.possiblePoitionsOnYMax);
-                    if (this.imageName.split("-")[0] === "left") this.x = this.possiblePoitionsOnXMax;
-                    if (this.imageName.split("-")[0] === "right") this.x = this.possiblePoitionsOnXMin;
+                    this.y = helperController.getRandomInt(this.possiblePositionsOnYMin, this.possiblePositionsOnYMax);
+                    if (this.imageName.split("-")[0] === "left") this.x = this.possiblePositionsOnXMax;
+                    if (this.imageName.split("-")[0] === "right") this.x = this.possiblePositionsOnXMin;
                 }
             }
 

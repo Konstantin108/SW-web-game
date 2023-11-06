@@ -78,7 +78,7 @@ export const game = {
         this.animationBan = true;
         this.playerCanStopGame = false;
         delay !== 0 ? message = delay : message = "go";
-        if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message);
+        if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message, 1);
         if (delay > -1) {
             setTimeout(() => {
                 return this.startGameDelay(delay += -1, resumeGame);
@@ -124,7 +124,7 @@ export const game = {
 
         this.gameOver = true;
         win ? message = "you win" : message = "you lose";
-        renderer.renderInCenterTableNotify(message);
+        renderer.renderInCenterTableNotify(message, 1);
         touchController.disableTouch();
         setTimeout(() => pause.showStatistics(), 1100);
     }
@@ -132,5 +132,5 @@ export const game = {
 
 // если canvas отключен, то игра включается сразу же без загрузки
 // отключение canvas
-// setTimeout(() => game.init(), game.gameLoadingSecondsCount);
-game.init();
+setTimeout(() => game.init(), game.gameLoadingSecondsCount);
+// game.init();

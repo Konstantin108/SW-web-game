@@ -21,11 +21,11 @@ export const background = {
     slowStarsArray: null,
     starsArray: null,
     meteorsArray: null,
-    possiblePoitionsOnX: {
+    possiblePositionsOnX: {
         "min": -200,
         "max": canvas.width + 200
     },
-    possiblePoitionsOnY: {
+    possiblePositionsOnY: {
         "min": -200,
         "max": canvas.height + 200
     },
@@ -36,9 +36,9 @@ export const background = {
         let y = null;
 
         for (let i = 0; i < bodiesCount; i++) {
-            x = helperController.getRandomInt(this.possiblePoitionsOnX.max, this.possiblePoitionsOnX.min);
-            y = helperController.getRandomInt(this.possiblePoitionsOnY.max, this.possiblePoitionsOnY.min);
-            bodiesArray.push(new bodyType(x, y, canvas.height, context, this.possiblePoitionsOnX, this.possiblePoitionsOnY));
+            x = helperController.getRandomInt(this.possiblePositionsOnX.max, this.possiblePositionsOnX.min);
+            y = helperController.getRandomInt(this.possiblePositionsOnY.max, this.possiblePositionsOnY.min);
+            bodiesArray.push(new bodyType(x, y, canvas.height, context, this.possiblePositionsOnX, this.possiblePositionsOnY));
         }
         return bodiesArray;
     },
@@ -53,7 +53,7 @@ export const background = {
 
     animate() {
         // отключение canvas
-        return;
+        // return;
 
         if (background.gameIsInitialized) {
             if (!game.gameIsRunning) {

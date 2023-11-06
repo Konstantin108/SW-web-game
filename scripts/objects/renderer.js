@@ -577,14 +577,14 @@ export const renderer = {
         removeTargets.forEach(removeTarget => removeTarget.classList.remove(`${selector}`));
     },
 
-    renderInCenterTableNotify(message) {
+    renderInCenterTableNotify(message, hideDelaySecondsCount, className = "messageElement") {
         let table = document.querySelector("table");
         let messageElement = null;
 
-        table.insertAdjacentHTML("afterbegin", templatePrinter.inCenterTableNotifyTemplatePrint(message));
+        table.insertAdjacentHTML("afterbegin", templatePrinter.inCenterTableNotifyTemplatePrint(message, className));
 
         messageElement = document.querySelector("#messageContainer");
-        if (messageElement) setTimeout(() => table.removeChild(messageElement), 1000);
+        if (messageElement) setTimeout(() => table.removeChild(messageElement), hideDelaySecondsCount * 1000);
     },
 
     renderPauseMenu() {

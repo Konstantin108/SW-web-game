@@ -149,7 +149,7 @@ export const progressController = {
         let playerCantStopGameTime = 2000;
 
         game.playerCanStopGame = false;
-        renderer.renderInCenterTableNotify(message);
+        renderer.renderInCenterTableNotify(message, 1);
         helperController.removeAllIntervalTimers(blockageController.blockageTimerIdsArray);
         blockageController.blockageCreate(blockagesCount);
         blockageController.blockageMove(blockageController.blockagesArray);
@@ -160,7 +160,7 @@ export const progressController = {
         if (!game.gameIsRunning) return;
 
         boss.bossAnimationIsRunningNow = true;
-        setTimeout(() => renderer.renderInCenterTableNotify("boss"), 1000);
+        setTimeout(() => renderer.renderInCenterTableNotify("boss", 1), 1000);
         setTimeout(() => {
             explosion.explode(false);
             bonusController.destroyAllBonuses();

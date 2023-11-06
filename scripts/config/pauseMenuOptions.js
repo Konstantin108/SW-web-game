@@ -68,13 +68,13 @@ export const pauseMenuOptions = {
                 referer: false
             },
             {
-                name: "confirmСhoice",
+                name: "confirmChoice",
                 title: "да",
                 actionType: "requestToServerOption",
                 renderSector: [
                     "confirmSector"
                 ],
-                id: "confirmСhoice",
+                id: "confirmChoice",
                 classes: [
                     "pauseMenuBtn"
                 ],

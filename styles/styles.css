@@ -19,9 +19,7 @@ body {
 }
 
 body {
-  background-color: #453d4c;
-  background-image: url("../src/images/background-space.jpg");
-  background-repeat: no-repeat;
+  background-color: black;
 }
 
 #wrapper {
@@ -837,8 +835,9 @@ td {
 
 #messageElement {
   font-style: italic;
-  font-size: 124px;
+  text-align: center;
   text-transform: uppercase;
+  font-size: 124px;
   animation: numberIn 0.3s, numberOut 0.3s 0.8s;
 }
 
