@@ -10,6 +10,7 @@ import {pause} from "./pause.js";
 import {background} from "../background/background.js";
 import {tooltipController} from "../controllers/tooltipController.js";
 import {localStorageController} from "../controllers/localStorageController.js";
+import {touchController} from "../controllers/touchController.js";
 
 export const debugPanel = {
     cheats: config.cheats,
@@ -78,14 +79,17 @@ export const debugPanel = {
             case "tooltipController":
                 this.objectsInfoShow(element, tooltipController);
                 break;
+            case "touchController":
+                this.objectsInfoShow(element, touchController);
+                break;
             case "background":
                 this.objectsInfoShow(element, background);
                 break;
-            case "pause":
-                this.objectsInfoShow(element, pause);
-                break;
             case "cheatsInfo":
                 cheatsController.cheatsInfoForPlayer();
+                break;
+            case "pause":
+                this.objectsInfoShow(element, pause);
                 break;
             case "clearLocalStorage":
                 localStorageController.clearLocalStorage();
@@ -96,13 +100,13 @@ export const debugPanel = {
                 break;
             case "callBoss":
             case "killBoss":
-            case "toggleInfinityMode":
-            case "toggleInstantStart":
             case "playerArrowsObjects":
             case "enemyArrowsObjects":
             case "blockagesObjects":
             case "bonusesObjects":
             case "bossGetDamageInfo":
+            case "toggleInfinityMode":
+            case "toggleInstantStart":
                 cheat = helperController.getObjectByName(this.cheats, element);
                 message = cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
                 console.log(message);

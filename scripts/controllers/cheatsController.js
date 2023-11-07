@@ -437,17 +437,16 @@ export const cheatsController = {
         let activatedCheat = null;
 
         debugPanel[paramName] = this.standartToggleCheatAction(paramName, toggle);
-        if (!debugPanel[paramName]) {
-            config.cheatsActivated.forEach(cheatName => {
-                activatedCheat = helperController.getObjectByName(this.cheats, cheatName);
-                if (activatedCheat.debugTool) {
-                    this.activateCheat(activatedCheat, "off", activatedCheat.paramName);
-                    this.editCheatNamesArrayInGameConfig(true, activatedCheat);
-                }
-            });
-            debugPanelElement = document.querySelector("#debugPanel");
-            if (debugPanelElement) renderer.renderDebugPanel();
-        }
+        if (debugPanel[paramName]) return;
+        config.cheatsActivated.forEach(cheatName => {
+            activatedCheat = helperController.getObjectByName(this.cheats, cheatName);
+            if (activatedCheat.debugTool) {
+                this.activateCheat(activatedCheat, "off", activatedCheat.paramName);
+                this.editCheatNamesArrayInGameConfig(true, activatedCheat);
+            }
+        });
+        debugPanelElement = document.querySelector("#debugPanel");
+        if (debugPanelElement) renderer.renderDebugPanel();
     },
 
     getBonusForArbitaryTime(paramName, secondsCount) {
