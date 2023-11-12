@@ -35,7 +35,7 @@ export const game = {
         renderer.hideLoadingScreen();
         cheatsController.callCheatConsole();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
-        pause.pauseBtnClickHandler();
+        pause.pauseBtnKeyDownHandler();
         this.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanel();

@@ -37,6 +37,7 @@ export const renderer = {
         this.renderBonusBarElement("newArrowTypeBar");
         this.renderSuperAbilityBar();
         this.renderSuperAbilityBarActivatedByCheat();
+        setTimeout(() => this.renderGameStopOrPlayBtnTemplatePrint(true), 1000);
     },
 
     renderMap() {
@@ -984,7 +985,7 @@ export const renderer = {
 
         if (!toggle && !changeColorCheat && !pause) this.tooltipControlPanelOutTimerId = setTimeout(() => this.hideTooltipControlPanel(), 7000);
 
-        if (animation) animationClass = "tooltipControlPanelIn";
+        if (animation) animationClass = "fromBottomInClass";
         if (pause) {
             animationClass = "pauseElementAdd";
             if (this.tooltipControlPanelInTimerId) clearTimeout(this.tooltipControlPanelInTimerId);
@@ -1002,9 +1003,21 @@ export const renderer = {
 
         !pause ? animationClass = "tooltipControlPanelOut" : animationClass = "pauseElementRemove";
 
-        tooltipControlPanel.classList.remove("tooltipControlPanelIn");
+        tooltipControlPanel.classList.remove("fromBottomInClass");
         tooltipControlPanel.classList.add(animationClass);
         if (tooltipController.hideTooltipControlPanelAnimationTimerId) clearTimeout(tooltipController.hideTooltipControlPanelAnimationTimerId);
         tooltipController.hideTooltipControlPanelAnimationTimerId = setTimeout(() => this.body.removeChild(tooltipControlPanel), 180);
+    },
+
+    renderGameStopOrPlayBtnTemplatePrint(animation, gameIsRunning = true) {
+        let gameStopOrPlayBtnElement = document.querySelector("#gameStopOrPlayBtn");
+        let icon = null;
+        let animationClass = "";
+
+        gameIsRunning ? icon = `<i class="fas fa-pause pointerClass"></i>` : icon = `<i class="fas fa-play pointerClass"></i>`;
+        if (animation) animationClass = "fromBottomInClass";
+        if (gameStopOrPlayBtnElement) this.body.removeChild(gameStopOrPlayBtnElement);
+        this.body.insertAdjacentHTML("afterbegin", templatePrinter.gameStopOrPlayBtnTemplatePrint(icon, animationClass));
+        pause.pauseBtnClickHandler();
     }
 }

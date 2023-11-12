@@ -236,14 +236,24 @@ export const templatePrinter = {
     tooltipControlPanelTemplatePrint(text, bulb, animationClass) {
         return `<div id="tooltipControlPanel" class="${animationClass}">
                     <div id="tooltipControlPanelBox">
-                        <div id="circle">
-                            <div id="circleDisplay">
+                        <div class="circle">
+                            <div class="circleDisplay">
                                 ${bulb}
                             </div>
                         </div>
                         <button id="tooltipControlPanelBtn" class="${config.menuColor}">
                             ${text} подсказки
                         </button>
+                    </div>
+                </div>`;
+    },
+
+    gameStopOrPlayBtnTemplatePrint(icon, animationClass) {
+        return `<div id="gameStopOrPlayBtn" class="${animationClass}">
+                    <div class="circle">
+                        <div class="circleDisplay ${config.menuColor}">
+                            ${icon}
+                        </div>
                     </div>
                 </div>`;
     }

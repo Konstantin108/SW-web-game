@@ -18,9 +18,9 @@ body
 body
   // отключение canvas
   background-color: black
-//background-color: #453d4c
-//background-image: url("../src/images/background-space.jpg")
-//background-repeat: no-repeat
+  //background-color: #453d4c
+  //background-image: url("../src/images/background-space.jpg")
+  //background-repeat: no-repeat
 
 // экран загрузки и wrapper
 
@@ -1158,6 +1158,16 @@ td
     transform: rotate(0)
     opacity: 1
 
+#gameStopOrPlayBtn
+  position: fixed
+  right: 2%
+  bottom: 2%
+  z-index: 6
+  padding: 6px
+
+.pointerClass
+  cursor: pointer
+
 // стили tooltip и tooltipControlPanel
 
 #tooltipControlPanel,
@@ -1280,7 +1290,7 @@ td
   padding: 3px
   border-radius: 8px
 
-.tooltipControlPanelIn
+.fromBottomInClass
   animation: fromBottomIn .2s
 
 @keyframes fromBottomIn
@@ -1301,7 +1311,7 @@ td
 #tooltipControlPanelBox
   display: flex
 
-#circle
+.circle
   background-image: url("../src/images/background-rusty-iron2.jpg")
   border-radius: 100px
   display: flex
@@ -1312,7 +1322,7 @@ td
   scale: 1.7
   padding: 3px
 
-#circleDisplay
+.circleDisplay
   background-color: black
   border-radius: 100px
   display: flex

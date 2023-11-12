@@ -1360,6 +1360,18 @@ td {
     opacity: 1;
   }
 }
+#gameStopOrPlayBtn {
+  position: fixed;
+  right: 2%;
+  bottom: 2%;
+  z-index: 6;
+  padding: 6px;
+}
+
+.pointerClass {
+  cursor: pointer;
+}
+
 #tooltipControlPanel,
 #circle {
   background-color: saddlebrown;
@@ -1506,7 +1518,7 @@ td {
   border-radius: 8px;
 }
 
-.tooltipControlPanelIn {
+.fromBottomInClass {
   animation: fromBottomIn 0.2s;
 }
 
@@ -1534,7 +1546,7 @@ td {
   display: flex;
 }
 
-#circle {
+.circle {
   background-image: url("../src/images/background-rusty-iron2.jpg");
   border-radius: 100px;
   display: flex;
@@ -1546,7 +1558,7 @@ td {
   padding: 3px;
 }
 
-#circleDisplay {
+.circleDisplay {
   background-color: black;
   border-radius: 100px;
   display: flex;

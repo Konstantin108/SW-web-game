@@ -12,7 +12,7 @@ export const pause = {
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
 
-    pauseBtnClickHandler() {
+    pauseBtnKeyDownHandler() {
         let pauseBtnsArray = helperController.getObjectByName(this.gameControl, "pauseBtnsArray").btns;
 
         document.addEventListener("keydown", function (event) {
@@ -24,10 +24,21 @@ export const pause = {
         });
     },
 
+    pauseBtnClickHandler() {
+        let gameStopOrPlayBtnElement = document.querySelector("#gameStopOrPlayBtn");
+        if (gameStopOrPlayBtnElement) gameStopOrPlayBtnElement.addEventListener("click", () => {
+            if (pause.animationIsRunningNow) return;
+            if (game.gameOver) return;
+            pause.activeMenuSector = pause.menuStructure[0];
+            pause.showOrHidePauseMenu();
+        });
+    },
+
     showOrHidePauseMenu(resumeGameForce = false) {
         if (pause.animationIsRunningNow) return;
 
         let delay = 1500;
+        let gameIsRunningNow = null;
 
         if (!resumeGameForce) {
             if (!game.playerCanStopGame) return;
@@ -36,14 +47,17 @@ export const pause = {
 
         if (game.gameIsRunning) {
             game.stopGame();
+            gameIsRunningNow = false;
         } else {
             game.startGameDelay(game.startGameDelaySecondsCount, true);
             this.activeMenuSector = null;
+            gameIsRunningNow = true;
         }
 
         this.animationIsRunningNow = true;
         setTimeout(() => this.animationIsRunningNow = false, delay);
         renderer.renderPauseMenu();
+        renderer.renderGameStopOrPlayBtnTemplatePrint(false, gameIsRunningNow);
     },
 
     continueGameAction() {

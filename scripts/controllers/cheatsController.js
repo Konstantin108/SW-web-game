@@ -312,6 +312,8 @@ export const cheatsController = {
     },
 
     colorChange(paramName, color) {
+        if (game.animationBan) return;
+
         if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
             localStorageController.setParamToLocalStorage(paramName, color);
         } else {
@@ -323,6 +325,7 @@ export const cheatsController = {
         renderer.renderPauseMenuOptions();
         renderer.renderPauseMenuSideBlocksBtn("back");
         renderer.renderPauseMenuSideBlocksBtn("cross");
+        renderer.renderGameStopOrPlayBtnTemplatePrint(false, game.gameIsRunning);
         tooltipController.tooltipOnOrOff(false, false, true);
         tooltipController.tooltipsArray.forEach(tooltip => tooltip.show(false, true));
     },
