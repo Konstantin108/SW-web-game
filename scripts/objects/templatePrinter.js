@@ -77,7 +77,7 @@ export const templatePrinter = {
     },
 
     bombBarTemplatePrint(bomb) {
-        return `<div id="bombBar">
+        return `<div id="bombBar" class="touchActionOff">
                     ${bomb}
                 </div>`;
     },
@@ -106,9 +106,9 @@ export const templatePrinter = {
     },
 
     superAbilityBarTemplatePrint(sectors) {
-        return `<div id="superAbilityBar">
-                    <div id="lightningElementContainer">
-                        <div id="lightningElement" class="lightningIsOff"></div>
+        return `<div id="superAbilityBar" class="touchActionOff">
+                    <div id="lightningElementContainer" class="touchActionOff">
+                        <div id="lightningElement" class="lightningIsOff touchActionOff"></div>
                     </div>
                     <div id="shineSectorsContainer">
                         <div id="shineSectorsBox">

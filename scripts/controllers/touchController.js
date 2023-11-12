@@ -51,7 +51,11 @@ export const touchController = {
         this.hammer.get("tap").requireFailure("doubletap");
 
         this.hammer.on("tap doubletap", (event) => {
-            event.type === "doubletap" ? player.useSuperAbility() : player.shoot();
+            if (event.type === "doubletap") {
+                player.useSuperAbility();
+            } else {
+                if (!event.target.classList.contains("touchActionOff")) player.shoot();
+            }
         });
 
         this.hammer.on("tap2fingers", () => explosion.explosionCall());

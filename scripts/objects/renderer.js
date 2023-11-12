@@ -375,10 +375,10 @@ export const renderer = {
         let bomb = null;
 
         if (bombElement) table.removeChild(bombElement);
-        player.bombsCount < 1 ? bomb = `<div class="bomb emptyBomb"></div>` : bomb = `<div class="bomb activeBomb"></div>`;
+        player.bombsCount < 1 ? bomb = `<div class="bomb emptyBomb touchActionOff"></div>` : bomb = `<div class="bomb activeBomb touchActionOff"></div>`;
 
         if (!playerHasBomb) {
-            bomb = `<div class="bomb redBomb"></div>`;
+            bomb = `<div class="bomb redBomb touchActionOff"></div>`;
             setTimeout(() => this.renderBombBar(), 200);
         }
 
