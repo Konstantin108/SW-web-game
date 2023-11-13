@@ -17,8 +17,8 @@ export const touchController = {
         let deltaX = 0;
         let deltaY = 0;
 
-        document.addEventListener("dblclick", (event) => event.preventDefault());
-        document.addEventListener("mousedown", (event) => event.preventDefault());
+        document.addEventListener("dblclick", event => event.preventDefault());
+        document.addEventListener("mousedown", event => event.preventDefault());
 
         this.hammer = new Hammer.Manager(document.querySelector("body"));
         this.hammer.add(new Hammer.Pan());
