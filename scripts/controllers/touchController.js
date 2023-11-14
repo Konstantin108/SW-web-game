@@ -50,7 +50,7 @@ export const touchController = {
         this.hammer.get("doubletap").recognizeWith("tap");
         this.hammer.get("tap").requireFailure("doubletap");
 
-        this.hammer.on("tap doubletap", (event) => {
+        this.hammer.on("tap doubletap", event => {
             if (event.type === "doubletap") {
                 player.useSuperAbility();
             } else {
@@ -71,7 +71,7 @@ export const touchController = {
             this.timerId = null;
         });
 
-        this.hammer.on("panleft", (event) => {
+        this.hammer.on("panleft", event => {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
             if (Math.abs(event.deltaX - deltaX) <= threshold) return;
@@ -81,7 +81,7 @@ export const touchController = {
             deltaY = event.deltaY;
         });
 
-        this.hammer.on("panright", (event) => {
+        this.hammer.on("panright", event => {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
             if (Math.abs(event.deltaX - deltaX) <= threshold) return;
@@ -91,7 +91,7 @@ export const touchController = {
             deltaY = event.deltaY;
         });
 
-        this.hammer.on("pandown", (event) => {
+        this.hammer.on("pandown", event => {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
             if (Math.abs(event.deltaY - deltaY) <= threshold) return;
@@ -101,7 +101,7 @@ export const touchController = {
             deltaY = event.deltaY;
         });
 
-        this.hammer.on("panup", (event) => {
+        this.hammer.on("panup", event => {
             if (!game.gameIsRunning) return;
             if (!player.canMove) return;
             if (Math.abs(event.deltaY - deltaY) <= threshold) return;
