@@ -638,7 +638,7 @@ export const cheatsController = {
                                 if (config[cheat.paramName] === option) code += cheatActivated;
                             }
                             infoArray = this[cheat.optionsInfo];
-                            cheatsInfoObject[code] = `${cheat.descriptionForPlayer} (${infoArray.get(option)})`;
+                            cheatsInfoObject[code] = `${cheat.descriptionForPlayer} (${infoArray[option]})`;
                         });
                         break;
                     case "arbitaryValueCheat":

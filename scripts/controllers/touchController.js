@@ -4,11 +4,11 @@ import {config} from "../config/config.js";
 import {game} from "../game.js";
 
 export const touchController = {
-    arrowsSpeed: new Map([
-        ["arrow", config.arrowAutoShootSpeed],
-        ["arrow-drill", config.arrowDrillAutoShootSpeed],
-        ["arrow-trinity", config.arrowTrinityAutoShootSpeed]
-    ]),
+    arrowsSpeed: {
+        "arrow": config.arrowAutoShootSpeed,
+        "arrow-drill": config.arrowDrillAutoShootSpeed,
+        "arrow-trinity": config.arrowTrinityAutoShootSpeed
+    },
     hammer: null,
     timerId: null,
 
@@ -61,7 +61,7 @@ export const touchController = {
         this.hammer.on("tap2fingers", () => explosion.explosionCall());
 
         this.hammer.on("panstart", () => {
-            if (!this.timerId) this.timerId = setInterval(() => player.shoot(), touchController.setAutoShootSpeed());
+            if (!this.timerId) this.timerId = setInterval(() => player.shoot(), this.arrowsSpeed[player.arrowType]);
             deltaX = 0;
             deltaY = 0;
         });
@@ -123,10 +123,6 @@ export const touchController = {
     autoShoot() {
         if (!this.timerId) return
         clearInterval(this.timerId);
-        this.timerId = setInterval(() => player.shoot(), this.setAutoShootSpeed());
-    },
-
-    setAutoShootSpeed() {
-        return this.arrowsSpeed.get(player.arrowType);
+        this.timerId = setInterval(() => player.shoot(), this.arrowsSpeed[player.arrowType]);
     }
 }
