@@ -33,12 +33,12 @@ export const game = {
         renderer.render();
         // экран загрузки должен быть отключен, если отключен canvas
         renderer.hideLoadingScreen();
-        cheatsController.callCheatConsole();
+        cheatsController.callCheatConsoleKeyDownHandler();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         pause.pauseBtnKeyDownHandler();
         this.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
-        debugPanel.callDebugPanel();
+        debugPanel.callDebugPanelKeyDownHandler();
         touchController.initTouch();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);

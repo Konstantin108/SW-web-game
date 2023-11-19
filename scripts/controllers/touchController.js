@@ -2,6 +2,8 @@ import {player} from "../objects/player.js";
 import {explosion} from "../objects/explosion.js";
 import {config} from "../config/config.js";
 import {game} from "../game.js";
+import {cheatsController} from "./cheatsController.js";
+import {debugPanel} from "../objects/debugPanel.js";
 
 export const touchController = {
     arrowsSpeed: {
@@ -22,6 +24,7 @@ export const touchController = {
 
         this.hammer = new Hammer.Manager(document.querySelector("body"));
         this.hammer.add(new Hammer.Pan());
+        this.hammer.add(new Hammer.Swipe());
 
         this.hammer.add(new Hammer.Tap({
             event: "doubletap",
@@ -51,10 +54,10 @@ export const touchController = {
         this.hammer.get("tap").requireFailure("doubletap");
 
         this.hammer.on("tap doubletap", event => {
-            if (event.type === "doubletap") {
-                player.useSuperAbility();
-            } else {
+            if (event.type === "tap") {
                 if (!event.target.classList.contains("touchActionOff")) player.shoot();
+            } else {
+                player.useSuperAbility();
             }
         });
 
@@ -109,6 +112,40 @@ export const touchController = {
             player.move();
             deltaX = event.deltaX;
             deltaY = event.deltaY;
+        });
+
+        this.hammer.add(new Hammer.Swipe({
+            event: "swipeleft2fingers",
+            pointers: 2,
+            direction: Hammer.DIRECTION_LEFT
+        }));
+
+        this.hammer.add(new Hammer.Swipe({
+            event: "swiperight2fingers",
+            pointers: 2,
+            direction: Hammer.DIRECTION_RIGHT
+        }));
+
+        this.hammer.add(new Hammer.Swipe({
+            event: "swipedown2fingers",
+            pointers: 2,
+            direction: Hammer.DIRECTION_DOWN
+        }));
+
+        this.hammer.add(new Hammer.Swipe({
+            event: "swipeup2fingers",
+            pointers: 2,
+            direction: Hammer.DIRECTION_UP
+        }));
+
+        this.hammer.get("swipe").recognizeWith(this.hammer.get("pan"));
+
+        this.hammer.on("swipeleft2fingers swiperight2fingers", () => {
+            if (debugPanel.playerCanCallDebugPanel) debugPanel.callDebugPanel();
+        });
+
+        this.hammer.on("swipedown2fingers swipeup2fingers", () => {
+            if (cheatsController.playerCanCallCheatConsole) cheatsController.callCheatConsole();
         });
     },
 

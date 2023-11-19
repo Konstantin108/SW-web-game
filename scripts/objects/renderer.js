@@ -854,6 +854,7 @@ export const renderer = {
 
             cheatInput = document.querySelector("#cheatInput");
             setTimeout(() => cheatInput.focus(), 10);
+            if (mobileMode) cheatInput.addEventListener("click", () => cheatInput.focus());
         } else {
             cheatConsole = document.querySelector("#cheatConsole");
             cheatConsole.classList.add("cheatConsoleOut");

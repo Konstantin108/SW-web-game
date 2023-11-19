@@ -22,22 +22,27 @@ export const cheatsController = {
     cheatsInfinityActiveMode: "cheatsInfinityActiveMode",
     activatedCheatsParamsDataTempArray: new Map(),
     defaultConfigParamsArray: new Map(),
+    playerCanCallCheatConsole: true,
 
-    callCheatConsole() {
+    callCheatConsoleKeyDownHandler() {
         let showCheatConsoleBtn = helperController.getObjectByName(this.gameControl, "showCheatConsoleBtn").btns;
-        let playerCanCallCheatConsole = true;
-        let mobileMode = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!playerCanCallCheatConsole) return;
+            if (!cheatsController.playerCanCallCheatConsole) return;
             if (!showCheatConsoleBtn.includes(event.code)) return;
-            if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
-            playerCanCallCheatConsole = false;
-            renderer.renderCheatConsole(mobileMode);
-            cheatsController.inputCheat();
-            setTimeout(() => playerCanCallCheatConsole = true, 500);
-            mobileMode = false;
+            cheatsController.callCheatConsole();
         });
+    },
+
+    callCheatConsole() {
+        let mobileMode = false;
+
+        if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
+        this.playerCanCallCheatConsole = false;
+        renderer.renderCheatConsole(mobileMode);
+        cheatsController.inputCheat();
+        setTimeout(() => this.playerCanCallCheatConsole = true, 500);
+        mobileMode = false;
     },
 
     inputCheat() {

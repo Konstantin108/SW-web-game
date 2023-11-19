@@ -1030,6 +1030,7 @@ td {
   border: 1px solid #999;
   border-radius: 6px;
   user-select: none;
+  color: black;
 }
 
 .btnInputLabel {

@@ -16,27 +16,32 @@ export const debugPanel = {
     cheats: config.cheats,
     gameControl: config.gameControl,
     debugMode: null,
+    playerCanCallDebugPanel: true,
 
     debugModeStatusInit() {
         this.debugMode = config.debugMode;
     },
 
-    callDebugPanel() {
+    callDebugPanelKeyDownHandler() {
         let showDebugPanelBtn = helperController.getObjectByName(this.gameControl, "showDebugPanelBtn").btns;
-        let playerCanCallDebugPanel = true;
-        let mobileMode = false;
 
         document.addEventListener("keydown", function (event) {
-            if (!debugPanel.debugMode) return;
-            if (!playerCanCallDebugPanel) return;
+            if (!debugPanel.playerCanCallDebugPanel) return;
             if (!showDebugPanelBtn.includes(event.code)) return;
-            if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
-            playerCanCallDebugPanel = false;
-            renderer.renderDebugPanel(mobileMode);
-            debugPanel.clickOnDebugPanelElementBtn();
-            setTimeout(() => playerCanCallDebugPanel = true, 500);
-            mobileMode = false;
+            debugPanel.callDebugPanel();
         });
+    },
+
+    callDebugPanel() {
+        if (!debugPanel.debugMode) return;
+        let mobileMode = false;
+
+        if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
+        this.playerCanCallDebugPanel = false;
+        renderer.renderDebugPanel(mobileMode);
+        debugPanel.clickOnDebugPanelElementBtn();
+        setTimeout(() => this.playerCanCallDebugPanel = true, 500);
+        mobileMode = false;
     },
 
     clickOnDebugPanelElementBtn() {
