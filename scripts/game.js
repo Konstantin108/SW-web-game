@@ -31,7 +31,6 @@ export const game = {
         this.startGameDelaySet();
         background.gameIsInitialized = true;
         renderer.render();
-        // экран загрузки должен быть отключен, если отключен canvas
         renderer.hideLoadingScreen();
         cheatsController.callCheatConsoleKeyDownHandler();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
@@ -130,7 +129,5 @@ export const game = {
     }
 }
 
-// если canvas отключен, то игра включается сразу же без загрузки
-// отключение canvas
 setTimeout(() => game.init(), game.gameLoadingSecondsCount);
 // game.init();

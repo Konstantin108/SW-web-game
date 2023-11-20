@@ -242,7 +242,7 @@ td {
 .redScull {
   background-image: url("../src/images/red-scull.png");
   margin-bottom: 3px;
-  scale: 1.1;
+  transform: scale(1.1);
 }
 
 #heartsBar,
@@ -271,10 +271,10 @@ td {
 
 @keyframes scale {
   from {
-    scale: 1.2;
+    transform: scale(1.2);
   }
   to {
-    scale: 1;
+    transform: scale(1);
   }
 }
 #bombBar {
@@ -486,7 +486,7 @@ td {
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 1;
-  scale: 9;
+  transform: scale(9);
 }
 
 .boss {
@@ -514,7 +514,7 @@ td {
 .bossShieldOff::after {
   content: "-";
   color: #6565dc;
-  scale: 1.1;
+  transform: scale(1.1);
   position: absolute;
   left: 0;
   bottom: 0;
@@ -545,21 +545,21 @@ td {
 @keyframes onBossShield {
   from {
     width: 0;
-    scale: 0;
+    transform: scale(0);
     opacity: 0;
   }
   to {
     width: 50px;
-    scale: 1.1;
+    transform: scale(1.1);
     opacity: 1;
   }
 }
 @keyframes bossCreate {
   from {
-    transform: translate(0, -40px);
+    transform: translate(0, -240px) scale(9);
   }
   to {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(9);
   }
 }
 @keyframes disappears {
@@ -617,7 +617,7 @@ td {
 .disk {
   width: 14px;
   height: 40px;
-  scale: 1.3;
+  transform: scale(1.3);
 }
 
 .bossLivesBarShineSectorOnHide {
@@ -660,28 +660,32 @@ td {
   background-repeat: no-repeat;
 }
 
+.blockage,
+.blockageWhite {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.blockageBull,
+.blockageWhiteBull {
+  opacity: 1;
+  transform: scale(2.2);
+}
+
 .blockage {
   background-image: url("../src/images/blockage.png");
-  opacity: 1;
-  scale: 1;
 }
 
 .blockageWhite {
   background-image: url("../src/images/blockage-white.png");
-  opacity: 1;
-  scale: 1;
 }
 
 .blockageBull {
   background-image: url("../src/images/blockage-bull.png");
-  opacity: 1;
-  scale: 2.2;
 }
 
 .blockageWhiteBull {
   background-image: url("../src/images/blockage-white-bull.png");
-  opacity: 1;
-  scale: 2.2;
 }
 
 .arrow {
@@ -707,29 +711,32 @@ td {
   transition: 0.3s;
 }
 
+.drill,
+.trinity,
+.shield,
+.life,
+.killAll {
+  transform: scale(1);
+}
+
 .drill {
   background-image: url("../src/images/bonus-drill.png");
-  scale: 1;
 }
 
 .trinity {
   background-image: url("../src/images/bonus-trinity.png");
-  scale: 1;
 }
 
 .shield {
   background-image: url("../src/images/bonus-shield.png");
-  scale: 1;
 }
 
 .life {
   background-image: url("../src/images/bonus-life.png");
-  scale: 1;
 }
 
 .killAll {
   background-image: url("../src/images/bonus-kill-all.png");
-  scale: 1;
 }
 
 .picked,
@@ -769,7 +776,7 @@ td {
 
 .crash {
   background-image: url("../src/images/crash.png");
-  transform: scale(1.8);
+  scale: 1.8;
 }
 
 .superAbilityCenterLine {
@@ -853,11 +860,11 @@ td {
 }
 @keyframes numberOut {
   from {
-    scale: 1;
+    transform: scale(1);
     opacity: 1;
   }
   to {
-    scale: 1.2;
+    transform: scale(1.2);
     opacity: 0;
   }
 }
@@ -882,7 +889,7 @@ td {
 }
 
 .cheatConsoleMobileMode {
-  scale: 2;
+  transform: scale(2);
   left: 17%;
   top: 11%;
 }
@@ -952,10 +959,22 @@ td {
 
 @keyframes fromTopIn {
   from {
-    transform: translate(0, -176px);
+    transform: translate(0, -320px);
   }
   to {
     transform: translate(0, 0);
+  }
+}
+.cheatConsoleInMobileMode {
+  animation: fromTopInMobileMode 0.5s;
+}
+
+@keyframes fromTopInMobileMode {
+  from {
+    transform: translate(0, -320px) scale(2);
+  }
+  to {
+    transform: translate(0, 0) scale(2);
   }
 }
 .cheatConsoleOut {
@@ -967,7 +986,19 @@ td {
     transform: translate(0, 0);
   }
   to {
-    transform: translate(0, -176px);
+    transform: translate(0, -320px);
+  }
+}
+.cheatConsoleOutMobileMode {
+  animation: fromTopOutMobileMode 0.5s;
+}
+
+@keyframes fromTopOutMobileMode {
+  from {
+    transform: translate(0, 0) scale(2);
+  }
+  to {
+    transform: translate(0, -320px) scale(2);
   }
 }
 #debugPanel {
@@ -989,7 +1020,7 @@ td {
 }
 
 .debugPanelMobileMode {
-  scale: 1.4;
+  transform: scale(1.4);
   right: 9%;
   top: 15%;
 }
@@ -1062,10 +1093,22 @@ td {
 
 @keyframes debugPanelIn {
   from {
-    transform: translate(380px, 0);
+    transform: translate(640px, 0);
   }
   to {
     transform: translate(0, 0);
+  }
+}
+.debugPanelInMobileMode {
+  animation: debugPanelInMobileMode 0.5s;
+}
+
+@keyframes debugPanelInMobileMode {
+  from {
+    transform: translate(640px, 0) scale(1.4);
+  }
+  to {
+    transform: translate(0, 0) scale(1.4);
   }
 }
 .debugPanelOut {
@@ -1077,7 +1120,19 @@ td {
     transform: translate(0, 0);
   }
   to {
-    transform: translate(380px, 0);
+    transform: translate(640px, 0);
+  }
+}
+.debugPanelOutMobileMode {
+  animation: debugPanelOutMobileMode 0.5s;
+}
+
+@keyframes debugPanelOutMobileMode {
+  from {
+    transform: translate(0, 0) scale(1.4);
+  }
+  to {
+    transform: translate(640px, 0) scale(1.4);
   }
 }
 .pauseSideOptionBlock,
@@ -1138,11 +1193,11 @@ td {
 
 @keyframes pauseElementAdd {
   from {
-    scale: 0.98;
+    transform: scale(0.98);
     opacity: 0;
   }
   to {
-    scale: 1;
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -1152,11 +1207,11 @@ td {
 
 @keyframes pauseElementRemove {
   from {
-    scale: 1;
+    transform: scale(1);
     opacity: 1;
   }
   to {
-    scale: 0.98;
+    transform: scale(0.98);
     opacity: 0;
   }
 }
@@ -1266,7 +1321,7 @@ td {
   border-radius: 12px;
   min-width: 222px;
   min-height: 143px;
-  scale: 1.1;
+  transform: scale(1.1);
   background-color: black;
   text-align: center;
   padding-left: 46px;
@@ -1278,7 +1333,7 @@ td {
 .pauseMenuListBigSize {
   width: 351px;
   height: 278px;
-  scale: 1.08 !important;
+  transform: scale(1.08) !important;
 }
 
 .listFlexStyle {
@@ -1438,21 +1493,21 @@ td {
 
 @keyframes tooltipIn {
   from {
-    scale: 0.9;
+    transform: scale(0.9);
     opacity: 0;
   }
   to {
-    scale: 1;
+    transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes tooltipOut {
   from {
-    scale: 1;
+    transform: scale(1);
     opacity: 1;
   }
   to {
-    scale: 0.9;
+    transform: scale(0.9);
     opacity: 0;
   }
 }
@@ -1555,7 +1610,7 @@ td {
   align-items: center;
   width: 36px;
   height: 36px;
-  scale: 1.7;
+  transform: scale(1.7);
   padding: 3px;
 }
 
@@ -1567,7 +1622,7 @@ td {
   align-items: center;
   width: 33px;
   height: 33px;
-  scale: 1.1;
+  transform: scale(1.1);
 }
 
 .tooltipImage {

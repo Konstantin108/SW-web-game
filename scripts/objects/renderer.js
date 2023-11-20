@@ -774,17 +774,25 @@ export const renderer = {
     renderDebugPanel(mobileMode) {
         let debugPanel = null;
         let sizeClass = "debugPanelDesktopMode";
+        let inClass = "debugPanelIn";
+        let outClass = "debugPanelOut";
 
-        if (mobileMode) sizeClass = "debugPanelMobileMode";
+        if (mobileMode) {
+            sizeClass = "debugPanelMobileMode";
+            inClass = "debugPanelInMobileMode";
+        }
 
         if (!document.querySelector("#debugPanel")) {
             this.container.insertAdjacentHTML("beforeend", templatePrinter.debugPanelTemplatePrint(this.renderDebugPanelBtnsBlock(), sizeClass));
             debugPanel = document.querySelector("#debugPanel");
-            debugPanel.classList.add("debugPanelIn");
-            setTimeout(() => debugPanel.classList.remove("debugPanelIn"), 500);
+            debugPanel.classList.add(inClass);
+            setTimeout(() => debugPanel.classList.remove(inClass), 500);
         } else {
             debugPanel = document.querySelector("#debugPanel");
-            debugPanel.classList.add("debugPanelOut");
+
+            if (debugPanel.classList.contains("debugPanelMobileMode")) outClass = "debugPanelOutMobileMode";
+            debugPanel.classList.add(outClass);
+
             setTimeout(() => this.container.removeChild(debugPanel), 480);
         }
     },
@@ -843,21 +851,29 @@ export const renderer = {
         let cheatConsole = null;
         let cheatInput = null;
         let sizeClass = "cheatConsoleDesktopMode";
+        let inClass = "cheatConsoleIn";
+        let outClass = "cheatConsoleOut";
 
-        if (mobileMode) sizeClass = "cheatConsoleMobileMode";
+        if (mobileMode) {
+            sizeClass = "cheatConsoleMobileMode";
+            inClass = "cheatConsoleInMobileMode";
+        }
 
         if (!document.querySelector("#cheatConsole")) {
             this.container.insertAdjacentHTML("afterbegin", templatePrinter.cheatConsoleTemplatePrint(sizeClass));
             cheatConsole = document.querySelector("#cheatConsole");
-            cheatConsole.classList.add("cheatConsoleIn");
-            setTimeout(() => cheatConsole.classList.remove("cheatConsoleIn"), 500);
+            cheatConsole.classList.add(inClass);
+            setTimeout(() => cheatConsole.classList.remove(inClass), 500);
 
             cheatInput = document.querySelector("#cheatInput");
             setTimeout(() => cheatInput.focus(), 10);
             if (mobileMode) cheatInput.addEventListener("click", () => cheatInput.focus());
         } else {
             cheatConsole = document.querySelector("#cheatConsole");
-            cheatConsole.classList.add("cheatConsoleOut");
+
+            if (cheatConsole.classList.contains("cheatConsoleMobileMode")) outClass = "cheatConsoleOutMobileMode";
+            cheatConsole.classList.add(outClass);
+
             setTimeout(() => this.container.removeChild(cheatConsole), 480);
         }
     },
