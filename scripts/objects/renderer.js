@@ -521,7 +521,7 @@ export const renderer = {
 
         let useSuperAbilityBtnGameControlObject = helperController.getObjectByName(config.gameControl, "useSuperAbilityBtn");
         tooltipController.tooltipCreateTimerIdsArray.push(setTimeout(() => {
-            tooltipController.tooltipCreateAndDestroy(useSuperAbilityBtnGameControlObject);
+            setTimeout(() => tooltipController.tooltipCreateAndDestroy(useSuperAbilityBtnGameControlObject), config.startGameDelaySecondsCount * 1000 + 2100);
         }, this.useSuperAbilityBtnShowDelaySeconds));
     },
 

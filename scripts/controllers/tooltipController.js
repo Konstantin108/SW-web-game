@@ -61,10 +61,14 @@ export const tooltipController = {
         if (!tooltipControlPanelBtn) return;
 
         tooltipControlPanelBtn.addEventListener("mouseenter", () => {
-            if (renderer.tooltipControlPanelOutTimerId) clearTimeout(renderer.tooltipControlPanelOutTimerId);
+            if (renderer.tooltipControlPanelOutTimerId && !navigator.userAgent.toLowerCase().match(/mobile/i)) {
+                clearTimeout(renderer.tooltipControlPanelOutTimerId);
+            }
         });
         tooltipControlPanelBtn.addEventListener("mouseleave", () => {
-            renderer.tooltipControlPanelOutTimerId = setTimeout(() => renderer.hideTooltipControlPanel(), 3000);
+            if (!navigator.userAgent.toLowerCase().match(/mobile/i)) {
+                renderer.tooltipControlPanelOutTimerId = setTimeout(() => renderer.hideTooltipControlPanel(), 3000);
+            }
         });
     },
 
