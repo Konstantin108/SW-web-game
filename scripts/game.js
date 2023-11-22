@@ -38,7 +38,6 @@ export const game = {
         this.superAbilityStatusInit();
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanelKeyDownHandler();
-        touchController.initTouch();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
@@ -129,5 +128,6 @@ export const game = {
     }
 }
 
+touchController.initTouch();
 setTimeout(() => game.init(), game.gameLoadingSecondsCount);
 // game.init();
