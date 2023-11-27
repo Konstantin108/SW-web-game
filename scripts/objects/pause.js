@@ -3,6 +3,7 @@ import {game} from "../game.js";
 import {progressController} from "../controllers/progressController.js";
 import {config} from "../config/config.js";
 import {helperController} from "../controllers/helperController.js";
+import {audioController} from "../controllers/audioController.js";
 
 export const pause = {
     menuStructure: config.pauseMenuStructure,
@@ -11,6 +12,7 @@ export const pause = {
     activeMenuSector: null,
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
+    soundsMute: false,
 
     pauseBtnKeyDownHandler() {
         let pauseBtnsArray = helperController.getObjectByName(this.gameControl, "pauseBtnsArray").btns;
@@ -48,14 +50,17 @@ export const pause = {
         if (game.gameIsRunning) {
             game.stopGame();
             gameIsRunningNow = false;
+            this.soundsMute = true;
         } else {
             game.startGameDelay(game.startGameDelaySecondsCount, true);
             this.activeMenuSector = null;
             gameIsRunningNow = true;
+            this.soundsMute = false;
         }
 
         this.animationIsRunningNow = true;
         setTimeout(() => this.animationIsRunningNow = false, delay);
+        audioController.soundOnOrOff(gameIsRunningNow);
         renderer.renderPauseMenu();
         renderer.renderGameStopOrPlayBtnTemplatePrint(false, gameIsRunningNow);
     },

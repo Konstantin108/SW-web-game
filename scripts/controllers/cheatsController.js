@@ -331,6 +331,7 @@ export const cheatsController = {
         renderer.renderPauseMenuSideBlocksBtn("back");
         renderer.renderPauseMenuSideBlocksBtn("cross");
         renderer.renderGameStopOrPlayBtnTemplatePrint(false, game.gameIsRunning);
+        renderer.renderAudioControlBtnTemplatePrint();
         tooltipController.tooltipOnOrOff(false, false, true);
         tooltipController.tooltipsArray.forEach(tooltip => tooltip.show(false, true));
     },

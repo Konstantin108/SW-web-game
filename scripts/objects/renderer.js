@@ -8,6 +8,7 @@ import {boss} from "./boss.js";
 import {helperController} from "../controllers/helperController.js";
 import {pause} from "./pause.js";
 import {tooltipController} from "../controllers/tooltipController.js";
+import {audioController} from "../controllers/audioController.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -38,6 +39,7 @@ export const renderer = {
         this.renderSuperAbilityBar();
         this.renderSuperAbilityBarActivatedByCheat();
         setTimeout(() => this.renderGameStopOrPlayBtnTemplatePrint(true), 1000);
+        setTimeout(() => this.renderAudioControlBtnTemplatePrint(true), 1100);
     },
 
     renderMap() {
@@ -1027,14 +1029,32 @@ export const renderer = {
     },
 
     renderGameStopOrPlayBtnTemplatePrint(animation, gameIsRunning = true) {
-        let gameStopOrPlayBtnElement = document.querySelector("#gameStopOrPlayBtn");
+        let name = "gameStopOrPlayBtn";
+        let gameStopOrPlayBtnElement = document.querySelector(`#${name}`);
         let icon = null;
         let animationClass = "";
 
         gameIsRunning ? icon = `<i class="fas fa-pause pointerClass"></i>` : icon = `<i class="fas fa-play pointerClass"></i>`;
         if (animation) animationClass = "fromBottomInClass";
         if (gameStopOrPlayBtnElement) this.body.removeChild(gameStopOrPlayBtnElement);
-        this.body.insertAdjacentHTML("afterbegin", templatePrinter.gameStopOrPlayBtnTemplatePrint(icon, animationClass));
+        this.body.insertAdjacentHTML("afterbegin", templatePrinter.roundBtnTemplatePrint(name, icon, animationClass));
         pause.pauseBtnClickHandler();
+    },
+
+    renderAudioControlBtnTemplatePrint(animation = false) {
+        let name = "audioControlBtn";
+        let audioControlBtnElement = document.querySelector(`#${name}`);
+        let icon = null;
+        let animationClass = "";
+
+        if (audioController.sounds) {
+            icon = `<i class="fas fa-volume-up pointerClass touchActionOff"></i>`;
+        } else {
+            icon = `<i class="fas fa-volume-mute pointerClass touchActionOff rubrum"></i>`;
+        }
+        if (animation) animationClass = "fromBottomInClass";
+        if (audioControlBtnElement) this.body.removeChild(audioControlBtnElement);
+        this.body.insertAdjacentHTML("afterbegin", templatePrinter.roundBtnTemplatePrint(name, icon, animationClass));
+        audioController.soundOnOrOffClickHandler();
     }
 }

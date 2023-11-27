@@ -29,6 +29,7 @@ export const config = {
     debugMode: false,
     production: false,
     gameLoadingSecondsCount: 3000,
+    sounds: false,
     // подсказки
     tips: true,
     tip_possibleDirectionsShown: false,

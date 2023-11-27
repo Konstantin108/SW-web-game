@@ -248,10 +248,10 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    gameStopOrPlayBtnTemplatePrint(icon, animationClass) {
-        return `<div id="gameStopOrPlayBtn" class="${animationClass}">
-                    <div class="circle">
-                        <div class="circleDisplay ${config.menuColor}">
+    roundBtnTemplatePrint(name, icon, animationClass) {
+        return `<div id="${name}" class="touchActionOff ${animationClass}">
+                    <div class="circle touchActionOff">
+                        <div class="circleDisplay touchActionOff ${config.menuColor}">
                             ${icon}
                         </div>
                     </div>
