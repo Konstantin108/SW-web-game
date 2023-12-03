@@ -20,14 +20,16 @@ export const audioController = {
         let sourcePath = "";
 
         if (getRandomSource) {
-            source = helperController.getRandomElementAndIndexInArray(this.mainSoundThemes);
+            source = helperController.getRandomElementAndIndexInArray(this.mainSoundThemes.sources);
             sourcePath = this.path + source.element;
             this.sourceIndex = source.index;
             this.mainSoundThemeAudio = new Audio(sourcePath);
+            this.mainSoundThemeAudio.volume = this.mainSoundThemes.volume;
         } else {
-            this.sourceIndex >= this.mainSoundThemes.length - 1 ? this.sourceIndex = 0 : this.sourceIndex += 1;
-            sourcePath = this.path + this.mainSoundThemes[this.sourceIndex];
+            this.sourceIndex >= this.mainSoundThemes.sources.length - 1 ? this.sourceIndex = 0 : this.sourceIndex += 1;
+            sourcePath = this.path + this.mainSoundThemes.sources[this.sourceIndex];
             this.mainSoundThemeAudio = new Audio(sourcePath);
+            this.mainSoundThemeAudio.volume = this.mainSoundThemes.volume;
             this.play();
         }
         this.mainSoundThemeAudio.onended = () => this.init();

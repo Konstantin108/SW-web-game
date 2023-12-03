@@ -101,6 +101,12 @@ export const helperController = {
         return unit;
     },
 
+    isMobileDeviceCheck() {
+        let result = false;
+        if (navigator.userAgent.toLowerCase().match(/mobile/i)) result = true;
+        return result;
+    },
+
     getCenterMapOnY() {
         return config.mapSizeY % 2 === 0 ? config.mapSizeY / 2 : (config.mapSizeY - 1) / 2 + 1;
     },

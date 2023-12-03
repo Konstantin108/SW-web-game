@@ -37,7 +37,7 @@ export const cheatsController = {
     callCheatConsole() {
         let mobileMode = false;
 
-        if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
+        if (helperController.isMobileDeviceCheck()) mobileMode = true;
         this.playerCanCallCheatConsole = false;
         renderer.renderCheatConsole(mobileMode);
         cheatsController.inputCheat();

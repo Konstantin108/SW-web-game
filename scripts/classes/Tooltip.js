@@ -1,6 +1,7 @@
 import {renderer} from "../objects/renderer.js";
 import {tooltipController} from "../controllers/tooltipController.js";
 import {config} from "../config/config.js";
+import {helperController} from "../controllers/helperController.js";
 
 export class Tooltip {
     constructor(data) {
@@ -13,7 +14,7 @@ export class Tooltip {
         }
 
         let mobileMode = false;
-        if (navigator.userAgent.toLowerCase().match(/mobile/i)) {
+        if (helperController.isMobileDeviceCheck()) {
             if (!this.data.tooltipMobileMode) return;
             mobileMode = true;
             renderer.renderBlockForTooltipsInMobilModeTemplatePrint();

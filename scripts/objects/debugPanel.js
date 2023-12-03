@@ -36,7 +36,7 @@ export const debugPanel = {
         if (!debugPanel.debugMode) return;
         let mobileMode = false;
 
-        if (navigator.userAgent.toLowerCase().match(/mobile/i)) mobileMode = true;
+        if (helperController.isMobileDeviceCheck()) mobileMode = true;
         this.playerCanCallDebugPanel = false;
         renderer.renderDebugPanel(mobileMode);
         debugPanel.clickOnDebugPanelElementBtn();
@@ -45,7 +45,7 @@ export const debugPanel = {
     },
 
     clickOnDebugPanelElementBtn() {
-        let btns = document.querySelectorAll(".debugPanelButton");
+        let btns = document.querySelectorAll(".debugPanelBtn");
 
         btns.forEach(btn => {
             btn.addEventListener("click", function () {

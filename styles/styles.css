@@ -19,7 +19,9 @@ body {
 }
 
 body {
-  background-color: black;
+  background-color: #453d4c;
+  background-image: url("../src/images/background-space.jpg");
+  background-repeat: no-repeat;
 }
 
 #wrapper {

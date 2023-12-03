@@ -813,7 +813,7 @@ export const renderer = {
                                         <input id="${elem.name}"
                                                type="button"
                                                value="${elem.name}"
-                                               class="debugPanelButton btnLabel ${customClass}">
+                                               class="debugPanelBtn btnLabel ${customClass}">
                                      </div>`;
             } else {
                 debugElementsDiv += `<div>
@@ -821,7 +821,7 @@ export const renderer = {
                                                name="debug"
                                                type="checkbox"
                                                value="${elem.name}"
-                                               class="debugPanelButton btnInputElement"
+                                               class="debugPanelBtn btnInputElement"
                                                ${checked}>
                                         <label class="btnInputLabel" for="${elem.name}">
                                             ${elem.name}
