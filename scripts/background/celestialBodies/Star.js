@@ -7,7 +7,7 @@ export class Star {
         this.canvasHeight = canvasHeight;
         this.context = context;
 
-        this.imageName = helperController.getRandomElementInArray(this.imageNames);
+        this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
 
         this.image = new Image();
         this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
@@ -62,7 +62,7 @@ export class Star {
 
             this.speed = this.speedLimit / this.size;
 
-            this.imageName = helperController.getRandomElementInArray(this.imageNames);
+            this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
 
             this.image = new Image();
             this.image.src = `./src/images/${this.type}-${this.imageName}.png`;

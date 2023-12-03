@@ -896,6 +896,7 @@ export const renderer = {
         let dataTooltip = null;
         let tooltipDiv = null;
         let tooltipKeyboardsCount = null;
+        let path = "./src/images/";
         let tooltipElement = "";
         let tooltipClasses = "tooltip ";
 
@@ -934,8 +935,8 @@ export const renderer = {
                                                                                                 ${dataTooltip.keyboards[i].units[j].label}
                                                                                             </p>`;
 
-                        tooltipElement += `<img src="${dataTooltip.keyboards[i].units[j].src}"
-                                                alt="${dataTooltip.keyboards[i].units[j].alt}"
+                        tooltipElement += `<img src="${path}${dataTooltip.keyboards[i].units[j].src}"
+                                                alt="${dataTooltip.keyboards[i].units[j].src}"
                                                 class="${dataTooltip.imageClass}">`;
 
                         if (dataTooltip.keyboards[i].units[j].label) tooltipElement += "</div>";

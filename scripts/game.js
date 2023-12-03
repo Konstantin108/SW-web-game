@@ -16,6 +16,7 @@ import {pause} from "./objects/pause.js";
 import {background} from "./background/background.js";
 import {tooltipController} from "./controllers/tooltipController.js";
 import {touchController} from "./controllers/touchController.js";
+import {audioController} from "./controllers/audioController.js";
 
 export const game = {
     gameLoadingSecondsCount: config.gameLoadingSecondsCount,
@@ -36,6 +37,7 @@ export const game = {
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         pause.pauseBtnKeyDownHandler();
         this.superAbilityStatusInit();
+        audioController.init(true);
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanelKeyDownHandler();
         if (config.production) cheatsController.cheatsInfoForPlayer();
@@ -128,6 +130,6 @@ export const game = {
     }
 }
 
-touchController.initTouch();
+touchController.init();
 setTimeout(() => game.init(), game.gameLoadingSecondsCount);
 // game.init();

@@ -83,9 +83,12 @@ export const helperController = {
         return config.mapSizeX % 2 === 0 ? config.mapSizeX / 2 : (config.mapSizeX - 1) / 2 + 1;
     },
 
-    getRandomElementInArray(array) {
+    getRandomElementAndIndexInArray(array) {
         let index = Math.floor(Math.random() * array.length);
-        return array[index];
+        return {
+            element: array[index],
+            index: index
+        }
     },
 
     randomAppearanceCelestialBody(appearanceChance) {

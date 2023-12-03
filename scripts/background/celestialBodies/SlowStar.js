@@ -7,7 +7,7 @@ export class SlowStar {
         this.canvasHeight = canvasHeight;
         this.context = context;
 
-        this.imageName = helperController.getRandomElementInArray(this.imageNames);
+        this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
 
         this.image = new Image();
         this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
@@ -59,7 +59,7 @@ export class SlowStar {
             this.size = helperController.getRandomInt(this.minSize, this.maxSize);
             this.y = -this.size;
 
-            this.imageName = helperController.getRandomElementInArray(this.imageNames);
+            this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
 
             this.image = new Image();
             this.image.src = `./src/images/${this.type}-${this.imageName}.png`;

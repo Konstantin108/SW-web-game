@@ -128,16 +128,7 @@ export const debugPanel = {
     objectsInfoShow(elementName, showObjects, showCount = false) {
         let element = helperController.getObjectByName(config.debugPanelElements, elementName);
 
-        if (showCount) {
-            console.log(`${element.message} ${showObjects.length}`);
-        } else {
-            console.log(element.message);
-        }
-
-        if (Array.isArray(showObjects)) {
-            showObjects.forEach(elem => console.log(elem));
-        } else {
-            console.log(showObjects);
-        }
+        showCount ? console.log(`${element.message} ${showObjects.length}`) : console.log(element.message);
+        Array.isArray(showObjects) ? showObjects.forEach(elem => console.log(elem)) : console.log(showObjects);
     }
 }

@@ -1,113 +1,29 @@
 export const gameControl = {
     btnsSrc: {
-        "KeyW": {
-            label: null,
-            src: "./src/images/w.png",
-            alt: "w.png"
-        },
-        "KeyA": {
-            label: null,
-            src: "./src/images/a.png",
-            alt: "a.png"
-        },
-        "KeyS": {
-            label: null,
-            src: "./src/images/s.png",
-            alt: "s.png"
-        },
-        "KeyD": {
-            label: null,
-            src: "./src/images/d.png",
-            alt: "d.png"
-        },
-        "ArrowUp": {
-            label: null,
-            src: "./src/images/up.png",
-            alt: "up.png"
-        },
-        "ArrowLeft": {
-            label: null,
-            src: "./src/images/left.png",
-            alt: "left.png"
-        },
-        "ArrowDown": {
-            label: null,
-            src: "./src/images/down.png",
-            alt: "down.png"
-        },
-        "ArrowRight": {
-            label: null,
-            src: "./src/images/right.png",
-            alt: "right.png"
-        },
-        "Numpad0": {
-            label: "num",
-            src: "./src/images/null.png",
-            alt: "null.png"
-        },
-        "Space": {
-            label: null,
-            src: "./src/images/space.png",
-            alt: "space.png"
-        },
-        "ControlLeft": {
-            label: "left",
-            src: "./src/images/ctrl.png",
-            alt: "ctrl.png"
-        },
-        "ControlRight": {
-            label: "right",
-            src: "./src/images/ctrl.png",
-            alt: "ctrl.png"
-        },
-        "Escape": {
-            label: null,
-            src: "./src/images/esc.png",
-            alt: "esc.png"
-        },
-        "Pause": {
-            label: null,
-            src: "./src/images/pause.png",
-            alt: "pause.png"
-        }
+        "KeyW": {label: null, src: "w.png"},
+        "KeyA": {label: null, src: "a.png"},
+        "KeyS": {label: null, src: "s.png"},
+        "KeyD": {label: null, src: "d.png"},
+        "ArrowUp": {label: null, src: "up.png"},
+        "ArrowLeft": {label: null, src: "left.png"},
+        "ArrowDown": {label: null, src: "down.png"},
+        "ArrowRight": {label: null, src: "right.png",},
+        "Numpad0": {label: "num", src: "null.png"},
+        "Space": {label: null, src: "space.png"},
+        "ControlLeft": {label: "left", src: "ctrl.png"},
+        "ControlRight": {label: "right", src: "ctrl.png"},
+        "Escape": {label: null, src: "esc.png"},
+        "Pause": {label: null, src: "pause.png"}
     },
 
     touchesSrc: {
-        "touchArrowUp": {
-            label: null,
-            src: "./src/images/touch-arrow-up.png",
-            alt: "touch-arrow-up.png"
-        },
-        "touchArrowLeft": {
-            label: null,
-            src: "./src/images/touch-arrow-left.png",
-            alt: "touch-arrow-left.png"
-        },
-        "touchArrowDown": {
-            label: null,
-            src: "./src/images/touch-arrow-down.png",
-            alt: "touch-arrow-down.png"
-        },
-        "touchArrowRight": {
-            label: null,
-            src: "./src/images/touch-arrow-right.png",
-            alt: "touch-arrow-right.png"
-        },
-        "touchFingerLeft": {
-            label: null,
-            src: "./src/images/touch-finger-left.png",
-            alt: "touch-finger-left.png"
-        },
-        "touchUseSuperAbilityBtn": {
-            label: null,
-            src: "./src/images/lightning.png",
-            alt: "lightning.png"
-        },
-        "touchUseBombBtn": {
-            label: null,
-            src: "./src/images/bomb.png",
-            alt: "bomb.png"
-        }
+        "touchArrowUp": {label: null, src: "touch-arrow-up.png"},
+        "touchArrowLeft": {label: null, src: "touch-arrow-left.png"},
+        "touchArrowDown": {label: null, src: "touch-arrow-down.png"},
+        "touchArrowRight": {label: null, src: "touch-arrow-right.png"},
+        "touchFingerLeft": {label: null, src: "touch-finger-left.png"},
+        "touchUseSuperAbilityBtn": {label: null, src: "lightning.png"},
+        "touchUseBombBtn": {label: null, src: "bomb.png"}
     },
 
     // возможно добавить пункт для вывода игроку в разделе "управление и подсказки"

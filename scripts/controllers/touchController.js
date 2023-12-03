@@ -17,7 +17,7 @@ export const touchController = {
     hammerContainer: null,
     timerId: null,
 
-    initTouch() {
+    init() {
         let threshold = 50;
         let deltaX = 0;
         let deltaY = 0;

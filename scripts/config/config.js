@@ -4,6 +4,7 @@ import {cheats} from "./cheats.js";
 import {debugPanelElements} from "./debugPanelElements.js";
 import {pauseMenuOptions} from "./pauseMenuOptions.js";
 import {gameControl} from "./gameControl.js";
+import {soundSources} from "./soundSources.js";
 
 export const config = {
     // игра и игрок
@@ -30,6 +31,7 @@ export const config = {
     production: false,
     gameLoadingSecondsCount: 3000,
     sounds: false,
+    soundSources: soundSources.sourcesObject,
     // подсказки
     tips: true,
     tip_possibleDirectionsShown: false,
