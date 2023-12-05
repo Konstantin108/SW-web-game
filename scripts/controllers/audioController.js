@@ -6,10 +6,10 @@ import {helperController} from "./helperController.js";
 export const audioController = {
     sounds: config.sounds,
     mainSoundThemes: config.soundSources.mainSoundThemes,
+    soundEffects: config.soundSources.soundEffects,
     path: "../../src/sounds/",
     mainSoundThemeAudio: null,
     sourceIndex: null,
-    soundIsPlaying: false,
 
     // когда игра закончилась - музыка выключается, возможно включать новый трэк (разный для победы или проигрыша)
     // в главном меню будет своя музыкальная тема (возможно один короткий зацикленный трэк)
@@ -30,21 +30,17 @@ export const audioController = {
             sourcePath = this.path + this.mainSoundThemes.sources[this.sourceIndex];
             this.mainSoundThemeAudio = new Audio(sourcePath);
             this.mainSoundThemeAudio.volume = this.mainSoundThemes.volume;
-            this.play();
+            this.play(this.mainSoundThemeAudio);
         }
         this.mainSoundThemeAudio.onended = () => this.init();
     },
 
-    play() {
-        let promise = this.mainSoundThemeAudio.play();
-        promise.then(() => {
-            this.soundIsPlaying = true;
-        }).catch(error => console.log(error));
-    },
-
     soundOnOrOffClickHandler() {
         let audioControlBtn = document.querySelector("#audioControlBtn");
-        if (audioControlBtn) audioControlBtn.addEventListener("click", () => this.soundOnOrOff());
+        if (audioControlBtn) audioControlBtn.addEventListener("click", () => {
+            this.soundOnOrOff();
+            this.playSoundEffect("roundBtn");
+        });
     },
 
     soundOnOrOff(soundStatus = null) {
@@ -57,12 +53,20 @@ export const audioController = {
             action = soundStatus;
         }
 
-        if (action && this.sounds && !pause.soundsMute) {
-            this.play();
-        } else {
-            this.mainSoundThemeAudio.pause();
-            this.soundIsPlaying = false;
-        }
+        action && this.sounds && !pause.soundsMute ? this.play(this.mainSoundThemeAudio) : this.mainSoundThemeAudio.pause();
         renderer.renderAudioControlBtnTemplatePrint();
+    },
+
+    play(audio) {
+        let promise = audio.play();
+        promise.then().catch(error => console.log(error));
+    },
+
+    playSoundEffect(key) {
+        if (!this.sounds) return;
+        let sourcePath = this.path + this.soundEffects.sources[key];
+        let soundEffect = new Audio(sourcePath);
+        soundEffect.volume = this.soundEffects.volume;
+        this.play(soundEffect);
     }
 }

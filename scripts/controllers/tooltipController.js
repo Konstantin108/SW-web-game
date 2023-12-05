@@ -4,6 +4,7 @@ import {renderer} from "../objects/renderer.js";
 import {game} from "../game.js";
 import {helperController} from "./helperController.js";
 import {localStorageController} from "./localStorageController.js";
+import {audioController} from "./audioController.js";
 
 export const tooltipController = {
     gameControl: config.gameControl,
@@ -51,7 +52,10 @@ export const tooltipController = {
         let tooltipControlPanelBtn = document.querySelector("#tooltipControlPanelBtn");
         if (!tooltipControlPanelBtn) return;
 
-        tooltipControlPanelBtn.addEventListener("click", () => this.tooltipOnOrOff(false, true, false));
+        tooltipControlPanelBtn.addEventListener("click", () => {
+            this.tooltipOnOrOff(false, true, false);
+            audioController.playSoundEffect("roundBtn");
+        });
     },
 
     tooltipControlPanelMouseEnterHandler() {

@@ -59,7 +59,7 @@ export class EnemyArrow {
 
         for (let i = 0; i <= enemyArrowsArray.length; i++) {
             if (enemyArrowsArray[i]) {
-                let lastEnemyArrowInArray = enemyArrowsArray[enemyArrowsArray.length - 1];
+                let lastEnemyArrowInArray = enemyArrowsArray.at(-1);
                 if (lastEnemyArrowInArray) {
                     if (lastEnemyArrowInArray.id - enemyArrowsArray[i].id > 15) enemyArrowsArray.splice(i, 1);
                 }

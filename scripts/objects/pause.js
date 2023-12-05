@@ -41,6 +41,7 @@ export const pause = {
 
         let delay = 1500;
         let gameIsRunningNow = null;
+        let soundEffectKey = "";
 
         if (!resumeGameForce) {
             if (!game.playerCanStopGame) return;
@@ -50,16 +51,19 @@ export const pause = {
         if (game.gameIsRunning) {
             game.stopGame();
             gameIsRunningNow = false;
+            soundEffectKey = "pauseShowMenu";
             this.soundsMute = true;
         } else {
             game.startGameDelay(game.startGameDelaySecondsCount, true);
             this.activeMenuSector = null;
             gameIsRunningNow = true;
+            soundEffectKey = "pauseHideMenu";
             this.soundsMute = false;
         }
 
         this.animationIsRunningNow = true;
         setTimeout(() => this.animationIsRunningNow = false, delay);
+        audioController.playSoundEffect(soundEffectKey);
         audioController.soundOnOrOff(gameIsRunningNow);
         renderer.renderPauseMenu();
         renderer.renderGameStopOrPlayBtnTemplatePrint(false, gameIsRunningNow);
@@ -75,7 +79,8 @@ export const pause = {
     },
 
     needConfirmAction() {
-        let needConfirmBtns = document.querySelectorAll(".needConfirm");
+        let selector = "needConfirm";
+        let needConfirmBtns = document.querySelectorAll(`.${selector}`);
         if (!needConfirmBtns) return;
 
         needConfirmBtns.forEach(btn => {
@@ -84,12 +89,20 @@ export const pause = {
                 this.activeMenuSector = this.menuStructure[2];
                 this.thisActionNeedConfirmNow = btn.value;
                 renderer.renderPauseMenuOptions();
+                audioController.playSoundEffect(selector);
             });
         });
     },
 
+    confirmChoiceAction() {
+        let selector = "confirmChoice";
+        let confirmChoiceBtn = document.querySelector(`#${selector}`);
+        if (confirmChoiceBtn) confirmChoiceBtn.addEventListener("click", () => audioController.playSoundEffect(selector));
+    },
+
     cancelChoiceAction() {
-        let cancelChoiceBtns = document.querySelectorAll(".cancelСhoice");
+        let selector = "cancelChoice";
+        let cancelChoiceBtns = document.querySelectorAll(`.${selector}`);
         if (!cancelChoiceBtns) return;
         let previousMenuSectorIndex = null;
 
@@ -98,6 +111,7 @@ export const pause = {
                 previousMenuSectorIndex = this.menuStructure.indexOf(String(btn.value));
                 this.activeMenuSector = this.menuStructure[previousMenuSectorIndex];
                 renderer.renderPauseMenuOptions("optionsContainer");
+                audioController.playSoundEffect(selector);
             });
         });
     },

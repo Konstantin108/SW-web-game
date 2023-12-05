@@ -7,7 +7,7 @@ export const gameControl = {
         "ArrowUp": {label: null, src: "up.png"},
         "ArrowLeft": {label: null, src: "left.png"},
         "ArrowDown": {label: null, src: "down.png"},
-        "ArrowRight": {label: null, src: "right.png",},
+        "ArrowRight": {label: null, src: "right.png"},
         "Numpad0": {label: "num", src: "null.png"},
         "Space": {label: null, src: "space.png"},
         "ControlLeft": {label: "left", src: "ctrl.png"},

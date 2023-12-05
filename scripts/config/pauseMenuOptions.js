@@ -82,16 +82,16 @@ export const pauseMenuOptions = {
             referer: false
         },
         {
-            name: "cancelСhoice",
+            name: "cancelChoice",
             title: "нет",
             actionType: "actionOnGameSiteOption",
             renderSector: [
                 "confirmSector"
             ],
-            id: "cancelСhoice",
+            id: "cancelChoice",
             classes: [
                 "pauseMenuBtn",
-                "cancelСhoice"
+                "cancelChoice"
             ],
             internalClasses: null,
             containerBlockId: "optionsContainer",
@@ -111,7 +111,7 @@ export const pauseMenuOptions = {
             classes: [
                 "pauseMenuSideBtn",
                 "pauseMenuBackAdd",
-                "cancelСhoice"
+                "cancelChoice"
             ],
             internalClasses: [
                 "fas",

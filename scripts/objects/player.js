@@ -17,7 +17,7 @@ export const player = {
     invincibilityTimerId: null,  // id таймера до окончания действия неуязвимости
     timeInInvincibilityOffTimerId: null,  // id таймера delay в методе calculateTimeInInvincibilityOff()
     timeInInvincibilityOff: null,  // сюда записывается цифра - количество секунд до окончания неуязвимости
-    x: helperController.getCenterMapOnX(),
+    x: helperController.getCenterMapOnAxis(config.mapSizeX),
     y: config.mapSizeY,
     x_current: null,
     y_current: null,

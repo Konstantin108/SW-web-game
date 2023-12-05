@@ -17,13 +17,10 @@ export const touchController = {
     hammerContainer: null,
     timerId: null,
 
-    init() {
+    hammerBodyCreate() {
         let threshold = 50;
         let deltaX = 0;
         let deltaY = 0;
-
-        document.addEventListener("dblclick", event => event.preventDefault());
-        document.addEventListener("mousedown", event => event.preventDefault());
 
         this.hammerBody = new Hammer.Manager(document.querySelector("body"));
         this.hammerBody.add(new Hammer.Pan());
@@ -115,9 +112,10 @@ export const touchController = {
         });
 
         this.hammerBody.on("tap2fingers", () => explosion.explosionCall());
+    },
 
-
-        this.hammerContainer = new Hammer.Manager(document.querySelector("#container"));
+    hammerContainerCreate(id = "container") {
+        this.hammerContainer = new Hammer.Manager(document.querySelector(`#${id}`));
         this.hammerContainer.add(new Hammer.Swipe());
 
         this.hammerContainer.on("swipeleft swiperight", () => {
@@ -127,6 +125,13 @@ export const touchController = {
         this.hammerContainer.on("swipedown swipeup", () => {
             if (cheatsController.playerCanCallCheatConsole) cheatsController.callCheatConsole();
         });
+    },
+
+    init() {
+        document.addEventListener("dblclick", event => event.preventDefault());
+        document.addEventListener("mousedown", event => event.preventDefault());
+        this.hammerBodyCreate();
+        this.hammerContainerCreate();
     },
 
     disableTouch() {

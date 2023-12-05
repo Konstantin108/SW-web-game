@@ -9,6 +9,7 @@ import {helperController} from "../controllers/helperController.js";
 import {pause} from "./pause.js";
 import {tooltipController} from "../controllers/tooltipController.js";
 import {audioController} from "../controllers/audioController.js";
+import {touchController} from "../controllers/touchController.js";
 
 export const renderer = {
     x: config.mapSizeX,
@@ -591,12 +592,13 @@ export const renderer = {
     },
 
     renderPauseMenu() {
+        let pauseMenuBackgroundId = "pauseMenuBackground";
         let backgroundElement = null;
         let pauseMenuContainer = null;
 
-        if (!document.querySelector("#pauseMenuBackground")) {
+        if (!document.querySelector(`#${pauseMenuBackgroundId}`)) {
             this.body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint());
-            backgroundElement = document.querySelector("#pauseMenuBackground");
+            backgroundElement = document.querySelector(`#${pauseMenuBackgroundId}`);
             backgroundElement.classList.add("pauseOn");
             setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
 
@@ -604,8 +606,9 @@ export const renderer = {
             setTimeout(() => this.renderPauseMenuSideBlocksBtn("cross", true), 200);
 
             tooltipController.tooltipOnOrOff(false, false, false, true);
+            touchController.hammerContainerCreate(pauseMenuBackgroundId);
         } else {
-            backgroundElement = document.querySelector("#pauseMenuBackground");
+            backgroundElement = document.querySelector(`#${pauseMenuBackgroundId}`);
             pauseMenuContainer = document.querySelector("#pauseMenuContainer");
             backgroundElement.classList.add("pauseOff");
             pauseMenuContainer.classList.remove("pauseElementAdd");
@@ -693,7 +696,10 @@ export const renderer = {
             optionsBlock += templatePrinter.confirmBlockLabelPrint();
 
             this.renderPauseMenuSideBlocksBtn("back");
-            setTimeout(() => pause.cancelChoiceAction(), 10);
+            setTimeout(() => {
+                pause.cancelChoiceAction();
+                pause.confirmChoiceAction();
+            }, 10);
         } else {
             let backBtn = document.querySelector("#pauseMenuBack");
             if (backBtn) {

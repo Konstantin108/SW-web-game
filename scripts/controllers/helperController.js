@@ -79,8 +79,8 @@ export const helperController = {
         return value.trim();
     },
 
-    getCenterMapOnX() {
-        return config.mapSizeX % 2 === 0 ? config.mapSizeX / 2 : (config.mapSizeX - 1) / 2 + 1;
+    getCenterMapOnAxis(axis) {
+        return axis % 2 === 0 ? axis / 2 : (axis - 1) / 2 + 1;
     },
 
     getRandomElementAndIndexInArray(array) {
@@ -105,10 +105,6 @@ export const helperController = {
         let result = false;
         if (navigator.userAgent.toLowerCase().match(/mobile/i)) result = true;
         return result;
-    },
-
-    getCenterMapOnY() {
-        return config.mapSizeY % 2 === 0 ? config.mapSizeY / 2 : (config.mapSizeY - 1) / 2 + 1;
     },
 
     findPossiblePositions(employedPositionsArray, possiblePositionsArray) {

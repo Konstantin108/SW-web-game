@@ -35,6 +35,7 @@ export class Planet {
 
     speedLimit = 50;
     speed = this.speedLimit / this.size;
+
     // speed = 10;
 
     draw() {

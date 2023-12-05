@@ -8,7 +8,7 @@ import {enemyArrowController} from "../controllers/enemyArrowController.js";
 import {debugPanel} from "./debugPanel.js";
 
 export const boss = {
-    x: helperController.getCenterMapOnX(),
+    x: helperController.getCenterMapOnAxis(config.mapSizeX),
     y: 3,
     alive: false,
     lives: config.bossLives,
@@ -263,9 +263,9 @@ export const boss = {
     },
 
     returnPlayerOnStartCell() {
-        if (player.x === helperController.getCenterMapOnX() && player.y === config.mapSizeY) return;
+        if (player.x === helperController.getCenterMapOnAxis(config.mapSizeX) && player.y === config.mapSizeY) return;
         renderer.renderTeleportation("out");
-        player.x_current = helperController.getCenterMapOnX();
+        player.x_current = helperController.getCenterMapOnAxis(config.mapSizeX);
         player.y_current = config.mapSizeY;
         player.move();
         renderer.clear(player.selectorName);

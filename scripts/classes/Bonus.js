@@ -166,7 +166,7 @@ export class Bonus {
     removeStuckBonus(bonusesArray) {
         for (let i = 0; i <= bonusesArray.length; i++) {
             if (bonusesArray[i]) {
-                let lastBonusInArray = bonusesArray[bonusesArray.length - 1];
+                let lastBonusInArray = bonusesArray.at(-1);
                 if (lastBonusInArray) {
                     if (lastBonusInArray.id - bonusesArray[i].id > 6) bonusController.bonusesArray.splice(i, 1);
                 }
