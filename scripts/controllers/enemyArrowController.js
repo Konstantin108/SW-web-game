@@ -5,8 +5,8 @@ import {debugPanel} from "../objects/debugPanel.js";
 
 export const enemyArrowController = {
     arrowTypes: {
-        "enemyArrow": EnemyArrow,
-        "enemyArrowBomb": EnemyArrowBomb
+        enemyArrow: EnemyArrow,
+        enemyArrowBomb: EnemyArrowBomb
     },
     enemyArrowsArray: [],
 

@@ -2,6 +2,7 @@ import {renderer} from "../objects/renderer.js";
 import {tooltipController} from "../controllers/tooltipController.js";
 import {config} from "../config/config.js";
 import {helperController} from "../controllers/helperController.js";
+import {audioController} from "../controllers/audioController.js";
 
 export class Tooltip {
     constructor(data) {
@@ -21,6 +22,7 @@ export class Tooltip {
         }
         renderer.renderTooltip(this.data, animation, mobileMode);
         config[`tip_${this.data.name}Shown`] = true;
+        audioController.playSoundEffect("tooltip");
     }
 
     destroy() {

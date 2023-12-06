@@ -7,8 +7,8 @@ import {debugPanel} from "../objects/debugPanel.js";
 
 export const blockageController = {
     blockageTypes: {
-        "blockage": Blockage,
-        "blockageBull": BlockageBull
+        blockage: Blockage,
+        blockageBull: BlockageBull
     },
     blockageTimerIdsArray: [],
     blockagesArray: [],

@@ -52,7 +52,7 @@ export const background = {
     },
 
     animate() {
-        return;
+        // return;
 
         if (background.gameIsInitialized) {
             if (!game.gameIsRunning) {

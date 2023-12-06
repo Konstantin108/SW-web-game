@@ -13,6 +13,7 @@ import {debugPanel} from "../objects/debugPanel.js";
 import {bonuses} from "../config/bonuses.js";
 import {pause} from "../objects/pause.js";
 import {tooltipController} from "./tooltipController.js";
+import {audioController} from "./audioController.js";
 
 export const cheatsController = {
     cheats: config.cheats,
@@ -67,6 +68,7 @@ export const cheatsController = {
     matchPlayerInputAndCheatCode(input, cheatMessageContainer = null) {
         let message = "incorrect";
         let messageColor = "cheatMessageRed";
+        let soundEffectKey = "cheatInputIncorrect";
         let activatedCheat = null;
         let activatedCheatParam = null;
         let paramName = null;
@@ -132,6 +134,7 @@ export const cheatsController = {
                 message = "you are dead";
             } else {
                 messageColor = "cheatMessageGreen";
+                soundEffectKey = "cheatInputCorrect";
                 this.activateCheat(activatedCheat, activatedCheatParam, paramName);
                 if (config.production) {
                     console.clear();
@@ -140,6 +143,7 @@ export const cheatsController = {
             }
         }
         if (cheatMessageContainer) renderer.renderCheatMessage(message, messageColor, cheatMessageContainer);
+        audioController.playSoundEffect(soundEffectKey);
         return message;
     },
 

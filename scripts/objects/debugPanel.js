@@ -11,6 +11,7 @@ import {background} from "../background/background.js";
 import {tooltipController} from "../controllers/tooltipController.js";
 import {localStorageController} from "../controllers/localStorageController.js";
 import {touchController} from "../controllers/touchController.js";
+import {audioController} from "../controllers/audioController.js";
 
 export const debugPanel = {
     cheats: config.cheats,
@@ -45,16 +46,18 @@ export const debugPanel = {
     },
 
     clickOnDebugPanelElementBtn() {
-        let btns = document.querySelectorAll(".debugPanelBtn");
+        let selector = "debugPanelBtn";
+        let btns = document.querySelectorAll(`.${selector}`);
 
         btns.forEach(btn => {
             btn.addEventListener("click", function () {
-                debugPanel.showDebugPanelElementInfo(this.value);
+                debugPanel.debugPanelElementAction(this.value);
+                audioController.playSoundEffect(selector);
             });
         });
     },
 
-    showDebugPanelElementInfo(element) {
+    debugPanelElementAction(element) {
         let cheatMessageContainer = document.querySelector("#cheatMessageContainer");
         let cheat = null;
         let message = null;

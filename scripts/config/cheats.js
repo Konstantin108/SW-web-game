@@ -1,32 +1,32 @@
 export const cheats = {
     helpArray: {
-        "toggleCheat": "необходимо вводить только code, повторный ввод code - отключает действие чита",
-        "optionsCheat": "необходимо вводить code + : + одна из опций",
-        "simpleCheat": "необходимо вводить только code",
-        "arbitaryValueCheat": "необходимо вводить code + : + произвольное значение в цифрах"
+        toggleCheat: "необходимо вводить только code, повторный ввод code - отключает действие чита",
+        optionsCheat: "необходимо вводить code + : + одна из опций",
+        simpleCheat: "необходимо вводить только code",
+        arbitaryValueCheat: "необходимо вводить code + : + произвольное значение в цифрах"
     },
 
     translatedColorNames: {
-        "rubrum": "красный",
-        "orange": "оранжевый",
-        "aurum": "жёлтый",
-        "viridis": "зелёный",
-        "claracaelum": "голубой",
-        "caelum": "синий",
-        "violaceum": "фиолетовый",
-        "purpura": "розовый",
-        "album": "белый",
-        "ferrum": "серый",
-        "terra": "коричневый"
+        rubrum: "красный",
+        orange: "оранжевый",
+        aurum: "жёлтый",
+        viridis: "зелёный",
+        claracaelum: "голубой",
+        caelum: "синий",
+        violaceum: "фиолетовый",
+        purpura: "розовый",
+        album: "белый",
+        ferrum: "серый",
+        terra: "коричневый"
     },
 
     bonusCodeNames: {
-        "acus": "стрелы типа Дрель",
-        "tribus": "стрелы типа Тринити",
-        "testa": "щит",
-        "cor": "одна жизнь",
-        "micare": "бомба",
-        "radium": "суперспособность"
+        acus: "стрелы типа Дрель",
+        tribus: "стрелы типа Тринити",
+        testa: "щит",
+        cor: "одна жизнь",
+        micare: "бомба",
+        radium: "суперспособность"
     },
 
     setCheatsParams() {

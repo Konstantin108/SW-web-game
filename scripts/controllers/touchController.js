@@ -134,7 +134,7 @@ export const touchController = {
         this.hammerContainerCreate();
     },
 
-    disableTouch() {
+    hammerBodyTouchDisable() {
         this.hammerBody.off("panstart panend panleft panright pandown panup doubletap tap2fingers tap");
         if (this.timerId) {
             clearInterval(this.timerId);

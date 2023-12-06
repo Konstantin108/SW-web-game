@@ -74,11 +74,21 @@ export const game = {
 
     startGameDelay(delay, resumeGame = false) {
         let message = "";
+        let soundEffectKey = "";
 
         this.animationBan = true;
         this.playerCanStopGame = false;
-        delay !== 0 ? message = delay : message = "go";
-        if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) renderer.renderInCenterTableNotify(message, 1);
+        if (delay !== 0) {
+            message = delay;
+            soundEffectKey = "signalBeep";
+        } else {
+            message = "go";
+            soundEffectKey = "signalStart";
+        }
+        if (delay < this.startGameDelaySecondsCount + 1 && delay >= 0) {
+            renderer.renderInCenterTableNotify(message, 1);
+            audioController.playSoundEffect(soundEffectKey);
+        }
         if (delay > -1) {
             setTimeout(() => {
                 return this.startGameDelay(delay += -1, resumeGame);
@@ -121,15 +131,23 @@ export const game = {
 
     over(win = false) {
         let message = "";
+        let soundEffectKey = "";
 
         this.gameOver = true;
-        win ? message = "you win" : message = "you lose";
+        if (win) {
+            message = "you win";
+            soundEffectKey = "gameWin";
+        } else {
+            message = "you lose";
+            soundEffectKey = "gameLose";
+        }
         renderer.renderInCenterTableNotify(message, 1);
-        touchController.disableTouch();
+        touchController.hammerBodyTouchDisable();
+        audioController.playSoundEffect(soundEffectKey);
         setTimeout(() => pause.showStatistics(), 1100);
     }
 }
 
 touchController.init();
-// setTimeout(() => game.init(), game.gameLoadingSecondsCount);
-game.init();
+setTimeout(() => game.init(), game.gameLoadingSecondsCount);
+// game.init();
