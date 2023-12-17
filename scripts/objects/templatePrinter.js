@@ -180,7 +180,7 @@ export const templatePrinter = {
                         </div>
                         <div>
                             <div class="pauseMenuHorizontalBorder"></div>
-                                <div id="optionsContainer"></div>
+                                <nav id="optionsContainer"></nav>
                             <div class="pauseMenuHorizontalBorder"></div>
                         </div>
                         <div id="pauseMenuRightBlock">

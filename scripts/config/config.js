@@ -81,8 +81,8 @@ export const config = {
     bossFireChance: 20,
     bossFireArrowBombChance: 10,
     // уровни, бонусы, читы, элементы дебаг-панели
-    bonuses: bonuses.setBonusesParams(),
     levels: levels.levelsParams,
+    bonuses: bonuses.setBonusesParams(),
     cheats: cheats.setCheatsParams(),
     translatedColorNames: cheats.translatedColorNames,
     bonusCodeNames: cheats.bonusCodeNames,
