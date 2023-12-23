@@ -7,7 +7,7 @@ export const audioController = {
     sounds: config.sounds,
     mainSoundThemes: config.soundSources.mainSoundThemes,
     soundEffects: config.soundSources.soundEffects,
-    path: "../../src/sounds/",
+    path: "/game/src/sounds/",
     mainSoundThemeAudio: null,
     sourceIndex: null,
 

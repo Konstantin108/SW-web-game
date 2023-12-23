@@ -1,0 +1,1682 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:500,500i,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+* {
+  font-family: Roboto Condensed;
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  background-color: #453d4c;
+  background-image: url("../src/images/background-space.jpg");
+  background-repeat: no-repeat;
+}
+
+#wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#loadingScreen {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loadingScreenTitle {
+  color: lawngreen;
+  font-style: italic;
+  font-size: 110px;
+  text-transform: uppercase;
+}
+
+.dot {
+  opacity: 0;
+  transition: 0.3s;
+}
+
+#dotFirst {
+  animation: appearance 1s infinite;
+}
+
+#dotSecond {
+  animation: appearance 1s 0.2s infinite;
+}
+
+#dotThird {
+  animation: appearance 1s 0.3s infinite;
+}
+
+@keyframes appearance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#container {
+  position: relative;
+}
+
+table {
+  border-collapse: collapse;
+  border: 3px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.18);
+  transition: 0.8s;
+  position: relative;
+}
+
+td {
+  width: 50px;
+  height: 50px;
+  border: 3px solid black;
+}
+
+.rubrum {
+  color: red;
+}
+
+.rubrumBackground,
+.bossLivesBarShineSectorOff {
+  background-color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.orangeBackground {
+  background-color: orange;
+}
+
+.aurum {
+  color: yellow;
+}
+
+.aurumBackground {
+  background-color: yellow;
+}
+
+.viridis {
+  color: lawngreen;
+}
+
+.viridisBackground,
+.bossLivesBarShineSectorOn {
+  background-color: lawngreen;
+}
+
+.claracaelum {
+  color: deepskyblue;
+}
+
+.claracaelumBackground {
+  background-color: deepskyblue;
+}
+
+.caelum {
+  color: blue;
+}
+
+.caelumBackground {
+  background-color: blue;
+}
+
+.violaceum {
+  color: #6d14b8;
+}
+
+.violaceumBackground {
+  background-color: #6d14b8;
+}
+
+.purpura {
+  color: #d04ea0;
+}
+
+.purpuraBackground {
+  background-color: #d04ea0;
+}
+
+.album {
+  color: white;
+}
+
+.albumBackground,
+.bossLivesBarShineSectorHit {
+  background-color: white;
+}
+
+.ferrum {
+  color: grey;
+}
+
+.ferrumBackground {
+  background-color: grey;
+}
+
+.terra {
+  color: saddlebrown;
+}
+
+.terraBackground {
+  background-color: saddlebrown;
+}
+
+#statusBarContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#statusBar {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  background-size: 100%;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.statusBarElement {
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  background-color: black;
+  padding: 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 12px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.widePadding {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.infoLabel {
+  text-align: center;
+}
+
+#scull {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 55px;
+  transition: 0.3s;
+}
+
+.whiteScull {
+  background-image: url("../src/images/scull.png");
+}
+
+.redScull {
+  background-image: url("../src/images/red-scull.png");
+  margin-bottom: 3px;
+  transform: scale(1.1);
+}
+
+#heartsBar,
+#heartsBox {
+  display: flex;
+}
+
+.heart {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 55px;
+}
+
+.availableHeart {
+  background-image: url("../src/images/heart.png");
+}
+
+.lostHeart {
+  background-image: url("../src/images/lost-heart.png");
+}
+
+.heartScale {
+  animation: scale 0.3s;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+#bombBar {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  position: absolute;
+  left: 100%;
+  top: 56.7%;
+  border-top-right-radius: 12px;
+  transition: 0.2s;
+}
+
+.bomb {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+  animation: scale 0.3s;
+}
+
+.activeBomb {
+  background-image: url("../src/images/bomb.png");
+}
+
+.emptyBomb {
+  background-image: url("../src/images/empty-bomb.png");
+}
+
+.redBomb {
+  background-image: url("../src/images/red-bomb.png");
+}
+
+#bonusShieldBar,
+#bonusNewArrowTypeBar {
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  font-size: 20px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  left: 100%;
+  transition: 0.2s;
+}
+
+#bonusShieldBar {
+  background-image: url("../src/images/background-rusty-iron.jpg");
+  background-color: saddlebrown;
+  top: 66.1%;
+  border-top-right-radius: 12px;
+}
+
+#bonusNewArrowTypeBar {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-color: saddlebrown;
+  top: 82.5%;
+  border-bottom-right-radius: 12px;
+}
+
+.bonusBarElement {
+  margin-bottom: 6px;
+}
+
+.bonusLabel {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 48px;
+  height: 48px;
+  display: flex;
+}
+
+.timerLabel {
+  width: 48px;
+  height: 24px;
+}
+
+.drillPickUpImage,
+.trinityPickUpImage,
+.shieldPickUpImage {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+}
+
+.blinkBeforeBonusOff {
+  animation: blink 0.6s infinite;
+}
+
+.drillPickUpImage {
+  background-image: url("../src/images/bonus-drill.png");
+}
+
+.trinityPickUpImage {
+  background-image: url("../src/images/bonus-trinity.png");
+}
+
+.shieldPickUpImage {
+  background-image: url("../src/images/bonus-shield.png");
+}
+
+#superAbilityBar {
+  position: absolute;
+  right: 100%;
+  top: 57.3%;
+}
+
+#shineSectorsContainer {
+  display: flex;
+  justify-content: end;
+}
+
+#shineSectorsBox {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  display: block;
+  width: 16px;
+  padding: 10px;
+  border-bottom-left-radius: 12px;
+}
+
+.shineSector {
+  width: 10px;
+  height: 28px;
+  margin-bottom: 5px;
+  border-radius: 12px;
+}
+
+.shineSectorIsOff {
+  background-color: black;
+}
+
+#lightningElementContainer {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-repeat: no-repeat;
+  background-color: saddlebrown;
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 12px;
+  padding-bottom: 17px;
+  transition: 0.2s;
+}
+
+#lightningElement {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 106px;
+  animation: scale 0.3s;
+}
+
+.lightningIsOn {
+  background-image: url("../src/images/lightning.png");
+}
+
+.lightningIsOff {
+  background-image: url("../src/images/empty-lightning.png");
+}
+
+.lightningIsOut {
+  background-image: url("../src/images/red-lightning.png");
+}
+
+.player,
+.player-drill,
+.player-trinity {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.player {
+  background-image: url("../src/images/player.png");
+}
+
+.player-drill {
+  background-image: url("../src/images/player-drill.png");
+}
+
+.player-trinity {
+  background-image: url("../src/images/player-trinity.png");
+}
+
+.player-shield {
+  background-color: rgba(46, 232, 99, 0.7);
+  box-shadow: 0 0 60px greenyellow;
+  border-radius: 50%;
+}
+
+.invincibility {
+  animation: blink 0.6s infinite;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+.boss,
+.bossWhite {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transform: scale(9);
+}
+
+.boss {
+  background-image: url("../src/images/boss.png");
+}
+
+.bossWhite {
+  background-image: url("../src/images/boss-white.png");
+}
+
+.bossCreate {
+  animation: bossCreate 2s;
+}
+
+.bossDyingDisappears {
+  animation: disappears 3s;
+}
+
+.bossShield,
+.bossShieldOff {
+  position: relative;
+}
+
+.bossShield::after,
+.bossShieldOff::after {
+  content: "-";
+  color: #6565dc;
+  transform: scale(1.1);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  box-shadow: 0 0 20px #ffffff;
+}
+
+.bossShield::after {
+  width: 50px;
+  height: 4px;
+  background-color: #6565dc;
+  transition: 0.3s;
+  animation: onBossShield 0.3s, blink 1.5s infinite;
+}
+
+.bossShieldOff::after {
+  width: 0;
+  height: 4px;
+  background-color: #6565dc;
+  transition: 0.3s;
+}
+
+.bossShieldHit::after {
+  width: 50px;
+  height: 10px;
+  background-color: #ffffff;
+}
+
+@keyframes onBossShield {
+  from {
+    width: 0;
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    width: 50px;
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+@keyframes bossCreate {
+  from {
+    transform: translate(0, -240px) scale(9);
+  }
+  to {
+    transform: translate(0, 0) scale(9);
+  }
+}
+@keyframes disappears {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+#bossLivesBar {
+  width: 570px;
+  position: absolute;
+  z-index: 1;
+  left: 6px;
+  top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+#bossLivesBarMetalElement {
+  display: flex;
+  align-items: center;
+  background-image: url("../src/images/background-metal.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: dimgrey;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#bossLivesBarBlackElement {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.bossLivesBarShineSectorOn,
+.bossLivesBarShineSectorOff,
+.bossLivesBarShineSectorHit {
+  width: 6px;
+  height: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.disk {
+  width: 14px;
+  height: 40px;
+  transform: scale(1.3);
+}
+
+.bossLivesBarShineSectorOnHide {
+  animation: bossLivesBarShineSectorOnShow 1s;
+}
+
+@keyframes bossLivesBarShineSectorOnShow {
+  from {
+    width: 0;
+    height: 0;
+  }
+  to {
+    width: 6px;
+    height: 20px;
+  }
+}
+.bossLivesBarSmoothAppearance {
+  animation: appearance 0.5s;
+}
+
+.bossLivesBarHide {
+  animation: fromTopOut 1s;
+}
+
+.blockage,
+.blockageWhite,
+.blockageBull,
+.blockageWhiteBull,
+.arrow,
+.arrow-drill,
+.arrow-trinity,
+.enemyArrow,
+.enemyArrowBomb,
+.drill,
+.trinity,
+.shield,
+.life,
+.killAll {
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.blockage,
+.blockageWhite {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.blockageBull,
+.blockageWhiteBull {
+  opacity: 1;
+  transform: scale(2.2);
+}
+
+.blockage {
+  background-image: url("../src/images/blockage.png");
+}
+
+.blockageWhite {
+  background-image: url("../src/images/blockage-white.png");
+}
+
+.blockageBull {
+  background-image: url("../src/images/blockage-bull.png");
+}
+
+.blockageWhiteBull {
+  background-image: url("../src/images/blockage-white-bull.png");
+}
+
+.arrow {
+  background-image: url("../src/images/arrow.png");
+}
+
+.arrow-drill {
+  background-image: url("../src/images/arrow-drill.png");
+}
+
+.arrow-trinity {
+  background-image: url("../src/images/arrow-trinity.png");
+}
+
+.enemyArrow {
+  background-image: url("../src/images/enemy-arrow.png");
+  transition: 0.3s;
+  transform: scale(0.2);
+}
+
+.enemyArrowBomb {
+  background-image: url("../src/images/enemy-arrow-bomb.png");
+  transition: 0.3s;
+}
+
+.drill,
+.trinity,
+.shield,
+.life,
+.killAll {
+  transform: scale(1);
+}
+
+.drill {
+  background-image: url("../src/images/bonus-drill.png");
+}
+
+.trinity {
+  background-image: url("../src/images/bonus-trinity.png");
+}
+
+.shield {
+  background-image: url("../src/images/bonus-shield.png");
+}
+
+.life {
+  background-image: url("../src/images/bonus-life.png");
+}
+
+.killAll {
+  background-image: url("../src/images/bonus-kill-all.png");
+}
+
+.picked,
+.hit,
+.crash,
+.teleportationOut,
+.teleportationIn {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 0 0;
+  transition: 0.3s;
+}
+
+.picked {
+  background-image: url("../src/images/picked.png");
+  background-color: rgba(0, 0, 0, 0);
+  transform: scale(2);
+}
+
+.teleportationOut,
+.teleportationIn {
+  background-image: url("../src/images/teleportation.png");
+}
+
+.teleportationOut {
+  transform: scale(0.6);
+}
+
+.teleportationIn {
+  transform: scale(1.8);
+}
+
+.hit {
+  background-image: url("../src/images/hit.png");
+  transform: scale(2);
+}
+
+.crash {
+  background-image: url("../src/images/crash.png");
+  scale: 1.8;
+}
+
+.superAbilityCenterLine {
+  background-color: white;
+  box-shadow: 0 0 250px #e6e673;
+}
+
+.superAbilitySecondLine {
+  background-color: yellow;
+  box-shadow: 0 0 250px #cea72e;
+  transition: 0.2s;
+  animation: superAbilityGrowsInWidth 0.2s;
+}
+
+.superAbilityThirdLine {
+  background-color: orange;
+  box-shadow: 0 0 250px #c14a2e;
+  transition: 0.4s;
+  animation: superAbilityGrowsInWidth 0.4s;
+}
+
+@keyframes superAbilityGrowsInWidth {
+  from {
+    width: 0;
+    opacity: 0.8;
+  }
+  to {
+    width: 50px;
+    opacity: 1;
+  }
+}
+.flash {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 360px white;
+}
+
+.explosion {
+  background-image: url("../src/images/explosion.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 320px #e1601d;
+  animation: explosion 0.8s;
+}
+
+@keyframes explosion {
+  from {
+    background-size: 50%;
+  }
+  to {
+    background-size: 260%;
+  }
+}
+#messageContainer {
+  position: absolute;
+  z-index: 4;
+  margin-top: 50%;
+  width: 560px;
+  display: flex;
+  justify-content: center;
+  cursor: default;
+}
+
+#messageElement {
+  font-style: italic;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 124px;
+  animation: numberIn 0.3s, numberOut 0.3s 0.8s;
+}
+
+@keyframes numberIn {
+  from {
+    transform: translate(0, -16px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+@keyframes numberOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+#cheatConsole {
+  width: 268px;
+  height: 118px;
+  background-color: white;
+  border: 4px solid black;
+  position: absolute;
+  z-index: 6;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.cheatConsoleDesktopMode {
+  left: 1%;
+  top: 1%;
+}
+
+.cheatConsoleMobileMode {
+  transform: scale(2);
+  left: 17%;
+  top: 11%;
+}
+
+#cheatMessageContainer {
+  width: 220px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cheatMessage {
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  animation: messageBlink 0.4s 2;
+}
+
+.cheatMessageGreen {
+  color: lawngreen;
+}
+
+.cheatMessageRed {
+  color: red;
+}
+
+@keyframes messageBlink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+#cheatInputContainer {
+  width: 220px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#consoleSymbol {
+  font-size: 31px;
+}
+
+#cheatInput {
+  width: 164px;
+  height: 22px;
+  border-radius: 12px;
+  border: 2px solid black;
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 25px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: lawngreen;
+}
+
+.cheatConsoleIn {
+  animation: fromTopIn 0.5s;
+}
+
+@keyframes fromTopIn {
+  from {
+    transform: translate(0, -320px);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+.cheatConsoleInMobileMode {
+  animation: fromTopInMobileMode 0.5s;
+}
+
+@keyframes fromTopInMobileMode {
+  from {
+    transform: translate(0, -320px) scale(2);
+  }
+  to {
+    transform: translate(0, 0) scale(2);
+  }
+}
+.cheatConsoleOut {
+  animation: fromTopOut 0.5s;
+}
+
+@keyframes fromTopOut {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, -320px);
+  }
+}
+.cheatConsoleOutMobileMode {
+  animation: fromTopOutMobileMode 0.5s;
+}
+
+@keyframes fromTopOutMobileMode {
+  from {
+    transform: translate(0, 0) scale(2);
+  }
+  to {
+    transform: translate(0, -320px) scale(2);
+  }
+}
+#debugPanel {
+  background-color: white;
+  border: 4px solid black;
+  position: absolute;
+  z-index: 5;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.debugPanelDesktopMode {
+  right: 1%;
+  top: 1%;
+}
+
+.debugPanelMobileMode {
+  transform: scale(1.4);
+  right: 9%;
+  top: 15%;
+}
+
+#debugPanelLabel {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+#btnsBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 4px;
+}
+
+.btnInputElement {
+  display: none;
+}
+
+.btnInputElement:checked + label {
+  background-color: #ffe0a6;
+}
+
+.redBtn {
+  background-color: #ffe8e8 !important;
+}
+
+.btnInputLabel,
+.btnLabel {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  padding: 0 15px;
+  line-height: 34px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  user-select: none;
+  color: black;
+}
+
+.btnInputLabel {
+  width: 126px;
+}
+
+.btnLabel {
+  width: 100%;
+  background-color: white;
+  outline: none;
+}
+
+.btnInputLabel:hover,
+.btnLabel:hover {
+  color: #666;
+}
+
+.btnLabel:active {
+  background-color: #ffe0a6;
+}
+
+.redBtn:active {
+  background-color: #ff9e9e !important;
+}
+
+.debugPanelIn {
+  animation: debugPanelIn 0.5s;
+}
+
+@keyframes debugPanelIn {
+  from {
+    transform: translate(640px, 0);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+.debugPanelInMobileMode {
+  animation: debugPanelInMobileMode 0.5s;
+}
+
+@keyframes debugPanelInMobileMode {
+  from {
+    transform: translate(640px, 0) scale(1.4);
+  }
+  to {
+    transform: translate(0, 0) scale(1.4);
+  }
+}
+.debugPanelOut {
+  animation: debugPanelOut 0.5s;
+}
+
+@keyframes debugPanelOut {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(640px, 0);
+  }
+}
+.debugPanelOutMobileMode {
+  animation: debugPanelOutMobileMode 0.5s;
+}
+
+@keyframes debugPanelOutMobileMode {
+  from {
+    transform: translate(0, 0) scale(1.4);
+  }
+  to {
+    transform: translate(640px, 0) scale(1.4);
+  }
+}
+.pauseSideOptionBlock,
+.pauseMenuSideBorder,
+.pauseMenuSideBottomBracing,
+.pauseMenuHorizontalBorder {
+  background-color: saddlebrown;
+}
+
+#pauseMenuBackground {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(7px);
+}
+
+.pauseOn {
+  animation: pauseMenuBackgroundOn 0.2s;
+}
+
+.pauseOff {
+  animation: pauseMenuBackgroundOff 0.2s;
+}
+
+@keyframes pauseMenuBackgroundOn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(7px);
+  }
+}
+@keyframes pauseMenuBackgroundOff {
+  from {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(7px);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0);
+  }
+}
+#pauseMenuContainer {
+  display: flex;
+  align-items: center;
+}
+
+.pauseElementAdd {
+  animation: pauseElementAdd 0.2s;
+}
+
+@keyframes pauseElementAdd {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.pauseElementRemove {
+  animation: pauseElementRemove 0.2s;
+}
+
+@keyframes pauseElementRemove {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+}
+#pauseMenuLeftBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.pauseSideOptionBlock {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  width: 80px;
+  height: 70px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pauseLeftOptionDisplay {
+  background-color: black;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pauseRightOptionDisplay {
+  background-color: black;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  margin-left: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pauseMenuSideBtn {
+  background-color: black;
+  font-size: 30px;
+  padding-top: 1px;
+  border: none;
+  cursor: pointer;
+}
+
+.pauseMenuBackAdd {
+  animation: backBtnAdd 0.2s;
+}
+
+@keyframes backBtnAdd {
+  from {
+    transform: translate(4px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+.pauseMenuBackRemove {
+  animation: backBtnRemove 0.2s;
+}
+
+@keyframes backBtnRemove {
+  from {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-4px, 0);
+    opacity: 0;
+  }
+}
+.pauseMenuSideBorder {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  width: 22px;
+  height: 120px;
+}
+
+.pauseMenuSideBorderBigSize {
+  width: 25px;
+  height: 265px;
+}
+
+.pauseMenuSideBottomBracing {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  width: 34px;
+  height: 51px;
+  border-radius: 12px;
+}
+
+.pauseMenuHorizontalBorder {
+  height: 15px;
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+}
+
+.pauseMenuHorizontalBorderBigSize {
+  height: 19px;
+}
+
+#pauseMenuList {
+  list-style-type: none;
+  border-radius: 12px;
+  min-width: 222px;
+  min-height: 143px;
+  transform: scale(1.1);
+  background-color: black;
+  text-align: center;
+  padding-left: 46px;
+  padding-right: 46px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.pauseMenuListBigSize {
+  width: 351px;
+  height: 278px;
+  transform: scale(1.08) !important;
+}
+
+.listFlexStyle {
+  display: flex;
+  justify-content: space-around;
+}
+
+#confirmTitle,
+#statisticsTitle,
+.pauseMenuBtn {
+  font-family: Ubuntu;
+  font-size: 30px;
+}
+
+#confirmTitle {
+  margin-bottom: 20px;
+}
+
+#statisticsTitle {
+  margin-bottom: 12px;
+  font-size: 38px;
+}
+
+#statisticsGridContainer {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  row-gap: 2px;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.statisticsColumn {
+  font-family: Ubuntu;
+}
+
+.statisticsLeftColumn {
+  text-align: start;
+}
+
+.statisticsRightColumn {
+  text-align: end;
+}
+
+.pauseMenuOneList {
+  margin: 6px;
+}
+
+.pauseMenuBtn {
+  background-color: black;
+  opacity: 0;
+  border: none;
+}
+
+.pauseMenuBtnOn {
+  opacity: 1;
+  cursor: pointer;
+}
+
+#pauseMenuRightBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+#pauseMenuCross {
+  color: red;
+}
+
+.pauseMenuCrossAdd {
+  animation: crossBtnAdd 0.2s;
+}
+
+@keyframes crossBtnAdd {
+  from {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+#gameStopOrPlayBtn,
+#audioControlBtn {
+  position: fixed;
+  bottom: 2%;
+  z-index: 6;
+  padding: 6px;
+}
+
+#gameStopOrPlayBtn {
+  right: 24px;
+}
+
+#audioControlBtn {
+  right: 106px;
+}
+
+.pointerClass {
+  cursor: pointer;
+}
+
+#tooltipControlPanel,
+#circle {
+  background-color: saddlebrown;
+}
+
+.tooltip {
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #b6926c;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.oneKeyboardBlockGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.oneKeyboardBlockFlex {
+  display: flex;
+}
+
+.keyboardsBlockFlexColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flexBox {
+  display: flex;
+  align-items: center;
+}
+
+.tooltipAnimationIn {
+  animation: tooltipIn 0.2s;
+}
+
+.tooltipAnimationOut {
+  animation: tooltipOut 0.2s;
+}
+
+.tooltipElement {
+  margin: 6px;
+}
+
+.tooltipElementText {
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
+.keyboardLabelDiv {
+  display: flex;
+  align-items: end;
+}
+
+.keyboardLabel {
+  text-transform: uppercase;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+@keyframes tooltipIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes tooltipOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+.possibleDirectionsDesktopMode,
+.pauseBtnsArrayDesktopMode,
+.shootBtnsArrayDesktopMode,
+.useSuperAbilityBtnDesktopMode,
+.useBombBtnDesktopMode {
+  position: absolute;
+  z-index: 2;
+}
+
+.possibleDirectionsDesktopMode {
+  left: -30%;
+  top: 20%;
+}
+
+.pauseBtnsArrayDesktopMode {
+  right: -30%;
+  top: 11%;
+}
+
+.shootBtnsArrayDesktopMode {
+  right: -56%;
+  top: 29%;
+}
+
+.useSuperAbilityBtnDesktopMode {
+  left: -44%;
+  top: 55%;
+}
+
+.useBombBtnDesktopMode {
+  right: -50%;
+  top: 56%;
+}
+
+.anyTooltipMobileMode {
+  margin-top: 20px;
+  font-size: 34px;
+}
+
+.tooltipAdditionalMessage {
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+.anyTooltipMobileMode > .tooltipElementText {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#tooltipControlPanel {
+  background-image: url("../src/images/background-rusty-iron.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: fixed;
+  left: 24px;
+  bottom: 2%;
+  z-index: 6;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.fromBottomInClass {
+  animation: fromBottomIn 0.2s;
+}
+
+@keyframes fromBottomIn {
+  from {
+    transform: translate(0, 120px);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+.tooltipControlPanelOut {
+  animation: fromBottomOut 0.2s;
+}
+
+@keyframes fromBottomOut {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, 120px);
+  }
+}
+#tooltipControlPanelBox {
+  display: flex;
+}
+
+.circle {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  transform: scale(1.7);
+  padding: 3px;
+}
+
+.circleDisplay {
+  background-color: black;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  height: 33px;
+  transform: scale(1.1);
+}
+
+.tooltipImage {
+  width: 45px;
+}
+
+.tooltipImageBig {
+  width: 80px;
+}
+
+#bulbOn,
+#bulbOff {
+  font-size: 20px;
+}
+
+#bulbOn {
+  color: yellow;
+}
+
+#bulbOff {
+  color: grey;
+}
+
+#tooltipControlPanelBtn {
+  font-family: Ubuntu;
+  font-size: 20px;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 270px;
+  padding-left: 25px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 7px;
+}
+
+#blockForTooltipsInMobilMode {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  margin-top: 160px;
+  position: absolute;
+}
+
+/*# sourceMappingURL=styles.css.map */

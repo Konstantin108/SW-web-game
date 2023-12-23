@@ -149,5 +149,5 @@ export const game = {
 }
 
 touchController.init();
-setTimeout(() => game.init(), game.gameLoadingSecondsCount);
-// game.init();
+// setTimeout(() => game.init(), game.gameLoadingSecondsCount);
+game.init();
