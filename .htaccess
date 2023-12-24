@@ -1,6 +1,9 @@
 AddDefaultCharset UTF-8
 RewriteEngine on
 
+ErrorDocument 403 /
+Options -Indexes
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 

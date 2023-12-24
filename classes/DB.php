@@ -2,7 +2,7 @@
 
 class DB
 {
-    private $connection;
+    private mysqli|false $connection;
 
     // будет jQuery запрос, чтобы передать на фронт картики в папке,
     // их можно будет выбирать при завершении игры

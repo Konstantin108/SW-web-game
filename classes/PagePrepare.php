@@ -2,7 +2,7 @@
 
 class PagePrepare
 {
-    public function getIncludeContents($path)
+    public function getIncludeContents($path): bool|string
     {
         if (is_file($path)) {
             ob_start();
@@ -12,18 +12,18 @@ class PagePrepare
         return false;
     }
 
-    public function getPath($fileName, $partPath = "")
+    public function getPath($fileName, $partPath = ""): string
     {
         return "{$partPath}views/content/$fileName.php";
     }
 
-    public function getPart($content, $partName)
+    public function getPart($content, $partName): mixed
     {
         $pattern = "#{{2}$partName:(.*)}{2}#i";
         return preg_match($pattern, $content, $match) && $match[1] ? $match[1] : APP_NAME;
     }
 
-    public function removeAllParts($content)
+    public function removeAllParts($content): string
     {
         preg_match_all("#{{2}.*}{2}#", $content, $matches);
         foreach (array_shift($matches) as $elem) {
