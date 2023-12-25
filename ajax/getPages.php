@@ -13,7 +13,7 @@ $excludedPagesArray = [
 $pages = scandir("../views/content/");
 $pages = array_diff($pages, $excludedPagesArray);
 $result[] = [
-    "fileName" => "#",
+    "fileName" => "game",
     "title" => "играть"
 ];
 

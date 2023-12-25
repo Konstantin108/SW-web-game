@@ -17,6 +17,10 @@ class DB
         mysqli_query($this->connection, "SET NAMES 'utf8'");
     }
 
+    /**
+     * @param $query
+     * @return array|void
+     */
     public function readData($query)
     {
         $data = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));

@@ -1,27 +1,22 @@
 <?php
-include "config.php";
-include "classes/DB.php";
-include "classes/PagePrepare.php";
-
 // здесь стартовать сессию, JS для получения данных из localStorage
-if (DBG) {
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
-    ini_set("display_startup_errors", 1);
-}
+// на длину ника игрока должно быть ограничение
+include "includes/main.php";
 
 $db = new DB;
 $pagePrepare = new PagePrepare;
 
-$path = $pagePrepare->getPath("index");
-$content = "";
+preg_match_all("[\w+]", $_SERVER["REQUEST_URI"], $matches);
+$matches = array_shift($matches);
+$page = $matches[0] ?? "index";
+$param = $matches[1] ?? null;
 
-if (!empty($_GET["page"])) $path = $pagePrepare->getPath($_GET["page"]);
+$path = $pagePrepare->getPath($page);
 if (!file_exists($path)) {
     $path = $pagePrepare->getPath("404");
     header("HTTP/1.0 404 Not Found");
 }
-$content = $pagePrepare->getIncludeContents($path);
+$content = $pagePrepare->getIncludeContents($path) ?? "";
 
 $title = $pagePrepare->getPart($content, "title");
 $content = $pagePrepare->removeAllParts($content);

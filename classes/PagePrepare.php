@@ -2,6 +2,10 @@
 
 class PagePrepare
 {
+    /**
+     * @param $path
+     * @return bool|string
+     */
     public function getIncludeContents($path): bool|string
     {
         if (is_file($path)) {
@@ -12,17 +16,32 @@ class PagePrepare
         return false;
     }
 
-    public function getPath($fileName, $partPath = ""): string
+    /**
+     * @param $fileName
+     * @param string $slug
+     * @return string
+     */
+    public function getPath($fileName, string $slug = ""): string
     {
-        return "{$partPath}views/content/$fileName.php";
+        return "{$slug}views/content/$fileName.php";
     }
 
-    public function getPart($content, $partName): mixed
+    /**
+     * @param $content
+     * @param $partName
+     * @return string
+     */
+    public function getPart($content, $partName): string
     {
         $pattern = "#{{2}$partName:(.*)}{2}#i";
-        return preg_match($pattern, $content, $match) && $match[1] ? $match[1] : APP_NAME;
+        $result = preg_match($pattern, $content, $match) && $match[1] ? $match[1] : APP_NAME;
+        return trim($result);
     }
 
+    /**
+     * @param $content
+     * @return string
+     */
     public function removeAllParts($content): string
     {
         preg_match_all("#{{2}.*}{2}#", $content, $matches);

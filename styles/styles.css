@@ -21,5 +21,9 @@ td {
     scale: 1;
   }
 }
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
 
 /*# sourceMappingURL=styles.css.map */

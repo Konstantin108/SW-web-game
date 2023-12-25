@@ -1,11 +1,18 @@
 {{title: Таблица лидеров}}
 
+<?php global $param; ?>
 <b>лучшие игроки</b>
 <div id="recordsTableContainer"></div>
 <script>
-    $.get("/ajax/getRecords.php", function (data) {
-        data = JSON.parse(data)
-        checkRecordsCount(data);
+    $.ajax({
+        method: "POST",
+        url: "/ajax/getRecords.php",
+        data: {
+            rpage: "<?= $param; ?>"
+        },
+        success: function (data) {
+            checkRecordsCount(JSON.parse(data));
+        },
     });
 
     function checkRecordsCount(data) {
@@ -18,7 +25,7 @@
                           <p>стань первым</p>
                        </div>`;
 
-        setTimeout(() => $("#recordsTableContainer").append(message), 300);
+        setTimeout(() => $("#recordsTableContainer").append(message), 100);
     }
 
     function createRecordRow(items, index) {
@@ -31,11 +38,11 @@
             minute: "numeric"
         });
 
-        let path = `/src/images/${items[index].avatar}`;
+        let path = `src/images/${items[index].avatar}`;
 
         let record = `<tr>
                         <td>
-                            <img src="${path}" alt="${items[index].avatar}">
+                            <img src="/${path}" alt="${items[index].avatar}" class="avatar">
                         </td>
                         <td>${items[index].name}</td>
                         <td>${items[index].level}</td>
@@ -50,7 +57,7 @@
         if (index < items.length - 1) {
             setTimeout(() => {
                 return createRecordRow(items, index += 1);
-            }, 300);
+            }, 100);
         }
     }
 
@@ -75,6 +82,6 @@
                      </table>`;
 
         $("#recordsTableContainer").append(table);
-        setTimeout(() => createRecordRow(data.items, 0), 300);
+        setTimeout(() => createRecordRow(data.items, 0), 100);
     }
 </script>
