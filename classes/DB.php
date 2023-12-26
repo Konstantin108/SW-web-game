@@ -21,11 +21,19 @@ class DB
      * @param $query
      * @return array|void
      */
-    public function readData($query)
+    public function getDataAsArray($query)
     {
         $data = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
-        $result["items"] = mysqli_fetch_all($data, MYSQLI_ASSOC);
-        $result["total"] = mysqli_num_rows($data);
-        return $result;
+        return mysqli_fetch_all($data, MYSQLI_ASSOC);
+    }
+
+    /**
+     * @param $query
+     * @return bool|void
+     */
+    public function getData($query)
+    {
+        $data = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
+        return mysqli_fetch_assoc($data);
     }
 }

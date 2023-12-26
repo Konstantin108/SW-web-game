@@ -16,7 +16,7 @@
     });
 
     function checkRecordsCount(data) {
-        data.total ? createRecordsTable(data) : noRecordsMessageShow();
+        data.items.length ? createRecordsTable(data) : noRecordsMessageShow();
     }
 
     function noRecordsMessageShow() {
@@ -83,5 +83,23 @@
 
         $("#recordsTableContainer").append(table);
         setTimeout(() => createRecordRow(data.items, 0), 100);
+        createNavigationArrows(data);
+    }
+
+    function createNavigationArrows(data) {
+        let page = data.page;
+        let max = data.max;
+        let prevArrowDisabled = "";
+        let nextArrowDisabled = "";
+
+        if (page <= 1) prevArrowDisabled = "disabled";
+        if (page >= max) nextArrowDisabled = "disabled";
+
+        let navigationBLock = `<div>
+                                 <a href="${page - 1}" class="${prevArrowDisabled}"><<<</a>
+                                 <a href="${page + 1}" class="${nextArrowDisabled}">>>></a>
+                               </div>`;
+
+        $("#recordsTableContainer").append(navigationBLock);
     }
 </script>

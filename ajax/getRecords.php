@@ -2,15 +2,28 @@
 include "../config.php";
 include "../classes/DB.php";
 
-// ограничить - нельзя перейти на страницу, больше максимальной
-// разобраться с total, возможно использовать отдельный метод для получения total
+$db = new DB;
+
 $recordsOnPage = 5;
 $recordsPageNumber = 1;
 
-if (preg_match("/^\d+$/", $_POST["rpage"])) $recordsPageNumber = (int)$_POST["rpage"];
+$query = "SELECT COUNT(*) AS count FROM records";
+$recordsTotal = $db->getData($query)["count"];
+$recordsPagesCount = ceil($recordsTotal / $recordsOnPage);
+
+if (preg_match("/^\d+$/", $_POST["rpage"])) {
+    $number = (int)$_POST["rpage"];
+    if ($number && $number <= $recordsPagesCount) $recordsPageNumber = $number;
+    if ($number > $recordsPagesCount) $recordsPageNumber = $recordsPagesCount;
+}
 
 $from = ($recordsPageNumber - 1) * $recordsOnPage;
 
 $query = "SELECT * FROM records ORDER BY score DESC LIMIT $from, $recordsOnPage";
-$result = (new DB)->readData($query);
+$result["items"] = $db->getDataAsArray($query);
+// возможно total не нужно будет выводить
+$result["total"] = $recordsTotal;
+$result["page"] = $recordsPageNumber;
+$result["max"] = $recordsPagesCount;
+
 print_r(json_encode($result));
