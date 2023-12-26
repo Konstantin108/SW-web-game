@@ -12,7 +12,7 @@
         },
         success: function (data) {
             checkRecordsCount(JSON.parse(data));
-        },
+        }
     });
 
     function checkRecordsCount(data) {
