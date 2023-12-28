@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!--    возможно вынести head в отдельный template-->
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,10 +18,19 @@
     <?php include "views/components/header.php"; ?>
 </header>
 <main>
-    <?= $content; ?>
+    <div id="content">
+        <?= $content; ?>
+    </div>
 </main>
 <footer>
+    <!--    тут тоже будет JS, возможно не подключать компоненты в PHP-->
     <?php include "views/components/footer.php"; ?>
 </footer>
+<?php if (AJAX_TRANSITION): ?>
+    <script src="/js/getRequest.js" type="text/javascript"></script>
+<?php endif; ?>
+<?php if (COLORIZE_GAME_TITLE): ?>
+    <script src="/js/colorizeGameTitle.js" type="text/javascript"></script>
+<?php endif; ?>
 </body>
 </html>

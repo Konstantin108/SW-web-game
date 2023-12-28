@@ -25,5 +25,6 @@ $result["items"] = $db->getDataAsArray($query);
 $result["total"] = $recordsTotal;
 $result["page"] = $recordsPageNumber;
 $result["max"] = $recordsPagesCount;
+$result["path"] = AJAX_TRANSITION ? "records/" : "";
 
-print_r(json_encode($result));
+print_r(json_encode($result, JSON_UNESCAPED_UNICODE));

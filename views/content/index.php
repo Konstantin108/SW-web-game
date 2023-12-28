@@ -8,7 +8,9 @@
 
     function createLink(data, index) {
         let link = `<li>
-                        <a href="/${data[index].fileName}/">${data[index].title.toLowerCase()}</a>
+                        <a href="/${data[index].fileName}/">
+                            ${data[index].title.toLowerCase()}
+                        </a>
                     </li>`;
 
         $("#menu").append(link);

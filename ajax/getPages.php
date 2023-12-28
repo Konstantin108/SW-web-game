@@ -26,4 +26,4 @@ foreach ($pages as $page) {
     ];
 }
 
-print_r(json_encode($result));
+print_r(json_encode($result, JSON_UNESCAPED_UNICODE));

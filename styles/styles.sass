@@ -1,6 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Lines&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap")
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Broken+Fax&family=Rubik+Lines&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap")
+
 *
-//margin: 0
-//padding: 0
+  margin: 0
+  padding: 0
+  touch-action: manipulation
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+html,
+body
+  overflow: hidden
+
+body
+  background-color: black
+
+// JS для скрытия или отрисовки кнопки "назад" и для
+// изменения размера названии игры
+// сгруппировать стили
+
+// стили названия игры
+
+#gameTitle
+  font-family: Rubik Broken Fax
+  font-size: 0
+  display: flex
+
+#spaceWord
+  margin-right: 40px
+
+.letter
+  font-size: 150px
+
+.yellowLetter
+  background: linear-gradient(#905d00, #beda50)
+  -webkit-background-clip: text
+  color: transparent
+
+.orangeLetter
+  background: linear-gradient(red, #e68345)
+  -webkit-background-clip: text
+  color: transparent
+
+// стили блока main
+
+main
+  padding: 10px
+  background-color: #b6926c
+  transition: .3s
+  width: 200px
+  height: 100px
+
+.bigSize
+  width: 90vw
+  height: 70vh
 
 table
   border-collapse: collapse
@@ -21,8 +77,7 @@ td
     scale: 1
 
 .avatar
-  width: 150px
-  border-radius: 50%
+  width: 50px
 
 .disabled
   pointer-events: none

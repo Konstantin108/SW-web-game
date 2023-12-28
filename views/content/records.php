@@ -86,9 +86,12 @@
         createNavigationArrows(data);
     }
 
+    // кнопки навигации должны быть отрисованы всегда
+    // при получении данных они гаснут на секунду или меньше
     function createNavigationArrows(data) {
         let page = data.page;
         let max = data.max;
+        let path = data.path;
         let prevArrowDisabled = "";
         let nextArrowDisabled = "";
 
@@ -96,8 +99,8 @@
         if (page >= max) nextArrowDisabled = "disabled";
 
         let navigationBLock = `<div>
-                                 <a href="${page - 1}" class="${prevArrowDisabled}"><<<</a>
-                                 <a href="${page + 1}" class="${nextArrowDisabled}">>>></a>
+                                 <a href="${path + (page - 1)}" class="${prevArrowDisabled}"><<<</a>
+                                 <a href="${path + (page + 1)}" class="${nextArrowDisabled}">>>></a>
                                </div>`;
 
         $("#recordsTableContainer").append(navigationBLock);
