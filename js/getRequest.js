@@ -1,22 +1,30 @@
 let dataReceiving = false;
+let showBackBtn = false;
 
 // добавить работу с header и footer
 // возможно header будет менять размер
-// кнопка назад в footer должна быть отображена при переходе в подменю
-// в ссылки добавить attr-height и attr-width для получения нужного размера табло для каждого
-// пункта подменю
-$(document).on("click", "a", function (event) {
-    if ($(this).attr("href") === "/game/") return;
+$(document).on("click", ".link", function (event) {
+    event.preventDefault();
     if (dataReceiving) return false;
     dataReceiving = true;
-    event.preventDefault();
+
     $("#content").html("loading");
+    $("#container").width($(this).attr("data-width"));
+    $("#container").height($(this).attr("data-height"));
+    if ($(this).attr("id") === "back") {
+        $("#container").removeAttr("style");
+        $(this).hide();
+        showBackBtn = false;
+    } else {
+        showBackBtn = true;
+    }
+
     $.get($(this).attr("href"), function (data) {
-        $("main").addClass("bigSize");
         setTimeout(() => {
             $("#content").html($(data).find("#content").html());
+            if (showBackBtn) $("#back").show();
             dataReceiving = false;
             return false;
-        }, 500);
+        }, 400);
     });
 });

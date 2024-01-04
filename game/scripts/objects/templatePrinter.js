@@ -138,7 +138,6 @@ export const templatePrinter = {
                             </p> 
                         <input id="cheatInput"
                                name="cheatInput"
-                               class="${config.menuColor}"
                                type="text"
                                autocomplete="off"
                                onpaste="return false;"

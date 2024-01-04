@@ -1,8 +1,12 @@
 {{title: Таблица лидеров}}
+{{width: 70vw}}
+{{height: 68vh}}
 
 <?php global $param; ?>
-<b>лучшие игроки</b>
-<div id="recordsTableContainer"></div>
+<div id="recordsPage">
+    <div id="recordsTableContainer"></div>
+    <div id="navigationBLockContainer"></div>
+</div>
 <script>
     $.ajax({
         method: "POST",
@@ -73,11 +77,6 @@
                                 <td>дата/время</td>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <td colspan="7">Всего записей ${data.total}</td>
-                            </tr>
-                        </tfoot>
                         <tbody id="recordsTable"></tbody>
                      </table>`;
 
@@ -99,10 +98,16 @@
         if (page >= max) nextArrowDisabled = "disabled";
 
         let navigationBLock = `<div>
-                                 <a href="${path + (page - 1)}" class="${prevArrowDisabled}"><<<</a>
-                                 <a href="${path + (page + 1)}" class="${nextArrowDisabled}">>>></a>
+                                  <a href="${path + (page - 1)}"
+                                     class="link green ${prevArrowDisabled}">
+                                        <i class="fas fa-arrow-up"></i>
+                                  </a>
+                                  <a href="${path + (page + 1)}"
+                                     class="link green ${nextArrowDisabled}">
+                                        <i class="fas fa-arrow-down"></i>
+                                  </a>
                                </div>`;
 
-        $("#recordsTableContainer").append(navigationBLock);
+        $("#navigationBLockContainer").append(navigationBLock);
     }
 </script>

@@ -14,10 +14,40 @@
 html,
 body {
   overflow: hidden;
+  height: 100%;
 }
 
 body {
-  background-color: black;
+  background-color: #030331;
+  background-image: url("../src/images/background-space2.jpg");
+  background-repeat: no-repeat;
+}
+
+#wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#top {
+  flex-grow: 1;
+}
+
+.pointerClass {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.green {
+  color: lawngreen;
+}
+
+header {
+  display: flex;
+  justify-content: center;
 }
 
 #gameTitle {
@@ -46,17 +76,76 @@ body {
   color: transparent;
 }
 
-main {
-  padding: 10px;
-  background-color: #b6926c;
-  transition: 0.3s;
-  width: 200px;
-  height: 100px;
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: 40px;
+  padding-bottom: 24px;
 }
 
-.bigSize {
-  width: 90vw;
-  height: 70vh;
+#gitHubLink {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  height: 36px;
+  width: 136px;
+  transition: 0.2s;
+  border-bottom: 2px solid rgba(255, 255, 255, 0);
+}
+
+#gitHubLink:hover {
+  border-bottom: 2px solid white;
+}
+
+#gitHubLogo {
+  font-size: 36px;
+}
+
+#gitHubTitle {
+  margin-top: 4px;
+  font-family: Ubuntu;
+  font-size: 30px;
+}
+
+.circle {
+  background-image: url("../src/images/background-rusty-iron2.jpg");
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  transform: scale(1.7);
+  padding: 3px;
+}
+
+.circleDisplay {
+  background-color: black;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  height: 33px;
+  transform: scale(1.1);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+  background-color: black;
+  transition: 0.3s;
+  width: 302px;
+  height: 163px;
+}
+
+#back {
+  display: none;
 }
 
 table {
@@ -65,7 +154,8 @@ table {
 
 td {
   padding: 20px;
-  border: 3px solid black;
+  color: lawngreen;
+  border: 3px solid lawngreen;
 }
 
 .elementFadeIn {
@@ -90,7 +180,34 @@ td {
   pointer-events: none;
   cursor: default;
   text-decoration: none;
-  color: grey;
+  color: #075807;
+}
+
+#menu {
+  list-style-type: none;
+  border-radius: 12px;
+  width: 222px;
+  height: 143px;
+  background-color: black;
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 20px;
+}
+
+.menuOneList {
+  margin: 6px;
+}
+
+.menuOneBtn {
+  font-family: Ubuntu;
+  font-size: 25px;
+  background-color: black;
+  border: none;
+}
+
+#recordsPage {
+  display: flex;
 }
 
 /*# sourceMappingURL=styles.css.map */

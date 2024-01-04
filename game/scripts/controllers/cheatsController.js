@@ -55,13 +55,9 @@ export const cheatsController = {
 
         form.addEventListener("submit", function (event) {
             event.preventDefault();
-            let data = new FormData(this);
-            let value = data.get("cheatInput");
-
-            if (value) {
-                cheatsController.matchPlayerInputAndCheatCode(value.toLowerCase(), cheatMessageContainer);
-                this.reset();
-            }
+            let data = new FormData(this).get("cheatInput");
+            if (data) cheatsController.matchPlayerInputAndCheatCode(data.toLowerCase(), cheatMessageContainer);
+            this.reset();
         });
     },
 

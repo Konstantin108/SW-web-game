@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Lines&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap")
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Broken+Fax&family=Rubik+Lines&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap")
 
+// проверить в мобильных браузерах
+// JS для скрытия или отрисовки кнопки "назад" и для
+// изменения размера названии игры
+// добавить новый loading
+
 *
   margin: 0
   padding: 0
@@ -14,15 +19,35 @@
 html,
 body
   overflow: hidden
+  height: 100%
 
 body
-  background-color: black
+  background-color: #030331
+  background-image: url("../src/images/background-space2.jpg")
+  background-repeat: no-repeat
 
-// JS для скрытия или отрисовки кнопки "назад" и для
-// изменения размера названии игры
-// сгруппировать стили
+#wrapper
+  min-height: 100%
+  display: flex
+  flex-direction: column
 
-// стили названия игры
+#top
+  flex-grow: 1
+
+.pointerClass
+  cursor: pointer
+
+a
+  text-decoration: none
+
+.green
+  color: lawngreen
+
+// стили блока header
+
+header
+  display: flex
+  justify-content: center
 
 #gameTitle
   font-family: Rubik Broken Fax
@@ -45,25 +70,79 @@ body
   -webkit-background-clip: text
   color: transparent
 
+// стили блока footer
+
+footer
+  display: flex
+  justify-content: space-between
+  padding-left: 24px
+  padding-right: 24px
+  margin-top: 40px
+  padding-bottom: 24px
+
+#gitHubLink
+  display: flex
+  justify-content: space-between
+  color: white
+  height: 36px
+  width: 136px
+  transition: .2s
+  border-bottom: 2px solid rgba(255, 255, 255, 0)
+
+#gitHubLink:hover
+  border-bottom: 2px solid white
+
+#gitHubLogo
+  font-size: 36px
+
+#gitHubTitle
+  margin-top: 4px
+  font-family: Ubuntu
+  font-size: 30px
+
+.circle
+  background-image: url("../src/images/background-rusty-iron2.jpg")
+  border-radius: 100px
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 36px
+  height: 36px
+  transform: scale(1.7)
+  padding: 3px
+
+.circleDisplay
+  background-color: black
+  border-radius: 100px
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 33px
+  height: 33px
+  transform: scale(1.1)
+
 // стили блока main
 
 main
-  padding: 10px
-  background-color: #b6926c
-  transition: .3s
-  width: 200px
-  height: 100px
+  display: flex
+  justify-content: center
 
-.bigSize
-  width: 90vw
-  height: 70vh
+#container
+  background-color: black
+  transition: .3s
+  width: 302px
+  height: 163px
+
+#back
+  display: none
 
 table
   border-collapse: collapse
 
 td
   padding: 20px
-  border: 3px solid black
+  color: lawngreen
+  border: 3px solid lawngreen
 
 .elementFadeIn
   animation: fadeIn .2s
@@ -83,4 +162,32 @@ td
   pointer-events: none
   cursor: default
   text-decoration: none
-  color: grey
+  color: #075807
+
+// стили странциы index
+
+#menu
+  list-style-type: none
+  border-radius: 12px
+  width: 222px
+  height: 143px
+  background-color: black
+  text-align: center
+  padding-left: 40px
+  padding-right: 40px
+  padding-top: 20px
+
+.menuOneList
+  margin: 6px
+
+.menuOneBtn
+  font-family: Ubuntu
+  font-size: 25px
+  background-color: black
+  border: none
+
+// стили странциы records
+
+#recordsPage
+  display: flex
+

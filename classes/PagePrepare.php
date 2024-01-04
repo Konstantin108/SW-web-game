@@ -34,8 +34,10 @@ class PagePrepare
     public function getPart($content, $partName): string
     {
         $pattern = "#{{2}$partName:(.*)}{2}#i";
-        $result = preg_match($pattern, $content, $match) && $match[1] ? $match[1] : APP_NAME;
-        return trim($result);
+        if (preg_match($pattern, $content, $match) && $match[1]) {
+            return trim($match[1]);
+        }
+        return false;
     }
 
     /**

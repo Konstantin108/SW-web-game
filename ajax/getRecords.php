@@ -21,8 +21,6 @@ $from = ($recordsPageNumber - 1) * $recordsOnPage;
 
 $query = "SELECT * FROM records ORDER BY score DESC LIMIT $from, $recordsOnPage";
 $result["items"] = $db->getDataAsArray($query);
-// возможно total не нужно будет выводить
-$result["total"] = $recordsTotal;
 $result["page"] = $recordsPageNumber;
 $result["max"] = $recordsPagesCount;
 $result["path"] = AJAX_TRANSITION ? "records/" : "";
