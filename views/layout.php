@@ -22,17 +22,16 @@
         </header>
     </div>
     <main>
-        <div id="container">
+        <div id="container" class="smallSize">
             <div id="content">
                 <?= $content; ?>
             </div>
-            <a href="/" id="back" class="link">
-                назад
-            </a>
+            <div id="pageBottom">
+                <a href="/" id="back" class="subMenu link">назад</a>
+            </div>
         </div>
     </main>
     <footer>
-        <!--    возможно при переходе в подменю просто добавлять класс и не передавать ширину и высоту для каждой страницы-->
         <?php include "views/components/footer.php"; ?>
     </footer>
 </div>

@@ -9,10 +9,8 @@
     function createLink(data, index) {
         let link = `<li class="menuOneList">
                         <a href="/${data[index].fileName}/"
-                           class="menuOneBtn green ${data[index].class ?? ""}"
-                           data-width="${data[index].width ?? ""}"
-                           data-height="${data[index].height ?? ""}">
-                                ${data[index].title.toLowerCase()}
+                           class="menuOneBtn ${data[index].classes ?? ""}">
+                                <p>${data[index].title.toLowerCase()}</p>
                         </a>
                     </li>`;
 

@@ -20,14 +20,10 @@ $result[] = [
 foreach ($pages as $page) {
     $fileName = pathinfo($page)["filename"];
     $title = $pagePrepare->getPart(file_get_contents($pagePrepare->getPath($fileName, "../")), "title");
-    $width = $pagePrepare->getPart(file_get_contents($pagePrepare->getPath($fileName, "../")), "width");
-    $height = $pagePrepare->getPart(file_get_contents($pagePrepare->getPath($fileName, "../")), "height");
     $result[] = [
         "fileName" => $fileName,
         "title" => $title,
-        "width" => $width,
-        "height" => $height,
-        "class" => "link"
+        "classes" => "subMenu link"
     ];
 }
 

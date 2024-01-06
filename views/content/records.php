@@ -1,11 +1,12 @@
 {{title: Таблица лидеров}}
-{{width: 70vw}}
-{{height: 68vh}}
 
 <?php global $param; ?>
 <div id="recordsPage">
-    <div id="recordsTableContainer"></div>
-    <div id="navigationBLockContainer"></div>
+    <p class="pageTitle">таблица лидеров</p>
+    <div id="pageContentContainer" class="flexBox">
+        <div id="recordsTableContainer"></div>
+        <div id="navigationBlockContainer"></div>
+    </div>
 </div>
 <script>
     $.ajax({
@@ -23,13 +24,14 @@
         data.items.length ? createRecordsTable(data) : noRecordsMessageShow();
     }
 
+    // стилизовать этот блок, убрать лишние дивы
     function noRecordsMessageShow() {
-        let message = `<div class="elementFadeIn">
+        let message = `<div id="noRecordsMessageBlock" class="recordsPageElement">
                           <p>таблица лидеров пуста</p>
                           <p>стань первым</p>
                        </div>`;
 
-        setTimeout(() => $("#recordsTableContainer").append(message), 100);
+        $("#pageContentContainer").append(message);
     }
 
     function createRecordRow(items, index) {
@@ -44,16 +46,38 @@
 
         let path = `src/images/${items[index].avatar}`;
 
-        let record = `<tr>
+        let record = `<tr class="recordsPageElement">
                         <td>
-                            <img src="/${path}" alt="${items[index].avatar}" class="avatar">
+                            <div id="tbodyDiv">
+                                <img src="/${path}" alt="${items[index].avatar}" id="avatar">
+                                <p id="playerName" class="tableText">${items[index].name}</p>
+                            </div>
                         </td>
-                        <td>${items[index].name}</td>
-                        <td>${items[index].level}</td>
-                        <td>${items[index].ship_destroyed}</td>
-                        <td>${items[index].boss_destroyed}</td>
-                        <td>${items[index].score}</td>
-                        <td>${date.replace(",", "")}</td>
+                        <td>
+                            <div>
+                                <p class="tableText">${Number(items[index].level).toLocaleString()}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <p class="tableText">${Number(items[index].ship_destroyed).toLocaleString()}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <p class="tableText">${Number(items[index].boss_destroyed).toLocaleString()}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <p class="tableText">${Number(items[index].score).toLocaleString()}</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <p class="tableText">${date.replace(",", "")}</p>
+                            </div>
+                        </td>
                       </tr>`;
 
         $("#recordsTable").append(record);
@@ -69,12 +93,36 @@
         let table = `<table>
                         <thead>
                             <tr>
-                                <td colspan="2">игрок</td>
-                                <td>уровень достигнут</td>
-                                <td>противников уничтожено</td>
-                                <td>босс уничтожен</td>
-                                <td>очки</td>
-                                <td>дата/время</td>
+                                <td id="playerColumn">
+                                    <div id="theadDiv">
+                                        <p class="tableText">игрок</p>
+                                    </div>
+                                </td>
+                                <td id="levelColumn">
+                                    <div>
+                                        <p class="tableText">уровень достигнут</p>
+                                    </div>
+                                </td>
+                                <td id="shipDestroyedColumn">
+                                    <div>
+                                        <p class="tableText">противников уничтожено</p>
+                                    </div>
+                                </td>
+                                <td id="bossDestroyedColumn">
+                                    <div>
+                                        <p class="tableText">босс уничтожен</p>
+                                    </div>
+                                </td>
+                                <td id="scoreColumn">
+                                    <div>
+                                        <p class="tableText">очки</p>
+                                    </div>
+                                </td>
+                                <td id="createdAtColumn">
+                                    <div>
+                                        <p class="tableText">дата/время</p>
+                                    </div>
+                                </td>
                             </tr>
                         </thead>
                         <tbody id="recordsTable"></tbody>
@@ -85,8 +133,6 @@
         createNavigationArrows(data);
     }
 
-    // кнопки навигации должны быть отрисованы всегда
-    // при получении данных они гаснут на секунду или меньше
     function createNavigationArrows(data) {
         let page = data.page;
         let max = data.max;
@@ -97,17 +143,17 @@
         if (page <= 1) prevArrowDisabled = "disabled";
         if (page >= max) nextArrowDisabled = "disabled";
 
-        let navigationBLock = `<div>
+        let navigationBLock = `<div id="navigationBlock">
                                   <a href="${path + (page - 1)}"
-                                     class="link green ${prevArrowDisabled}">
+                                     class="link navigationArrow ${prevArrowDisabled}">
                                         <i class="fas fa-arrow-up"></i>
                                   </a>
                                   <a href="${path + (page + 1)}"
-                                     class="link green ${nextArrowDisabled}">
+                                     class="link navigationArrow ${nextArrowDisabled}">
                                         <i class="fas fa-arrow-down"></i>
                                   </a>
                                </div>`;
 
-        $("#navigationBLockContainer").append(navigationBLock);
+        $("#navigationBlockContainer").append(navigationBLock);
     }
 </script>

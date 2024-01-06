@@ -1,28 +1,35 @@
 let dataReceiving = false;
-let showBackBtn = false;
+let needShowBackBtn = false;
 
-// добавить работу с header и footer
-// возможно header будет менять размер
 $(document).on("click", ".link", function (event) {
     event.preventDefault();
     if (dataReceiving) return false;
     dataReceiving = true;
 
-    $("#content").html("loading");
-    $("#container").width($(this).attr("data-width"));
-    $("#container").height($(this).attr("data-height"));
-    if ($(this).attr("id") === "back") {
-        $("#container").removeAttr("style");
-        $(this).hide();
-        showBackBtn = false;
+    $("#content").find(".recordsPageElement").addClass("elementFadeOut");
+    $(".navigationArrow").addClass("disabled");
+    if ($(this).hasClass("subMenu")) {
+        $("#container").toggleClass("smallSize bigSize");
+        $("#content").html(`<div id="loadingBlock">
+                                <img src="/src/images/loading.gif" alt="loading" id="loading">
+                            </div>`);
+        $("#pageBottom").hide();
+
+        needShowBackBtn = true;
     } else {
-        showBackBtn = true;
+        needShowBackBtn = false;
     }
 
     $.get($(this).attr("href"), function (data) {
         setTimeout(() => {
             $("#content").html($(data).find("#content").html());
-            if (showBackBtn) $("#back").show();
+
+            $(".navigationArrow").removeClass("disabled");
+            if (needShowBackBtn) {
+                $("#pageBottom").show();
+                $("#back").toggle();
+            }
+
             dataReceiving = false;
             return false;
         }, 400);
