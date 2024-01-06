@@ -6,7 +6,7 @@ $(document).on("click", ".link", function (event) {
     if (dataReceiving) return false;
     dataReceiving = true;
 
-    $("#content").find(".recordsPageElement").addClass("elementFadeOut");
+    $("#content").find(".pageElement").addClass("elementFadeOut");
     $(".navigationArrow").addClass("disabled");
     if ($(this).hasClass("subMenu")) {
         $("#container").toggleClass("smallSize bigSize");

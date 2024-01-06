@@ -7,7 +7,7 @@
     });
 
     function createLink(data, index) {
-        let link = `<li class="menuOneList">
+        let link = `<li class="menuOneList pageElement">
                         <a href="/${data[index].fileName}/"
                            class="menuOneBtn ${data[index].classes ?? ""}">
                                 <p>${data[index].title.toLowerCase()}</p>

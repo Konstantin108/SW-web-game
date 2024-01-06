@@ -24,9 +24,8 @@
         data.items.length ? createRecordsTable(data) : noRecordsMessageShow();
     }
 
-    // стилизовать этот блок, убрать лишние дивы
     function noRecordsMessageShow() {
-        let message = `<div id="noRecordsMessageBlock" class="recordsPageElement">
+        let message = `<div id="noRecordsMessageBlock" class="pageElement">
                           <p>таблица лидеров пуста</p>
                           <p>стань первым</p>
                        </div>`;
@@ -44,12 +43,10 @@
             minute: "numeric"
         });
 
-        let path = `src/images/${items[index].avatar}`;
-
-        let record = `<tr class="recordsPageElement">
+        let record = `<tr class="pageElement">
                         <td>
                             <div id="tbodyDiv">
-                                <img src="/${path}" alt="${items[index].avatar}" id="avatar">
+                                <img src="/src/images/${items[index].avatar}" alt="${items[index].avatar}" id="avatar">
                                 <p id="playerName" class="tableText">${items[index].name}</p>
                             </div>
                         </td>

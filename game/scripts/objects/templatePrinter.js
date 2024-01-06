@@ -17,36 +17,24 @@ export const templatePrinter = {
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer widePadding">
-                                    <div class="infoLabel">
-                                        уровень
-                                    </div>
-                                    <div>
-                                        ${level}
-                                    </div>    
+                                    <p>уровень</p>
+                                    <p>${level}</p>                                
                                 </div>
                             </strong>
                         </div>
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer widePadding">
-                                    <div class="infoLabel">
-                                        очки
-                                    </div>
-                                    <div>
-                                        ${score}
-                                    </div>
+                                    <p>очки</p>
+                                    <p>${score}</p>
                                 </div>
                             </strong>
                         </div>
                         <div class="statusBarElement">
                             <strong>
                                 <div class="infoContainer widePadding">
-                                    <div class="infoLabel">
-                                        уничтожено противников
-                                    </div>
-                                    <div>
-                                        ${shipDestroyed} 
-                                    </div>
+                                    <p>уничтожено противников</p>
+                                    <p>${shipDestroyed}</p>
                                 </div>
                             </strong>
                         </div>
@@ -59,12 +47,8 @@ export const templatePrinter = {
         return `<div class="statusBarElement">
                     <strong>
                         <div class="infoContainer widePadding">
-                            <div class="infoLabel">
-                                жизни
-                            </div>
-                            <div>
-                                ${lives}
-                            </div>
+                            <p>жизни</p>
+                            <p>${lives}</p>
                         </div>
                     </strong>
                 </div>`;
@@ -122,7 +106,7 @@ export const templatePrinter = {
         return `<div id="messageContainer">
                     <div id="${className}" class="${config.menuColor}">                                                      
                         <strong>
-                            ${message}
+                            <p>${message}</p>
                         </strong>
                     </div>        
                 </div>`;
@@ -133,9 +117,7 @@ export const templatePrinter = {
                     <strong>
                         <div id="cheatMessageContainer"></div>
                         <div id="cheatInputContainer">
-                            <p id="consoleSymbol">
-                                >_
-                            </p> 
+                            <p id="consoleSymbol">>_</p> 
                         <input id="cheatInput"
                                name="cheatInput"
                                type="text"
@@ -151,16 +133,12 @@ export const templatePrinter = {
     },
 
     cheatMessageTemplatePrint(message, messageColor) {
-        return `<p id="cheatMessage" class="${messageColor}">
-                    ${message}
-                </p>`;
+        return `<p id="cheatMessage" class="${messageColor}">${message}</p>`;
     },
 
     debugPanelTemplatePrint(debugElementsDiv, sizeClass) {
         return `<div id="debugPanel" class="${sizeClass}">
-                    <p id="debugPanelLabel">
-                        debug panel
-                    </p>
+                    <p id="debugPanelLabel">debug panel</p>
                     <div id="btnsContainer">
                         ${debugElementsDiv}
                     </div>    
@@ -194,16 +172,14 @@ export const templatePrinter = {
     },
 
     confirmBlockLabelPrint() {
-        return `<div id="confirmTitle" class="${config.menuColor}">
-                    вы уверены?
+        return `<div class="${config.menuColor}">
+                    <p id="confirmTitle">вы уверены?</p>
                 </div>`;
     },
 
     statisticsBlockPrint(data) {
         return `<div id="statisticsBlock" class="${config.menuColor}">
-                    <div id="statisticsTitle">
-                        игра окончена
-                    </div>
+                    <p id="statisticsTitle">игра окончена</p>
                     <div id="statisticsGridContainer">
                         ${data}
                     </div>
@@ -241,7 +217,7 @@ export const templatePrinter = {
                             </div>
                         </div>
                         <button id="tooltipControlPanelBtn" class="${config.menuColor}">
-                            ${text} подсказки
+                            <p>${text} подсказки</p>
                         </button>
                     </div>
                 </div>`;

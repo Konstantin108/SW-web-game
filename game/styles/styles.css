@@ -1343,15 +1343,15 @@ td {
   justify-content: space-around;
 }
 
-#confirmTitle,
 #statisticsTitle,
+#confirmTitle,
 .pauseMenuBtn {
   font-family: Ubuntu;
   font-size: 30px;
 }
 
-#confirmTitle {
-  margin-bottom: 20px;
+.ubuntuText {
+  font-family: Ubuntu;
 }
 
 #statisticsTitle {
@@ -1365,10 +1365,6 @@ td {
   row-gap: 2px;
   font-size: 22px;
   margin-bottom: 15px;
-}
-
-.statisticsColumn {
-  font-family: Ubuntu;
 }
 
 .statisticsLeftColumn {

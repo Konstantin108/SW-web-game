@@ -41,6 +41,26 @@ a
 .flexBox
   display: flex
 
+.pageElement
+  animation: fadeIn .5s
+
+@keyframes fadeIn
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+.elementFadeOut
+  animation: fadeOut .5s
+
+@keyframes fadeOut
+  from
+    opacity: 1
+    transform: translate(0, 0)
+  to
+    opacity: 0
+    transform: translate(0, 20px)
+
 // стили блока header
 
 header
@@ -225,26 +245,6 @@ tr
   background-color: rgba(142, 252, 0, .2)
   color: lawngreen
   margin-top: 4px
-
-.recordsPageElement
-  animation: fadeIn .5s
-
-@keyframes fadeIn
-  from
-    opacity: 0
-  to
-    opacity: 1
-
-.elementFadeOut
-  animation: fadeOut .5s
-
-@keyframes fadeOut
-  from
-    opacity: 1
-    transform: translate(0, 0)
-  to
-    opacity: 0
-    transform: translate(0, 20px)
 
 #theadDiv
   width: 160px

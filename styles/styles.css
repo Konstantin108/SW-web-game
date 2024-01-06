@@ -46,6 +46,32 @@ a {
   display: flex;
 }
 
+.pageElement {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.elementFadeOut {
+  animation: fadeOut 0.5s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, 20px);
+  }
+}
 header {
   display: flex;
   justify-content: center;
@@ -255,32 +281,6 @@ tr {
   margin-top: 4px;
 }
 
-.recordsPageElement {
-  animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.elementFadeOut {
-  animation: fadeOut 0.5s;
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-  to {
-    opacity: 0;
-    transform: translate(0, 20px);
-  }
-}
 #theadDiv {
   width: 160px;
   margin-left: 16px;

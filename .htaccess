@@ -4,6 +4,10 @@ RewriteEngine on
 ErrorDocument 403 /
 Options -Indexes
 
+<Files "config.php">
+   Deny From All
+</Files>
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php

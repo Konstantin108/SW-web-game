@@ -447,7 +447,9 @@ export const renderer = {
         if (!timer) return;
         let timerLabel = document.querySelector(`#${bonusTimerLabel}`);
         let timerDiv = document.querySelector(`#${timerElement}`)
-        let timerData = `<div id="${timerElement}" class="${config.menuColor}">${timer}</div>`;
+        let timerData = `<div id="${timerElement}" class="${config.menuColor}">
+                            <p>${timer}</p>
+                         </div>`;
         let thisTimerId = null;
         let tick = -1;
 
@@ -673,12 +675,8 @@ export const renderer = {
             data = pause.getStatisticsData();
             if (data) {
                 data.forEach(elem => {
-                    dataForPrinter += `<div class="statisticsColumn statisticsLeftColumn">
-                                            ${elem.name}
-                                       </div>
-                                       <div class="statisticsColumn statisticsRightColumn">
-                                            ${elem.data}
-                                       </div>`;
+                    dataForPrinter += `<p class="ubuntuText statisticsLeftColumn">${elem.name}</p>
+                                       <p class="ubuntuText statisticsRightColumn">${elem.data}</p>`;
                 });
             }
             optionsBlock += templatePrinter.statisticsBlockPrint(dataForPrinter);
@@ -753,7 +751,7 @@ export const renderer = {
                                     <button id="${option.id}"
                                             class="${classes.trim()}"
                                             value="${value}">
-                                        ${option.title}
+                                        <p class="ubuntuText">${option.title}</p>
                                     </button>
                                  </li>`;
             }
@@ -922,9 +920,7 @@ export const renderer = {
 
         tooltipElement = `<div class="${dataTooltip.allBlockStyle}">`;
 
-        if (dataTooltip.prologue) tooltipElement += `<p class="infoLabel tooltipElementText">
-                                                        ${dataTooltip.prologue}
-                                                    </p>`;
+        if (dataTooltip.prologue) tooltipElement += `<p class="infoLabel tooltipElementText">${dataTooltip.prologue}</p>`;
 
         tooltipElement += `<div class="${dataTooltip.keyboardsBlockClass}">`;
 
@@ -937,9 +933,7 @@ export const renderer = {
                     for (let j = 0; j < dataTooltip.keyboards[i].units.length; j++) {
 
                         if (dataTooltip.keyboards[i].units[j].label) tooltipElement += `<div class="keyboardLabelDiv">
-                                                                                            <p class="keyboardLabel">
-                                                                                                ${dataTooltip.keyboards[i].units[j].label}
-                                                                                            </p>`;
+                                                                                            <p class="keyboardLabel">${dataTooltip.keyboards[i].units[j].label}</p>`;
 
                         tooltipElement += `<img src="${path}${dataTooltip.keyboards[i].units[j].src}"
                                                 alt="${dataTooltip.keyboards[i].units[j].src}"
@@ -952,23 +946,17 @@ export const renderer = {
                 }
 
                 tooltipElement += "</div>";
-                if (tooltipKeyboardsCount > 1 && i + 1 < tooltipKeyboardsCount) tooltipElement += `<p class="infoLabel tooltipElement">
-                                                                                                        или
-                                                                                                   </p>`;
+                if (tooltipKeyboardsCount > 1 && i + 1 < tooltipKeyboardsCount) tooltipElement += `<p class="infoLabel tooltipElement">или</p>`;
             }
         }
 
         tooltipElement += "</div>";
 
-        tooltipElement += `<p class="infoLabel tooltipElementText">
-                                ${dataTooltip.text}
-                           </p>`;
+        tooltipElement += `<p class="infoLabel tooltipElementText">${dataTooltip.text}</p>`;
 
         tooltipElement += "</div>";
 
-        if (dataTooltip.additionalMessage) tooltipElement += `<p class="infoLabel tooltipAdditionalMessage">
-                                                                   ${dataTooltip.additionalMessage}
-                                                              </p>`;
+        if (dataTooltip.additionalMessage) tooltipElement += `<p class="infoLabel tooltipAdditionalMessage">${dataTooltip.additionalMessage}</p>`;
 
         tooltipDiv = document.querySelector(`#${data.name}`);
         if (tooltipDiv) placeForTooltip.removeChild(tooltipDiv);
