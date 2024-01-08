@@ -20,6 +20,7 @@
         }
     });
 
+
     function checkRecordsCount(data) {
         data.items.length ? createRecordsTable(data) : noRecordsMessageShow();
     }
@@ -31,6 +32,50 @@
                        </div>`;
 
         $("#pageContentContainer").append(message);
+    }
+
+    function createRecordsTable(data) {
+        let table = `<table>
+                        <thead>
+                            <tr>
+                                <td id="playerColumn">
+                                    <div id="theadDiv">
+                                        <p class="tableText">игрок</p>
+                                    </div>
+                                </td>
+                                <td id="levelColumn">
+                                    <div>
+                                        <p class="tableText">уровень достигнут</p>
+                                    </div>
+                                </td>
+                                <td id="shipDestroyedColumn">
+                                    <div>
+                                        <p class="tableText">противников уничтожено</p>
+                                    </div>
+                                </td>
+                                <td id="bossDestroyedColumn">
+                                    <div>
+                                        <p class="tableText">босс уничтожен</p>
+                                    </div>
+                                </td>
+                                <td id="scoreColumn">
+                                    <div>
+                                        <p class="tableText">очки</p>
+                                    </div>
+                                </td>
+                                <td id="createdAtColumn">
+                                    <div>
+                                        <p class="tableText">дата/время</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsTable"></tbody>
+                     </table>`;
+
+        $("#recordsTableContainer").append(table);
+        setTimeout(() => createRecordRow(data.items, 0), 100);
+        createNavigationArrows(data);
     }
 
     function createRecordRow(items, index) {
@@ -84,50 +129,6 @@
                 return createRecordRow(items, index += 1);
             }, 100);
         }
-    }
-
-    function createRecordsTable(data) {
-        let table = `<table>
-                        <thead>
-                            <tr>
-                                <td id="playerColumn">
-                                    <div id="theadDiv">
-                                        <p class="tableText">игрок</p>
-                                    </div>
-                                </td>
-                                <td id="levelColumn">
-                                    <div>
-                                        <p class="tableText">уровень достигнут</p>
-                                    </div>
-                                </td>
-                                <td id="shipDestroyedColumn">
-                                    <div>
-                                        <p class="tableText">противников уничтожено</p>
-                                    </div>
-                                </td>
-                                <td id="bossDestroyedColumn">
-                                    <div>
-                                        <p class="tableText">босс уничтожен</p>
-                                    </div>
-                                </td>
-                                <td id="scoreColumn">
-                                    <div>
-                                        <p class="tableText">очки</p>
-                                    </div>
-                                </td>
-                                <td id="createdAtColumn">
-                                    <div>
-                                        <p class="tableText">дата/время</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody id="recordsTable"></tbody>
-                     </table>`;
-
-        $("#recordsTableContainer").append(table);
-        setTimeout(() => createRecordRow(data.items, 0), 100);
-        createNavigationArrows(data);
     }
 
     function createNavigationArrows(data) {

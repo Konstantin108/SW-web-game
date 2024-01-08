@@ -13,7 +13,8 @@ $param = $matches[1] ?? null;
 
 $path = $pagePrepare->getPath($page);
 if (!file_exists($path)) {
-    $path = $pagePrepare->getPath("404");
+    $page = "404";
+    $path = $pagePrepare->getPath($page);
     header("HTTP/1.0 404 Not Found");
 }
 $content = $pagePrepare->getIncludeContents($path) ?? "";

@@ -6,6 +6,7 @@
         if (data) setTimeout(() => createLink(JSON.parse(data), 0), 100);
     });
 
+
     function createLink(data, index) {
         let link = `<li class="menuOneList pageElement">
                         <a href="/${data[index].fileName}/"

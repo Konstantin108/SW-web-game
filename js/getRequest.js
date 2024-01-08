@@ -27,7 +27,7 @@ $(document).on("click", ".link", function (event) {
             $(".navigationArrow").removeClass("disabled");
             if (needShowBackBtn) {
                 $("#pageBottom").show();
-                $("#back").toggle();
+                $("#back").toggleClass("hideElement showElement");
             }
 
             dataReceiving = false;

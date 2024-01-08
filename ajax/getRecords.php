@@ -11,7 +11,7 @@ $query = "SELECT COUNT(*) AS count FROM records";
 $recordsTotal = $db->getData($query)["count"];
 $recordsPagesCount = ceil($recordsTotal / $recordsOnPage);
 
-if (preg_match("/^\d+$/", $_POST["rpage"])) {
+if (isset($_POST["rpage"]) && preg_match("/^\d+$/", $_POST["rpage"])) {
     $number = (int)$_POST["rpage"];
     if ($number && $number <= $recordsPagesCount) $recordsPageNumber = $number;
     if ($number > $recordsPagesCount) $recordsPageNumber = $recordsPagesCount;

@@ -1,8 +1,17 @@
-<?php global $title, $content; ?>
+<?php global $title, $content, $page;
+$containerSizeClass = "bigSize";
+$backBtnDisplayClass = "showElement";
+
+if ($page === "index" || $page === "404") {
+    $containerSizeClass = "smallSize";
+    $backBtnDisplayClass = "hideElement";
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
     <?php include "views/components/head.php"; ?>
+    <title><?= $title ?: APP_NAME ?></title>
 </head>
 <body>
 <div id="wrapper">
@@ -12,12 +21,14 @@
         </header>
     </div>
     <main>
-        <div id="container" class="smallSize">
+        <div id="container" class="<?= $containerSizeClass; ?>">
             <div id="content">
                 <?= $content; ?>
             </div>
             <div id="pageBottom" class="pageElement">
-                <a href="/" id="back" class="subMenu link">назад</a>
+                <a href="/" id="back" class="subMenu link <?= $backBtnDisplayClass; ?>">
+                    <p>назад</p>
+                </a>
             </div>
         </div>
     </main>
