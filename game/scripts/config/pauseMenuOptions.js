@@ -39,7 +39,7 @@ export const pauseMenuOptions = {
             ],
             internalClasses: null,
             containerBlockId: "optionsContainer",
-            value: "startNewGame",  // здесь будет вызов метода PHP для перехода на страницу с игрой
+            value: "/game/",
             needConfirm: true,
             valueTransfer: false,
             referer: false
@@ -58,7 +58,7 @@ export const pauseMenuOptions = {
             ],
             internalClasses: null,
             containerBlockId: "optionsContainer",
-            value: "goToIndex",  // здесь будет вызов метода PHP для перехода на страницу index.php
+            value: "/",
             needConfirm: true,
             valueTransfer: false,
             referer: false

@@ -10,9 +10,11 @@ $(document).on("click", ".link", function (event) {
     $(".navigationArrow").addClass("disabled");
     if ($(this).hasClass("subMenu")) {
         $("#container").toggleClass("smallSize bigSize");
-        $("#content").html(`<div id="loadingBlock">
-                                <img src="/src/images/loading.gif" alt="loading" id="loading">
-                            </div>`);
+        $("#content").html(
+            `<div id="loadingBlock">
+                <img src="/src/images/loading.gif" alt="loading" id="loading">
+             </div>`
+        );
         $("#pageBottom").hide();
 
         needShowBackBtn = true;
@@ -22,6 +24,7 @@ $(document).on("click", ".link", function (event) {
 
     $.get($(this).attr("href"), function (data) {
         setTimeout(() => {
+            $("title").html($(data).filter("title").html());
             $("#content").html($(data).find("#content").html());
 
             $(".navigationArrow").removeClass("disabled");

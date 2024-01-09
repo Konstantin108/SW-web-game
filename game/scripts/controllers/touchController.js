@@ -5,8 +5,6 @@ import {game} from "../game.js";
 import {cheatsController} from "./cheatsController.js";
 import {debugPanel} from "../objects/debugPanel.js";
 
-// если перезапуск будет без перезагрузки страницы,
-// то hammer повторно создавать не надо
 export const touchController = {
     arrowsSpeed: {
         "arrow": config.arrowAutoShootSpeed,

@@ -8,6 +8,8 @@ import {soundSources} from "./soundSources.js";
 
 export const config = {
     // игра и игрок
+    domain: "spaceshooter",
+    protocol: "http://",
     mapSizeX: 10,
     mapSizeY: 13,
     gameInstantStart: false,

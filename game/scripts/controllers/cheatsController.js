@@ -502,9 +502,6 @@ export const cheatsController = {
             }
         ];
         setTimeout(() => crashChecker.crashCheck(hitData), delay);
-        // если перезапуск игры будет без перезагрузки страницы,
-        // то возвращать player.invincibility = true,
-        // если player.invincibility был установлен читом toggleInvincibility()
     },
 
     togglePowerfulArrow(paramName, toggle) {

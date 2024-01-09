@@ -8,6 +8,8 @@ import {audioController} from "../controllers/audioController.js";
 export const pause = {
     menuStructure: config.pauseMenuStructure,
     gameControl: config.gameControl,
+    domain: config.domain,
+    protocol: config.protocol,
     animationIsRunningNow: false,
     activeMenuSector: null,
     previousMenuSector: null,
@@ -97,7 +99,11 @@ export const pause = {
     confirmChoiceAction() {
         let selector = "confirmChoice";
         let confirmChoiceBtn = document.querySelector(`#${selector}`);
-        if (confirmChoiceBtn) confirmChoiceBtn.addEventListener("click", () => audioController.playSoundEffect(selector));
+
+        if (confirmChoiceBtn) confirmChoiceBtn.addEventListener("click", () => {
+            setTimeout(() => window.location.href = `${this.protocol}${this.domain}${confirmChoiceBtn.value}`, 200);
+            audioController.playSoundEffect(selector);
+        });
     },
 
     cancelChoiceAction() {
