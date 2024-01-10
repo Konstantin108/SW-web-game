@@ -7,6 +7,7 @@ $(document).on("click", ".link", function (event) {
     dataReceiving = true;
 
     $("#content").find(".pageElement").addClass("elementFadeOut");
+    setTimeout(() => $("#content").find(".pageElement").hide(), 500);
     $(".navigationArrow").addClass("disabled");
     if ($(this).hasClass("subMenu")) {
         $("#container").toggleClass("smallSize bigSize");
