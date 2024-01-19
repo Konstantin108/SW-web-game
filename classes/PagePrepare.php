@@ -8,22 +8,18 @@ class PagePrepare
      */
     public function getIncludeContents($path): bool|string
     {
-        if (is_file($path)) {
-            ob_start();
-            include $path;
-            return ob_get_clean();
-        }
-        return false;
+        ob_start();
+        include $path;
+        return ob_get_clean();
     }
 
     /**
      * @param $fileName
-     * @param string $slug
      * @return string
      */
-    public function getPath($fileName, string $slug = ""): string
+    public function getPath($fileName): string
     {
-        return "{$slug}views/content/$fileName.php";
+        return dirname(__DIR__) . "/views/content/$fileName.php";
     }
 
     /**

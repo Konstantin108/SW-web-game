@@ -1,7 +1,5 @@
 <?php
 define("APP_NAME", "Space Shooter");
-define("DOMAIN", "spaceshooter");
-define("PROTOCOL", "http://");
 
 define("HOST", "localhost");
 define("USER", "root");

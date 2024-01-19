@@ -16,6 +16,7 @@ import {audioController} from "../controllers/audioController.js";
 export const debugPanel = {
     cheats: config.cheats,
     gameControl: config.gameControl,
+    debugPanelElements: config.debugPanelElements,
     debugMode: null,
     playerCanCallDebugPanel: true,
 
@@ -101,7 +102,7 @@ export const debugPanel = {
                 break;
             case "clearLocalStorage":
                 localStorageController.clearLocalStorage();
-                console.log(helperController.getObjectByName(config.debugPanelElements, element).message);
+                console.log(helperController.getObjectByName(this.debugPanelElements, element).message);
                 break;
             case "clearConsole":
                 console.clear();
@@ -129,7 +130,7 @@ export const debugPanel = {
     },
 
     objectsInfoShow(elementName, showObjects, showCount = false) {
-        let element = helperController.getObjectByName(config.debugPanelElements, elementName);
+        let element = helperController.getObjectByName(this.debugPanelElements, elementName);
 
         showCount ? console.log(`${element.message} ${showObjects.length}`) : console.log(element.message);
         Array.isArray(showObjects) ? showObjects.forEach(elem => console.log(elem)) : console.log(showObjects);

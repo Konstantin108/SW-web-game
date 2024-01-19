@@ -19,11 +19,14 @@ $result[] = [
 
 foreach ($pages as $page) {
     $fileName = pathinfo($page)["filename"];
-    $title = $pagePrepare->getPart(file_get_contents($pagePrepare->getPath($fileName, "../")), "title");
+    $title = $pagePrepare->getPart(file_get_contents($pagePrepare->getPath($fileName)), "title");
     $result[] = [
         "fileName" => $fileName,
         "title" => $title,
-        "classes" => "subMenu link"
+        "classes" => [
+            "subMenu",
+            "link"
+        ]
     ];
 }
 

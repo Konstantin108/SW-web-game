@@ -3,11 +3,11 @@ include "../config.php";
 include "../classes/DB.php";
 
 $db = new DB;
-
+$table = "records";
 $recordsOnPage = 5;
 $recordsPageNumber = 1;
 
-$query = "SELECT COUNT(*) AS count FROM records";
+$query = "SELECT COUNT(*) AS count FROM $table";
 $recordsTotal = $db->getData($query)["count"];
 $recordsPagesCount = ceil($recordsTotal / $recordsOnPage);
 
@@ -19,7 +19,7 @@ if (isset($_POST["rpage"]) && preg_match("/^\d+$/", $_POST["rpage"])) {
 
 $from = ($recordsPageNumber - 1) * $recordsOnPage;
 
-$query = "SELECT * FROM records ORDER BY score DESC LIMIT $from, $recordsOnPage";
+$query = "SELECT * FROM $table ORDER BY score DESC LIMIT $from, $recordsOnPage";
 $result["items"] = $db->getDataAsArray($query);
 $result["page"] = $recordsPageNumber;
 $result["max"] = $recordsPagesCount;

@@ -4,7 +4,7 @@ import {cheats} from "./cheats.js";
 import {debugPanelElements} from "./debugPanelElements.js";
 import {pauseMenuOptions} from "./pauseMenuOptions.js";
 import {gameControl} from "./gameControl.js";
-import {soundSources} from "./soundSources.js";
+import {soundBank} from "./soundBank.js";
 
 export const config = {
     // игра и игрок
@@ -32,8 +32,8 @@ export const config = {
     debugMode: false,
     production: false,
     gameLoadingSecondsCount: 3000,
-    sounds: false,
-    soundSources: soundSources.sourcesObject,
+    soundOn: false,
+    soundBank: soundBank,
     // подсказки
     tips: true,
     tip_possibleDirectionsShown: false,
@@ -83,7 +83,7 @@ export const config = {
     bossFireChance: 20,
     bossFireArrowBombChance: 10,
     // уровни, бонусы, читы, элементы дебаг-панели
-    levels: levels.levelsParams,
+    levels: levels,
     bonuses: bonuses.setBonusesParams(),
     cheats: cheats.setCheatsParams(),
     translatedColorNames: cheats.translatedColorNames,
@@ -91,7 +91,7 @@ export const config = {
     cheatsInfinityActiveMode: false,
     paramsFromLocalStorage: [],
     cheatsActivated: [],
-    debugPanelElements: debugPanelElements.debugPanelElements,
+    debugPanelElements: debugPanelElements,
     debugPlayerArrowsObjectsShow: false,
     debugEnemyArrowsObjectsShow: false,
     debugBlockagesObjectsShow: false,

@@ -4,9 +4,9 @@ import {pause} from "../objects/pause.js";
 import {helperController} from "./helperController.js";
 
 export const audioController = {
-    sounds: config.sounds,
-    mainSoundThemes: config.soundSources.mainSoundThemes,
-    soundEffects: config.soundSources.soundEffects,
+    soundOn: config.soundOn,
+    mainSoundThemes: config.soundBank.mainSoundThemes,
+    soundEffects: config.soundBank.soundEffects,
     path: "/game/src/sounds/",
     mainSoundThemeAudio: null,
     sourceIndex: null,
@@ -46,13 +46,13 @@ export const audioController = {
         let action = null;
 
         if (soundStatus === null) {
-            this.sounds = !this.sounds;
-            action = this.sounds;
+            this.soundOn = !this.soundOn;
+            action = this.soundOn;
         } else {
             action = soundStatus;
         }
 
-        action && this.sounds && !pause.soundsMute ? this.play(this.mainSoundThemeAudio) : this.mainSoundThemeAudio.pause();
+        action && this.soundOn && !pause.soundsMute ? this.play(this.mainSoundThemeAudio) : this.mainSoundThemeAudio.pause();
         renderer.renderAudioControlBtnTemplatePrint();
     },
 
@@ -62,7 +62,7 @@ export const audioController = {
     },
 
     playSoundEffect(key) {
-        if (!this.sounds) return;
+        if (!this.soundOn) return;
         let sourcePath = this.path + this.soundEffects.sources[key];
         let soundEffect = new Audio(sourcePath);
         soundEffect.volume = this.soundEffects.volume;

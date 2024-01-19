@@ -634,10 +634,10 @@ export const renderer = {
         let classes = "";
         let internalClasses = "";
 
-        if (btn.classes) btn.classes.forEach(className => classes += className + " ");
+        if (btn.classes) btn.classes.forEach(className => classes += `${className} `);
         classes += config.menuColor;
 
-        if (btn.internalClasses) btn.internalClasses.forEach(internaClassName => internalClasses += internaClassName + " ");
+        if (btn.internalClasses) btn.internalClasses.forEach(internaClassName => internalClasses += `${internaClassName} `);
         if (btnName === "cross" && pauseOn) classes += " pauseMenuCrossAdd";
         if (btn.referer) value = pause.previousMenuSector;
         let btnElement = `<div class="pauseMenuSideBtnBlock">
@@ -681,7 +681,7 @@ export const renderer = {
             }
             optionsBlock += templatePrinter.statisticsBlockPrint(dataForPrinter);
         }
-        optionsBlock += `<div>`;
+        optionsBlock += "<div>";
 
         return optionsBlock;
     },
@@ -740,7 +740,7 @@ export const renderer = {
         options.forEach(option => {
             if (option.renderSector.includes(activeMenuSector)) {
                 container = document.querySelector(`#${option.containerBlockId}`);
-                if (option.classes) option.classes.forEach(className => classes += className + " ");
+                if (option.classes) option.classes.forEach(className => classes += `${className} `);
                 if (option.needConfirm) classes += "needConfirm";
 
                 value = option.value;
@@ -1042,7 +1042,7 @@ export const renderer = {
         let icon = null;
         let animationClass = "";
 
-        if (audioController.sounds) {
+        if (audioController.soundOn) {
             icon = `<i class="fas fa-volume-up pointerClass touchActionOff"></i>`;
         } else {
             icon = `<i class="fas fa-volume-mute pointerClass touchActionOff rubrum"></i>`;

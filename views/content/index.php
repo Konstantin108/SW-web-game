@@ -8,10 +8,13 @@
 
 
     function createLink(data, index) {
+        let classes = "menuOneBtn";
+
+        if (data[index].classes) data[index].classes.forEach(elem => classes += ` ${elem}`);
+
         let link = `<li class="menuOneList pageElement">
-                        <a href="/${data[index].fileName}/"
-                           class="menuOneBtn ${data[index].classes ?? ""}">
-                                <p>${data[index].title.toLowerCase()}</p>
+                        <a href="/${data[index].fileName}/" class="${classes.trim()}">
+                            <p>${data[index].title.toLowerCase()}</p>
                         </a>
                     </li>`;
 
