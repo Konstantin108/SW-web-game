@@ -14,7 +14,6 @@ export const pause = {
     activeMenuSector: null,
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
-    soundsMute: false,
 
     pauseBtnKeyDownHandler() {
         let pauseBtnsArray = helperController.getObjectByName(this.gameControl, "pauseBtnsArray").btns;
@@ -54,19 +53,16 @@ export const pause = {
             game.stopGame();
             gameIsRunningNow = false;
             soundEffectKey = "pauseShowMenu";
-            this.soundsMute = true;
         } else {
             game.startGameDelay(game.startGameDelaySecondsCount, true);
             this.activeMenuSector = null;
             gameIsRunningNow = true;
             soundEffectKey = "pauseHideMenu";
-            this.soundsMute = false;
         }
 
         this.animationIsRunningNow = true;
         setTimeout(() => this.animationIsRunningNow = false, delay);
         audioController.playSoundEffect(soundEffectKey);
-        audioController.soundOnOrOff(gameIsRunningNow);
         renderer.renderPauseMenu();
         renderer.renderGameStopOrPlayBtnTemplatePrint(false, gameIsRunningNow);
     },
@@ -101,7 +97,7 @@ export const pause = {
         let confirmChoiceBtn = document.querySelector(`#${selector}`);
 
         if (confirmChoiceBtn) confirmChoiceBtn.addEventListener("click", () => {
-            setTimeout(() => document.location.href = `${this.protocol}${this.domain}${confirmChoiceBtn.value}`, 200);
+            setTimeout(() => document.location.href = this.protocol + this.domain + confirmChoiceBtn.value, 200);
             audioController.playSoundEffect(selector);
         });
     },

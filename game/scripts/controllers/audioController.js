@@ -1,6 +1,5 @@
 import {config} from "../config/config.js";
 import {renderer} from "../objects/renderer.js";
-import {pause} from "../objects/pause.js";
 import {helperController} from "./helperController.js";
 
 export const audioController = {
@@ -10,6 +9,7 @@ export const audioController = {
     path: "/game/src/sounds/",
     mainSoundThemeAudio: null,
     sourceIndex: null,
+    mainSoundThemePaused: true,
 
     // в главном меню будет своя музыкальная тема (возможно один короткий зацикленный трэк)
     // возможно после добавления главного меню музыку можно будет запускать сразу после старта игры
@@ -52,7 +52,7 @@ export const audioController = {
             action = soundStatus;
         }
 
-        action && this.soundOn && !pause.soundsMute ? this.play(this.mainSoundThemeAudio) : this.mainSoundThemeAudio.pause();
+        action && this.soundOn && !this.mainSoundThemePaused ? this.play(this.mainSoundThemeAudio) : this.mainSoundThemeAudio.pause();
         renderer.renderAudioControlBtnTemplatePrint();
     },
 

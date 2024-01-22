@@ -55,8 +55,8 @@ export const game = {
 
     run() {
         this.gameIsRunning = true;
-        this.playerCanStopGame = true;
         this.animationBan = false;
+        this.playerCanStopGame = true;
         background.animate();
         progressController.progress();
         blockageController.blockageMove(blockageController.blockagesArray);
@@ -66,6 +66,8 @@ export const game = {
         player.shootKeyDownHandler();
         player.useSuperAbilityKeyDownHandler();
         player.useBombKeyDownHandler();
+        audioController.mainSoundThemePaused = false;
+        audioController.soundOnOrOff(true);
     },
 
     startGameDelaySet() {
@@ -109,6 +111,8 @@ export const game = {
         crashChecker.invincibilityOffCallCancel();
         boss.makeStepOff();
         boss.removeShieldTimerId();
+        audioController.mainSoundThemePaused = true;
+        audioController.soundOnOrOff(false);
     },
 
     resumeGame() {
@@ -127,6 +131,8 @@ export const game = {
         boss.makeStep();
         boss.setShieldTimerIdOnResumeGame();
         player.offBonusCall();
+        audioController.mainSoundThemePaused = false;
+        audioController.soundOnOrOff(true);
     },
 
     over(win = false) {
