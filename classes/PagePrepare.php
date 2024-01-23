@@ -15,11 +15,13 @@ class PagePrepare
 
     /**
      * @param $fileName
+     * @param string|null $directory
      * @return string
      */
-    public function getPath($fileName): string
+    public function getPath($fileName, string|null $directory = "pages"): string
     {
-        return dirname(__DIR__) . "/views/content/$fileName.php";
+        $directory = $directory ?: "pages";
+        return dirname(__DIR__) . "/views/content/$directory/$fileName.php";
     }
 
     /**

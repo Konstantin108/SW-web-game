@@ -143,11 +143,11 @@
 
         let navigationBLock = `<div id="navigationBlock">
                                   <a href="${path + (page - 1)}"
-                                     class="link navigationArrow ${prevArrowDisabled}">
+                                     class="link navigationArrow navigationElement ${prevArrowDisabled}">
                                         <i class="fas fa-arrow-up"></i>
                                   </a>
                                   <a href="${path + (page + 1)}"
-                                     class="link navigationArrow ${nextArrowDisabled}">
+                                     class="link navigationArrow navigationElement ${nextArrowDisabled}">
                                         <i class="fas fa-arrow-down"></i>
                                   </a>
                                </div>`;

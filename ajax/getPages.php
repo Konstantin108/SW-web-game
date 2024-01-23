@@ -10,7 +10,7 @@ $excludedPagesArray = [
     "..",
     "."
 ];
-$pages = scandir("../views/content/");
+$pages = scandir("../views/content/pages/");
 $pages = array_diff($pages, $excludedPagesArray);
 $result[] = [
     "fileName" => "game",
@@ -29,5 +29,13 @@ foreach ($pages as $page) {
         ]
     ];
 }
+$result[] = [
+    "fileName" => "tips/controls",
+    "title" => "подсказки",
+    "classes" => [
+        "subMenu",
+        "link"
+    ]
+];
 
 print_r(json_encode($result, JSON_UNESCAPED_UNICODE));

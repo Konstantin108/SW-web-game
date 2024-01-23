@@ -11,7 +11,7 @@ if ($page === "index" || $page === "404") {
 <html lang="en">
 <head>
     <?php include "views/components/head.php"; ?>
-    <title><?= $title ?: APP_NAME ?></title>
+    <title><?= $title ?: APP_NAME; ?></title>
 </head>
 <body>
 <div id="wrapper">
@@ -26,7 +26,9 @@ if ($page === "index" || $page === "404") {
                 <?= $content; ?>
             </div>
             <div id="pageBottom" class="pageElement">
-                <a href="/" id="back" class="subMenu link <?= $backBtnDisplayClass; ?>">
+                <a href="/"
+                   id="back"
+                   class="subMenu link navigationElement <?= $backBtnDisplayClass; ?>">
                     <p>назад</p>
                 </a>
             </div>

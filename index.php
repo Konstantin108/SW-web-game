@@ -5,13 +5,29 @@ include "includes/main.php";
 
 $db = new DB;
 $pagePrepare = new PagePrepare;
+$page = "index";
+$directory = null;
+$param = null;
 
 preg_match_all("[\w+]", $_SERVER["REQUEST_URI"], $matches);
 $matches = array_shift($matches);
-$page = $matches[0] ?? "index";
-$param = $matches[1] ?? null;
 
-$path = $pagePrepare->getPath($page);
+if ($matches) {
+    if (count($matches) > 1) {
+        if (preg_match("/^\d+$/", end($matches))) {
+            $param = end($matches);
+            array_pop($matches);
+        }
+    }
+    if (count($matches) > 1) {
+        $page = $matches[1];
+        $directory = $matches[0];
+    } else {
+        $page = $matches[0];
+    }
+}
+
+$path = $pagePrepare->getPath($page, $directory);
 if (!file_exists($path)) {
     $page = "404";
     $path = $pagePrepare->getPath($page);

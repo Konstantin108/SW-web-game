@@ -316,10 +316,6 @@ tr
   color: lawngreen
   font-size: 25px
 
-.menuOneBtn
-  background-color: black
-  border: none
-
 // стили странциы 404
 
 #notFoundCodeContainer
@@ -383,3 +379,34 @@ tr
 
 .quote
   font-family: Ubuntu
+
+// стили страниц tips
+
+#tipsMenu
+  list-style-type: none
+  display: flex
+  justify-content: space-around
+  padding-top: 10px
+
+.tipMenuOneBtn
+  font-family: Ubuntu
+  text-transform: uppercase
+  color: lawngreen
+  font-size: 20px
+  animation: fadeIn .3s
+
+.selected
+  font-size: 26px
+  pointer-events: none
+  cursor: default
+  text-decoration: none
+  animation: grow .3s
+
+@keyframes grow
+  from
+    font-size: 20px
+  to
+    font-size: 26px
+
+#tipContent
+  height: 84%
