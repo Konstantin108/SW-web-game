@@ -3,7 +3,6 @@
 // на длину ника игрока должно быть ограничение
 include "includes/main.php";
 
-$db = new DB;
 $pagePrepare = new PagePrepare;
 $page = "index";
 $directory = null;

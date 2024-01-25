@@ -31,7 +31,7 @@ foreach ($pages as $page) {
 }
 $result[] = [
     "fileName" => "tips/controls",
-    "title" => "подсказки",
+    "title" => "инструкции",
     "classes" => [
         "subMenu",
         "link"

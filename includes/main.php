@@ -7,5 +7,4 @@ if (DBG) {
     error_reporting(E_ALL);
 }
 
-include "classes/DB.php";
 include "classes/PagePrepare.php";

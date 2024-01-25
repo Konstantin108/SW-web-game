@@ -4,7 +4,7 @@ class PagePrepare
 {
     /**
      * @param $path
-     * @return bool|string
+     * @return false|string
      */
     public function getIncludeContents($path): bool|string
     {
@@ -18,7 +18,7 @@ class PagePrepare
      * @param string|null $directory
      * @return string
      */
-    public function getPath($fileName, string|null $directory = "pages"): string
+    public function getPath($fileName, ?string $directory = "pages"): string
     {
         $directory = $directory ?: "pages";
         return dirname(__DIR__) . "/views/content/$directory/$fileName.php";
@@ -27,9 +27,9 @@ class PagePrepare
     /**
      * @param $content
      * @param $partName
-     * @return string
+     * @return false|string
      */
-    public function getPart($content, $partName): string
+    public function getPart($content, $partName): bool|string
     {
         $pattern = "#{{2}$partName:(.*)}{2}#i";
         if (preg_match($pattern, $content, $match) && $match[1]) {

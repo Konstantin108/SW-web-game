@@ -33,7 +33,7 @@ usort($result, function ($a, $b) {
                 <a href="/tips/<?= $elem["fileName"]; ?>/"
                    id="<?= $elem["id"]; ?>"
                    class="tipMenuOneBtn link navigationElement <?= $elem["class"]; ?>">
-                    <p><?= $elem['title']; ?></p>
+                    <p><?= $elem["title"]; ?></p>
                 </a>
             </li>
         <?php endforeach; ?>
