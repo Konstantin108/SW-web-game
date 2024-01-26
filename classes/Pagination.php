@@ -1,29 +1,28 @@
 <?php
 
+use JetBrains\PhpStorm\ArrayShape;
+
 class Pagination
 {
     private object $repository;
-    private string $paramName;
     private string $slug;
     private int $elemOnPageCount;
     private int $currentPage;
-
+    private string $paramName = "page";
     private int $pagesCount;
 
     /**
      * @param $repository
-     * @param $paramName
      * @param $slug
      * @param $elemOnPageCount
      * @param $currentPage
      */
-    public function __construct($repository, $paramName, $slug, $elemOnPageCount, $currentPage)
+    public function __construct($repository, $slug, $elemOnPageCount, $currentPage)
     {
         /**
          * @var Repository $repository
          */
         $this->repository = $repository;
-        $this->paramName = $paramName;
         $this->slug = $slug;
         $this->elemOnPageCount = $elemOnPageCount;
         $this->currentPage = $currentPage;
@@ -78,13 +77,13 @@ class Pagination
     /**
      * @return array
      */
-    public function getPage(): array
+    #[ArrayShape(["items" => "array|void", "page" => "int", "max" => "int", "path" => "string"])] public function getPage(): array
     {
-        $result["items"] = $this->getElemsOnCurrentPage();
-        $result["page"] = $this->currentPage;
-        $result["max"] = $this->pagesCount;
-        $result["path"] = AJAX_TRANSITION ? $this->slug : "";
-
-        return $result;
+        return [
+            "items" => $this->getElemsOnCurrentPage(),
+            "page" => $this->currentPage,
+            "max" => $this->pagesCount,
+            "path" => AJAX_TRANSITION ? $this->slug : ""
+        ];
     }
 }

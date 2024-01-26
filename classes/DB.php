@@ -3,6 +3,10 @@
 // разобраться с датой, которая записывается в рекорд (дата и время)
 class DB
 {
+    private string $host = HOST;
+    private string $user = USER;
+    private string $password = PASSWORD;
+    private string $db = DB;
     private static ?DB $instance = null;
     private mysqli|false $connection;
 
@@ -10,12 +14,7 @@ class DB
     // их можно будет выбирать при завершении игры
     public function __construct()
     {
-        $host = HOST;
-        $db = DB;
-        $user = USER;
-        $password = PASSWORD;
-
-        $this->connection = mysqli_connect($host, $user, $password, $db) or die(mysqli_error($this->connection));
+        $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->db) or die(mysqli_error($this->connection));
         mysqli_query($this->connection, "SET NAMES 'utf8'");
     }
 

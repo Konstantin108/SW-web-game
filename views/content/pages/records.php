@@ -13,7 +13,7 @@
         method: "POST",
         url: "/ajax/getRecords.php",
         data: {
-            rpage: "<?= $param; ?>"
+            page: "<?= $param; ?>"
         },
         success: function (data) {
             checkRecordsCount(JSON.parse(data));

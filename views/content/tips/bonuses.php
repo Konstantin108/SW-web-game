@@ -11,7 +11,7 @@ include "views/components/tipsMenu.php";
             method: "POST",
             url: "/ajax/getBonuses.php",
             data: {
-                bpage: "<?= $param; ?>"
+                page: "<?= $param; ?>"
             },
             success: function (data) {
                 console.log(JSON.parse(data));
