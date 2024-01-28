@@ -545,7 +545,7 @@ export const cheatsController = {
                 localStorageController.setParamToLocalStorage("superAbilityIsActivated", status);
             }
             player[paramName] = config[paramName];
-            game.superAbilityStatusInit();
+            player.superAbilityStatusInit();
             renderer.renderSuperAbilityBarActivatedByCheat();
         } else {
             status = false;
@@ -611,7 +611,7 @@ export const cheatsController = {
                 break;
             case "radium":
                 config["superAbilityIsActivated"] = true;
-                game.superAbilityStatusInit();
+                player.superAbilityStatusInit();
                 renderer.renderSuperAbilityBarActivatedByCheat(true);
                 break;
             default:

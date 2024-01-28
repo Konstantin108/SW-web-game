@@ -36,21 +36,12 @@ export const game = {
         cheatsController.callCheatConsoleKeyDownHandler();
         this.startGameDelay(this.startGameDelaySecondsCount + 1);
         pause.pauseBtnKeyDownHandler();
-        this.superAbilityStatusInit();
+        player.superAbilityStatusInit();
         audioController.init(true);
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanelKeyDownHandler();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
-    },
-
-    superAbilityStatusInit() {
-        if (config.superAbilityIsAlwaysCharged) {
-            config.superAbilityIsActivated = config.superAbilityIsAlwaysCharged;
-            player.superAbilityIsActivated = config.superAbilityIsAlwaysCharged;
-        } else {
-            player.superAbilityIsActivated = config.superAbilityIsActivated;
-        }
     },
 
     run() {

@@ -63,11 +63,11 @@ export const debugPanelElements = [
         description: "вывести touchController в консоль"
     },
     {
-        name: "background",
+        name: "audioController",
         type: "button",
         customClass: null,
-        message: "background:",
-        description: "вывести background в консоль"
+        message: "audioController:",
+        description: "вывести audioController в консоль"
     },
     {
         name: "cheatsInfo",
@@ -166,5 +166,12 @@ export const debugPanelElements = [
         customClass: null,
         message: null,
         description: "отключить отсчёт перед запуском игры"
+    },
+    {
+        name: "background",
+        type: "button",
+        customClass: null,
+        message: "background:",
+        description: "вывести background в консоль"
     }
 ]

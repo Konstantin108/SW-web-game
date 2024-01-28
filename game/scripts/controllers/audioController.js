@@ -8,6 +8,7 @@ export const audioController = {
     soundEffects: config.soundBank.soundEffects,
     path: "/game/src/sounds/",
     mainSoundThemeAudio: null,
+    soundtrack: null,
     sourceIndex: null,
     mainSoundThemePaused: true,
 
@@ -21,6 +22,7 @@ export const audioController = {
         if (getRandomSource) {
             source = helperController.getRandomElementAndIndexInArray(this.mainSoundThemes.sources);
             sourcePath = this.path + source.element;
+            this.soundtrack = source.element;
             this.sourceIndex = source.index;
             this.mainSoundThemeAudio = new Audio(sourcePath);
             this.mainSoundThemeAudio.volume = this.mainSoundThemes.volume;

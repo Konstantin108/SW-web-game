@@ -196,6 +196,15 @@ export const player = {
         if (bombBar) bombBar.addEventListener("click", () => explosion.explosionCall());
     },
 
+    superAbilityStatusInit() {
+        if (config.superAbilityIsAlwaysCharged) {
+            config.superAbilityIsActivated = config.superAbilityIsAlwaysCharged;
+            this.superAbilityIsActivated = config.superAbilityIsAlwaysCharged;
+        } else {
+            this.superAbilityIsActivated = config.superAbilityIsActivated;
+        }
+    },
+
     useSuperAbilityKeyDownHandler() {
         let useSuperAbilityBtn = helperController.getObjectByName(this.gameControl, "useSuperAbilityBtn").btns;
         let isPressBtn = false;

@@ -91,8 +91,8 @@ export const debugPanel = {
             case "touchController":
                 this.objectsInfoShow(element, touchController);
                 break;
-            case "background":
-                this.objectsInfoShow(element, background);
+            case "audioController":
+                this.objectsInfoShow(element, audioController);
                 break;
             case "cheatsInfo":
                 cheatsController.cheatsInfoForPlayer();
@@ -123,6 +123,9 @@ export const debugPanel = {
             case "actualParamsInfo":
                 cheat = helperController.getObjectByName(this.cheats, element);
                 cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
+                break;
+            case "background":
+                this.objectsInfoShow(element, background);
                 break;
             default:
                 break;

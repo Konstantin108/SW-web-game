@@ -1,10 +1,12 @@
 <?php
 define("APP_NAME", "Space Shooter");
 
+define("DRIVER", "mysql");
 define("HOST", "localhost");
+define("DB", "spaceshooter");
+define("CHARSET", "UTF8");
 define("USER", "root");
 define("PASSWORD", "");
-define("DB", "spaceshooter");
 
 define("AJAX_TRANSITION", true);
 define("COLORIZE_GAME_TITLE", true);

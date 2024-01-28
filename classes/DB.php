@@ -1,41 +1,106 @@
 <?php
 
+use JetBrains\PhpStorm\ArrayShape;
+
 // разобраться с датой, которая записывается в рекорд (дата и время)
 class DB
 {
-    private string $host = HOST;
-    private string $user = USER;
-    private string $password = PASSWORD;
-    private string $db = DB;
+    private string $driver;
+    private string $host;
+    private string $db;
+    private string $charset;
+    private string $user;
+    private string $password;
     private static ?DB $instance = null;
-    private mysqli|false $connection;
+    private object $connection;
 
-    // будет jQuery запрос, чтобы передать на фронт картики в папке,
-    // их можно будет выбирать при завершении игры
     public function __construct()
     {
-        $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->db) or die(mysqli_error($this->connection));
-        mysqli_query($this->connection, "SET NAMES 'utf8'");
+        $this->driver = DRIVER;
+        $this->host = HOST;
+        $this->db = DB;
+        $this->charset = CHARSET;
+        $this->user = USER;
+        $this->password = PASSWORD;
     }
 
     /**
-     * @param $query
-     * @return array|void
+     * @return PDO|void
      */
-    public function getDataAsArray($query)
+    private function getConnection()
     {
-        $data = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
-        return mysqli_fetch_all($data, MYSQLI_ASSOC);
+        if (empty($this->connection)) {
+            try {
+                $this->connection = new PDO(
+                    $this->getSdn(),
+                    $this->user,
+                    $this->password,
+                    $this->getOpt()
+                );
+            } catch (Exception $e) {
+                die("Error! " . $e);
+            }
+        }
+        return $this->connection;
     }
 
     /**
-     * @param $query
-     * @return array|false|void|null
+     * @return string
      */
-    public function getData($query)
+    private function getSdn(): string
     {
-        $data = mysqli_query($this->connection, $query) or die(mysqli_error($this->connection));
-        return mysqli_fetch_assoc($data);
+        return sprintf(
+            "%s:host=%s;dbname=%s;charset=%s",
+            $this->driver,
+            $this->host,
+            $this->db,
+            $this->charset
+        );
+    }
+
+    /**
+     * @return array
+     */
+    #[ArrayShape([PDO::ATTR_ERRMODE => "int", PDO::ATTR_DEFAULT_FETCH_MODE => "int"])] private function getOpt(): array
+    {
+        return [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ];
+    }
+
+    /**
+     * @param $sql
+     * @param array $params
+     * @return bool|PDOStatement
+     */
+    private function query($sql, array $params = []): bool|PDOStatement
+    {
+        $PDOStatement = $this->getConnection()->prepare($sql);
+        $PDOStatement->execute($params);
+        return $PDOStatement;
+    }
+
+    /**
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
+    public function getData($sql, array $params = []): mixed
+    {
+        $PDOStatement = $this->query($sql, $params);
+        return $PDOStatement->fetch();
+    }
+
+    /**
+     * @param $sql
+     * @param array $params
+     * @return bool|array
+     */
+    public function getDataAsArray($sql, array $params = []): bool|array
+    {
+        $PDOStatement = $this->query($sql, $params);
+        return $PDOStatement->fetchAll();
     }
 
     /**

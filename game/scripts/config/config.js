@@ -31,7 +31,7 @@ export const config = {
     menuColor: "viridis",
     debugMode: false,
     production: false,
-    gameLoadingSecondsCount: 3000,
+    gameLoadingSecondsCount: 1000,  // возможно измнить время загрузки
     soundOn: false,
     soundBank: soundBank,
     // подсказки
