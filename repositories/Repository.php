@@ -30,22 +30,25 @@ abstract class Repository
      */
     public function getCount(): mixed
     {
-        $tableName = $this->getTableName();
-        $query = "SELECT COUNT(*) AS count FROM $tableName";
-        return $this->getDB()->getData($query)["count"];
+        $sql = "SELECT COUNT(*) AS count FROM {$this->getTableName()}";
+        return $this->getDB()->getData($sql)["count"];
     }
 
     /**
      * @param $from
      * @param $elemsOnPage
-     * @return array|void
+     * @return bool|array
      */
-    public function getAllRows($from, $elemsOnPage)
+    public function getAllRows($from, $elemsOnPage): bool|array
     {
-        $tableName = $this->getTableName();
-        $orderByColumn = $this->getOrderByColumn();
-        $sortingMode = $this->getSortingMode();
-        $query = "SELECT * FROM $tableName ORDER BY $orderByColumn $sortingMode LIMIT $from, $elemsOnPage";
-        return $this->getDB()->getDataAsArray($query);
+        $sql = sprintf(
+            "SELECT * FROM %s ORDER BY %s %s LIMIT %s, %s",
+            $this->getTableName(),
+            $this->getOrderByColumn(),
+            $this->getSortingMode(),
+            $from,
+            $elemsOnPage
+        );
+        return $this->getDB()->getDataAsArray($sql);
     }
 }
