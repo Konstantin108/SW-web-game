@@ -40,6 +40,7 @@ export const game = {
         audioController.init(true);
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanelKeyDownHandler();
+        helperController.confirmToLeave();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },
