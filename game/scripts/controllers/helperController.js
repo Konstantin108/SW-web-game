@@ -111,6 +111,10 @@ export const helperController = {
         }
     },
 
+    noConfirmToLeave() {
+        window.onbeforeunload = null;
+    },
+
     findPossiblePositions(employedPositionsArray, possiblePositionsArray) {
         let availablePositionsArray = [];
 

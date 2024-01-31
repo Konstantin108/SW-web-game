@@ -97,6 +97,7 @@ export const pause = {
         let confirmChoiceBtn = document.querySelector(`#${selector}`);
 
         if (confirmChoiceBtn) confirmChoiceBtn.addEventListener("click", () => {
+            helperController.noConfirmToLeave();
             setTimeout(() => document.location.href = this.protocol + this.domain + confirmChoiceBtn.value, 200);
             audioController.playSoundEffect(selector);
         });
