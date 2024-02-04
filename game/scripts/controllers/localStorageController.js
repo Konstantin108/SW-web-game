@@ -64,11 +64,9 @@ export const localStorageController = {
     getStartGameDelaySecondsCount() {
         let startGameDelaySecondsCount = null;
 
-        if (localStorage.hasOwnProperty("startGameDelaySecondsCount")) {
-            startGameDelaySecondsCount = 1000;
-        } else {
-            startGameDelaySecondsCount = config.startGameDelaySecondsCount * 1000 + 2100;
-        }
+        localStorage.hasOwnProperty("startGameDelaySecondsCount")
+            ? startGameDelaySecondsCount = 1000
+            : startGameDelaySecondsCount = config.startGameDelaySecondsCount * 1000 + 2100;
         return startGameDelaySecondsCount;
     },
 

@@ -4,6 +4,7 @@ import {progressController} from "../controllers/progressController.js";
 import {config} from "../config/config.js";
 import {helperController} from "../controllers/helperController.js";
 import {audioController} from "../controllers/audioController.js";
+import {boss} from "./boss.js";
 
 export const pause = {
     menuStructure: config.pauseMenuStructure,
@@ -14,6 +15,7 @@ export const pause = {
     activeMenuSector: null,
     previousMenuSector: null,
     thisActionNeedConfirmNow: null,
+    windowBlurGameStopped: false,
 
     pauseBtnKeyDownHandler() {
         let pauseBtnsArray = helperController.getObjectByName(this.gameControl, "pauseBtnsArray").btns;
@@ -143,5 +145,24 @@ export const pause = {
                 "data": progressController.score
             }
         ];
-    }
+    },
+
+    windowBlurListener() {
+        if (!config.stopGameOnWindowBlur) return;
+        window.onblur = function () {
+            if (!game.gameIsRunning) return;
+            if (boss.bossAnimationIsRunningNow) return;
+            game.stopGame();
+            pause.windowBlurGameStopped = true;
+        }
+    },
+
+    windowFocusListener() {
+        if (!config.stopGameOnWindowBlur) return;
+        window.onfocus = function () {
+            if (!pause.windowBlurGameStopped) return;
+            game.resumeGame();
+            pause.windowBlurGameStopped = false;
+        }
+    },
 }

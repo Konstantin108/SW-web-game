@@ -15,7 +15,8 @@ export const config = {
     gameInstantStart: false,
     startGameDelaySecondsCount: 3,  // указывается в секундах
     missReward: 1,
-    crashMulct: -100,
+    crashMulct: false,  // потеря очков при аварии отключена
+    crashMulctRate: -100,
     invincibilityAfterCrash: 4000,
     invincibility: false,
     lives: 5,
@@ -30,10 +31,12 @@ export const config = {
     superAbilityIsAlwaysCharged: false,
     menuColor: "viridis",
     debugMode: false,
-    production: false,
-    gameLoadingSecondsCount: 3000,  // возможно измнить время загрузки
+    production: false,  // на релизе true
+    gameLoadingSecondsCount: 3000,
     soundOn: false,
     soundBank: soundBank,
+    windowClosingConfirm: true,
+    stopGameOnWindowBlur: false,  // на релизе true
     // подсказки
     tips: true,
     tip_possibleDirectionsShown: false,

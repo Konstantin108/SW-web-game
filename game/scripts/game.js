@@ -41,6 +41,8 @@ export const game = {
         debugPanel.debugModeStatusInit();
         debugPanel.callDebugPanelKeyDownHandler();
         helperController.confirmToLeave();
+        pause.windowBlurListener();
+        pause.windowFocusListener();
         if (config.production) cheatsController.cheatsInfoForPlayer();
         if (config.debugActualParamsInfoShow) debugPanel.objectsInfoShow("actualParamsInfo", [localStorage, config]);
     },

@@ -108,9 +108,8 @@ class DB
      */
     public static function getInstance(): ?DB
     {
-        return
-            self::$instance === null
-                ? self::$instance = new self()
-                : self::$instance;
+        return self::$instance === null
+            ? self::$instance = new self()
+            : self::$instance;
     }
 }

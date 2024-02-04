@@ -248,11 +248,9 @@ export const renderer = {
     renderHit(object) {
         let hitPosition = null;
 
-        if (object.selectorName === "blockage" || object.selectorName === "blockageBull") {
-            hitPosition = document.querySelector(`[data-x="${object.x}"][data-y="${object.y}"]`);
-        } else {
-            hitPosition = document.querySelector(`[data-x="${object.hit_x}"][data-y="${object.hit_y}"]`);
-        }
+        object.selectorName === "blockage" || object.selectorName === "blockageBull"
+            ? hitPosition = document.querySelector(`[data-x="${object.x}"][data-y="${object.y}"]`)
+            : hitPosition = document.querySelector(`[data-x="${object.hit_x}"][data-y="${object.hit_y}"]`);
         if (hitPosition) {
             hitPosition.classList.add("hit");
             hitPosition.classList.remove("blockage", "blockageBull");
@@ -313,11 +311,9 @@ export const renderer = {
     renderPickedBonus(bonus, playerPickUpThisBonus = true) {
         let pickedBonusPosition = null;
 
-        if (playerPickUpThisBonus) {
-            pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`);
-        } else {
-            pickedBonusPosition = document.querySelector(`[data-x="${bonus.x}"][data-y="${bonus.y}"]`);
-        }
+        playerPickUpThisBonus
+            ? pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`)
+            : pickedBonusPosition = document.querySelector(`[data-x="${bonus.x}"][data-y="${bonus.y}"]`);
         if (pickedBonusPosition) {
             pickedBonusPosition.classList.remove(`${bonus.name}`);
             pickedBonusPosition.classList.remove(player.selectorName);
@@ -378,7 +374,9 @@ export const renderer = {
         let bomb = null;
 
         if (bombElement) table.removeChild(bombElement);
-        player.bombsCount < 1 ? bomb = `<div class="bomb emptyBomb touchActionOff"></div>` : bomb = `<div class="bomb activeBomb touchActionOff"></div>`;
+        player.bombsCount < 1
+            ? bomb = `<div class="bomb emptyBomb touchActionOff"></div>`
+            : bomb = `<div class="bomb activeBomb touchActionOff"></div>`;
 
         if (!playerHasBomb) {
             bomb = `<div class="bomb redBomb touchActionOff"></div>`;
@@ -465,7 +463,9 @@ export const renderer = {
 
         if (timer <= 6) bonusElementObject.classList.add("blinkBeforeBonusOff");
 
-        elementType === "shieldBar" ? this.bonusShieldTimerId = thisTimerId : this.bonusNewArrowTypeTimerId = thisTimerId;
+        elementType === "shieldBar"
+            ? this.bonusShieldTimerId = thisTimerId
+            : this.bonusNewArrowTypeTimerId = thisTimerId;
     },
 
     renderSuperAbilityBar(superAbilityIsActivated = true) {
@@ -812,15 +812,14 @@ export const renderer = {
         debugElements.forEach(elem => {
             if (config.cheatsActivated.includes(elem.name)) checked = "checked";
             if (elem.customClass) customClass = elem.customClass;
-            if (elem.type === "button") {
-                debugElementsDiv += `<div>
+            elem.type === "button"
+                ? debugElementsDiv += `<div>
                                         <input id="${elem.name}"
                                                type="button"
                                                value="${elem.name}"
                                                class="debugPanelBtn btnLabel ${customClass}">
-                                     </div>`;
-            } else {
-                debugElementsDiv += `<div>
+                                     </div>`
+                : debugElementsDiv += `<div>
                                         <input id="${elem.name}"
                                                name="debug"
                                                type="checkbox"
@@ -831,7 +830,6 @@ export const renderer = {
                                             ${elem.name}
                                         </label>
                                      </div>`;
-            }
             checked = "";
             customClass = "";
         });
@@ -1029,7 +1027,9 @@ export const renderer = {
         let icon = null;
         let animationClass = "";
 
-        gameIsRunning ? icon = `<i class="fas fa-pause pointerClass"></i>` : icon = `<i class="fas fa-play pointerClass"></i>`;
+        gameIsRunning
+            ? icon = `<i class="fas fa-pause pointerClass"></i>`
+            : icon = `<i class="fas fa-play pointerClass"></i>`;
         if (animation) animationClass = "fromBottomInClass";
         if (gameStopOrPlayBtnElement) this.body.removeChild(gameStopOrPlayBtnElement);
         this.body.insertAdjacentHTML("afterbegin", templatePrinter.roundBtnTemplatePrint(name, icon, animationClass));
@@ -1042,11 +1042,9 @@ export const renderer = {
         let icon = null;
         let animationClass = "";
 
-        if (audioController.soundOn) {
-            icon = `<i class="fas fa-volume-up pointerClass touchActionOff"></i>`;
-        } else {
-            icon = `<i class="fas fa-volume-mute pointerClass touchActionOff rubrum"></i>`;
-        }
+        audioController.soundOn
+            ? icon = `<i class="fas fa-volume-up pointerClass touchActionOff"></i>`
+            : icon = `<i class="fas fa-volume-mute pointerClass touchActionOff rubrum"></i>`;
         if (animation) animationClass = "fromBottomInClass";
         if (audioControlBtnElement) this.body.removeChild(audioControlBtnElement);
         this.body.insertAdjacentHTML("afterbegin", templatePrinter.roundBtnTemplatePrint(name, icon, animationClass));

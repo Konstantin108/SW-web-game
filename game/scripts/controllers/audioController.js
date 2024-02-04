@@ -27,7 +27,9 @@ export const audioController = {
             this.mainSoundThemeAudio = new Audio(sourcePath);
             this.mainSoundThemeAudio.volume = this.mainSoundThemes.volume;
         } else {
-            this.sourceIndex >= this.mainSoundThemes.sources.length - 1 ? this.sourceIndex = 0 : this.sourceIndex += 1;
+            this.sourceIndex >= this.mainSoundThemes.sources.length - 1
+                ? this.sourceIndex = 0
+                : this.sourceIndex += 1;
             sourcePath = this.path + this.mainSoundThemes.sources[this.sourceIndex];
             this.mainSoundThemeAudio = new Audio(sourcePath);
             this.mainSoundThemeAudio.volume = this.mainSoundThemes.volume;
@@ -54,7 +56,9 @@ export const audioController = {
             action = soundStatus;
         }
 
-        action && this.soundOn && !this.mainSoundThemePaused ? this.play(this.mainSoundThemeAudio) : this.mainSoundThemeAudio.pause();
+        action && this.soundOn && !this.mainSoundThemePaused
+            ? this.play(this.mainSoundThemeAudio)
+            : this.mainSoundThemeAudio.pause();
         renderer.renderAudioControlBtnTemplatePrint();
     },
 

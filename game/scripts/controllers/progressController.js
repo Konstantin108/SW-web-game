@@ -18,7 +18,7 @@ export const progressController = {
     fireChance: config.levels[0].fireChance,
     blockageTypes: config.levels[0].blockageTypes,
     bossExist: config.levels[0].bossExist,
-    crashMulct: config.crashMulct,
+    crashMulctRate: config.crashMulctRate,
     blockagesCount: 0,
     score: 0,
     shipDestroyed: 0,
@@ -71,7 +71,7 @@ export const progressController = {
     },
 
     scoreUp(scoreType) {
-        return this.score += scoreType * this.multiplier;
+        this.score += scoreType * this.multiplier;
     },
 
     killEnemy(coordinateObject, blockage, shipDestroyedReward, y_pos, dontCountKilledEnemies = false) {
@@ -110,10 +110,8 @@ export const progressController = {
     scoreDown() {
         let score = this.score;
 
-        score += this.crashMulct * this.multiplier;
-        if (score < 0) score = 0;
-        this.score = score;
-        return this.score;
+        score += this.crashMulctRate * this.multiplier;
+        score < 0 ? this.score = 0 : this.score = score;
     },
 
     superAbilityCharging() {

@@ -1,3 +1,5 @@
+import {config} from "../config/config.js";
+
 export const helperController = {
 
     getRandomInt(min, max) {
@@ -5,10 +7,7 @@ export const helperController = {
     },
 
     randomEvent(probabilityOfAction) {
-        let result = false;
-        let chance = (Math.random() * 100).toFixed(0);
-        if (chance <= probabilityOfAction) result = true;
-        return result;
+        return (Math.random() * 100).toFixed(0) <= probabilityOfAction;
     },
 
     getRandomType(types) {
@@ -94,20 +93,18 @@ export const helperController = {
     },
 
     getRandomDirectionOfRotation(chance) {
-        let unit = .001;
-        if (this.randomEvent(chance)) unit = -.001;
-        return unit;
+        return this.randomEvent(chance) ? -.001 : .001;
     },
 
     isMobileDeviceCheck() {
-        let result = false;
-        if (navigator.userAgent.toLowerCase().match(/mobile/i)) result = true;
-        return result;
+        return !!navigator.userAgent.toLowerCase().match(/mobile/i);
     },
 
     confirmToLeave() {
-        window.onbeforeunload = function () {
-            return true;
+        if (config.windowClosingConfirm) {
+            window.onbeforeunload = function () {
+                return true;
+            }
         }
     },
 

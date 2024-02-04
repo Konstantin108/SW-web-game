@@ -5,9 +5,11 @@ import {game} from "../game.js";
 import {helperController} from "../controllers/helperController.js";
 import {blockageController} from "../controllers/blockageController.js";
 import {boss} from "./boss.js";
+import {progressController} from "../controllers/progressController.js";
 
 export const crashChecker = {
     invincibilityAfterCrash: config.invincibilityAfterCrash,
+    crashMulct: config.crashMulct,
     x: null,
     y: null,
 
@@ -24,8 +26,10 @@ export const crashChecker = {
                 if (boss.bossAnimationIsRunningNow) return;
                 renderer.renderCrash();
                 if (createNewBlockage) dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
-                dangerArray[i].crashDamage ? player.lives += -dangerArray[i].crashDamage : player.lives += -dangerArray[i].damage;
-                // progressController.scoreDown();  // потеря очков при аварии отключена
+                dangerArray[i].crashDamage
+                    ? player.lives += -dangerArray[i].crashDamage
+                    : player.lives += -dangerArray[i].damage;
+                if (this.crashMulct) progressController.scoreDown();
                 player.invincibility = true;
                 this.invincibilityOffCall(this.invincibilityAfterCrash);
                 this.calculateTimeInInvincibilityOff(this.invincibilityAfterCrash / 1000);

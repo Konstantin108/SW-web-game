@@ -98,7 +98,9 @@ export const cheatsController = {
                     let count = Number(compoundCode[1]);
                     if (Number.isInteger(count) && count > 0) {
                         activatedCheat = matchCheatObject;
-                        count <= activatedCheat.limit ? activatedCheatParam = count : activatedCheatParam = activatedCheat.limit;
+                        count <= activatedCheat.limit
+                            ? activatedCheatParam = count
+                            : activatedCheatParam = activatedCheat.limit;
                         message = `${activatedCheat.message} ${activatedCheatParam}`;
                     }
                     break;
@@ -319,11 +321,9 @@ export const cheatsController = {
     colorChange(paramName, color) {
         if (game.animationBan) return;
 
-        if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-            localStorageController.setParamToLocalStorage(paramName, color);
-        } else {
-            config[paramName] = color;
-        }
+        localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)
+            ? localStorageController.setParamToLocalStorage(paramName, color)
+            : config[paramName] = color;
         renderer.renderStatusBar();
         renderer.renderSuperAbilityBar();
         renderer.renderSuperAbilityBarActivatedByCheat();
@@ -342,11 +342,9 @@ export const cheatsController = {
     },
 
     addLives(paramName, livesCount) {
-        if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-            localStorageController.setParamToLocalStorage(paramName, livesCount);
-        } else {
-            config[paramName] = livesCount;
-        }
+        localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)
+            ? localStorageController.setParamToLocalStorage(paramName, livesCount)
+            : config[paramName] = livesCount;
         player[paramName] = config[paramName];
         renderer.renderStatusBar();
     },

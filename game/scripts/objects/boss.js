@@ -195,11 +195,9 @@ export const boss = {
     },
 
     shieldOnOrOffCall(timer, mode) {
-        if (mode === "callTurnOff") {
-            this.shieldTimerId = setTimeout(() => this.offShield(), timer + 1000);
-        } else {
-            this.shieldTimerId = setTimeout(() => this.onShield(), timer + 1000);
-        }
+        mode === "callTurnOff"
+            ? this.shieldTimerId = setTimeout(() => this.offShield(), timer + 1000)
+            : this.shieldTimerId = setTimeout(() => this.onShield(), timer + 1000);
         this.calculateTimeShieldOnOrOff(timer / 1000, mode);
     },
 
@@ -211,11 +209,9 @@ export const boss = {
 
     setShieldTimerIdOnResumeGame() {
         if (!progressController.bossExist) return;
-        if (String(this.callTurnType) === "callTurnOff") {
-            this.shieldOnOrOffCall((this.calculateTime - 1) * 1000, "callTurnOff");
-        } else {
-            this.shieldOnOrOffCall((this.calculateTime - 1) * 1000, "callTurnOn");
-        }
+        String(this.callTurnType) === "callTurnOff"
+            ? this.shieldOnOrOffCall((this.calculateTime - 1) * 1000, "callTurnOff")
+            : this.shieldOnOrOffCall((this.calculateTime - 1) * 1000, "callTurnOn");
     },
 
     calculateTimeShieldOnOrOff(delay, turn) {
