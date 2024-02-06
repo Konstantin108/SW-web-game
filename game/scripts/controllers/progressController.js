@@ -70,8 +70,9 @@ export const progressController = {
         }
     },
 
-    scoreUp(scoreType) {
-        this.score += scoreType * this.multiplier;
+    scoreUp(scoreType, multiplier = true) {
+        if (multiplier) scoreType *= this.multiplier;
+        this.score += scoreType;
     },
 
     killEnemy(coordinateObject, blockage, shipDestroyedReward, y_pos, dontCountKilledEnemies = false) {
@@ -87,7 +88,7 @@ export const progressController = {
     },
 
     killBoss(bossDestroyedReward, hitCoordinates) {
-        if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward);
+        if (!this.playerCanEnterNewLevel) this.scoreUp(bossDestroyedReward, false);
         boss.bossAnimationIsRunningNow = true;
         game.playerCanStopGame = false;
         this.bossDestroyed += 1;

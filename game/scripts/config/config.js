@@ -76,7 +76,7 @@ export const config = {
     blockageBullCrashDamage: 1,
     // босс
     bossLives: 2000,
-    bossDestroyedReward: 2500,
+    bossDestroyedReward: 3000,
     bossAnotherDestroyedReward: null,
     bossSpeed: 1000,
     bossCrashDamage: 3,
