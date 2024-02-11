@@ -145,7 +145,7 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    pauseMenuPrint(sizeClass) {
+    pauseMenuTemplatePrint(sizeClass) {
         return `<div id="pauseMenuBackground">
                     <div id="pauseMenuContainer" class="pauseElementAdd ${sizeClass}">
                         <div id="pauseMenuLeftBlock">
@@ -171,13 +171,13 @@ export const templatePrinter = {
                 </div>`;
     },
 
-    confirmBlockLabelPrint() {
+    confirmBlockLabelTemplatePrint() {
         return `<div class="${config.menuColor}">
                     <p id="confirmTitle">вы уверены?</p>
                 </div>`;
     },
 
-    statisticsBlockPrint(data) {
+    statisticsBlockTemplatePrint(data) {
         return `<div id="statisticsBlock" class="${config.menuColor}">
                     <p id="statisticsTitle">игра окончена</p>
                     <div id="statisticsGridContainer">
@@ -221,6 +221,31 @@ export const templatePrinter = {
                         </button>
                     </div>
                 </div>`;
+    },
+
+    localStorageUnavailableMessageTemplatePrint() {
+        let text = `<p>в браузере отключено хранилище localStorage!</p>
+                    <p>для сохранения данных о введённых читах localStorage</p>
+                    <p>должен быть активирован в настройках вашего браузера,</p>
+                    <p>после перезагрузки страницы читы будут отключены</p>`;
+
+        return {
+            name: "localStorageUnavailableMessage",
+            tooltip: {
+                keyboardsBlockClass: "",
+                positionClass: "localStorageUnavailableMessageDesktopMode",
+                allBlockStyle: "textInCenterPosition",
+                text: text
+            },
+            tooltipMobileMode: {
+                keyboardsBlockClass: "",
+                positionClass: "anyTooltipMobileMode",
+                allBlockStyle: "textInCenterPositionMobileMode",
+                text: text
+            },
+            canShowAgain: true,
+            canShowWhenTipsIsOff: true
+        }
     },
 
     roundBtnTemplatePrint(name, icon, animationClass) {

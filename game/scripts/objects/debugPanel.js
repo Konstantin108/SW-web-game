@@ -30,20 +30,19 @@ export const debugPanel = {
         document.addEventListener("keydown", function (event) {
             if (!debugPanel.playerCanCallDebugPanel) return;
             if (!showDebugPanelBtn.includes(event.code)) return;
+            event.preventDefault();
             debugPanel.callDebugPanel();
         });
     },
 
     callDebugPanel() {
         if (!debugPanel.debugMode) return;
-        let mobileMode = false;
+        let mobileMode = helperController.isMobileDeviceCheck();
 
-        if (helperController.isMobileDeviceCheck()) mobileMode = true;
         this.playerCanCallDebugPanel = false;
         renderer.renderDebugPanel(mobileMode);
         debugPanel.clickOnDebugPanelElementBtn();
         setTimeout(() => this.playerCanCallDebugPanel = true, 500);
-        mobileMode = false;
     },
 
     clickOnDebugPanelElementBtn() {

@@ -177,7 +177,6 @@ td
 .statusBarElement
   display: flex
   justify-content: center
-  vertical-align: center
   background-color: black
   padding: 6px
   margin-left: 3px
@@ -933,6 +932,13 @@ td
 .redBtn:active
   background-color: #ff9e9e !important
 
+.disabled
+  opacity: .3
+  pointer-events: none
+  cursor: default
+  text-decoration: none
+  background-color: white !important
+
 .debugPanelIn
   animation: debugPanelIn .5s
 
@@ -1289,7 +1295,8 @@ td
 .pauseBtnsArrayDesktopMode,
 .shootBtnsArrayDesktopMode,
 .useSuperAbilityBtnDesktopMode,
-.useBombBtnDesktopMode
+.useBombBtnDesktopMode,
+.localStorageUnavailableMessageDesktopMode
   position: absolute
   z-index: 2
 
@@ -1313,6 +1320,15 @@ td
   right: -50%
   top: 56%
 
+.localStorageUnavailableMessageDesktopMode
+  right: 14%
+  top: 20%
+
+.textInCenterPosition
+  text-align: center
+  line-height: 26px
+  margin-bottom: 14px
+
 .anyTooltipMobileMode
   margin-top: 20px
   font-size: 34px
@@ -1326,6 +1342,10 @@ td
 .anyTooltipMobileMode > .tooltipElementText
   margin-top: 0 !important
   margin-bottom: 0 !important
+
+.textInCenterPositionMobileMode
+  text-align: center
+  line-height: 46px
 
 #tooltipControlPanel
   background-image: url("../src/images/background-rusty-iron.jpg")

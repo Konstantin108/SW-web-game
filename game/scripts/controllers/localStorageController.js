@@ -3,6 +3,9 @@ import {player} from "../objects/player.js";
 import {helperController} from "./helperController.js";
 import {cheatsController} from "./cheatsController.js";
 import {bonuses} from "../config/bonuses.js";
+import {game} from "../game.js";
+import {renderer} from "../objects/renderer.js";
+import {debugPanel} from "../objects/debugPanel.js";
 
 export const localStorageController = {
     notUsedLocalStorageParams: [
@@ -16,6 +19,7 @@ export const localStorageController = {
     bonusNamesFromLocalStorage: [],
 
     setLocalStorageParamsToGameConfig(param = null) {
+        if (!game.localStorageAvailable) return;
         if (param) {
             this.dataProcessingFromLocalStorage(param);
             return;
@@ -104,6 +108,23 @@ export const localStorageController = {
     },
 
     checkParamInLocalStorage(param) {
-        return localStorage[param];
+        if (game.localStorageAvailable) return localStorage[param];
+    },
+
+    checkLocalStorageAvailable() {
+        try {
+            localStorage.setItem("check", "?");
+            localStorage.removeItem("check");
+            game.localStorageAvailable = true;  // true
+        } catch (error) {
+            game.localStorageAvailable = false;
+        }
+        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
+        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
+    },
+
+    periodicCheckLocalStorageAvailable() {
+        this.checkLocalStorageAvailable();
+        setInterval(() => this.checkLocalStorageAvailable(), 1000);
     }
 }

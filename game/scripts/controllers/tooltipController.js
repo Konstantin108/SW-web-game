@@ -18,12 +18,14 @@ export const tooltipController = {
     hideTooltipControlPanelAnimationTimerId: null,
 
     tooltipCreateAndDestroy(gameControlObject) {
-        if (!config.tips) return;
+        if (!config.tips && !gameControlObject.canShowWhenTipsIsOff) return;
         let tooltip = new Tooltip(gameControlObject);
 
         this.tooltipsArray.push(tooltip);
         tooltip.show(true);
-        if (game.gameIsRunning) this.tooltipDestroyTimerIdsArray.push(setTimeout(() => tooltip.destroy(), 7800));
+        if (game.gameIsRunning || gameControlObject.canShowAgain) {
+            this.tooltipDestroyTimerIdsArray.push(setTimeout(() => tooltip.destroy(), 7800));
+        }
     },
 
     showMainGameControlTooltips(startGame = false) {
@@ -96,10 +98,14 @@ export const tooltipController = {
             if (config.tips) {
                 helperController.removeAllTimeoutTimers(this.tooltipCreateTimerIdsArray);
                 helperController.removeAllTimeoutTimers(this.tooltipDestroyTimerIdsArray);
-                localStorageController.setParamToLocalStorage("tips", false);
+                game.localStorageAvailable
+                    ? localStorageController.setParamToLocalStorage("tips", false)
+                    : config.tips = false;
             } else {
                 if (game.gameIsRunning) this.showMainGameControlTooltips();
-                localStorageController.removeParamFromLocalStorage("tips", true);
+                game.localStorageAvailable
+                    ? localStorageController.removeParamFromLocalStorage("tips", true)
+                    : config.tips = true;
             }
         }
 

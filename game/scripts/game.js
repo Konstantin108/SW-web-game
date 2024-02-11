@@ -25,9 +25,11 @@ export const game = {
     gameOver: false,
     playerCanStopGame: false,
     animationBan: false,
+    localStorageAvailable: true,  // true
 
     init() {
         cheatsController.saveDefaultConfigParams();
+        localStorageController.periodicCheckLocalStorageAvailable();
         localStorageController.setLocalStorageParamsToGameConfig();
         this.startGameDelaySet();
         background.gameIsInitialized = true;

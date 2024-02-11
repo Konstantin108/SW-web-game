@@ -58,18 +58,18 @@ export const gameControl = {
                     keyboards: [
                         {
                             units: [
-                                this.btnsSrc["KeyW"],
-                                this.btnsSrc["KeyA"],
-                                this.btnsSrc["KeyS"],
-                                this.btnsSrc["KeyD"]
+                                this.btnsSrc.KeyW,
+                                this.btnsSrc.KeyA,
+                                this.btnsSrc.KeyS,
+                                this.btnsSrc.KeyD
                             ]
                         },
                         {
                             units: [
-                                this.btnsSrc["ArrowUp"],
-                                this.btnsSrc["ArrowLeft"],
-                                this.btnsSrc["ArrowDown"],
-                                this.btnsSrc["ArrowRight"]
+                                this.btnsSrc.ArrowUp,
+                                this.btnsSrc.ArrowLeft,
+                                this.btnsSrc.ArrowDown,
+                                this.btnsSrc.ArrowRight
                             ]
                         }
                     ],
@@ -85,16 +85,18 @@ export const gameControl = {
                     allBlockStyle: "flexBox",
                     keyboards: [{
                         units: [
-                            this.touchesSrc["touchArrowUp"],
-                            this.touchesSrc["touchArrowDown"],
-                            this.touchesSrc["touchArrowLeft"],
-                            this.touchesSrc["touchArrowRight"]
+                            this.touchesSrc.touchArrowUp,
+                            this.touchesSrc.touchArrowDown,
+                            this.touchesSrc.touchArrowLeft,
+                            this.touchesSrc.touchArrowRight
                         ]
                     }],
                     prologue: "используйте свайпы",
                     text: "для перемещения",
                     additionalMessage: "при движении работает автострельба",
                 },
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "перемещение корабля игрока по карте",
             },
             {
@@ -107,8 +109,8 @@ export const gameControl = {
                     tooltipBlockClass: "",
                     allBlockStyle: "",
                     keyboards: [
-                        {units: [this.btnsSrc["Numpad0"]]},
-                        {units: [this.btnsSrc["Space"]]}
+                        {units: [this.btnsSrc.Numpad0]},
+                        {units: [this.btnsSrc.Space]}
                     ],
                     prologue: null,
                     text: "выстрел",
@@ -120,11 +122,13 @@ export const gameControl = {
                     imageClass: "tooltipImage",
                     tooltipBlockClass: "",
                     allBlockStyle: "flexBox",
-                    keyboards: [{units: [this.touchesSrc["touchFingerLeft"]]}],
+                    keyboards: [{units: [this.touchesSrc.touchFingerLeft]}],
                     prologue: "или коснитесь экрана",
                     text: "чтобы выстрелить",
                     additionalMessage: null,
                 },
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "выстрел"
             },
             {
@@ -136,7 +140,7 @@ export const gameControl = {
                     imageClass: "",
                     tooltipBlockClass: "",
                     allBlockStyle: "",
-                    keyboards: [{units: [this.btnsSrc["ControlLeft"]]}],
+                    keyboards: [{units: [this.btnsSrc.ControlLeft]}],
                     prologue: null,
                     text: "суперспособность",
                     additionalMessage: null,
@@ -147,11 +151,13 @@ export const gameControl = {
                     imageClass: "tooltipImage",
                     tooltipBlockClass: "",
                     allBlockStyle: "flexBox",
-                    keyboards: [{units: [this.touchesSrc["touchUseSuperAbilityBtn"]]}],
+                    keyboards: [{units: [this.touchesSrc.touchUseSuperAbilityBtn]}],
                     prologue: "коснитесь иконки",
                     text: "или используйте двойной тап",
                     additionalMessage: "чтобы активировать суперспособность",
                 },
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "использовать суперспособность"
             },
             {
@@ -163,7 +169,7 @@ export const gameControl = {
                     imageClass: "",
                     tooltipBlockClass: "",
                     allBlockStyle: "",
-                    keyboards: [{units: [this.btnsSrc["ControlRight"]]}],
+                    keyboards: [{units: [this.btnsSrc.ControlRight]}],
                     prologue: null,
                     text: "использовать бомбу",
                     additionalMessage: null,
@@ -174,11 +180,13 @@ export const gameControl = {
                     imageClass: "tooltipImageBig",
                     tooltipBlockClass: "",
                     allBlockStyle: "flexBox",
-                    keyboards: [{units: [this.touchesSrc["touchUseBombBtn"]]}],
+                    keyboards: [{units: [this.touchesSrc.touchUseBombBtn]}],
                     prologue: "коснитесь иконки",
                     text: "или коснитесь экрана двумя пальцами",
                     additionalMessage: "для активации бомбы",
                 },
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "использовать бомбу"
             },
             {
@@ -191,14 +199,16 @@ export const gameControl = {
                     tooltipBlockClass: "",
                     allBlockStyle: "",
                     keyboards: [
-                        {units: [this.btnsSrc["Escape"]]},
-                        {units: [this.btnsSrc["Pause"]]}
+                        {units: [this.btnsSrc.Escape]},
+                        {units: [this.btnsSrc.Pause]}
                     ],
                     prologue: null,
                     text: "остановить игру",
                     additionalMessage: null,
                 },
                 tooltipMobileMode: null,
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "вызов меню паузы"
             },
             {
@@ -206,6 +216,8 @@ export const gameControl = {
                 btns: ["Backquote"],
                 tooltip: null,
                 tooltipMobileMode: null,
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "вызов меню ввода читов"
             },
             {
@@ -213,6 +225,8 @@ export const gameControl = {
                 btns: ["Slash"],
                 tooltip: null,
                 tooltipMobileMode: null,
+                canShowAgain: false,
+                canShowWhenTipsIsOff: false,
                 description: "вызов дебаг-панели"
             }
         ];

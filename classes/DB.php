@@ -37,8 +37,8 @@ class DB
                     $this->password,
                     $this->getOpt()
                 );
-            } catch (Exception $e) {
-                die("Error! " . $e);
+            } catch (Exception $error) {
+                die($error);
             }
         }
         return $this->connection;

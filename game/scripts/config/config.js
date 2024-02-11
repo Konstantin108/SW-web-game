@@ -44,6 +44,7 @@ export const config = {
     tip_useSuperAbilityBtnShown: false,
     tip_useBombBtnShown: false,
     tip_pauseBtnsArrayShown: false,
+    tip_localStorageUnavailableMessageShown: false,
     possibleDirectionsShowDelaySeconds: 2000,
     shootBtnsArrayShowDelaySeconds: 4000,
     useSuperAbilityBtnShowDelaySeconds: 1000,

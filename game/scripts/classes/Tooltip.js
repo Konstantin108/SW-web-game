@@ -35,6 +35,7 @@ export class Tooltip {
                     if (tooltipsArray[i].data.name === this.data.name) tooltipController.tooltipsArray.splice(i, 1);
                 }
             }
+            if (this.data.canShowAgain) config[`tip_${this.data.name}Shown`] = false;
         }, 500);
     }
 }

@@ -599,7 +599,7 @@ export const renderer = {
         let pauseMenuContainer = null;
 
         if (!document.querySelector(`#${pauseMenuBackgroundId}`)) {
-            this.body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuPrint());
+            this.body.insertAdjacentHTML("afterbegin", templatePrinter.pauseMenuTemplatePrint());
             backgroundElement = document.querySelector(`#${pauseMenuBackgroundId}`);
             backgroundElement.classList.add("pauseOn");
             setTimeout(() => backgroundElement.classList.remove("pauseOn"), 210);
@@ -679,7 +679,7 @@ export const renderer = {
                                        <p class="ubuntuText statisticsRightColumn">${elem.data}</p>`;
                 });
             }
-            optionsBlock += templatePrinter.statisticsBlockPrint(dataForPrinter);
+            optionsBlock += templatePrinter.statisticsBlockTemplatePrint(dataForPrinter);
         }
         optionsBlock += "<div>";
 
@@ -691,7 +691,7 @@ export const renderer = {
 
         if (String(activeMenuSector) === "confirmSector") {
             menuListClasses = "listFlexStyle";
-            optionsBlock += templatePrinter.confirmBlockLabelPrint();
+            optionsBlock += templatePrinter.confirmBlockLabelTemplatePrint();
 
             this.renderPauseMenuSideBlocksBtn("back");
             setTimeout(() => {
@@ -807,30 +807,36 @@ export const renderer = {
         let debugElements = config.debugPanelElements;
         let debugElementsDiv = `<div id="btnsBlock">`;
         let checked = "";
+        let disabled = "";
         let customClass = "";
 
         debugElements.forEach(elem => {
             if (config.cheatsActivated.includes(elem.name)) checked = "checked";
             if (elem.customClass) customClass = elem.customClass;
+            if (elem.name === "toggleInfinityMode") {
+                if (!game.localStorageAvailable) disabled = "disabled";
+            }
             elem.type === "button"
                 ? debugElementsDiv += `<div>
-                                        <input id="${elem.name}"
-                                               type="button"
-                                               value="${elem.name}"
-                                               class="debugPanelBtn btnLabel ${customClass}">
-                                     </div>`
+                                            <input id="${elem.name}"
+                                                   type="button"
+                                                   value="${elem.name}"
+                                                   class="debugPanelBtn btnLabel ${customClass}">
+                                       </div>`
                 : debugElementsDiv += `<div>
-                                        <input id="${elem.name}"
-                                               name="debug"
-                                               type="checkbox"
-                                               value="${elem.name}"
-                                               class="debugPanelBtn btnInputElement"
-                                               ${checked}>
-                                        <label class="btnInputLabel" for="${elem.name}">
-                                            ${elem.name}
-                                        </label>
-                                     </div>`;
+                                            <input id="${elem.name}"
+                                                   name="debug"
+                                                   type="checkbox"
+                                                   value="${elem.name}"
+                                                   class="debugPanelBtn btnInputElement"
+                                                   ${checked}
+                                                   ${disabled}>
+                                            <label class="btnInputLabel ${disabled}" for="${elem.name}">
+                                                <p>${elem.name}</p>
+                                            </label>
+                                       </div>`;
             checked = "";
+            disabled = "";
             customClass = "";
         });
         debugElementsDiv += "</div>";
@@ -973,7 +979,9 @@ export const renderer = {
         if (!tooltipDiv) return;
         if (tooltipDiv.classList.contains("tooltipAnimationIn")) tooltipDiv.classList.remove("tooltipAnimationIn");
         tooltipDiv.classList.add("tooltipAnimationOut");
-        setTimeout(() => tooltipDiv.parentElement.removeChild(tooltipDiv), 150);
+        setTimeout(() => {
+            if (tooltipDiv.parentElement) tooltipDiv.parentElement.removeChild(tooltipDiv);
+        }, 150);
     },
 
     renderTooltipControlPanel(animation, toggle, changeColorCheat, pause) {
@@ -1018,7 +1026,9 @@ export const renderer = {
         tooltipControlPanel.classList.remove("fromBottomInClass");
         tooltipControlPanel.classList.add(animationClass);
         if (tooltipController.hideTooltipControlPanelAnimationTimerId) clearTimeout(tooltipController.hideTooltipControlPanelAnimationTimerId);
-        tooltipController.hideTooltipControlPanelAnimationTimerId = setTimeout(() => this.body.removeChild(tooltipControlPanel), 180);
+        tooltipController.hideTooltipControlPanelAnimationTimerId = setTimeout(() => {
+            if (this.body.contains(tooltipControlPanel)) this.body.removeChild(tooltipControlPanel);
+        }, 180);
     },
 
     renderGameStopOrPlayBtnTemplatePrint(animation, gameIsRunning = true) {

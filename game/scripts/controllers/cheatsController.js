@@ -14,6 +14,7 @@ import {bonuses} from "../config/bonuses.js";
 import {pause} from "../objects/pause.js";
 import {tooltipController} from "./tooltipController.js";
 import {audioController} from "./audioController.js";
+import {templatePrinter} from "../objects/templatePrinter.js";
 
 export const cheatsController = {
     cheats: config.cheats,
@@ -36,14 +37,12 @@ export const cheatsController = {
     },
 
     callCheatConsole() {
-        let mobileMode = false;
+        let mobileMode = helperController.isMobileDeviceCheck();
 
-        if (helperController.isMobileDeviceCheck()) mobileMode = true;
         this.playerCanCallCheatConsole = false;
         renderer.renderCheatConsole(mobileMode);
         cheatsController.inputCheat();
         setTimeout(() => this.playerCanCallCheatConsole = true, 500);
-        mobileMode = false;
     },
 
     inputCheat() {
@@ -240,10 +239,11 @@ export const cheatsController = {
     },
 
     updateCheatNamesArrayInLocalStorageAfterCheatOn() {
+        let cheatsActivated = localStorageController.getParamFromLocalStorage("cheatsActivated");
         let activatedCheatNamesInLocalStorage = [];
 
-        if (localStorage.cheatsActivated) {
-            localStorageController.getParamFromLocalStorage("cheatsActivated").split(",").forEach(cheatName => {
+        if (cheatsActivated) {
+            cheatsActivated.split(",").forEach(cheatName => {
                 helperController.addItemToArray(activatedCheatNamesInLocalStorage, cheatName);
             });
         }
@@ -260,6 +260,10 @@ export const cheatsController = {
 
     // методы запуска читов
     toggleInfinityMode(paramName, toggle) {
+        if (!game.localStorageAvailable) {
+            tooltipController.tooltipCreateAndDestroy(templatePrinter.localStorageUnavailableMessageTemplatePrint());
+            return;
+        }
         if (toggle === "on") {
             localStorageController.setParamToLocalStorage(paramName, true);
 
@@ -292,8 +296,7 @@ export const cheatsController = {
             localStorageController.removeParamFromLocalStorage(paramName, false);
             localStorageController.clearLocalStorage(["tips"]);
         }
-        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
-        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
+        localStorageController.checkLocalStorageAvailable();
     },
 
     toggleInvincibility(paramName, toggle) {
@@ -404,8 +407,7 @@ export const cheatsController = {
             }
             config[paramName] = status;
         }
-        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
-        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
+        localStorageController.checkLocalStorageAvailable();
         return status;
     },
 
@@ -418,7 +420,7 @@ export const cheatsController = {
             delay = -1;
 
             config[paramName] = status;
-            config["startGameDelaySecondsCount"] = delay;
+            config.startGameDelaySecondsCount = delay;
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.setParamToLocalStorage(paramName, status);
                 localStorageController.setParamToLocalStorage("startGameDelaySecondsCount", delay);
@@ -432,11 +434,10 @@ export const cheatsController = {
                 localStorageController.removeParamFromLocalStorage("startGameDelaySecondsCount", delay);
             }
             config[paramName] = status;
-            config["startGameDelaySecondsCount"] = delay;
+            config.startGameDelaySecondsCount = delay;
         }
         game.startGameDelaySet();
-        let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();
-        if (btnsBlockRefreshed) debugPanel.clickOnDebugPanelElementBtn();
+        localStorageController.checkLocalStorageAvailable();
     },
 
     toggleDebugMode(paramName, toggle) {
@@ -525,7 +526,7 @@ export const cheatsController = {
     },
 
     setBonusChance(paramName, percent) {
-        config["bonuses"] = bonuses.setBonusesParams(percent);
+        config.bonuses = bonuses.setBonusesParams(percent);
         if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
             localStorageController.setParamToLocalStorage(paramName, percent, false);
         }
@@ -537,7 +538,7 @@ export const cheatsController = {
         if (toggle === "on") {
             status = true;
             config[paramName] = status;
-            config["superAbilityIsActivated"] = status;
+            config.superAbilityIsActivated = status;
             if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
                 localStorageController.setParamToLocalStorage(paramName, status);
                 localStorageController.setParamToLocalStorage("superAbilityIsActivated", status);
@@ -552,7 +553,7 @@ export const cheatsController = {
                 localStorageController.removeParamFromLocalStorage("superAbilityIsActivated", status);
             }
             config[paramName] = status;
-            config["superAbilityIsActivated"] = status;
+            config.superAbilityIsActivated = status;
         }
     },
 
@@ -608,7 +609,7 @@ export const cheatsController = {
                 bonusController.getBomb();
                 break;
             case "radium":
-                config["superAbilityIsActivated"] = true;
+                config.superAbilityIsActivated = true;
                 player.superAbilityStatusInit();
                 renderer.renderSuperAbilityBarActivatedByCheat(true);
                 break;
