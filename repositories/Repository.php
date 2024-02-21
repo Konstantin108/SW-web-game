@@ -42,7 +42,7 @@ abstract class Repository
     public function getAllRows($from, $elemsOnPage): bool|array
     {
         $sql = sprintf(
-            "SELECT * FROM %s ORDER BY %s %s LIMIT %s, %s",
+            "SELECT * FROM %s ORDER BY %s %s LIMIT %d, %d",
             $this->getTableName(),
             $this->getOrderByColumn(),
             $this->getSortingMode(),
