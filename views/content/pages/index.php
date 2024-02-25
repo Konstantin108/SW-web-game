@@ -3,7 +3,7 @@
 </nav>
 <script>
     $.get("/ajax/getPages.php", function (data) {
-        if (data) setTimeout(() => createLink(JSON.parse(data), 0), 100);
+        if (data) setTimeout(() => createLink(data, 0), 100);
     });
 
 

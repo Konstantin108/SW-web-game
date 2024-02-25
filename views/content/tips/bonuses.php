@@ -14,7 +14,7 @@ include "views/components/tipsMenu.php";
                 page: "<?= $param; ?>"
             },
             success: function (data) {
-                console.log(JSON.parse(data));
+                console.log(data);
             }
         });
     </script>

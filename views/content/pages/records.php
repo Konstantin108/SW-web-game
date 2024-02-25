@@ -16,7 +16,7 @@
             page: "<?= $param; ?>"
         },
         success: function (data) {
-            checkRecordsCount(JSON.parse(data));
+            checkRecordsCount(data);
         }
     });
 
