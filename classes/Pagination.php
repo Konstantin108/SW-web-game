@@ -8,7 +8,7 @@ class Pagination
     private string $slug;
     private int $elemOnPageCount;
     private int $currentPage;
-    private string $paramName = "page";
+    private string $paramName;
     private int $pagesCount;
 
     /**
@@ -23,6 +23,7 @@ class Pagination
         $this->slug = $slug;
         $this->elemOnPageCount = $elemOnPageCount;
         $this->currentPage = $currentPage;
+        $this->paramName = "page";
     }
 
     /**
