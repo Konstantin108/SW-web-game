@@ -1,5 +1,5 @@
 <?php
-include "../config.php";
+include "../includes/main.php";
 include "../classes/PagePrepare.php";
 
 $pagePrepare = new PagePrepare;

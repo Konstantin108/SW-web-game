@@ -1,5 +1,5 @@
 <?php
-include "../config.php";
+include "../includes/main.php";
 include "../classes/DB.php";
 include "../repositories/Repository.php";
 include "../repositories/RecordRepository.php";

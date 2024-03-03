@@ -1,20 +1,23 @@
 <?php
+// добавить spl_autoload_register и избавиться от include
+include __DIR__ . "/../traits/SingletonTrait.php";
 
 use JetBrains\PhpStorm\ArrayShape;
 
 // разобраться с датой, которая записывается в рекорд (дата и время)
 class DB
 {
+    use SingletonTrait;
+
     private string $driver;
     private string $host;
     private string $db;
     private string $charset;
     private string $user;
     private string $password;
-    private static ?DB $instance = null;
     private object $connection;
 
-    public function __construct()
+    private function __construct()
     {
         $this->driver = DRIVER;
         $this->host = HOST;
@@ -70,11 +73,11 @@ class DB
     }
 
     /**
-     * @param $sql
+     * @param string $sql
      * @param array $params
      * @return bool|PDOStatement
      */
-    private function query($sql, array $params = []): bool|PDOStatement
+    private function query(string $sql, array $params = []): bool|PDOStatement
     {
         $PDOStatement = $this->getConnection()->prepare($sql);
         $PDOStatement->execute($params);
@@ -82,34 +85,36 @@ class DB
     }
 
     /**
-     * @param $sql
+     * @param string $sql
      * @param array $params
-     * @return mixed
+     * @return mixed|null
      */
-    public function getData($sql, array $params = []): mixed
+    public function getData(string $sql, array $params = []): mixed
     {
         $PDOStatement = $this->query($sql, $params);
-        return $PDOStatement->fetch();
+        return $PDOStatement
+            ? $PDOStatement->fetch()
+            : null;
     }
 
     /**
-     * @param $sql
+     * @param string $sql
      * @param array $params
-     * @return bool|array
+     * @return bool|array|null
      */
-    public function getDataAsArray($sql, array $params = []): bool|array
+    public function getDataAsArray(string $sql, array $params = []): bool|array|null
     {
         $PDOStatement = $this->query($sql, $params);
-        return $PDOStatement->fetchAll();
+        return $PDOStatement
+            ? $PDOStatement->fetchAll()
+            : null;
     }
 
     /**
-     * @return DB|null
+     * @return DB
      */
-    public static function getInstance(): ?DB
+    public static function call(): DB
     {
-        return self::$instance === null
-            ? self::$instance = new self()
-            : self::$instance;
+        return static::getInstance();
     }
 }

@@ -12,16 +12,13 @@ class Pagination
     private int $pagesCount;
 
     /**
-     * @param $repository
-     * @param $slug
-     * @param $elemOnPageCount
-     * @param $currentPage
+     * @param Repository $repository
+     * @param string $slug
+     * @param int $elemOnPageCount
+     * @param int $currentPage
      */
-    public function __construct($repository, $slug, $elemOnPageCount, $currentPage)
+    public function __construct(Repository $repository, string $slug, int $elemOnPageCount, int $currentPage)
     {
-        /**
-         * @var Repository $repository
-         */
         $this->repository = $repository;
         $this->slug = $slug;
         $this->elemOnPageCount = $elemOnPageCount;

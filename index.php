@@ -2,6 +2,7 @@
 // здесь стартовать сессию, JS для получения данных из localStorage
 // на длину ника игрока должно быть ограничение
 include "includes/main.php";
+include "classes/PagePrepare.php";
 
 $pagePrepare = new PagePrepare;
 $page = "index";
