@@ -30,7 +30,7 @@ abstract class Repository
      */
     public function getCount(): mixed
     {
-        $sql = "SELECT COUNT(*) AS count FROM `{$this->getTableName()}`";
+        $sql = "SELECT COUNT(*) AS count FROM `{$this->getTableName()}`;";
         return $this->getDB()->getData($sql)["count"];
     }
 
@@ -42,7 +42,7 @@ abstract class Repository
     public function getAllRows(int $from, int $elemsOnPage): bool|array|null
     {
         $sql = sprintf(
-            "SELECT * FROM `%s` ORDER BY `%s` %s LIMIT %d, %d",
+            "SELECT * FROM `%s` ORDER BY `%s` %s LIMIT %d, %d;",
             $this->getTableName(),
             $this->getOrderByColumn(),
             $this->getSortingMode(),
