@@ -12,35 +12,3 @@ Stack trace:
 #8 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(87): Pagination->getElemsOnCurrentPage()
 #9 C:\OSPanel\domains\spaceshooter\ajax\getRecords.php(17): Pagination->getPage()
 #10 {main}
-2024-03-11 01:07:34 --------------------------------------------
-DbException: Проблема с БД SQLSTATE[HY000] [1045] Access denied for user 'rootfd'@'localhost' (using password: YES) in C:\OSPanel\domains\spaceshooter\classes\DB.php:44
-Stack trace:
-#0 C:\OSPanel\domains\spaceshooter\classes\DB.php(83): DB->getConnection()
-#1 C:\OSPanel\domains\spaceshooter\classes\DB.php(96): DB->exec()
-#2 C:\OSPanel\domains\spaceshooter\repositories\Repository.php(35): DB->getRowsCount()
-#3 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(35): Repository->getCount()
-#4 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(44): Pagination->getTotal()
-#5 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(53): Pagination->getPagesCount()
-#6 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(68): Pagination->getPageNumber()
-#7 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(77): Pagination->getElemFromNumber()
-#8 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(87): Pagination->getElemsOnCurrentPage()
-#9 C:\OSPanel\domains\spaceshooter\ajax\getRecords.php(17): Pagination->getPage()
-#10 {main}
-2024-03-11 01:07:36 --------------------------------------------
-DbException: Проблема с БД SQLSTATE[HY000] [1045] Access denied for user 'rootfd'@'localhost' (using password: YES) in C:\OSPanel\domains\spaceshooter\classes\DB.php:44
-Stack trace:
-#0 C:\OSPanel\domains\spaceshooter\classes\DB.php(83): DB->getConnection()
-#1 C:\OSPanel\domains\spaceshooter\classes\DB.php(96): DB->exec()
-#2 C:\OSPanel\domains\spaceshooter\repositories\Repository.php(35): DB->getRowsCount()
-#3 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(35): Repository->getCount()
-#4 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(44): Pagination->getTotal()
-#5 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(53): Pagination->getPagesCount()
-#6 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(68): Pagination->getPageNumber()
-#7 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(77): Pagination->getElemFromNumber()
-#8 C:\OSPanel\domains\spaceshooter\classes\Pagination.php(87): Pagination->getElemsOnCurrentPage()
-#9 C:\OSPanel\domains\spaceshooter\ajax\getRecords.php(17): Pagination->getPage()
-#10 {main}
-2024-03-11 01:07:38 --------------------------------------------
-NotFoundException: Страница { dsf } - не найдена! in C:\OSPanel\domains\spaceshooter\index.php:34
-Stack trace:
-#0 {main}
