@@ -27,9 +27,10 @@ class DB
     }
 
     /**
-     * @return PDO|void
+     * @return PDO
+     * @throws DbException
      */
-    private function getConnection()
+    private function getConnection(): PDO
     {
         if (empty($this->connection)) {
             try {
@@ -39,8 +40,8 @@ class DB
                     $this->password,
                     $this->getOptions()
                 );
-            } catch (Exception $e) {
-                die($e);
+            } catch (PDOException $e) {
+                throw new DbException($e->getMessage());
             }
         }
         return $this->connection;
@@ -75,6 +76,7 @@ class DB
      * @param string $sql
      * @param array $params
      * @return bool|PDOStatement|null
+     * @throws DbException
      */
     private function exec(string $sql, array $params = []): bool|PDOStatement|null
     {
@@ -87,6 +89,7 @@ class DB
     /**
      * @param string $sql
      * @return mixed|null
+     * @throws DbException
      */
     public function getRowsCount(string $sql): mixed
     {
@@ -100,6 +103,7 @@ class DB
      * @param string $sql
      * @param array $params
      * @return bool|array|null
+     * @throws DbException
      */
     public function query(string $sql, array $params = []): bool|array|null
     {

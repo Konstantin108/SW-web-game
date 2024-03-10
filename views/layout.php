@@ -2,7 +2,7 @@
 $containerSizeClass = "bigSize";
 $backBtnDisplayClass = "showElement";
 
-if ($page === "index" || $page === "404") {
+if ($page === "index" || $page === "error") {
     $containerSizeClass = "smallSize";
     $backBtnDisplayClass = "hideElement";
 }

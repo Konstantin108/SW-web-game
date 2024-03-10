@@ -6,7 +6,7 @@ $pagePrepare = new PagePrepare();
 
 $excludedPagesArray = [
     "index.php",
-    "404.php",
+    "error.php",
     "..",
     "."
 ];
@@ -38,5 +38,4 @@ $result[] = [
     ]
 ];
 
-header("Content-type: application/json; charset=utf-8");
 print_r(json_encode($result, JSON_UNESCAPED_UNICODE));

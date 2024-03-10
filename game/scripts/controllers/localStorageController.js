@@ -116,7 +116,7 @@ export const localStorageController = {
             localStorage.setItem("check", "?");
             localStorage.removeItem("check");
             game.localStorageAvailable = true;  // true
-        } catch (error) {
+        } catch (e) {
             game.localStorageAvailable = false;
         }
         let btnsBlockRefreshed = renderer.refreshDebugPanelBtnsBlock();

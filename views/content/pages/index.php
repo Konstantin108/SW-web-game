@@ -3,9 +3,23 @@
 </nav>
 <script>
     $.get("/ajax/getPages.php", function (data) {
-        if (data) setTimeout(() => createLink(data, 0), 100);
+        try {
+            data = JSON.parse(data);
+            if (data) setTimeout(() => createLink(data, 0), 100);
+        } catch (e) {
+            errorMessage("cервис временно недоступен")
+            console.log(e);
+        }
     });
 
+
+    function errorMessage(errorMessage) {
+        let message = `<li class="menuOneList pageElement menuOneBtn quote">
+                          <p>${errorMessage}</p>
+                       </li>`;
+
+        setTimeout(() => $("#menu").append(message), 100);
+    }
 
     function createLink(data, index) {
         let classes = "menuOneBtn";

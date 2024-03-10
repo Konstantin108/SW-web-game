@@ -16,7 +16,13 @@
             page: "<?= $param; ?>"
         },
         success: function (data) {
-            checkRecordsCount(data);
+            try {
+                data = JSON.parse(data);
+                checkRecordsCount(data);
+            } catch (e) {
+                errorMessage(data);
+                console.log(e);
+            }
         }
     });
 
@@ -25,13 +31,21 @@
         data.items.length ? createRecordsTable(data) : noRecordsMessageShow();
     }
 
+    function errorMessage(errorMessage) {
+        let message = `<div id="recordsPageMessageBlock" class="pageElement">
+                          <p>${errorMessage}</p>
+                       </div>`;
+
+        setTimeout(() => $("#pageContentContainer").append(message), 100);
+    }
+
     function noRecordsMessageShow() {
-        let message = `<div id="noRecordsMessageBlock" class="pageElement">
+        let message = `<div id="recordsPageMessageBlock" class="pageElement">
                           <p>таблица лидеров пуста</p>
                           <p>стань первым</p>
                        </div>`;
 
-        $("#pageContentContainer").append(message);
+        setTimeout(() => $("#pageContentContainer").append(message), 100);
     }
 
     function createRecordsTable(data) {

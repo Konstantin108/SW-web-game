@@ -3,6 +3,7 @@
 // на длину ника игрока должно быть ограничение
 include "includes/main.php";
 include "classes/PagePrepare.php";
+include "exceptions/NotFoundException.php";
 
 $pagePrepare = new PagePrepare();
 $page = "index";
@@ -28,11 +29,17 @@ if ($matches) {
 }
 
 $path = $pagePrepare->getPath($page, $directory);
-if (!file_exists($path)) {
-    $page = "404";
+
+try {
+    if (!file_exists($path)) throw new NotFoundException($page);
+} catch (NotFoundException $e) {
+    $e->writeLog();
+    $page = "error";
     $path = $pagePrepare->getPath($page);
-    http_response_code(404);
+    $code = 404;
+    http_response_code($code);
 }
+
 $content = $pagePrepare->getIncludeContents($path) ?? "";
 
 $title = $pagePrepare->getPart($content, "title");

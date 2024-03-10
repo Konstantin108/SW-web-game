@@ -1,6 +1,7 @@
-{{title: 404}}
+{{title: Ошибка}}
 
-<?php
+<?php global $code;
+$code = (string)$code;
 $quotesArray = [
     "Все на свете неизбежно стремится к будущему",
     "Исследование любой истинной аномалии может привести к научной революции, коренному изменению наших взглядов на то, что мы считаем истиной",
@@ -11,9 +12,9 @@ $quotesArray = [
 ];
 ?>
 <div id="notFoundCodeContainer">
-    <p id="firstNumber">4</p>
-    <p id="secondNumber">0</p>
-    <p id="thirdNumber">4</p>
+    <p id="firstNumber"><?= $code[0] ?></p>
+    <p id="secondNumber"><?= $code[1] ?></p>
+    <p id="thirdNumber"><?= $code[2] ?></p>
 </div>
 <div id="quoteContainer">
     <p class="pageElement quote"><?= $quotesArray[array_rand($quotesArray)]; ?></p>

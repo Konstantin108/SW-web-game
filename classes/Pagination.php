@@ -28,6 +28,7 @@ class Pagination
 
     /**
      * @return mixed
+     * @throws DbException
      */
     public function getTotal(): mixed
     {
@@ -36,6 +37,7 @@ class Pagination
 
     /**
      * @return float
+     * @throws DbException
      */
     public function getPagesCount(): float
     {
@@ -44,6 +46,7 @@ class Pagination
 
     /**
      * @return int
+     * @throws DbException
      */
     public function getPageNumber(): int
     {
@@ -58,6 +61,7 @@ class Pagination
 
     /**
      * @return float|int
+     * @throws DbException
      */
     public function getElemFromNumber(): float|int
     {
@@ -66,6 +70,7 @@ class Pagination
 
     /**
      * @return array|void
+     * @throws DbException
      */
     public function getElemsOnCurrentPage()
     {
@@ -74,6 +79,7 @@ class Pagination
 
     /**
      * @return array
+     * @throws DbException
      */
     #[ArrayShape(["items" => "array|void", "page" => "int", "max" => "int", "path" => "string"])] public function getPage(): array
     {

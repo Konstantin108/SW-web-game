@@ -27,6 +27,7 @@ abstract class Repository
 
     /**
      * @return mixed|null
+     * @throws DbException
      */
     public function getCount(): mixed
     {
@@ -38,6 +39,7 @@ abstract class Repository
      * @param int $from
      * @param int $elemsOnPage
      * @return bool|array|null
+     * @throws DbException
      */
     public function getAllRows(int $from, int $elemsOnPage): bool|array|null
     {

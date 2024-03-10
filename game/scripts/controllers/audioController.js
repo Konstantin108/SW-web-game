@@ -64,7 +64,7 @@ export const audioController = {
 
     play(audio) {
         let promise = audio.play();
-        promise.then().catch(error => console.log(error));
+        promise.then().catch(e => console.log(e));
     },
 
     playSoundEffect(key) {

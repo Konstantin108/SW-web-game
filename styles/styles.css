@@ -234,7 +234,7 @@ main {
   padding-bottom: 10px;
 }
 
-#noRecordsMessageBlock {
+#recordsPageMessageBlock {
   font-family: Ubuntu;
   display: flex;
   flex-direction: column;
