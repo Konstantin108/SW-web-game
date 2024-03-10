@@ -5,7 +5,7 @@ define("DRIVER", "mysql");
 define("HOST", "localhost");
 define("DB", "spaceshooter");
 define("CHARSET", "UTF8");
-define("USER", "root");
+define("USER", "rootfd");
 define("PASSWORD", "");
 
 define("AJAX_TRANSITION", true);
