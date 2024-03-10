@@ -5,7 +5,7 @@ include "../repositories/Repository.php";
 include "../repositories/RecordRepository.php";
 include "../classes/Pagination.php";
 
-$recordRepository = new RecordRepository;
+$recordRepository = new RecordRepository();
 $slug = "records/";
 $recordsOnPage = 5;
 $recordsPageNumber = 1;

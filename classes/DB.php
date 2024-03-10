@@ -1,5 +1,4 @@
 <?php
-// добавить spl_autoload_register и избавиться от include
 include __DIR__ . "/../traits/SingletonTrait.php";
 
 use JetBrains\PhpStorm\ArrayShape;
@@ -15,7 +14,7 @@ class DB
     private string $charset;
     private string $user;
     private string $password;
-    private object $connection;
+    private PDO $connection;
 
     private function __construct()
     {
@@ -40,8 +39,8 @@ class DB
                     $this->password,
                     $this->getOptions()
                 );
-            } catch (Exception $error) {
-                die($error);
+            } catch (Exception $e) {
+                die($e);
             }
         }
         return $this->connection;
@@ -75,25 +74,25 @@ class DB
     /**
      * @param string $sql
      * @param array $params
-     * @return bool|PDOStatement
+     * @return bool|PDOStatement|null
      */
-    private function query(string $sql, array $params = []): bool|PDOStatement
+    private function exec(string $sql, array $params = []): bool|PDOStatement|null
     {
         $PDOStatement = $this->getConnection()->prepare($sql);
-        $PDOStatement->execute($params);
-        return $PDOStatement;
+        return $PDOStatement->execute($params)
+            ? $PDOStatement
+            : null;
     }
 
     /**
      * @param string $sql
-     * @param array $params
      * @return mixed|null
      */
-    public function getData(string $sql, array $params = []): mixed
+    public function getRowsCount(string $sql): mixed
     {
-        $PDOStatement = $this->query($sql, $params);
+        $PDOStatement = $this->exec($sql);
         return $PDOStatement
-            ? $PDOStatement->fetch()
+            ? $PDOStatement->fetchColumn()
             : null;
     }
 
@@ -102,9 +101,9 @@ class DB
      * @param array $params
      * @return bool|array|null
      */
-    public function getDataAsArray(string $sql, array $params = []): bool|array|null
+    public function query(string $sql, array $params = []): bool|array|null
     {
-        $PDOStatement = $this->query($sql, $params);
+        $PDOStatement = $this->exec($sql, $params);
         return $PDOStatement
             ? $PDOStatement->fetchAll()
             : null;

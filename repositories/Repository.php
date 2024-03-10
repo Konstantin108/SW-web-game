@@ -26,12 +26,12 @@ abstract class Repository
     }
 
     /**
-     * @return mixed
+     * @return mixed|null
      */
     public function getCount(): mixed
     {
-        $sql = "SELECT COUNT(*) AS count FROM `{$this->getTableName()}`;";
-        return $this->getDB()->getData($sql)["count"];
+        $sql = "SELECT COUNT(*) FROM `{$this->getTableName()}`;";
+        return $this->getDB()->getRowsCount($sql);
     }
 
     /**
@@ -49,6 +49,6 @@ abstract class Repository
             $from,
             $elemsOnPage
         );
-        return $this->getDB()->getDataAsArray($sql);
+        return $this->getDB()->query($sql);
     }
 }

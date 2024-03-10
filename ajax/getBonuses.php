@@ -5,7 +5,7 @@ include "../repositories/Repository.php";
 include "../repositories/BonusRepository.php";
 include "../classes/Pagination.php";
 
-$bonusRepository = new BonusRepository;
+$bonusRepository = new BonusRepository();
 $slug = "tips/bonuses/";
 $bonusesOnPage = 5;
 $bonusesPageNumber = 1;

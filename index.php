@@ -4,7 +4,7 @@
 include "includes/main.php";
 include "classes/PagePrepare.php";
 
-$pagePrepare = new PagePrepare;
+$pagePrepare = new PagePrepare();
 $page = "index";
 $directory = null;
 $param = null;
@@ -31,7 +31,7 @@ $path = $pagePrepare->getPath($page, $directory);
 if (!file_exists($path)) {
     $page = "404";
     $path = $pagePrepare->getPath($page);
-    header("HTTP/1.0 404 Not Found");
+    http_response_code(404);
 }
 $content = $pagePrepare->getIncludeContents($path) ?? "";
 

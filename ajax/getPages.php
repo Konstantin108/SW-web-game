@@ -2,7 +2,7 @@
 include "../includes/main.php";
 include "../classes/PagePrepare.php";
 
-$pagePrepare = new PagePrepare;
+$pagePrepare = new PagePrepare();
 
 $excludedPagesArray = [
     "index.php",
