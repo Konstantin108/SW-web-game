@@ -11,10 +11,10 @@ $quotesArray = [
     "Третий закон Ньютона. Единственный известный людям способ куда-то попасть — это оставить что-то позади»"
 ];
 ?>
-<div id="notFoundCodeContainer">
-    <p id="firstNumber"><?= $code[0] ?></p>
-    <p id="secondNumber"><?= $code[1] ?></p>
-    <p id="thirdNumber"><?= $code[2] ?></p>
+<div id="errorCodeContainer">
+    <p id="firstNumber"><?= $code[0]; ?></p>
+    <p id="secondNumber"><?= $code[1]; ?></p>
+    <p id="thirdNumber"><?= $code[2]; ?></p>
 </div>
 <div id="quoteContainer">
     <p class="pageElement quote"><?= $quotesArray[array_rand($quotesArray)]; ?></p>

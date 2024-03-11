@@ -5,6 +5,7 @@ class DbException extends AbstractException
 {
     protected string $errorMessage;
     protected string $messageForUsers;
+    protected string $messageToConsole;
 
     /**
      * @param string $errorMessage
@@ -14,7 +15,8 @@ class DbException extends AbstractException
         Exception::__construct("Проблема с БД $errorMessage");
         parent::__construct("../");
         $this->errorMessage = $errorMessage;
-        $this->messageForUsers = "cервис временно недоступен";
+        $this->messageForUsers = "сервис временно недоступен";
+        $this->messageToConsole = "проблема с подключением к БД";
     }
 
     /**
@@ -23,5 +25,13 @@ class DbException extends AbstractException
     public function getMessageForUsers(): string
     {
         return $this->messageForUsers;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageToConsole(): string
+    {
+        return $this->messageToConsole;
     }
 }

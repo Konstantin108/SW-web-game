@@ -18,10 +18,15 @@
         success: function (data) {
             try {
                 data = JSON.parse(data);
-                checkRecordsCount(data);
+                if (!data.hasOwnProperty("fail")) {
+                    checkRecordsCount(data);
+                } else {
+                    errorMessage(data.messageForUsers);
+                    console.log(data.messageToConsole)
+                }
             } catch (e) {
-                errorMessage(data);
-                console.log(e);
+                errorMessage("сервис временно недоступен");
+                console.log("получен невалидный JSON");
             }
         }
     });

@@ -7,8 +7,8 @@
             data = JSON.parse(data);
             if (data) setTimeout(() => createLink(data, 0), 100);
         } catch (e) {
-            errorMessage("cервис временно недоступен")
-            console.log(e);
+            errorMessage("сервис временно недоступен")
+            console.log("получен невалидный JSON");
         }
     });
 

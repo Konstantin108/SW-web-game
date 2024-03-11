@@ -365,7 +365,7 @@ tr {
   font-size: 25px;
 }
 
-#notFoundCodeContainer {
+#errorCodeContainer {
   position: absolute;
   top: -350px;
   left: -450px;

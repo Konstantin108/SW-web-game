@@ -16,10 +16,15 @@ include "views/components/tipsMenu.php";
             success: function (data) {
                 try {
                     data = JSON.parse(data);
-                    console.log(data);
+                    if (!data.hasOwnProperty("fail")) {
+                        console.log(data);
+                    } else {
+                        errorMessage(data.messageForUsers);
+                        console.log(data.messageToConsole)
+                    }
                 } catch (e) {
-                    console.log(data);
-                    console.log(e);
+                    errorMessage("сервис временно недоступен");
+                    console.log("получен невалидный JSON");
                 }
             }
         });
