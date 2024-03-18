@@ -8,8 +8,8 @@ import {boss} from "../objects/boss.js";
 import {progressController} from "../controllers/progressController.js";
 
 export class Arrow {
-    static id = 0;
-    id = Arrow.id++;
+    static id = 0;  // возможно изменить свойство
+    id = Arrow.id++;  // возможно использовать self или this
     selectorName = "arrow";
     x = player.x;
     y = player.y - 1;

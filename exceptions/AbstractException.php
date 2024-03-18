@@ -21,9 +21,10 @@ abstract class AbstractException extends Exception
     public function writeLog(): void
     {
         if ($this->writelog) {
-            $dateTime = new DateTime();
-            $text = $dateTime->format("Y-m-d H:i:s")
-                . " --------------------------------------------"
+            $text = PHP_EOL
+                . ">>>>>> "
+                . date("Y-m-d H:i:s")
+                . " ----------------------------------------"
                 . PHP_EOL
                 . $this->__toString()
                 . PHP_EOL;
