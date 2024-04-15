@@ -64,7 +64,7 @@ class DB
     /**
      * @return array
      */
-    #[ArrayShape([PDO::ATTR_ERRMODE => "int", PDO::ATTR_DEFAULT_FETCH_MODE => "int"])]
+    #[ArrayShape(shape: [PDO::ATTR_ERRMODE => "int", PDO::ATTR_DEFAULT_FETCH_MODE => "int"])]
     private function getOptions(): array
     {
         return [

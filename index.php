@@ -21,8 +21,7 @@ if ($matches) {
         }
     }
     if (count($matches) > 1) {
-        $page = $matches[1];
-        $directory = $matches[0];
+        [$directory, $page] = $matches;
     } else {
         $page = $matches[0];
     }

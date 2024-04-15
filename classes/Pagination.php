@@ -81,7 +81,7 @@ class Pagination
      * @return array
      * @throws DbException
      */
-    #[ArrayShape(["items" => "array|void", "page" => "int", "max" => "int", "path" => "string"])]
+    #[ArrayShape(shape: ["items" => "array|void", "page" => "int", "max" => "int", "path" => "string"])]
     public function getPage(): array
     {
         return [

@@ -22,8 +22,8 @@ foreach ($tips as $tip) {
     ];
 }
 
-usort($result, function ($a, $b) {
-    return ($a["priority"] - $b["priority"]);
+usort($result, function ($accumulator, $item): mixed {
+    return ($accumulator["priority"] - $item["priority"]);
 });
 ?>
 <nav>
