@@ -5,9 +5,8 @@ export class ArrowTrinity extends Arrow {
     constructor(x) {
         super();
         this.x = x;
+        this.selectorName = "arrow-trinity";
+        this.damage = config.arrowTrinityDamage * config.power;
+        this.speed = config.arrowTrinitySpeed;
     }
-
-    selectorName = "arrow-trinity";
-    damage = config.arrowTrinityDamage * config.power;
-    speed = config.arrowTrinitySpeed;
 }

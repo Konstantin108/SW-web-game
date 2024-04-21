@@ -7,20 +7,7 @@ import {crashChecker} from "../objects/crashChecker.js";
 import {enemyArrowController} from "../controllers/enemyArrowController.js";
 
 export class Blockage {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    lives = config.blockageLives;
-    shipDestroyedReward = config.blockageShipDestroyedRewards;
-    speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
-    crashDamage = config.blockageCrashDamage;
-    missReward = config.missReward;
-    selectorName = "blockage";
-    getDamageOutlookSelectorName = "blockageWhite";
-    arrowTypeSelectorName = "enemyArrow";
-    thisSelectorOverlay = [
+    static thisSelectorOverlay = [
         "drill",
         "trinity",
         "shield",
@@ -28,7 +15,20 @@ export class Blockage {
         "killAll"
     ];
 
-    shoot(arrowTypeSelectorName, x_pos, y_pos) {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.lives = config.blockageLives;
+        this.shipDestroyedReward = config.blockageShipDestroyedRewards;
+        this.speed = helperController.getRandomInt(progressController.maxBlockageSpeed, progressController.minBlockageSpeed);
+        this.crashDamage = config.blockageCrashDamage;
+        this.missReward = config.missReward;
+        this.selectorName = "blockage";
+        this.getDamageOutlookSelectorName = "blockageWhite";
+        this.arrowTypeSelectorName = "enemyArrow";
+    }
+
+    static #shoot(arrowTypeSelectorName, x_pos, y_pos) {
         if (helperController.randomEvent(progressController.fireChance)) {
             return {
                 arrowType: arrowTypeSelectorName,
@@ -58,7 +58,7 @@ export class Blockage {
                 this.x = x_pos;
             }
             if (this.y > 1) {
-                enemyArrowController.enemyArrowCreate(this.shoot(this.arrowTypeSelectorName, x_pos, y_pos));
+                enemyArrowController.enemyArrowCreate(Blockage.#shoot(this.arrowTypeSelectorName, x_pos, y_pos));
                 enemyArrowController.enemyArrowMove();
             }
         } else if (y_pos === config.mapSizeY + 1) {
@@ -72,7 +72,7 @@ export class Blockage {
             renderer.renderStatusBar();
         }
         renderer.clear(this.selectorName);
-        renderer.renderMovingObjects(blockageController.blockagesArray, this.thisSelectorOverlay);
+        renderer.renderMovingObjects(blockageController.blockagesArray, Blockage.thisSelectorOverlay);
         crashChecker.crashCheck(blockageController.blockagesArray, true);
         progressController.progress();
     }

@@ -8,26 +8,26 @@ import {helperController} from "../controllers/helperController.js";
 import {touchController} from "../controllers/touchController.js";
 
 export class Bonus {
+    static #id = 0;
+    static thisSelectorOverlay = [
+        "enemyArrow"
+    ];
+
     constructor(objectType, actionTime, x, y) {
+        this.id = Bonus.#id++;
         this.objectType = objectType;
         this.actionTime = actionTime;
         this.selectorName = objectType.name;
         this.x = x;
         this.y = y;
+        this.speed = config.bonuses.bonusSpeed;
+        this.picked_x = null;
+        this.picked_y = null;
+        this.timerId = null;  // id таймера интервала для метода makeStep()
+        this.timeBonusCanMakeStepTimerId = null;  // id таймера отсчёта времени до удаления interval для отключения makeStep()
     }
 
-    static id = 0;
-    id = Bonus.id++;
-    thisSelectorOverlay = [
-        "enemyArrow"
-    ];
-    speed = config.bonuses.bonusSpeed;
-    picked_x = null;
-    picked_y = null;
-    timerId = null;  // id таймера интервала для метода makeStep()
-    timeBonusCanMakeStepTimerId = null;  // id таймера отсчёта времени до удаления interval для отключения makeStep()
-
-    step() {
+    #step() {
         if (!game.gameIsRunning) return;
         let y_pos = this.y;
         y_pos += 1;
@@ -40,15 +40,15 @@ export class Bonus {
             this.remove();
         }
         renderer.clear(this.selectorName);
-        renderer.renderMovingObjects(bonusController.bonusesArray, this.thisSelectorOverlay);
+        renderer.renderMovingObjects(bonusController.bonusesArray, Bonus.thisSelectorOverlay);
         this.getBonus(this.picked());
         renderer.renderPlayer();
 
-        if (helperController.randomEvent(60)) this.removeStuckBonus(bonusController.bonusesArray);
+        if (helperController.randomEvent(60)) Bonus.#removeStuckBonus(bonusController.bonusesArray);
     }
 
     makeStep() {
-        this.timerId = setInterval(() => this.step(), this.speed);
+        this.timerId = setInterval(() => this.#step(), this.speed);
     }
 
     makeStepOff() {
@@ -74,12 +74,12 @@ export class Bonus {
 
     getBonus(bonus) {
         if (bonus) {
-            this.setNewPropertiesForPlayer(bonus.objectType);
+            this.#setNewPropertiesForPlayer(bonus.objectType);
             renderer.renderPlayer();
         }
     }
 
-    setNewPropertiesForPlayer(bonus) {
+    #setNewPropertiesForPlayer(bonus) {
         if (bonus.playerArrowType) {
             renderer.clear(player.selectorName);
             player.selectorName = bonus.playerOutlook;
@@ -87,9 +87,9 @@ export class Bonus {
             player.bonusObjectNewArrowType = bonus;
             player.bonusNewArrowTypeIsActivated = true;
             renderer.renderBonusBarElement("newArrowTypeBar", bonus, this.actionTime);
-            this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId, player.calculateTimeInBonusNewArrowTypeOffTimerId);
-            this.newPropertiesForPlayerOffCall(bonus);
-            this.calculateTimeInBonusOff(this.actionTime / 1000, "newArrowType");
+            Bonus.#newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId, player.calculateTimeInBonusNewArrowTypeOffTimerId);
+            this.#newPropertiesForPlayerOffCall(bonus);
+            this.#calculateTimeInBonusOff(this.actionTime / 1000, "newArrowType");
             touchController.autoShootOn(true);
         }
         if (bonus.playerExtraOutlook) {
@@ -97,15 +97,15 @@ export class Bonus {
             player.bonusObjectShield = bonus;
             player.bonusShieldIsActivated = true;
             renderer.renderBonusBarElement("shieldBar", bonus, this.actionTime);
-            this.newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId, player.calculateTimeInBonusShieldOffTimerId);
-            this.newPropertiesForPlayerOffCall(bonus);
-            this.calculateTimeInBonusOff(this.actionTime / 1000, "shield");
+            Bonus.#newPropertiesForPlayerOffCallCancel(player.bonusShieldIsActivatedTimerId, player.calculateTimeInBonusShieldOffTimerId);
+            this.#newPropertiesForPlayerOffCall(bonus);
+            this.#calculateTimeInBonusOff(this.actionTime / 1000, "shield");
         }
         if (bonus.name === "life") bonusController.getLife();
         if (bonus.name === "killAll") bonusController.getBomb();
     }
 
-    newPropertiesForPlayerOff(bonus) {
+    #newPropertiesForPlayerOff(bonus) {
         if (bonus.playerArrowType) {
             renderer.clear(player.selectorName);
             player.selectorName = "player";
@@ -133,19 +133,19 @@ export class Bonus {
         }
     }
 
-    newPropertiesForPlayerOffCall(bonus) {
-        let timerId = setTimeout(() => this.newPropertiesForPlayerOff(bonus), this.actionTime);
+    #newPropertiesForPlayerOffCall(bonus) {
+        let timerId = setTimeout(() => this.#newPropertiesForPlayerOff(bonus), this.actionTime);
         bonus.playerArrowType
             ? player.bonusNewArrowTypeIsActivatedTimerId = timerId
             : player.bonusShieldIsActivatedTimerId = timerId;
     }
 
-    newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId, calculateTimeInBonusOffTimerId) {
+    static #newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId, calculateTimeInBonusOffTimerId) {
         if (bonusIsActivatedTimerId) clearTimeout(bonusIsActivatedTimerId);
         if (calculateTimeInBonusOffTimerId) clearTimeout(calculateTimeInBonusOffTimerId);
     }
 
-    calculateTimeInBonusOff(bonusActionTime, calculateTimeInBonusOffType) {
+    #calculateTimeInBonusOff(bonusActionTime, calculateTimeInBonusOffType) {
         let calculateTimeInBonusOffTimerId = null;
         let tick = -1;
 
@@ -153,7 +153,7 @@ export class Bonus {
 
         if (bonusActionTime > 0) {
             calculateTimeInBonusOffTimerId = setTimeout(() => {
-                return this.calculateTimeInBonusOff(bonusActionTime += tick, calculateTimeInBonusOffType);
+                return this.#calculateTimeInBonusOff(bonusActionTime += tick, calculateTimeInBonusOffType);
             }, 1000);
         }
         if (calculateTimeInBonusOffType === "newArrowType") {
@@ -165,7 +165,7 @@ export class Bonus {
         }
     }
 
-    removeStuckBonus(bonusesArray) {
+    static #removeStuckBonus(bonusesArray) {
         for (let i = 0; i <= bonusesArray.length; i++) {
             if (bonusesArray[i]) {
                 let lastBonusInArray = bonusesArray.at(-1);
@@ -179,7 +179,7 @@ export class Bonus {
     remove(forceRemove = false) {
         let bonusesArray = bonusController.bonusesArray;
 
-        this.removeStuckBonus(bonusesArray);
+        Bonus.#removeStuckBonus(bonusesArray);
         for (let i = 0; i <= bonusesArray.length; i++) {
             if (bonusesArray[i]) {
                 if (bonusesArray[i].y >= config.mapSizeY || forceRemove) {

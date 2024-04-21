@@ -8,18 +8,21 @@ import {boss} from "../objects/boss.js";
 import {progressController} from "../controllers/progressController.js";
 
 export class Arrow {
-    static id = 0;  // возможно изменить свойство
-    id = Arrow.id++;  // возможно использовать self или this
-    selectorName = "arrow";
-    x = player.x;
-    y = player.y - 1;
-    damage = config.arrowDamage * config.power;
-    speed = config.arrowSpeed;
-    penetration = config.arrowPenetration;
-    hit_x = null;
-    hit_y = null;
+    static #id = 0;
 
-    step() {
+    constructor() {
+        this.id = Arrow.#id++;
+        this.selectorName = "arrow";
+        this.x = player.x;
+        this.y = player.y - 1;
+        this.damage = config.arrowDamage * config.power;
+        this.speed = config.arrowSpeed;
+        this.penetration = config.arrowPenetration;
+        this.hit_x = null;
+        this.hit_y = null;
+    }
+
+    #step() {
         if (!game.gameIsRunning) return;
         let y_pos = this.y;
         y_pos += -1;
@@ -28,21 +31,21 @@ export class Arrow {
         } else if (y_pos === -2) {
             y_pos = -3;
             this.y = y_pos;
-            this.remove()
+            Arrow.#remove()
         }
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(arrowController.arrowsArray);
-        this.hitBossShield();
-        this.hitBoss();
-        this.hit();
+        this.#hitBossShield();
+        this.#hitBoss();
+        this.#hit();
     }
 
     makeStep() {
-        let timerId = setInterval(() => this.step(), this.speed);
+        let timerId = setInterval(() => this.#step(), this.speed);
         setTimeout(() => clearInterval(timerId), 1300);
     }
 
-    hit() {
+    #hit() {
         let blockagesArray = blockageController.blockagesArray;
 
         for (let i = 0; i < blockagesArray.length; i++) {
@@ -51,43 +54,40 @@ export class Arrow {
                 this.hit_y = this.y;
                 blockagesArray[i].getDamage(this, i, blockagesArray[i].shipDestroyedReward, 0);
                 renderer.renderStatusBar();
-                this.outFromMap();
+                this.#outFromMap();
             }
         }
-        this.hit_x = null;
-        this.hit_y = null;
     }
 
-    hitBoss() {
+    #hitBoss() {
         if (!progressController.bossExist) return;
         if (boss.bodyX.includes(this.x) && boss.y === this.y) {
             this.hit_x = this.x;
             this.hit_y = this.y;
-            this.y = -1;
             boss.getDamage(this);
-            this.remove();
+            this.#outFromMap();
         }
-        this.hit_x = null;
-        this.hit_y = null;
     }
 
-    hitBossShield() {
+    #hitBossShield() {
         if (!progressController.bossExist) return;
         if (!boss.shieldBody.x.length) return;
         if (boss.shieldBody.x.includes(this.x) && boss.shieldBody.y === Number(this.y)) {
             boss.bossShieldGetDamage(false, this);
-            this.outFromMap();
+            this.#outFromMap();
         }
     }
 
-    outFromMap() {
+    #outFromMap() {
         if (this.penetration) return;
         this.y = -1;
+        this.hit_x = null;
+        this.hit_y = null;
         renderer.clear(this.selectorName);
-        this.remove();
+        Arrow.#remove();
     }
 
-    remove() {
+    static #remove() {
         let arrowsArray = arrowController.arrowsArray;
 
         for (let i = 0; i <= arrowsArray.length; i++) {

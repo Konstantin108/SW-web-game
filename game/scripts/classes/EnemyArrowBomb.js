@@ -2,7 +2,10 @@ import {EnemyArrow} from "./EnemyArrow.js";
 import {config} from "../config/config.js";
 
 export class EnemyArrowBomb extends EnemyArrow {
-    selectorName = "enemyArrowBomb";
-    damage = config.enemyArrowBombDamage;
-    speed = config.enemyArrowBombSpeed;
+    constructor(x, y) {
+        super(x, y);
+        this.selectorName = "enemyArrowBomb";
+        this.damage = config.enemyArrowBombDamage;
+        this.speed = config.enemyArrowBombSpeed;
+    }
 }

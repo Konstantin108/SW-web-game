@@ -1,30 +1,8 @@
 import {helperController} from "../../controllers/helperController.js";
 
 export class Meteor {
-    constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
-        this.x = x;
-        this.y = y;
-        this.canvasHeight = canvasHeight;
-        this.context = context;
-        this.degree = 0;
-        this.directionInDegree = helperController.getRandomDirectionOfRotation(50);
-
-        this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
-
-        this.image = new Image();
-        this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
-        this.imageWidth = this.size;
-        this.imageHeight = this.size;
-
-        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
-        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
-
-        this.possiblePositionsOnYMin = possiblePositionsOnY.min;
-        this.possiblePositionsOnYMax = possiblePositionsOnY.max;
-    }
-
-    type = "meteor";
-    imageNames = [
+    static #type = "meteor";
+    static #imageNames = [
         "left-comet",
         "left-comet2",
         "left-comet3",
@@ -37,7 +15,7 @@ export class Meteor {
         "rock2",
         "rock3",
     ];
-    noRotateNames = [
+    static #noRotateNames = [
         "left-comet",
         "left-comet2",
         "left-comet3",
@@ -45,46 +23,67 @@ export class Meteor {
         "right-comet2",
         "right-comet3"
     ];
-    maxSize = 60;
-    minSize = 40;
-    appearanceChance = 5;
+    static #maxSize = 60;
+    static #minSize = 40;
+    static #appearanceChance = 5;
+    static #speedLimit = 20;
 
-    size = helperController.getRandomInt(this.minSize, this.maxSize);
+    constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
+        this.x = x;
+        this.y = y;
+        this.canvasHeight = canvasHeight;
+        this.context = context;
+        this.degree = 0;
+        this.directionInDegree = helperController.getRandomDirectionOfRotation(50);
 
-    speedLimit = 20;
-    speed = this.speedLimit / this.size;
+        this.imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
 
-    selfRotate() {
+        this.size = helperController.getRandomInt(Meteor.#minSize, Meteor.#maxSize);
+        this.speed = Meteor.#speedLimit / this.size;
+
+        this.image = new Image();
+        this.image.src = `./src/images/${Meteor.#type}-${this.imageName}.png`;
+        this.imageWidth = this.size;
+        this.imageHeight = this.size;
+
+        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
+
+        this.possiblePositionsOnYMin = possiblePositionsOnY.min;
+        this.possiblePositionsOnYMax = possiblePositionsOnY.max;
+    }
+
+    #selfRotate() {
         this.degree += this.directionInDegree;
 
         this.context.save();
         this.context.translate(this.x, this.y);
-        if (!this.noRotateNames.includes(this.imageName)) this.context.rotate(this.degree + Math.PI / 180);
+        if (!Meteor.#noRotateNames.includes(this.imageName)) this.context.rotate(this.degree + Math.PI / 180);
         this.context.translate(-this.x, -this.y);
         this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
         this.context.restore();
     }
 
     draw() {
-        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(this.appearanceChance)) return;
+        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(Meteor.#appearanceChance)) return;
 
-        this.selfRotate();
+        this.#selfRotate();
 
         if (this.y > this.canvasHeight) {
             this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
-            this.size = helperController.getRandomInt(this.minSize, this.maxSize);
+            this.size = helperController.getRandomInt(Meteor.#minSize, Meteor.#maxSize);
             this.y = -this.size;
 
-            this.speed = this.speedLimit / this.size;
+            this.speed = Meteor.#speedLimit / this.size;
 
-            this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
+            this.imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
 
             this.image = new Image();
-            this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
+            this.image.src = `./src/images/${Meteor.#type}-${this.imageName}.png`;
             this.imageWidth = this.size;
             this.imageHeight = this.size;
 
-            if (this.noRotateNames.includes(this.imageName)) {
+            if (Meteor.#noRotateNames.includes(this.imageName)) {
                 if (helperController.randomEvent(50)) {
                     this.y = helperController.getRandomInt(this.possiblePositionsOnYMin, this.possiblePositionsOnYMax);
                     if (this.imageName.split("-")[0] === "left") this.x = this.possiblePositionsOnXMax;
@@ -93,7 +92,7 @@ export class Meteor {
             }
 
         } else {
-            if (!this.noRotateNames.includes(this.imageName)) this.y += this.speed;
+            if (!Meteor.#noRotateNames.includes(this.imageName)) this.y += this.speed;
             if (this.imageName.split("-")[0] === "left") {
                 this.y += this.speed * 20;
                 this.x += -this.speed * 20;
