@@ -34,7 +34,9 @@ export const explosion = {
         }
 
         for (let i = 0; i < blockagesArray.length; i++) {
-            if (blockagesArray[i].y >= 0) progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8, dontCountKilledEnemies);
+            if (blockagesArray[i].y >= 0) {
+                progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -8, dontCountKilledEnemies);
+            }
         }
         renderer.renderExplosion();
         renderer.renderStatusBar();

@@ -144,6 +144,7 @@ export const progressController = {
     },
 
     newLevelEntry(blockagesCount) {
+        if (game.gameOver) return;
         let message = `level ${this.level}`;
         let playerCantStopGameTime = 2000;
 

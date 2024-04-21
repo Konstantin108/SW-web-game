@@ -90,7 +90,7 @@ export class Bonus {
             this.newPropertiesForPlayerOffCallCancel(player.bonusNewArrowTypeIsActivatedTimerId, player.calculateTimeInBonusNewArrowTypeOffTimerId);
             this.newPropertiesForPlayerOffCall(bonus);
             this.calculateTimeInBonusOff(this.actionTime / 1000, "newArrowType");
-            touchController.autoShoot();
+            touchController.autoShootOn(true);
         }
         if (bonus.playerExtraOutlook) {
             player.extraSelectorName = bonus.playerExtraOutlook;
@@ -119,7 +119,7 @@ export class Bonus {
             cheatsController.activatedCheatsParamsDataTempArray.delete("trinity");
             cheatsController.removeCheatNameFromGameConfig("getDrill");
             cheatsController.removeCheatNameFromGameConfig("getTrinity");
-            touchController.autoShoot();
+            touchController.autoShootOn(true);
         }
         if (bonus.playerExtraOutlook) {
             renderer.clear(player.extraSelectorName);

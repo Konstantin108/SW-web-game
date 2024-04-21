@@ -66,9 +66,9 @@ export class Meteor {
     }
 
     draw() {
-        this.selfRotate();
-
         if (this.y === -this.size && helperController.randomAppearanceCelestialBody(this.appearanceChance)) return;
+
+        this.selfRotate();
 
         if (this.y > this.canvasHeight) {
             this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);

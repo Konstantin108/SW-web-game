@@ -14,6 +14,11 @@ export const crashChecker = {
     y: null,
 
     crashCheck(dangerArray, createNewBlockage = false) {
+        if (player.invincibility) return;
+        if (player.bonusShieldIsActivated) return;
+        if (boss.bossAnimationIsRunningNow) return;
+        if (!game.playerCanStopGame) return;
+
         let blockageTypes = blockageController.blockageTypesProvider();
         let blockageType = blockageController.blockageCreateOneUnit();
 
@@ -21,10 +26,6 @@ export const crashChecker = {
             if (dangerArray[i].x === player.x && dangerArray[i].y === player.y) {
                 this.x = player.x;
                 this.y = player.y;
-                if (player.invincibility) return;
-                if (player.bonusShieldIsActivated) return;
-                if (boss.bossAnimationIsRunningNow) return;
-                renderer.renderCrash();
                 if (createNewBlockage) dangerArray[i] = new blockageTypes[blockageType](helperController.getRandomInt(0, config.mapSizeX), 0);
                 dangerArray[i].crashDamage
                     ? player.lives += -dangerArray[i].crashDamage
@@ -37,6 +38,7 @@ export const crashChecker = {
                     player.lives = 0;
                     game.over();
                 }
+                renderer.renderCrash();
                 renderer.renderPlayer();
                 renderer.renderStatusBar();
                 renderer.renderHeartScaleAnimation();

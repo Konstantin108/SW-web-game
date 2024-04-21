@@ -9,6 +9,7 @@ import {progressController} from "../controllers/progressController.js";
 import {arrowController} from "../controllers/arrowController.js";
 import {game} from "../game.js";
 import {boss} from "./boss.js";
+import {touchController} from "../controllers/touchController.js";
 
 export const player = {
     lives: config.lives,
@@ -135,6 +136,7 @@ export const player = {
 
         document.addEventListener("keydown", function (event) {
             if (isPressBtn) return;
+            if (touchController.autoShootIsOnNow) return;
             if (!shootBtnsArray.includes(event.code)) return;
             player.shoot();
             isPressBtn = true;

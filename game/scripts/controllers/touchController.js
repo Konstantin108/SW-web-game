@@ -14,6 +14,7 @@ export const touchController = {
     hammerBody: null,
     hammerContainer: null,
     timerId: null,
+    autoShootIsOnNow: false,
 
     hammerBodyCreate() {
         let threshold = 50;
@@ -24,14 +25,13 @@ export const touchController = {
         this.hammerBody.add(new Hammer.Pan());
 
         this.hammerBody.on("panstart", () => {
-            if (!this.timerId) this.timerId = setInterval(() => player.shoot(), this.arrowsSpeed[player.arrowType]);
+            this.autoShootOn();
             deltaX = 0;
             deltaY = 0;
         });
 
         this.hammerBody.on("panend", () => {
-            clearInterval(this.timerId);
-            this.timerId = null;
+            this.autoShootOff();
         });
 
         this.hammerBody.on("panleft", event => {
@@ -138,9 +138,18 @@ export const touchController = {
         }
     },
 
-    autoShoot() {
-        if (!this.timerId) return
-        clearInterval(this.timerId);
+    autoShootOn(changeArrowType = false) {
+        if (changeArrowType) {
+            if (!this.timerId) return
+            clearInterval(this.timerId);
+        }
         this.timerId = setInterval(() => player.shoot(), this.arrowsSpeed[player.arrowType]);
+        this.autoShootIsOnNow = true;
+    },
+
+    autoShootOff() {
+        clearInterval(this.timerId);
+        this.timerId = null;
+        this.autoShootIsOnNow = false;
     }
 }
