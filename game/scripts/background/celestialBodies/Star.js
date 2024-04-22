@@ -1,25 +1,8 @@
 import {helperController} from "../../controllers/helperController.js";
 
 export class Star {
-    constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
-        this.x = x;
-        this.y = y;
-        this.canvasHeight = canvasHeight;
-        this.context = context;
-
-        this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
-
-        this.image = new Image();
-        this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
-        this.imageWidth = this.size;
-        this.imageHeight = this.size;
-
-        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
-        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
-    }
-
-    type = "star";
-    imageNames = [
+    static #type = "star";
+    static #imageNames = [
         "blue",
         "blue2",
         "blue3",
@@ -41,31 +24,47 @@ export class Star {
         "white3",
         "yellow"
     ];
-    maxSize = 14;
-    minSize = 3;
-    appearanceChance = 300;
+    static #maxSize = 14;
+    static #minSize = 3;
+    static #appearanceChance = 300;
+    static #speedLimit = 10;
 
-    size = helperController.getRandomInt(this.minSize, this.maxSize);
+    constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
+        this.x = x;
+        this.y = y;
+        this.canvasHeight = canvasHeight;
+        this.context = context;
 
-    speedLimit = 10;
-    speed = this.speedLimit / this.size;
+        this.imageName = helperController.getRandomElementAndIndexInArray(Star.#imageNames).element;
+
+        this.size = helperController.getRandomInt(Star.#minSize, Star.#maxSize);
+        this.speed = Star.#speedLimit / this.size;
+
+        this.image = new Image();
+        this.image.src = `./src/images/${Star.#type}-${this.imageName}.png`;
+        this.imageWidth = this.size;
+        this.imageHeight = this.size;
+
+        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
+    }
 
     draw() {
-        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(this.appearanceChance)) return;
+        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(Star.#appearanceChance)) return;
 
         this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
 
         if (this.y > this.canvasHeight) {
             this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
-            this.size = helperController.getRandomInt(this.minSize, this.maxSize);
+            this.size = helperController.getRandomInt(Star.#minSize, Star.#maxSize);
             this.y = -this.size;
 
-            this.speed = this.speedLimit / this.size;
+            this.speed = Star.#speedLimit / this.size;
 
-            this.imageName = helperController.getRandomElementAndIndexInArray(this.imageNames).element;
+            this.imageName = helperController.getRandomElementAndIndexInArray(Star.#imageNames).element;
 
             this.image = new Image();
-            this.image.src = `./src/images/${this.type}-${this.imageName}.png`;
+            this.image.src = `./src/images/${Star.#type}-${this.imageName}.png`;
             this.imageWidth = this.size;
             this.imageHeight = this.size;
 
