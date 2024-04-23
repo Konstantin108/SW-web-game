@@ -239,7 +239,7 @@ export const cheats = {
             {
                 name: "enemyArrowsObjects",
                 code: "dbgenmarrows",
-                message: "enemy arrows show ",
+                message: "enemies' arrows show ",
                 type: "toggleCheat",
                 scope: [
                     "config"

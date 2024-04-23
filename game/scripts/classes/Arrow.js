@@ -24,15 +24,8 @@ export class Arrow {
 
     #step() {
         if (!game.gameIsRunning) return;
-        let y_pos = this.y;
-        y_pos += -1;
-        if (y_pos >= -1) {
-            this.y = y_pos;
-        } else if (y_pos === -2) {
-            y_pos = -3;
-            this.y = y_pos;
-            Arrow.#remove()
-        }
+        this.y += -1;
+        if (this.y <= -2) Arrow.#remove();
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(arrowController.arrowsArray);
         this.#hitBossShield();

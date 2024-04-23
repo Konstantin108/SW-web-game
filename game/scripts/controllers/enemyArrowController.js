@@ -4,6 +4,7 @@ import {config} from "../config/config.js";
 import {debugPanel} from "../objects/debugPanel.js";
 
 export const enemyArrowController = {
+    debugElementName: "enemyArrowsObjects",
     arrowTypes: {
         enemyArrow: EnemyArrow,
         enemyArrowBomb: EnemyArrowBomb
@@ -21,7 +22,7 @@ export const enemyArrowController = {
         let enemyArrow = this.enemyArrowsArray.at(-1);
         enemyArrow.makeStep();
         if (config.debugEnemyArrowsObjectsShow) {
-            debugPanel.objectsInfoShow("playerArrowsObjects", this.enemyArrowsArray, true);
+            debugPanel.objectsInfoShow(this.debugElementName, this.enemyArrowsArray, true);
         }
     }
 }

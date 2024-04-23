@@ -8,6 +8,7 @@ import {tooltipController} from "./tooltipController.js";
 
 export const bonusController = {
     useBombBtnShowDelaySeconds: config.useBombBtnShowDelaySeconds,
+    debugElementName: "bonusesObjects",
     bonusesArray: [],
     bonusAppearanceListenerTimerId: null,
 
@@ -93,7 +94,7 @@ export const bonusController = {
         bonus.makeStep();
         bonus.makeStepOff();
         if (config.debugBonusesObjectsShow) {
-            debugPanel.objectsInfoShow("bonusesObjects", this.bonusesArray, true);
+            debugPanel.objectsInfoShow(this.debugElementName, this.bonusesArray, true);
         }
     }
 }

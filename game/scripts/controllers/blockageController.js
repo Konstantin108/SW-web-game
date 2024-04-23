@@ -6,6 +6,7 @@ import {progressController} from "./progressController.js";
 import {debugPanel} from "../objects/debugPanel.js";
 
 export const blockageController = {
+    debugElementName: "blockagesObjects",
     blockageTypes: {
         blockage: Blockage,
         blockageBull: BlockageBull
@@ -49,7 +50,7 @@ export const blockageController = {
             this.blockageTimerIdsArray.push(setInterval(() => blockagesArray[i].step(), blockagesArray[i].speed));
         }
         if (config.debugBlockagesObjectsShow) {
-            debugPanel.objectsInfoShow("blockagesObjects", blockagesArray, true);
+            debugPanel.objectsInfoShow(this.debugElementName, blockagesArray, true);
         }
     }
 }

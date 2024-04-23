@@ -6,6 +6,7 @@ import {config} from "../config/config.js";
 import {debugPanel} from "../objects/debugPanel.js";
 
 export const arrowController = {
+    debugElementName: "playerArrowsObjects",
     arrowTypes: {
         "arrow": Arrow,
         "arrow-drill": ArrowDrill,
@@ -32,7 +33,7 @@ export const arrowController = {
             if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
         }
         if (config.debugPlayerArrowsObjectsShow) {
-            debugPanel.objectsInfoShow("playerArrowsObjects", this.arrowsArray, true);
+            debugPanel.objectsInfoShow(this.debugElementName, this.arrowsArray, true);
         }
     }
 }

@@ -83,7 +83,7 @@ export const config = {
     bossCrashDamage: 3,
     bossShieldCrashDamage: 3,
     bossShieldIsOnSecondsCount: 7000,
-    bossShieldIsOffSecondsCount: 3000,
+    bossShieldIsOffSecondsCount: 4000,
     bossFireChance: 20,
     bossFireArrowBombChance: 10,
     // уровни, бонусы, читы, элементы дебаг-панели

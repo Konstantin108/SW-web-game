@@ -29,13 +29,8 @@ export class Bonus {
 
     #step() {
         if (!game.gameIsRunning) return;
-        let y_pos = this.y;
-        y_pos += 1;
-        if (y_pos <= config.mapSizeY) {
-            this.y = y_pos;
-        } else if (y_pos === config.mapSizeY + 1) {
-            y_pos = config.mapSizeY + 2;
-            this.y = y_pos;
+        this.y += 1;
+        if (this.y >= config.mapSizeY + 1) {
             renderer.clear(this.selectorName);
             this.remove();
         }
@@ -182,7 +177,7 @@ export class Bonus {
         Bonus.#removeStuckBonus(bonusesArray);
         for (let i = 0; i <= bonusesArray.length; i++) {
             if (bonusesArray[i]) {
-                if (bonusesArray[i].y >= config.mapSizeY || forceRemove) {
+                if (bonusesArray[i].y >= config.mapSizeY + 1 || forceRemove) {
                     renderer.renderPickedBonus(bonusesArray[i], false);
                     bonusController.bonusesArray.splice(i, 1);
                 }

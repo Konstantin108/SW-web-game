@@ -21,13 +21,8 @@ export class EnemyArrow {
 
     #step() {
         if (!game.gameIsRunning) return;
-        let y_pos = this.y;
-        y_pos += 1;
-        if (y_pos <= config.mapSizeY) {
-            this.y = y_pos;
-        } else if (y_pos === config.mapSizeY + 1) {
-            y_pos = config.mapSizeY + 2;
-            this.y = y_pos;
+        this.y += 1;
+        if (this.y >= config.mapSizeY + 1) {
             renderer.clear(this.selectorName);
             EnemyArrow.#remove();
         }
@@ -63,7 +58,7 @@ export class EnemyArrow {
                 if (lastEnemyArrowInArray) {
                     if (lastEnemyArrowInArray.id - enemyArrowsArray[i].id > 15) enemyArrowsArray.splice(i, 1);
                 }
-                if (enemyArrowsArray[i].y >= config.mapSizeY) enemyArrowsArray.splice(i, 1);
+                if (enemyArrowsArray[i].y >= config.mapSizeY + 1) enemyArrowsArray.splice(i, 1);
             }
         }
     }

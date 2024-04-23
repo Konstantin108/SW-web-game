@@ -122,8 +122,8 @@ export const debugPanelElements = [
         name: "enemyArrowsObjects",
         type: "checkbox",
         customClass: null,
-        message: "enemy arrows:",
-        description: "выводить enemy arrows в консоль постоянно"
+        message: "enemies' arrows:",
+        description: "выводить enemies' arrows в консоль постоянно"
     },
     {
         name: "blockagesObjects",
