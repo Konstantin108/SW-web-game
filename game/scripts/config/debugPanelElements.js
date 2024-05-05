@@ -173,5 +173,12 @@ export const debugPanelElements = [
         customClass: null,
         message: "background:",
         description: "вывести background в консоль"
+    },
+    {
+        name: "disableConfirmToLeave",
+        type: "checkbox",
+        customClass: null,
+        message: null,
+        description: "отключить подтверждение ухода со страницы"
     }
 ]

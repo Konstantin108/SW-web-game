@@ -315,7 +315,7 @@ export const renderer = {
             ? pickedBonusPosition = document.querySelector(`[data-x="${bonus.picked_x}"][data-y="${bonus.picked_y}"]`)
             : pickedBonusPosition = document.querySelector(`[data-x="${bonus.x}"][data-y="${bonus.y}"]`);
         if (pickedBonusPosition) {
-            pickedBonusPosition.classList.remove(`${bonus.name}`);
+            pickedBonusPosition.classList.remove(`${bonus.selectorName}`);
             pickedBonusPosition.classList.remove(player.selectorName);
             pickedBonusPosition.classList.add("picked");
             setTimeout(() => this.clear("picked"), 500);

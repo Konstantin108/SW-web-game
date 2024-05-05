@@ -28,6 +28,7 @@ export const game = {
     localStorageAvailable: true,  // true
 
     init() {
+        helperController.preCacheImages(config.preCacheImagesArray);
         cheatsController.saveDefaultConfigParams();
         localStorageController.periodicCheckLocalStorageAvailable();
         localStorageController.setLocalStorageParamsToGameConfig();

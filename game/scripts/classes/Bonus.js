@@ -34,9 +34,9 @@ export class Bonus {
             renderer.clear(this.selectorName);
             this.remove();
         }
+        this.getBonus(this.picked());
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(bonusController.bonusesArray, Bonus.thisSelectorOverlay);
-        this.getBonus(this.picked());
         renderer.renderPlayer();
 
         if (helperController.randomEvent(60)) Bonus.#removeStuckBonus(bonusController.bonusesArray);
@@ -60,7 +60,6 @@ export class Bonus {
             renderer.renderPickedBonus(this);
             pickedBonus = this;
             this.remove();
-            // console.log(pickedBonus);  // данные подобранного бонуса
             return pickedBonus;
         }
         this.picked_x = null;

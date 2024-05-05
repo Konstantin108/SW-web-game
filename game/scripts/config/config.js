@@ -35,7 +35,7 @@ export const config = {
     gameLoadingSecondsCount: 3000,
     soundOn: false,
     soundBank: soundBank,
-    windowClosingConfirm: true,
+    windowClosingConfirmDisable: false,
     stopGameOnWindowBlur: false,  // на релизе true
     // подсказки
     tips: true,
@@ -90,6 +90,7 @@ export const config = {
     levels: levels,
     bonuses: bonuses.setBonusesParams(),
     cheats: cheats.setCheatsParams(),
+    cheatActiveStatus: cheats.cheatActiveStatus,
     translatedColorNames: cheats.translatedColorNames,
     bonusCodeNames: cheats.bonusCodeNames,
     cheatsInfinityActiveMode: false,
@@ -111,5 +112,10 @@ export const config = {
     planetsCount: 2,
     slowStarsCount: 30,
     starsCount: 40,
-    meteorsCount: 6
+    meteorsCount: 6,
+    // изображения, которые заранее кэшируются в фоне
+    preCacheImagesArray: [
+        "./src/images/explosion.png",
+        "./src/images/boss.png"
+    ]
 }

@@ -101,7 +101,7 @@ export const helperController = {
     },
 
     confirmToLeave() {
-        if (config.windowClosingConfirm) {
+        if (!config.windowClosingConfirmDisable) {
             window.onbeforeunload = function () {
                 return true;
             }
@@ -110,6 +110,15 @@ export const helperController = {
 
     noConfirmToLeave() {
         window.onbeforeunload = null;
+    },
+
+    preCacheImages(imagesArray) {
+        window.addEventListener("load", () => {
+            imagesArray.forEach(oneImage => {
+                let image = new Image();
+                image.src = oneImage;
+            });
+        });
     },
 
     findPossiblePositions(employedPositionsArray, possiblePositionsArray) {

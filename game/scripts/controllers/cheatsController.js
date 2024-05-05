@@ -18,6 +18,7 @@ import {templatePrinter} from "../objects/templatePrinter.js";
 
 export const cheatsController = {
     cheats: config.cheats,
+    cheatActiveStatus: config.cheatActiveStatus,
     translatedColorNames: config.translatedColorNames,
     bonusCodeNames: config.bonusCodeNames,
     gameControl: config.gameControl,
@@ -179,6 +180,9 @@ export const cheatsController = {
             case "dbginstant":
                 this.toggleInstantStart(paramName, activatedCheatParam);
                 break;
+            case "dbgquickleave":
+                this.toggleDisableConfirmToLeave(paramName, activatedCheatParam);
+                break;
             case "respiceintus":
                 this.toggleDebugMode(paramName, activatedCheatParam);
                 break;
@@ -258,13 +262,22 @@ export const cheatsController = {
         this.defaultConfigParamsArray.set("startGameDelaySecondsCount", config.startGameDelaySecondsCount);
     },
 
+    addOrRemoveParamsToLocalStorage(status, paramNamesArray, paramValuesArray = []) {
+        if (!localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) return;
+
+        status
+            ? paramNamesArray.forEach((paramName, i) => localStorageController.setParamToLocalStorage(paramName, paramValuesArray[i] ?? status))
+            : paramNamesArray.forEach((paramName, i) => localStorageController.removeParamFromLocalStorage(paramName, paramValuesArray[i] ?? status));
+    },
+
     // методы запуска читов
     toggleInfinityMode(paramName, toggle) {
         if (!game.localStorageAvailable) {
             tooltipController.tooltipCreateAndDestroy(templatePrinter.localStorageUnavailableMessageTemplatePrint());
             return;
         }
-        if (toggle === "on") {
+
+        if (this.cheatActiveStatus[toggle]) {
             localStorageController.setParamToLocalStorage(paramName, true);
 
             this.updateCheatNamesArrayInLocalStorageAfterCheatOn();
@@ -296,29 +309,19 @@ export const cheatsController = {
             localStorageController.removeParamFromLocalStorage(paramName, false);
             localStorageController.clearLocalStorage(["tips"]);
         }
-        localStorageController.checkLocalStorageAvailable();
     },
 
     toggleInvincibility(paramName, toggle) {
-        let status = null;
-
-        if (toggle === "on") {
-            status = true;
-            config[paramName] = status;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, status);
-            }
-            player[paramName] = config[paramName];
+        if (this.cheatActiveStatus[toggle]) {
+            player[paramName] = this.cheatActiveStatus[toggle];
             crashChecker.invincibilityOffCallCancel();
             renderer.renderPlayer();
         } else {
-            status = false;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, status);
-            }
-            config[paramName] = status;
             crashChecker.invincibilityOff();
         }
+
+        this.addOrRemoveParamsToLocalStorage(this.cheatActiveStatus[toggle], [paramName]);
+        config[paramName] = this.cheatActiveStatus[toggle];
     },
 
     colorChange(paramName, color) {
@@ -392,52 +395,37 @@ export const cheatsController = {
     },
 
     standartToggleCheatAction(paramName, toggle) {
-        let status = null;
-
-        if (toggle === "on") {
-            status = true;
-            config[paramName] = status;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, status);
-            }
-        } else {
-            status = false;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, status);
-            }
-            config[paramName] = status;
-        }
-        localStorageController.checkLocalStorageAvailable();
-        return status;
+        this.addOrRemoveParamsToLocalStorage(this.cheatActiveStatus[toggle], [paramName]);
+        config[paramName] = this.cheatActiveStatus[toggle];
+        return this.cheatActiveStatus[toggle];
     },
 
     toggleInstantStart(paramName, toggle) {
-        let status = null;
         let delay = null;
 
-        if (toggle === "on") {
-            status = true;
-            delay = -1;
+        this.cheatActiveStatus[toggle]
+            ? delay = -1
+            : delay = this.defaultConfigParamsArray.get("startGameDelaySecondsCount");
 
-            config[paramName] = status;
-            config.startGameDelaySecondsCount = delay;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, status);
-                localStorageController.setParamToLocalStorage("startGameDelaySecondsCount", delay);
-            }
-        } else {
-            status = false;
-            delay = this.defaultConfigParamsArray.get("startGameDelaySecondsCount");
+        this.addOrRemoveParamsToLocalStorage(
+            this.cheatActiveStatus[toggle],
+            [paramName, "startGameDelaySecondsCount"],
+            [this.cheatActiveStatus[toggle], delay]
+        );
 
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, status);
-                localStorageController.removeParamFromLocalStorage("startGameDelaySecondsCount", delay);
-            }
-            config[paramName] = status;
-            config.startGameDelaySecondsCount = delay;
-        }
+        config[paramName] = this.cheatActiveStatus[toggle];
+        config.startGameDelaySecondsCount = delay;
         game.startGameDelaySet();
-        localStorageController.checkLocalStorageAvailable();
+    },
+
+    toggleDisableConfirmToLeave(paramName, toggle) {
+        config[paramName] = this.cheatActiveStatus[toggle];
+
+        this.cheatActiveStatus[toggle]
+            ? helperController.noConfirmToLeave()
+            : helperController.confirmToLeave();
+
+        this.addOrRemoveParamsToLocalStorage(this.cheatActiveStatus[toggle], [paramName]);
     },
 
     toggleDebugMode(paramName, toggle) {
@@ -505,20 +493,18 @@ export const cheatsController = {
 
     togglePowerfulArrow(paramName, toggle) {
         let multiplier = null;
+        let status = null;
 
         if (toggle === 10) {
-            multiplier = toggle
-            config[paramName] = multiplier;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, multiplier);
-            }
+            multiplier = toggle;
+            status = true;
         } else {
             multiplier = this.defaultConfigParamsArray.get(paramName);
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, multiplier);
-            }
-            config[paramName] = multiplier;
+            status = false;
         }
+
+        this.addOrRemoveParamsToLocalStorage(status, [paramName], [multiplier]);
+        config[paramName] = multiplier;
     },
 
     explosion() {
@@ -533,28 +519,16 @@ export const cheatsController = {
     },
 
     superAbilityIsAlwaysCharged(paramName, toggle) {
-        let status = null;
+        config[paramName] = this.cheatActiveStatus[toggle];
 
-        if (toggle === "on") {
-            status = true;
-            config[paramName] = status;
-            config.superAbilityIsActivated = status;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.setParamToLocalStorage(paramName, status);
-                localStorageController.setParamToLocalStorage("superAbilityIsActivated", status);
-            }
+        if (this.cheatActiveStatus[toggle]) {
             player[paramName] = config[paramName];
             player.superAbilityStatusInit();
             renderer.renderSuperAbilityBarActivatedByCheat();
-        } else {
-            status = false;
-            if (localStorageController.checkParamInLocalStorage(this.cheatsInfinityActiveMode)) {
-                localStorageController.removeParamFromLocalStorage(paramName, status);
-                localStorageController.removeParamFromLocalStorage("superAbilityIsActivated", status);
-            }
-            config[paramName] = status;
-            config.superAbilityIsActivated = status;
         }
+
+        this.addOrRemoveParamsToLocalStorage(this.cheatActiveStatus[toggle], [paramName, "superAbilityIsActivated"]);
+        config.superAbilityIsActivated = this.cheatActiveStatus[toggle];
     },
 
     offAllCheats() {

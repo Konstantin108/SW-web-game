@@ -115,6 +115,7 @@ export const debugPanel = {
             case "bossGetDamageInfo":
             case "toggleInfinityMode":
             case "toggleInstantStart":
+            case "disableConfirmToLeave":
                 cheat = helperController.getObjectByName(this.cheats, element);
                 message = cheatsController.matchPlayerInputAndCheatCode(cheat.code, cheatMessageContainer);
                 console.log(message);

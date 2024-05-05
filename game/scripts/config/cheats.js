@@ -6,6 +6,11 @@ export const cheats = {
         arbitaryValueCheat: "необходимо вводить code + : + произвольное значение в цифрах"
     },
 
+    cheatActiveStatus: {
+        on: true,
+        off: false
+    },
+
     translatedColorNames: {
         rubrum: "красный",
         orange: "оранжевый",
@@ -372,6 +377,29 @@ export const cheats = {
                 options: null,
                 playerCanUseThisCheatAfterGameOver: true,
                 description: "включение или выключение режима запуска игры без отсчёта (для отладки)",
+                descriptionForPlayer: null
+            },
+            {
+                name: "disableConfirmToLeave",
+                code: "dbgquickleave",
+                message: "quick leave mode ",
+                type: "toggleCheat",
+                scope: [
+                    "config"
+                ],
+                toggleOptions: [
+                    "on",
+                    "off"
+                ],
+                paramName: "windowClosingConfirmDisable",
+                limit: null,
+                help: this.helpArray.toggleCheat,
+                needAddNoteToGameConfig: true,
+                debugTool: true,
+                optionsInfo: null,
+                options: null,
+                playerCanUseThisCheatAfterGameOver: true,
+                description: "включение или выключение подтверждения ухода со страницы игры (для отладки)",
                 descriptionForPlayer: null
             },
             {
