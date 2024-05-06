@@ -6,9 +6,9 @@ abstract class AbstractException extends Exception
     protected string $logFile;
 
     /**
-     * @param $slug
+     * @param string $slug
      */
-    public function __construct($slug = "")
+    public function __construct(string $slug = "")
     {
         parent::__construct();
         $this->writelog = WRITE_LOG;
