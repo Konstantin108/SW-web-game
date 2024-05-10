@@ -20,7 +20,7 @@ export class Arrow {
         this.penetration = config.arrowPenetration;
         this.hit_x = null;
         this.hit_y = null;
-    }
+    };
 
     #step() {
         if (!game.gameIsRunning) return;
@@ -31,12 +31,12 @@ export class Arrow {
         this.#hitBossShield();
         this.#hitBoss();
         this.#hit();
-    }
+    };
 
     makeStep() {
         let timerId = setInterval(() => this.#step(), this.speed);
         setTimeout(() => clearInterval(timerId), 1300);
-    }
+    };
 
     #hit() {
         let blockagesArray = blockageController.blockagesArray;
@@ -50,7 +50,7 @@ export class Arrow {
                 this.#outFromMap();
             }
         }
-    }
+    };
 
     #hitBoss() {
         if (!progressController.bossExist) return;
@@ -60,7 +60,7 @@ export class Arrow {
             boss.getDamage(this);
             this.#outFromMap();
         }
-    }
+    };
 
     #hitBossShield() {
         if (!progressController.bossExist) return;
@@ -69,7 +69,7 @@ export class Arrow {
             boss.bossShieldGetDamage(false, this);
             this.#outFromMap();
         }
-    }
+    };
 
     #outFromMap() {
         if (this.penetration) return;
@@ -78,7 +78,7 @@ export class Arrow {
         this.hit_y = null;
         renderer.clear(this.selectorName);
         Arrow.#remove();
-    }
+    };
 
     static #remove() {
         let arrowsArray = arrowController.arrowsArray;
@@ -88,5 +88,5 @@ export class Arrow {
                 if (arrowsArray[i].y <= -2) arrowController.arrowsArray.splice(i, 1);
             }
         }
-    }
+    };
 }

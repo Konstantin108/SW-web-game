@@ -27,4 +27,4 @@ export const soundBank = {
             signalBeep: "signal-beep.mp3"
         }
     }
-}
+};

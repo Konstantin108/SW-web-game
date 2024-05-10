@@ -36,4 +36,4 @@ export const arrowController = {
             debugPanel.objectsInfoShow(this.debugElementName, this.arrowsArray, true);
         }
     }
-}
+};

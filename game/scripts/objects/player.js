@@ -262,4 +262,4 @@ export const player = {
             renderer.renderSuperAbilityBar(player.superAbilityIsActivated);
         }
     }
-}
+};

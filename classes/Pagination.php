@@ -30,25 +30,25 @@ class Pagination
      * @return mixed
      * @throws DbException
      */
-    public function getTotal(): mixed
+    private function getTotal(): mixed
     {
         return $this->repository->getCount();
     }
 
     /**
-     * @return float
+     * @return void
      * @throws DbException
      */
-    public function getPagesCount(): float
+    private function getPagesCount(): void
     {
-        return $this->pagesCount = ceil($this->getTotal() / $this->elemOnPageCount);
+        $this->pagesCount = ceil($this->getTotal() / $this->elemOnPageCount);
     }
 
     /**
      * @return int
      * @throws DbException
      */
-    public function getPageNumber(): int
+    private function getPageNumber(): int
     {
         $this->getPagesCount();
         if (isset($_POST[$this->paramName]) && preg_match("/^\d+$/", $_POST[$this->paramName])) {
@@ -63,7 +63,7 @@ class Pagination
      * @return float|int
      * @throws DbException
      */
-    public function getElemFromNumber(): float|int
+    private function getElemFromNumber(): float|int
     {
         return ($this->getPageNumber() - 1) * $this->elemOnPageCount;
     }
@@ -72,7 +72,7 @@ class Pagination
      * @return array|void
      * @throws DbException
      */
-    public function getElemsOnCurrentPage()
+    private function getElemsOnCurrentPage()
     {
         return $this->repository->getAllRows($this->getElemFromNumber(), $this->elemOnPageCount);
     }

@@ -44,7 +44,7 @@ export const helperController = {
         return {
             x: this.getRandomInt(possibleOnXArray[0], possibleOnXArray.at(-1)),
             y: this.getRandomInt(possibleOnYArray[0], possibleOnYArray.at(-1))
-        }
+        };
     },
 
     removeAllIntervalTimers(timerIdsArray) {
@@ -85,7 +85,7 @@ export const helperController = {
         return {
             element: array[index],
             index: index
-        }
+        };
     },
 
     randomAppearanceCelestialBody(appearanceChance) {
@@ -136,4 +136,4 @@ export const helperController = {
         if (result) return result;
         this.findValidValueInArrayOnIndex(array);
     }
-}
+};

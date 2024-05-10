@@ -127,4 +127,4 @@ export const localStorageController = {
         this.checkLocalStorageAvailable();
         setInterval(() => this.checkLocalStorageAvailable(), 1000);
     }
-}
+};

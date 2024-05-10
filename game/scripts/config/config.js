@@ -118,4 +118,4 @@ export const config = {
         "./src/images/explosion.png",
         "./src/images/boss.png"
     ]
-}
+};

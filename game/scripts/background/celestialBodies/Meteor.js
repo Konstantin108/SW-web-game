@@ -29,78 +29,78 @@ export class Meteor {
     static #speedLimit = 20;
 
     constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
-        this.x = x;
-        this.y = y;
-        this.canvasHeight = canvasHeight;
-        this.context = context;
-        this.degree = 0;
-        this.directionInDegree = helperController.getRandomDirectionOfRotation(50);
+        this._x = x;
+        this._y = y;
+        this._canvasHeight = canvasHeight;
+        this._context = context;
+        this._degree = 0;
+        this._directionInDegree = helperController.getRandomDirectionOfRotation(50);
 
-        this.imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
+        this._imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
 
-        this.size = helperController.getRandomInt(Meteor.#minSize, Meteor.#maxSize);
-        this.speed = Meteor.#speedLimit / this.size;
+        this._size = helperController.getRandomInt(Meteor.#minSize, Meteor.#maxSize);
+        this._speed = Meteor.#speedLimit / this._size;
 
-        this.image = new Image();
-        this.image.src = `./src/images/${Meteor.#type}-${this.imageName}.png`;
-        this.imageWidth = this.size;
-        this.imageHeight = this.size;
+        this._image = new Image();
+        this._image.src = `./src/images/${Meteor.#type}-${this._imageName}.png`;
+        this._imageWidth = this._size;
+        this._imageHeight = this._size;
 
-        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
-        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
+        this._possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this._possiblePositionsOnXMax = possiblePositionsOnX.max;
 
-        this.possiblePositionsOnYMin = possiblePositionsOnY.min;
-        this.possiblePositionsOnYMax = possiblePositionsOnY.max;
-    }
+        this._possiblePositionsOnYMin = possiblePositionsOnY.min;
+        this._possiblePositionsOnYMax = possiblePositionsOnY.max;
+    };
 
     #selfRotate() {
-        this.degree += this.directionInDegree;
+        this._degree += this._directionInDegree;
 
-        this.context.save();
-        this.context.translate(this.x, this.y);
-        if (!Meteor.#noRotateNames.includes(this.imageName)) this.context.rotate(this.degree + Math.PI / 180);
-        this.context.translate(-this.x, -this.y);
-        this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
-        this.context.restore();
-    }
+        this._context.save();
+        this._context.translate(this._x, this._y);
+        if (!Meteor.#noRotateNames.includes(this._imageName)) this._context.rotate(this._degree + Math.PI / 180);
+        this._context.translate(-this._x, -this._y);
+        this._context.drawImage(this._image, this._x, this._y, this._imageWidth, this._imageHeight);
+        this._context.restore();
+    };
 
     draw() {
-        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(Meteor.#appearanceChance)) return;
+        if (this._y === -this._size && helperController.randomAppearanceCelestialBody(Meteor.#appearanceChance)) return;
 
         this.#selfRotate();
 
-        if (this.y > this.canvasHeight) {
-            this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
-            this.size = helperController.getRandomInt(Meteor.#minSize, Meteor.#maxSize);
-            this.y = -this.size;
+        if (this._y > this._canvasHeight) {
+            this._x = helperController.getRandomInt(this._possiblePositionsOnXMin, this._possiblePositionsOnXMax);
+            this._size = helperController.getRandomInt(Meteor.#minSize, Meteor.#maxSize);
+            this._y = -this._size;
 
-            this.speed = Meteor.#speedLimit / this.size;
+            this._speed = Meteor.#speedLimit / this._size;
 
-            this.imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
+            this._imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
 
-            this.image = new Image();
-            this.image.src = `./src/images/${Meteor.#type}-${this.imageName}.png`;
-            this.imageWidth = this.size;
-            this.imageHeight = this.size;
+            this._image = new Image();
+            this._image.src = `./src/images/${Meteor.#type}-${this._imageName}.png`;
+            this._imageWidth = this._size;
+            this._imageHeight = this._size;
 
-            if (Meteor.#noRotateNames.includes(this.imageName)) {
+            if (Meteor.#noRotateNames.includes(this._imageName)) {
                 if (helperController.randomEvent(50)) {
-                    this.y = helperController.getRandomInt(this.possiblePositionsOnYMin, this.possiblePositionsOnYMax);
-                    if (this.imageName.split("-")[0] === "left") this.x = this.possiblePositionsOnXMax;
-                    if (this.imageName.split("-")[0] === "right") this.x = this.possiblePositionsOnXMin;
+                    this._y = helperController.getRandomInt(this._possiblePositionsOnYMin, this._possiblePositionsOnYMax);
+                    if (this._imageName.split("-")[0] === "left") this._x = this._possiblePositionsOnXMax;
+                    if (this._imageName.split("-")[0] === "right") this._x = this._possiblePositionsOnXMin;
                 }
             }
 
         } else {
-            if (!Meteor.#noRotateNames.includes(this.imageName)) this.y += this.speed;
-            if (this.imageName.split("-")[0] === "left") {
-                this.y += this.speed * 20;
-                this.x += -this.speed * 20;
+            if (!Meteor.#noRotateNames.includes(this._imageName)) this._y += this._speed;
+            if (this._imageName.split("-")[0] === "left") {
+                this._y += this._speed * 20;
+                this._x += -this._speed * 20;
             }
-            if (this.imageName.split("-")[0] === "right") {
-                this.y += this.speed * 20;
-                this.x += this.speed * 20;
+            if (this._imageName.split("-")[0] === "right") {
+                this._y += this._speed * 20;
+                this._x += this._speed * 20;
             }
         }
-    }
+    };
 }

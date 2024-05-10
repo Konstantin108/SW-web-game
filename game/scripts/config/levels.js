@@ -115,4 +115,4 @@ export const levels = [
         blockageTypes: null,
         bossExist: false
     }
-]
+];

@@ -77,4 +77,4 @@ export const crashChecker = {
         player.timeInInvincibilityOffTimerId = calculateTimeInInvincibilityOffTimerId;
         player.timeInInvincibilityOff = invincibilityAfterCrashActionTime;
     }
-}
+};

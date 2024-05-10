@@ -149,7 +149,7 @@ export const game = {
         audioController.playSoundEffect(soundEffectKey);
         setTimeout(() => pause.showStatistics(), 1100);
     }
-}
+};
 
 touchController.init();
 setTimeout(() => game.init(), game.gameLoadingSecondsCount);

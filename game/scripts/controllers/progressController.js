@@ -167,4 +167,4 @@ export const progressController = {
         }, 2000);
         setTimeout(() => boss.createBoss(), 3000);
     }
-}
+};

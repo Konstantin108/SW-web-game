@@ -635,4 +635,4 @@ export const cheatsController = {
         console.log("Нажми клавишу ~ для вызова меню ввода читов");
         console.table(cheatsInfoObject);
     }
-}
+};

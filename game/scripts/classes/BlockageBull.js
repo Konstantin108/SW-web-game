@@ -9,5 +9,5 @@ export class BlockageBull extends Blockage {
         this.selectorName = "blockageBull";
         this.getDamageOutlookSelectorName = "blockageWhiteBull";
         this.arrowTypeSelectorName = "enemyArrowBomb";
-    }
+    };
 }

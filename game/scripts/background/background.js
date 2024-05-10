@@ -78,7 +78,7 @@ export const background = {
             canvas.height = window.innerHeight;
         });
     }
-}
+};
 
 background.celestialBodiesCreateInit();
 background.animate();

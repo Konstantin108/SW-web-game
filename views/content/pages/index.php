@@ -7,18 +7,18 @@
             data = JSON.parse(data);
             if (data) setTimeout(() => createLink(data, 0), 100);
         } catch (e) {
-            errorMessage("сервис временно недоступен")
-            console.log("получен невалидный JSON");
+            errorMessage("сервис временно недоступен", "получен невалидный JSON")
         }
     });
 
 
-    function errorMessage(errorMessage) {
+    function errorMessage(messageForUsers, messageToConsole) {
         let message = `<li class="menuOneList pageElement menuOneBtn quote">
-                          <p>${errorMessage}</p>
+                          <p>${messageForUsers}</p>
                        </li>`;
 
         setTimeout(() => $("#menu").append(message), 100);
+        console.log(messageToConsole);
     }
 
     function createLink(data, index) {

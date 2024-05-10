@@ -181,4 +181,4 @@ export const debugPanelElements = [
         message: null,
         description: "отключить подтверждение ухода со страницы"
     }
-]
+];

@@ -7,5 +7,5 @@ export class EnemyArrowBomb extends EnemyArrow {
         this.selectorName = "enemyArrowBomb";
         this.damage = config.enemyArrowBombDamage;
         this.speed = config.enemyArrowBombSpeed;
-    }
+    };
 }

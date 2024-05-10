@@ -8,5 +8,5 @@ export class ArrowDrill extends Arrow {
         this.damage = config.arrowDrillDamage * config.power;
         this.speed = config.arrowDrillSpeed;
         this.penetration = true;
-    }
+    };
 }

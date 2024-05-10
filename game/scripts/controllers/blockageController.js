@@ -53,4 +53,4 @@ export const blockageController = {
             debugPanel.objectsInfoShow(this.debugElementName, blockagesArray, true);
         }
     }
-}
+};

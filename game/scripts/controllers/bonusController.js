@@ -97,4 +97,4 @@ export const bonusController = {
             debugPanel.objectsInfoShow(this.debugElementName, this.bonusesArray, true);
         }
     }
-}
+};

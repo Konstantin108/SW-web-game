@@ -26,7 +26,7 @@ export class Blockage {
         this.selectorName = "blockage";
         this.getDamageOutlookSelectorName = "blockageWhite";
         this.arrowTypeSelectorName = "enemyArrow";
-    }
+    };
 
     static #shoot(arrowTypeSelectorName, x_pos, y_pos) {
         if (helperController.randomEvent(progressController.fireChance)) {
@@ -34,9 +34,9 @@ export class Blockage {
                 arrowType: arrowTypeSelectorName,
                 x: x_pos,
                 y: y_pos
-            }
+            };
         }
-    }
+    };
 
     step() {
         let blockagesArray = blockageController.blockagesArray;
@@ -75,11 +75,11 @@ export class Blockage {
         renderer.renderMovingObjects(blockageController.blockagesArray, Blockage.thisSelectorOverlay);
         crashChecker.crashCheck(blockageController.blockagesArray, true);
         progressController.progress();
-    }
+    };
 
     getDamage(hitData, blockageNumberInBlockagesArray, shipDestroyedReward, newStartPositionOnY) {
         this.lives += -hitData.damage;
         if (this.lives > 0) renderer.renderGetDamageEnemy(hitData, this.getDamageOutlookSelectorName);
         if (this.lives <= 0) progressController.killEnemy(hitData, blockageNumberInBlockagesArray, shipDestroyedReward, newStartPositionOnY);
-    }
+    };
 }

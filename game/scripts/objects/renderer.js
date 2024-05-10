@@ -1060,4 +1060,4 @@ export const renderer = {
         this.body.insertAdjacentHTML("afterbegin", templatePrinter.roundBtnTemplatePrint(name, icon, animationClass));
         audioController.soundOnOrOffClickHandler();
     }
-}
+};

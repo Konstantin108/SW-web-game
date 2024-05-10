@@ -19,43 +19,43 @@ export class Galaxy {
     static #speed = .01;
 
     constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
-        this.x = x;
-        this.y = y;
-        this.canvasHeight = canvasHeight;
-        this.context = context;
+        this._x = x;
+        this._y = y;
+        this._canvasHeight = canvasHeight;
+        this._context = context;
 
-        this.imageName = helperController.getRandomElementAndIndexInArray(Galaxy.#imageNames).element;
+        this._imageName = helperController.getRandomElementAndIndexInArray(Galaxy.#imageNames).element;
 
-        this.size = helperController.getRandomInt(Galaxy.#minSize, Galaxy.#maxSize);
+        this._size = helperController.getRandomInt(Galaxy.#minSize, Galaxy.#maxSize);
 
-        this.image = new Image();
-        this.image.src = `./src/images/${Galaxy.#type}-${this.imageName}.png`;
-        this.imageWidth = this.size;
-        this.imageHeight = this.size;
+        this._image = new Image();
+        this._image.src = `./src/images/${Galaxy.#type}-${this._imageName}.png`;
+        this._imageWidth = this._size;
+        this._imageHeight = this._size;
 
-        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
-        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
-    }
+        this._possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this._possiblePositionsOnXMax = possiblePositionsOnX.max;
+    };
 
     draw() {
-        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(Galaxy.#appearanceChance)) return;
+        if (this._y === -this._size && helperController.randomAppearanceCelestialBody(Galaxy.#appearanceChance)) return;
 
-        this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+        this._context.drawImage(this._image, this._x, this._y, this._imageWidth, this._imageHeight);
 
-        if (this.y > this.canvasHeight) {
-            this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
-            this.size = helperController.getRandomInt(Galaxy.#minSize, Galaxy.#maxSize);
-            this.y = -this.size;
+        if (this._y > this._canvasHeight) {
+            this._x = helperController.getRandomInt(this._possiblePositionsOnXMin, this._possiblePositionsOnXMax);
+            this._size = helperController.getRandomInt(Galaxy.#minSize, Galaxy.#maxSize);
+            this._y = -this._size;
 
-            this.imageName = helperController.getRandomElementAndIndexInArray(Galaxy.#imageNames).element;
+            this._imageName = helperController.getRandomElementAndIndexInArray(Galaxy.#imageNames).element;
 
-            this.image = new Image();
-            this.image.src = `./src/images/${Galaxy.#type}-${this.imageName}.png`;
-            this.imageWidth = this.size;
-            this.imageHeight = this.size;
+            this._image = new Image();
+            this._image.src = `./src/images/${Galaxy.#type}-${this._imageName}.png`;
+            this._imageWidth = this._size;
+            this._imageHeight = this._size;
 
         } else {
-            this.y += Galaxy.#speed;
+            this._y += Galaxy.#speed;
         }
-    }
+    };
 }

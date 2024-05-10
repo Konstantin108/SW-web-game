@@ -146,4 +146,4 @@ export const pauseMenuOptions = {
             referer: false
         }
     ]
-}
+};

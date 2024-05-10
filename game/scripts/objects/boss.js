@@ -159,7 +159,7 @@ export const boss = {
                 arrowType: arrowTypeSelectorNameAndGunPosition.gunType,
                 x: this.randomChoiceGun(arrowTypeSelectorNameAndGunPosition.gunPosition),
                 y: y_pos
-            }
+            };
         }
     },
 
@@ -272,4 +272,4 @@ export const boss = {
             renderer.renderPlayer();
         }, 500);
     }
-}
+};

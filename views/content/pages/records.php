@@ -18,15 +18,11 @@
         success: function (data) {
             try {
                 data = JSON.parse(data);
-                if (!data.hasOwnProperty("fail")) {
-                    checkRecordsCount(data);
-                } else {
-                    errorMessage(data.messageForUsers);
-                    console.log(data.messageToConsole)
-                }
+                !data.hasOwnProperty("fail")
+                    ? checkRecordsCount(data)
+                    : errorMessage(data.messageForUsers, data.messageToConsole);
             } catch (e) {
-                errorMessage("сервис временно недоступен");
-                console.log("получен невалидный JSON");
+                errorMessage("сервис временно недоступен", "получен невалидный JSON");
             }
         }
     });
@@ -36,12 +32,13 @@
         data.items.length ? createRecordsTable(data) : noRecordsMessageShow();
     }
 
-    function errorMessage(errorMessage) {
+    function errorMessage(messageForUsers, messageToConsole) {
         let message = `<div id="recordsPageMessageBlock" class="pageElement">
-                          <p>${errorMessage}</p>
+                          <p>${messageForUsers}</p>
                        </div>`;
 
         setTimeout(() => $("#pageContentContainer").append(message), 100);
+        console.log(messageToConsole);
     }
 
     function noRecordsMessageShow() {

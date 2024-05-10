@@ -25,7 +25,7 @@ export class Bonus {
         this.picked_y = null;
         this.timerId = null;  // id таймера интервала для метода makeStep()
         this.timeBonusCanMakeStepTimerId = null;  // id таймера отсчёта времени до удаления interval для отключения makeStep()
-    }
+    };
 
     #step() {
         if (!game.gameIsRunning) return;
@@ -40,15 +40,15 @@ export class Bonus {
         renderer.renderPlayer();
 
         if (helperController.randomEvent(60)) Bonus.#removeStuckBonus(bonusController.bonusesArray);
-    }
+    };
 
     makeStep() {
         this.timerId = setInterval(() => this.#step(), this.speed);
-    }
+    };
 
     makeStepOff() {
         this.timeBonusCanMakeStepTimerId = setTimeout(() => clearInterval(this.timerId), 30000);
-    }
+    };
 
     picked() {
         let pickedBonus = null;
@@ -64,14 +64,14 @@ export class Bonus {
         }
         this.picked_x = null;
         this.picked_y = null;
-    }
+    };
 
     getBonus(bonus) {
         if (bonus) {
             this.#setNewPropertiesForPlayer(bonus.objectType);
             renderer.renderPlayer();
         }
-    }
+    };
 
     #setNewPropertiesForPlayer(bonus) {
         if (bonus.playerArrowType) {
@@ -97,7 +97,7 @@ export class Bonus {
         }
         if (bonus.name === "life") bonusController.getLife();
         if (bonus.name === "killAll") bonusController.getBomb();
-    }
+    };
 
     #newPropertiesForPlayerOff(bonus) {
         if (bonus.playerArrowType) {
@@ -125,19 +125,19 @@ export class Bonus {
             cheatsController.activatedCheatsParamsDataTempArray.delete("shield");
             cheatsController.removeCheatNameFromGameConfig("getShield");
         }
-    }
+    };
 
     #newPropertiesForPlayerOffCall(bonus) {
         let timerId = setTimeout(() => this.#newPropertiesForPlayerOff(bonus), this.actionTime);
         bonus.playerArrowType
             ? player.bonusNewArrowTypeIsActivatedTimerId = timerId
             : player.bonusShieldIsActivatedTimerId = timerId;
-    }
+    };
 
     static #newPropertiesForPlayerOffCallCancel(bonusIsActivatedTimerId, calculateTimeInBonusOffTimerId) {
         if (bonusIsActivatedTimerId) clearTimeout(bonusIsActivatedTimerId);
         if (calculateTimeInBonusOffTimerId) clearTimeout(calculateTimeInBonusOffTimerId);
-    }
+    };
 
     #calculateTimeInBonusOff(bonusActionTime, calculateTimeInBonusOffType) {
         let calculateTimeInBonusOffTimerId = null;
@@ -157,7 +157,7 @@ export class Bonus {
             player.calculateTimeInBonusShieldOffTimerId = calculateTimeInBonusOffTimerId;
             player.calculateTimeInBonusShieldOff = bonusActionTime;
         }
-    }
+    };
 
     static #removeStuckBonus(bonusesArray) {
         for (let i = 0; i <= bonusesArray.length; i++) {
@@ -168,7 +168,7 @@ export class Bonus {
                 }
             }
         }
-    }
+    };
 
     remove(forceRemove = false) {
         let bonusesArray = bonusController.bonusesArray;
@@ -182,5 +182,5 @@ export class Bonus {
                 }
             }
         }
-    }
+    };
 }

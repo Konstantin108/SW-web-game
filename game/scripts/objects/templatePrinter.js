@@ -245,7 +245,7 @@ export const templatePrinter = {
             },
             canShowAgain: true,
             canShowWhenTipsIsOff: true
-        }
+        };
     },
 
     roundBtnTemplatePrint(name, icon, animationClass) {
@@ -257,4 +257,4 @@ export const templatePrinter = {
                     </div>
                 </div>`;
     }
-}
+};

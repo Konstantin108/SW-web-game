@@ -142,4 +142,4 @@ export const debugPanel = {
             ? showObjects.forEach(elem => console.log(elem))
             : console.log(showObjects);
     }
-}
+};

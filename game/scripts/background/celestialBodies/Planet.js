@@ -16,46 +16,46 @@ export class Planet {
     static #speedLimit = 50;
 
     constructor(x, y, canvasHeight, context, possiblePositionsOnX, possiblePositionsOnY) {
-        this.x = x;
-        this.y = y;
-        this.canvasHeight = canvasHeight;
-        this.context = context;
+        this._x = x;
+        this._y = y;
+        this._canvasHeight = canvasHeight;
+        this._context = context;
 
-        this.imageName = helperController.getRandomElementAndIndexInArray(Planet.#imageNames).element;
+        this._imageName = helperController.getRandomElementAndIndexInArray(Planet.#imageNames).element;
 
-        this.size = helperController.getRandomInt(Planet.#minSize, Planet.#maxSize);
-        this.speed = Planet.#speedLimit / this.size;
+        this._size = helperController.getRandomInt(Planet.#minSize, Planet.#maxSize);
+        this._speed = Planet.#speedLimit / this._size;
 
-        this.image = new Image();
-        this.image.src = `./src/images/${Planet.#type}-${this.imageName}.png`;
-        this.imageWidth = this.size;
-        this.imageHeight = this.size;
+        this._image = new Image();
+        this._image.src = `./src/images/${Planet.#type}-${this._imageName}.png`;
+        this._imageWidth = this._size;
+        this._imageHeight = this._size;
 
-        this.possiblePositionsOnXMin = possiblePositionsOnX.min;
-        this.possiblePositionsOnXMax = possiblePositionsOnX.max;
-    }
+        this._possiblePositionsOnXMin = possiblePositionsOnX.min;
+        this._possiblePositionsOnXMax = possiblePositionsOnX.max;
+    };
 
     draw() {
-        if (this.y === -this.size && helperController.randomAppearanceCelestialBody(Planet.#appearanceChance)) return;
+        if (this._y === -this._size && helperController.randomAppearanceCelestialBody(Planet.#appearanceChance)) return;
 
-        this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+        this._context.drawImage(this._image, this._x, this._y, this._imageWidth, this._imageHeight);
 
-        if (this.y > this.canvasHeight) {
-            this.x = helperController.getRandomInt(this.possiblePositionsOnXMin, this.possiblePositionsOnXMax);
-            this.size = helperController.getRandomInt(Planet.#minSize, Planet.#maxSize);
-            this.y = -this.size;
+        if (this._y > this._canvasHeight) {
+            this._x = helperController.getRandomInt(this._possiblePositionsOnXMin, this._possiblePositionsOnXMax);
+            this._size = helperController.getRandomInt(Planet.#minSize, Planet.#maxSize);
+            this._y = -this._size;
 
-            this.speed = Planet.#speedLimit / this.size;
+            this._speed = Planet.#speedLimit / this._size;
 
-            this.imageName = helperController.getRandomElementAndIndexInArray(Planet.#imageNames).element;
+            this._imageName = helperController.getRandomElementAndIndexInArray(Planet.#imageNames).element;
 
-            this.image = new Image();
-            this.image.src = `./src/images/${Planet.#type}-${this.imageName}.png`;
-            this.imageWidth = this.size;
-            this.imageHeight = this.size;
+            this._image = new Image();
+            this._image.src = `./src/images/${Planet.#type}-${this._imageName}.png`;
+            this._imageWidth = this._size;
+            this._imageHeight = this._size;
 
         } else {
-            this.y += this.speed;
+            this._y += this._speed;
         }
-    }
+    };
 }

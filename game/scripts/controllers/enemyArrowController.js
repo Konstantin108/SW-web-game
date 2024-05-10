@@ -25,4 +25,4 @@ export const enemyArrowController = {
             debugPanel.objectsInfoShow(this.debugElementName, this.enemyArrowsArray, true);
         }
     }
-}
+};

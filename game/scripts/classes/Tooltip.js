@@ -7,7 +7,7 @@ import {audioController} from "../controllers/audioController.js";
 export class Tooltip {
     constructor(data) {
         this.data = data;
-    }
+    };
 
     show(animation, colorChange = false) {
         if (!colorChange) {
@@ -23,7 +23,7 @@ export class Tooltip {
         renderer.renderTooltip(this.data, animation, mobileMode);
         config[`tip_${this.data.name}Shown`] = true;
         audioController.playSoundEffect("tooltip");
-    }
+    };
 
     destroy() {
         let tooltipsArray = tooltipController.tooltipsArray;
@@ -37,5 +37,5 @@ export class Tooltip {
             }
             if (this.data.canShowAgain) config[`tip_${this.data.name}Shown`] = false;
         }, 500);
-    }
+    };
 }

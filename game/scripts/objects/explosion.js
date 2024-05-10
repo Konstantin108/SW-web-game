@@ -41,4 +41,4 @@ export const explosion = {
         renderer.renderExplosion();
         renderer.renderStatusBar();
     }
-}
+};

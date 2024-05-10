@@ -17,7 +17,7 @@ export class EnemyArrow {
         this.speed = config.enemyArrowSpeed;
         this.hit_x = null;
         this.hit_y = null;
-    }
+    };
 
     #step() {
         if (!game.gameIsRunning) return;
@@ -29,12 +29,12 @@ export class EnemyArrow {
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(enemyArrowController.enemyArrowsArray);
         this.#hit();
-    }
+    };
 
     makeStep() {
         let timerId = setInterval(() => this.#step(), this.speed);
         setTimeout(() => clearInterval(timerId), 2000);
-    }
+    };
 
     #hit() {
         if (player.x === this.x && player.y === this.y) {
@@ -47,7 +47,7 @@ export class EnemyArrow {
         }
         this.hit_x = null;
         this.hit_y = null;
-    }
+    };
 
     static #remove() {
         let enemyArrowsArray = enemyArrowController.enemyArrowsArray;
@@ -61,5 +61,5 @@ export class EnemyArrow {
                 if (enemyArrowsArray[i].y >= config.mapSizeY + 1) enemyArrowsArray.splice(i, 1);
             }
         }
-    }
+    };
 }

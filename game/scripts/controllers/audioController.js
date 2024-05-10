@@ -74,4 +74,4 @@ export const audioController = {
         soundEffect.volume = this.soundEffects.volume;
         this.play(soundEffect);
     }
-}
+};

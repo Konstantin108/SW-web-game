@@ -113,4 +113,4 @@ export const tooltipController = {
         this.tooltipControlPanelClickHandler();
         setTimeout(() => this.tooltipControlPanelMouseEnterHandler(), 100);
     }
-}
+};

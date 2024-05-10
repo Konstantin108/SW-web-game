@@ -8,5 +8,5 @@ export class ArrowTrinity extends Arrow {
         this.selectorName = "arrow-trinity";
         this.damage = config.arrowTrinityDamage * config.power;
         this.speed = config.arrowTrinitySpeed;
-    }
+    };
 }

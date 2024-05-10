@@ -640,4 +640,4 @@ export const cheats = {
             }
         ];
     }
-}
+};

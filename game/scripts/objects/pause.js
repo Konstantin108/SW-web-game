@@ -164,5 +164,5 @@ export const pause = {
             game.resumeGame();
             pause.windowBlurGameStopped = false;
         }
-    },
-}
+    }
+};

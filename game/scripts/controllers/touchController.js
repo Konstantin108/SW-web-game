@@ -152,4 +152,4 @@ export const touchController = {
         this.timerId = null;
         this.autoShootIsOnNow = false;
     }
-}
+};
