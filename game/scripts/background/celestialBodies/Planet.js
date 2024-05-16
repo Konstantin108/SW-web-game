@@ -27,7 +27,7 @@ export class Planet {
         this._speed = Planet.#speedLimit / this._size;
 
         this._image = new Image();
-        this._image.src = `./src/images/${Planet.#type}-${this._imageName}.png`;
+        this._image.src = `./src/images/${Planet.#type}-${this._imageName}.webp`;
         this._imageWidth = this._size;
         this._imageHeight = this._size;
 
@@ -50,7 +50,7 @@ export class Planet {
             this._imageName = helperController.getRandomElementAndIndexInArray(Planet.#imageNames).element;
 
             this._image = new Image();
-            this._image.src = `./src/images/${Planet.#type}-${this._imageName}.png`;
+            this._image.src = `./src/images/${Planet.#type}-${this._imageName}.webp`;
             this._imageWidth = this._size;
             this._imageHeight = this._size;
 

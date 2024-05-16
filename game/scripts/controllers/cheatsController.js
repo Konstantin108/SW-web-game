@@ -71,7 +71,7 @@ export const cheatsController = {
         let removeNoteFromGameConfig = false;
 
         let compoundCode = input.split(":");
-        let matchCheatObject = this.cheats.find((cheat) => cheat.code === compoundCode[0]);
+        let matchCheatObject = this.cheats.find(cheat => cheat.code === compoundCode[0]);
 
         if (matchCheatObject) {
 

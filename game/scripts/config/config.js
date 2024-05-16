@@ -115,7 +115,11 @@ export const config = {
     meteorsCount: 6,
     // изображения, которые заранее кэшируются в фоне
     preCacheImagesArray: [
-        "./src/images/explosion.png",
-        "./src/images/boss.png"
+        "explosion",
+        "teleportation",
+        "enemy-arrow-bomb",
+        "disk",
+        "boss",
+        "picked"
     ]
 };

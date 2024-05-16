@@ -40,7 +40,7 @@ export class SlowStar {
         this._size = helperController.getRandomInt(SlowStar.#minSize, SlowStar.#maxSize);
 
         this._image = new Image();
-        this._image.src = `./src/images/${SlowStar.#type}-${this._imageName}.png`;
+        this._image.src = `./src/images/${SlowStar.#type}-${this._imageName}.webp`;
         this._imageWidth = this._size;
         this._imageHeight = this._size;
 
@@ -61,7 +61,7 @@ export class SlowStar {
             this._imageName = helperController.getRandomElementAndIndexInArray(SlowStar.#imageNames).element;
 
             this._image = new Image();
-            this._image.src = `./src/images/${SlowStar.#type}-${this._imageName}.png`;
+            this._image.src = `./src/images/${SlowStar.#type}-${this._imageName}.webp`;
             this._imageWidth = this._size;
             this._imageHeight = this._size;
 

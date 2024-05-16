@@ -260,7 +260,7 @@ export const boss = {
 
     returnPlayerOnStartCell() {
         if (player.x === helperController.getCenterMapOnAxis(config.mapSizeX) && player.y === config.mapSizeY) return;
-        renderer.renderTeleportation("out");
+        renderer.renderTeleportation(player.x, player.y, "out");
         player.x_current = helperController.getCenterMapOnAxis(config.mapSizeX);
         player.y_current = config.mapSizeY;
         player.move();
@@ -268,7 +268,7 @@ export const boss = {
         if (player.extraSelectorName) renderer.clear(player.extraSelectorName);
         if (player.invincibility) renderer.clear("invincibility");
         setTimeout(() => {
-            renderer.renderTeleportation("in");
+            renderer.renderTeleportation(player.x, player.y, "in");
             renderer.renderPlayer();
         }, 500);
     }

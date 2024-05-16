@@ -5,6 +5,7 @@ export const levels = [
         multiplier: 1,
         blockagesCount: 4,
         fireChance: 42,
+        jumpChance: 10,
         maxBlockageSpeed: 1300,
         minBlockageSpeed: 2500,
         blockageTypes: {
@@ -22,6 +23,7 @@ export const levels = [
         multiplier: 2,
         blockagesCount: 5,
         fireChance: 35,
+        jumpChance: 12,
         maxBlockageSpeed: 1300,
         minBlockageSpeed: 2500,
         blockageTypes: {
@@ -44,6 +46,7 @@ export const levels = [
         multiplier: 2,
         blockagesCount: 5,
         fireChance: 30,
+        jumpChance: 14,
         maxBlockageSpeed: 1100,
         minBlockageSpeed: 2300,
         blockageTypes: {
@@ -66,6 +69,7 @@ export const levels = [
         multiplier: 3,
         blockagesCount: 6,
         fireChance: 20,
+        jumpChance: 16,
         maxBlockageSpeed: 1000,
         minBlockageSpeed: 2200,
         blockageTypes: {
@@ -88,6 +92,7 @@ export const levels = [
         multiplier: 4,
         blockagesCount: 6,
         fireChance: 18,
+        jumpChance: 18,
         maxBlockageSpeed: 1000,
         minBlockageSpeed: 2200,
         blockageTypes: {
@@ -110,6 +115,7 @@ export const levels = [
         multiplier: null,
         blockagesCount: null,
         fireChance: null,
+        jumpChance: null,
         maxBlockageSpeed: null,
         minBlockageSpeed: null,
         blockageTypes: null,

@@ -16,6 +16,7 @@ export const progressController = {
     minBlockageSpeed: config.levels[0].minBlockageSpeed,
     multiplier: config.levels[0].multiplier,
     fireChance: config.levels[0].fireChance,
+    jumpChance: config.levels[0].jumpChance,
     blockageTypes: config.levels[0].blockageTypes,
     bossExist: config.levels[0].bossExist,
     crashMulctRate: config.crashMulctRate,
@@ -47,6 +48,7 @@ export const progressController = {
                     this.maxBlockageSpeed = this.levels[i].maxBlockageSpeed;
                     this.minBlockageSpeed = this.levels[i].minBlockageSpeed;
                     this.fireChance = this.levels[i].fireChance;
+                    this.jumpChance = this.levels[i].jumpChance;
                     this.blockageTypes = this.levels[i].blockageTypes;
                     this.bossExist = this.levels[i].bossExist;
                     this.bossCalled = false;

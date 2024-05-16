@@ -234,21 +234,21 @@ export const player = {
 
         if (player.superAbilityIsActivated) {
             for (let i = 0; i < blockagesArray.length; i++) {
-                if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0 ||
-                    blockagesArray[i].x === player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                    blockagesArray[i].x === player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0 ||
-                    blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0 ||
-                    blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
+                if (blockagesArray[i].x === player.x && blockagesArray[i].y < player.y && blockagesArray[i].y >= 0
+                    || blockagesArray[i].x === player.x - 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0
+                    || blockagesArray[i].x === player.x - 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0
+                    || blockagesArray[i].x === player.x + 1 && blockagesArray[i].y < player.y - 1 && blockagesArray[i].y >= 0
+                    || blockagesArray[i].x === player.x + 2 && blockagesArray[i].y < player.y - 2 && blockagesArray[i].y >= 0) {
                     progressController.killEnemy(blockagesArray[i], i, blockagesArray[i].shipDestroyedReward, -3);
                     renderer.renderStatusBar();
                 }
             }
             if (progressController.bossExist) {
-                if (boss.bodyX.includes(player.x) ||
-                    boss.bodyX.includes(player.x - 1) ||
-                    boss.bodyX.includes(player.x - 2) ||
-                    boss.bodyX.includes(player.x + 1) ||
-                    boss.bodyX.includes(player.x + 2)) {
+                if (boss.bodyX.includes(player.x)
+                    || boss.bodyX.includes(player.x - 1)
+                    || boss.bodyX.includes(player.x - 2)
+                    || boss.bodyX.includes(player.x + 1)
+                    || boss.bodyX.includes(player.x + 2)) {
                     boss.getDamage(player.superAbilityDamage, true);
                 }
             }

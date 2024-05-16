@@ -41,7 +41,7 @@ export class Star {
         this._speed = Star.#speedLimit / this._size;
 
         this._image = new Image();
-        this._image.src = `./src/images/${Star.#type}-${this._imageName}.png`;
+        this._image.src = `./src/images/${Star.#type}-${this._imageName}.webp`;
         this._imageWidth = this._size;
         this._imageHeight = this._size;
 
@@ -64,7 +64,7 @@ export class Star {
             this._imageName = helperController.getRandomElementAndIndexInArray(Star.#imageNames).element;
 
             this._image = new Image();
-            this._image.src = `./src/images/${Star.#type}-${this._imageName}.png`;
+            this._image.src = `./src/images/${Star.#type}-${this._imageName}.webp`;
             this._imageWidth = this._size;
             this._imageHeight = this._size;
 

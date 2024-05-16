@@ -191,7 +191,7 @@ td {
   display: flex;
   align-items: center;
   padding: 10px;
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   background-size: 100%;
@@ -235,11 +235,11 @@ td {
 }
 
 .whiteScull {
-  background-image: url("../src/images/scull.png");
+  background-image: url("../src/images/scull.webp");
 }
 
 .redScull {
-  background-image: url("../src/images/red-scull.png");
+  background-image: url("../src/images/red-scull.webp");
   margin-bottom: 3px;
   transform: scale(1.1);
 }
@@ -257,11 +257,11 @@ td {
 }
 
 .availableHeart {
-  background-image: url("../src/images/heart.png");
+  background-image: url("../src/images/heart.webp");
 }
 
 .lostHeart {
-  background-image: url("../src/images/lost-heart.png");
+  background-image: url("../src/images/lost-heart.webp");
 }
 
 .heartScale {
@@ -277,7 +277,7 @@ td {
   }
 }
 #bombBar {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   position: absolute;
@@ -296,15 +296,15 @@ td {
 }
 
 .activeBomb {
-  background-image: url("../src/images/bomb.png");
+  background-image: url("../src/images/bomb.webp");
 }
 
 .emptyBomb {
-  background-image: url("../src/images/empty-bomb.png");
+  background-image: url("../src/images/empty-bomb.webp");
 }
 
 .redBomb {
-  background-image: url("../src/images/red-bomb.png");
+  background-image: url("../src/images/red-bomb.webp");
 }
 
 #bonusShieldBar,
@@ -322,14 +322,14 @@ td {
 }
 
 #bonusShieldBar {
-  background-image: url("../src/images/background-rusty-iron.jpg");
+  background-image: url("../src/images/background-rusty-iron.webp");
   background-color: saddlebrown;
   top: 66.1%;
   border-top-right-radius: 12px;
 }
 
 #bonusNewArrowTypeBar {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   background-color: saddlebrown;
   top: 82.5%;
   border-bottom-right-radius: 12px;
@@ -366,15 +366,15 @@ td {
 }
 
 .drillPickUpImage {
-  background-image: url("../src/images/bonus-drill.png");
+  background-image: url("../src/images/bonus-drill.webp");
 }
 
 .trinityPickUpImage {
-  background-image: url("../src/images/bonus-trinity.png");
+  background-image: url("../src/images/bonus-trinity.webp");
 }
 
 .shieldPickUpImage {
-  background-image: url("../src/images/bonus-shield.png");
+  background-image: url("../src/images/bonus-shield.webp");
 }
 
 #superAbilityBar {
@@ -389,7 +389,7 @@ td {
 }
 
 #shineSectorsBox {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   display: block;
@@ -410,7 +410,7 @@ td {
 }
 
 #lightningElementContainer {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   background-repeat: no-repeat;
   background-color: saddlebrown;
   border-bottom-left-radius: 12px;
@@ -431,15 +431,15 @@ td {
 }
 
 .lightningIsOn {
-  background-image: url("../src/images/lightning.png");
+  background-image: url("../src/images/lightning.webp");
 }
 
 .lightningIsOff {
-  background-image: url("../src/images/empty-lightning.png");
+  background-image: url("../src/images/empty-lightning.webp");
 }
 
 .lightningIsOut {
-  background-image: url("../src/images/red-lightning.png");
+  background-image: url("../src/images/red-lightning.webp");
 }
 
 .player,
@@ -451,15 +451,15 @@ td {
 }
 
 .player {
-  background-image: url("../src/images/player.png");
+  background-image: url("../src/images/player.webp");
 }
 
 .player-drill {
-  background-image: url("../src/images/player-drill.png");
+  background-image: url("../src/images/player-drill.webp");
 }
 
 .player-trinity {
-  background-image: url("../src/images/player-trinity.png");
+  background-image: url("../src/images/player-trinity.webp");
 }
 
 .player-shield {
@@ -489,11 +489,11 @@ td {
 }
 
 .boss {
-  background-image: url("../src/images/boss.png");
+  background-image: url("../src/images/boss.webp");
 }
 
 .bossWhite {
-  background-image: url("../src/images/boss-white.png");
+  background-image: url("../src/images/boss-white.webp");
 }
 
 .bossCreate {
@@ -584,7 +584,7 @@ td {
 #bossLivesBarMetalElement {
   display: flex;
   align-items: center;
-  background-image: url("../src/images/background-metal.jpg");
+  background-image: url("../src/images/background-metal.webp");
   background-size: 100%;
   background-repeat: no-repeat;
   background-color: dimgrey;
@@ -672,41 +672,41 @@ td {
 }
 
 .blockage {
-  background-image: url("../src/images/blockage.png");
+  background-image: url("../src/images/blockage.webp");
 }
 
 .blockageWhite {
-  background-image: url("../src/images/blockage-white.png");
+  background-image: url("../src/images/blockage-white.webp");
 }
 
 .blockageBull {
-  background-image: url("../src/images/blockage-bull.png");
+  background-image: url("../src/images/blockage-bull.webp");
 }
 
 .blockageWhiteBull {
-  background-image: url("../src/images/blockage-white-bull.png");
+  background-image: url("../src/images/blockage-white-bull.webp");
 }
 
 .arrow {
-  background-image: url("../src/images/arrow.png");
+  background-image: url("../src/images/arrow.webp");
 }
 
 .arrow-drill {
-  background-image: url("../src/images/arrow-drill.png");
+  background-image: url("../src/images/arrow-drill.webp");
 }
 
 .arrow-trinity {
-  background-image: url("../src/images/arrow-trinity.png");
+  background-image: url("../src/images/arrow-trinity.webp");
 }
 
 .enemyArrow {
-  background-image: url("../src/images/enemy-arrow.png");
+  background-image: url("../src/images/enemy-arrow.webp");
   transition: 0.3s;
   transform: scale(0.2);
 }
 
 .enemyArrowBomb {
-  background-image: url("../src/images/enemy-arrow-bomb.png");
+  background-image: url("../src/images/enemy-arrow-bomb.webp");
   transition: 0.3s;
 }
 
@@ -719,23 +719,23 @@ td {
 }
 
 .drill {
-  background-image: url("../src/images/bonus-drill.png");
+  background-image: url("../src/images/bonus-drill.webp");
 }
 
 .trinity {
-  background-image: url("../src/images/bonus-trinity.png");
+  background-image: url("../src/images/bonus-trinity.webp");
 }
 
 .shield {
-  background-image: url("../src/images/bonus-shield.png");
+  background-image: url("../src/images/bonus-shield.webp");
 }
 
 .life {
-  background-image: url("../src/images/bonus-life.png");
+  background-image: url("../src/images/bonus-life.webp");
 }
 
 .killAll {
-  background-image: url("../src/images/bonus-kill-all.png");
+  background-image: url("../src/images/bonus-kill-all.webp");
 }
 
 .picked,
@@ -746,22 +746,32 @@ td {
   background-size: 100%;
   background-repeat: no-repeat;
   box-shadow: 0 0 0 0;
+}
+
+.picked,
+.hit,
+.crash,
+.teleportationIn {
   transition: 0.3s;
 }
 
+.teleportationOut {
+  transition: 0.5s;
+}
+
 .picked {
-  background-image: url("../src/images/picked.png");
+  background-image: url("../src/images/picked.webp");
   background-color: rgba(0, 0, 0, 0);
   transform: scale(2);
 }
 
 .teleportationOut,
 .teleportationIn {
-  background-image: url("../src/images/teleportation.png");
+  background-image: url("../src/images/teleportation.webp");
 }
 
 .teleportationOut {
-  transform: scale(0.6);
+  transform: scale(0.4);
 }
 
 .teleportationIn {
@@ -769,12 +779,12 @@ td {
 }
 
 .hit {
-  background-image: url("../src/images/hit.png");
+  background-image: url("../src/images/hit.webp");
   transform: scale(2);
 }
 
 .crash {
-  background-image: url("../src/images/crash.png");
+  background-image: url("../src/images/crash.webp");
   scale: 1.8;
 }
 
@@ -813,7 +823,7 @@ td {
 }
 
 .explosion {
-  background-image: url("../src/images/explosion.png");
+  background-image: url("../src/images/explosion.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-color: rgb(255, 255, 255);
@@ -1232,7 +1242,7 @@ td {
 }
 
 .pauseSideOptionBlock {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   width: 80px;
   height: 70px;
   border-radius: 12px;
@@ -1300,7 +1310,7 @@ td {
   }
 }
 .pauseMenuSideBorder {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   width: 22px;
   height: 120px;
 }
@@ -1311,7 +1321,7 @@ td {
 }
 
 .pauseMenuSideBottomBracing {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   width: 34px;
   height: 51px;
   border-radius: 12px;
@@ -1319,7 +1329,7 @@ td {
 
 .pauseMenuHorizontalBorder {
   height: 15px;
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
 }
 
 .pauseMenuHorizontalBorderBigSize {
@@ -1594,7 +1604,7 @@ td {
 }
 
 #tooltipControlPanel {
-  background-image: url("../src/images/background-rusty-iron.jpg");
+  background-image: url("../src/images/background-rusty-iron.webp");
   background-size: 100%;
   background-repeat: no-repeat;
   position: fixed;
@@ -1634,7 +1644,7 @@ td {
 }
 
 .circle {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   border-radius: 100px;
   display: flex;
   justify-content: center;

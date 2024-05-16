@@ -42,7 +42,7 @@ export class Meteor {
         this._speed = Meteor.#speedLimit / this._size;
 
         this._image = new Image();
-        this._image.src = `./src/images/${Meteor.#type}-${this._imageName}.png`;
+        this._image.src = `./src/images/${Meteor.#type}-${this._imageName}.webp`;
         this._imageWidth = this._size;
         this._imageHeight = this._size;
 
@@ -79,7 +79,7 @@ export class Meteor {
             this._imageName = helperController.getRandomElementAndIndexInArray(Meteor.#imageNames).element;
 
             this._image = new Image();
-            this._image.src = `./src/images/${Meteor.#type}-${this._imageName}.png`;
+            this._image.src = `./src/images/${Meteor.#type}-${this._imageName}.webp`;
             this._imageWidth = this._size;
             this._imageHeight = this._size;
 

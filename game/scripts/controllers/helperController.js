@@ -113,11 +113,9 @@ export const helperController = {
     },
 
     preCacheImages(imagesArray) {
-        window.addEventListener("load", () => {
-            imagesArray.forEach(oneImage => {
-                let image = new Image();
-                image.src = oneImage;
-            });
+        imagesArray.forEach(oneImage => {
+            let image = new Image();
+            image.src = `./src/images/${oneImage}.webp`;
         });
     },
 

@@ -29,7 +29,7 @@ export class Galaxy {
         this._size = helperController.getRandomInt(Galaxy.#minSize, Galaxy.#maxSize);
 
         this._image = new Image();
-        this._image.src = `./src/images/${Galaxy.#type}-${this._imageName}.png`;
+        this._image.src = `./src/images/${Galaxy.#type}-${this._imageName}.webp`;
         this._imageWidth = this._size;
         this._imageHeight = this._size;
 
@@ -50,7 +50,7 @@ export class Galaxy {
             this._imageName = helperController.getRandomElementAndIndexInArray(Galaxy.#imageNames).element;
 
             this._image = new Image();
-            this._image.src = `./src/images/${Galaxy.#type}-${this._imageName}.png`;
+            this._image.src = `./src/images/${Galaxy.#type}-${this._imageName}.webp`;
             this._imageWidth = this._size;
             this._imageHeight = this._size;
 

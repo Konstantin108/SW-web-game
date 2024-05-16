@@ -241,7 +241,7 @@ export const renderer = {
         getDamageEnemyPosition = document.querySelector(`[data-x="${hitData.hit_x}"][data-y="${hitData.hit_y}"]`);
         if (getDamageEnemyPosition) {
             getDamageEnemyPosition.classList.add(`${selectorName}`);
-            setTimeout(() => this.clear(`${selectorName}`), 40);
+            setTimeout(() => this.clear(`${selectorName}`), 60);
         }
     },
 
@@ -322,13 +322,15 @@ export const renderer = {
         }
     },
 
-    renderTeleportation(mode) {
+    renderTeleportation(x_pos, y_pos, mode) {
         let selector = null;
 
         mode === "out" ? selector = "teleportationOut" : selector = "teleportationIn";
-        let teleportationPosition = document.querySelector(`[data-x="${player.x}"][data-y="${player.y}"]`);
-        teleportationPosition.classList.add(`${selector}`);
-        setTimeout(() => teleportationPosition.classList.remove(`${selector}`), 500);
+        let teleportationPosition = document.querySelector(`[data-x="${x_pos}"][data-y="${y_pos}"]`);
+        if (teleportationPosition) {
+            teleportationPosition.classList.add(`${selector}`);
+            setTimeout(() => teleportationPosition.classList.remove(`${selector}`), 500);
+        }
     },
 
     renderMovingObjects(objectsArray, thisSelectorOverlay = null) {
