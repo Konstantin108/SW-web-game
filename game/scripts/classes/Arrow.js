@@ -20,6 +20,8 @@ export class Arrow {
         this.penetration = config.arrowPenetration;
         this.hit_x = null;
         this.hit_y = null;
+        this.timerId = null;
+        this.clearIntervalTimerId = null;
     };
 
     #step() {
@@ -33,9 +35,13 @@ export class Arrow {
         this.#hit();
     };
 
-    makeStep() {
-        let timerId = setInterval(() => this.#step(), this.speed);
-        setTimeout(() => clearInterval(timerId), 1300);
+    makeStep(force) {
+        if (!this.timerId || force) {
+            this.timerId = setInterval(() => this.#step(), this.speed);
+        }
+        if (!this.clearIntervalTimerId || force) {
+            this.clearIntervalTimerId = setTimeout(() => clearInterval(this.timerId), 2000);
+        }
     };
 
     #hit() {
@@ -80,12 +86,26 @@ export class Arrow {
         Arrow.#remove();
     };
 
+    removeObjectTimers() {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+        if (this.clearIntervalTimerId) {
+            clearTimeout(this.clearIntervalTimerId);
+            this.clearIntervalTimerId = null;
+        }
+    };
+
     static #remove() {
         let arrowsArray = arrowController.arrowsArray;
 
         for (let i = 0; i <= arrowsArray.length; i++) {
             if (arrowsArray[i]) {
-                if (arrowsArray[i].y <= -2) arrowController.arrowsArray.splice(i, 1);
+                if (arrowsArray[i].y <= -2) {
+                    arrowsArray[i].removeObjectTimers();
+                    arrowsArray.splice(i, 1);
+                }
             }
         }
     };

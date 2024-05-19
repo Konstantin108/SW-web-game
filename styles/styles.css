@@ -20,7 +20,7 @@ body {
 
 body {
   background-color: #030331;
-  background-image: url("../src/images/background-space2.jpg");
+  background-image: url("../src/images/background-space2.webp");
   background-repeat: no-repeat;
 }
 
@@ -146,7 +146,7 @@ footer {
 }
 
 .circle {
-  background-image: url("../src/images/background-rusty-iron2.jpg");
+  background-image: url("../src/images/background-rusty-iron2.webp");
   border-radius: 100px;
   display: flex;
   justify-content: center;

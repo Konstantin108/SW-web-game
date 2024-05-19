@@ -40,6 +40,13 @@ export const player = {
     bonusObjectNewArrowType: null,  // данные подобраного бонуса усиление оружия для возобновления действия после снятия игры с паузы
     bonusObjectShield: null,  // данные подобраного бонуса щит для возобновления действия после снятия игры с паузы,
 
+    gameControlHandlersInit() {
+        this.moveKeyDownHandler();
+        this.shootKeyDownHandler();
+        this.useSuperAbilityKeyDownHandler();
+        this.useBombKeyDownHandler();
+    },
+
     moveKeyDownHandler() {
         let possibleDirections = helperController.getObjectByName(this.gameControl, "possibleDirections").btns;
         this.x_current = this.x;

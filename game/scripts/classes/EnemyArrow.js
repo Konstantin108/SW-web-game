@@ -17,23 +17,26 @@ export class EnemyArrow {
         this.speed = config.enemyArrowSpeed;
         this.hit_x = null;
         this.hit_y = null;
+        this.timerId = null;
+        this.clearIntervalTimerId = null;
     };
 
     #step() {
         if (!game.gameIsRunning) return;
         this.y += 1;
-        if (this.y >= config.mapSizeY + 1) {
-            renderer.clear(this.selectorName);
-            EnemyArrow.#remove();
-        }
+        if (this.y >= config.mapSizeY + 1) EnemyArrow.#remove();
         renderer.clear(this.selectorName);
         renderer.renderMovingObjects(enemyArrowController.enemyArrowsArray);
         this.#hit();
     };
 
-    makeStep() {
-        let timerId = setInterval(() => this.#step(), this.speed);
-        setTimeout(() => clearInterval(timerId), 2000);
+    makeStep(force) {
+        if (!this.timerId || force) {
+            this.timerId = setInterval(() => this.#step(), this.speed);
+        }
+        if (!this.clearIntervalTimerId || force) {
+            this.clearIntervalTimerId = setTimeout(() => clearInterval(this.timerId), 3000);
+        }
     };
 
     #hit() {
@@ -49,17 +52,34 @@ export class EnemyArrow {
         this.hit_y = null;
     };
 
+    removeObjectTimers() {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+        if (this.clearIntervalTimerId) {
+            clearTimeout(this.clearIntervalTimerId);
+            this.clearIntervalTimerId = null;
+        }
+    };
+
     static #remove() {
         let enemyArrowsArray = enemyArrowController.enemyArrowsArray;
+        let needRemove = false;
 
         for (let i = 0; i <= enemyArrowsArray.length; i++) {
             if (enemyArrowsArray[i]) {
                 let lastEnemyArrowInArray = enemyArrowsArray.at(-1);
                 if (lastEnemyArrowInArray) {
-                    if (lastEnemyArrowInArray.id - enemyArrowsArray[i].id > 15) enemyArrowsArray.splice(i, 1);
+                    if (lastEnemyArrowInArray.id - enemyArrowsArray[i].id > 15) needRemove = true;
                 }
-                if (enemyArrowsArray[i].y >= config.mapSizeY + 1) enemyArrowsArray.splice(i, 1);
+                if (enemyArrowsArray[i].y >= config.mapSizeY + 1) needRemove = true;
+                if (needRemove) {
+                    enemyArrowsArray[i].removeObjectTimers();
+                    enemyArrowsArray.splice(i, 1);
+                }
             }
+            needRemove = false;
         }
     };
 }

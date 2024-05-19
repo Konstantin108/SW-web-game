@@ -12,6 +12,11 @@ export const levels = [
             1: {
                 name: "blockage",
                 chanceFrom: 0,
+                chanceTo: 95,
+            },
+            2: {
+                name: "blockageBull",
+                chanceFrom: 96,
                 chanceTo: 100,
             }
         },

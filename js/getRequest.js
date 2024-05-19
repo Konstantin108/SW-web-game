@@ -50,7 +50,7 @@ $(document).on("click", ".link", function (event) {
 function showLoadingBlock(selector) {
     $(`#${selector}`).html(
         `<div id="loadingBlock">
-            <img src="/src/images/loading.gif" alt="loading" id="loading">
+            <img src="/src/images/loading.webp" alt="loading.webp" id="loading">
          </div>`
     );
 }

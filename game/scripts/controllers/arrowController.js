@@ -2,11 +2,13 @@ import {player} from "../objects/player.js";
 import {Arrow} from "../classes/Arrow.js";
 import {ArrowDrill} from "../classes/ArrowDrill.js";
 import {ArrowTrinity} from "../classes/ArrowTrinity.js";
-import {config} from "../config/config.js";
-import {debugPanel} from "../objects/debugPanel.js";
+import {arrowMethodsMixin} from "../mixins/arrowMethodsMixin.js";
 
 export const arrowController = {
+    __proto__: arrowMethodsMixin,
+
     debugElementName: "playerArrowsObjects",
+    debugParamName: "debugPlayerArrowsObjectsShow",
     arrowTypes: {
         "arrow": Arrow,
         "arrow-drill": ArrowDrill,
@@ -28,12 +30,11 @@ export const arrowController = {
         }
     },
 
-    arrowMove() {
-        for (let i = 0; i < this.arrowsArray.length; i++) {
-            if (this.arrowsArray[i]) this.arrowsArray[i].makeStep();
-        }
-        if (config.debugPlayerArrowsObjectsShow) {
-            debugPanel.objectsInfoShow(this.debugElementName, this.arrowsArray, true);
-        }
+    arrowMove(force = false) {
+        super.arrowMove(this.arrowsArray, this.debugElementName, this.debugParamName, force);
+    },
+
+    arrowStop() {
+        super.arrowStop(this.arrowsArray);
     }
 };

@@ -115,8 +115,7 @@ export const boss = {
             }
             if (this.x === 3) this.toTheRight = true;
         }
-        enemyArrowController.enemyArrowCreate(this.shoot(this.randomChoiceGunType(), this.y + 1));
-        enemyArrowController.enemyArrowMove();
+        this.shoot(this.y + 1);
         renderer.clear(this.selectorName);
         renderer.renderBoss(this.selectorName, this.thisSelectorOverlay);
     },
@@ -153,14 +152,15 @@ export const boss = {
         return helperController.randomEvent(choiceGunChance) ? leftGun : rightGun;
     },
 
-    shoot(arrowTypeSelectorNameAndGunPosition, y_pos) {
-        if (helperController.randomEvent(this.fireChance)) {
-            return {
-                arrowType: arrowTypeSelectorNameAndGunPosition.gunType,
-                x: this.randomChoiceGun(arrowTypeSelectorNameAndGunPosition.gunPosition),
-                y: y_pos
-            };
-        }
+    shoot(y_pos) {
+        if (!helperController.randomEvent(this.fireChance)) return;
+        let arrowTypeSelectorNameAndGunPosition = this.randomChoiceGunType();
+        enemyArrowController.enemyArrowCreate({
+            arrowType: arrowTypeSelectorNameAndGunPosition.gunType,
+            x: this.randomChoiceGun(arrowTypeSelectorNameAndGunPosition.gunPosition),
+            y: y_pos
+        });
+        enemyArrowController.enemyArrowMove();
     },
 
     bodyCellsArrayForCrashChecker(body, y, crashDamageType) {

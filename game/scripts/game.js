@@ -59,10 +59,7 @@ export const game = {
         blockageController.blockageMove(blockageController.blockagesArray);
         bonusController.bonusAppearanceListener();
         tooltipController.showMainGameControlTooltips(true);
-        player.moveKeyDownHandler();
-        player.shootKeyDownHandler();
-        player.useSuperAbilityKeyDownHandler();
-        player.useBombKeyDownHandler();
+        player.gameControlHandlersInit();
         audioController.mainSoundThemePaused = false;
         audioController.soundOnOrOff(true);
     },
@@ -105,6 +102,8 @@ export const game = {
         helperController.removeAllIntervalTimers(blockageController.blockageTimerIdsArray);
         helperController.removeAllTimeoutTimers(tooltipController.tooltipCreateTimerIdsArray);
         helperController.removeAllTimeoutTimers(tooltipController.tooltipDestroyTimerIdsArray);
+        arrowController.arrowStop();
+        enemyArrowController.enemyArrowStop();
         crashChecker.invincibilityOffCallCancel();
         boss.makeStepOff();
         boss.removeShieldTimerId();

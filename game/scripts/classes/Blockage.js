@@ -31,17 +31,16 @@ export class Blockage {
         this.arrowTypeSelectorName = "enemyArrow";
     };
 
-    static #shoot(arrowTypeSelectorName, x_pos, y_pos, openFire = false) {
+    #shoot(x_pos, y_pos, openFire = false) {
         let fireChance = progressController.fireChance;
-
         if (openFire) fireChance = 100;
-        if (helperController.randomEvent(fireChance)) {
-            return {
-                arrowType: arrowTypeSelectorName,
-                x: x_pos,
-                y: y_pos
-            };
-        }
+        if (!helperController.randomEvent(fireChance)) return;
+        enemyArrowController.enemyArrowCreate({
+            arrowType: this.arrowTypeSelectorName,
+            x: x_pos,
+            y: y_pos
+        });
+        enemyArrowController.enemyArrowMove();
     };
 
     step() {
@@ -70,10 +69,7 @@ export class Blockage {
             this.x = player.x;
             this.y = player.y - helperController.getRandomInt(5, 8);
             renderer.renderTeleportation(this.x, this.y, "in");
-            setTimeout(() => {
-                enemyArrowController.enemyArrowCreate(Blockage.#shoot(this.arrowTypeSelectorName, this.x, this.y, true));
-                enemyArrowController.enemyArrowMove();
-            }, 200);
+            setTimeout(() => this.#shoot(this.x, this.y, true), 200);
             return true;
         } else {
             return false;
@@ -95,8 +91,7 @@ export class Blockage {
                 this.x = x_pos;
             }
             if (this.y > 1) {
-                enemyArrowController.enemyArrowCreate(Blockage.#shoot(this.arrowTypeSelectorName, x_pos, y_pos));
-                enemyArrowController.enemyArrowMove();
+                this.#shoot(x_pos, y_pos);
             }
         } else if (y_pos === config.mapSizeY + 1) {
             y_pos = config.mapSizeY + 2;

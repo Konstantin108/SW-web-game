@@ -5,6 +5,8 @@ import {config} from "../config/config.js";
 import {helperController} from "../controllers/helperController.js";
 import {audioController} from "../controllers/audioController.js";
 import {boss} from "./boss.js";
+import {arrowController} from "../controllers/arrowController.js";
+import {enemyArrowController} from "../controllers/enemyArrowController.js";
 
 export const pause = {
     menuStructure: config.pauseMenuStructure,
@@ -158,8 +160,10 @@ export const pause = {
     },
 
     windowFocusListener() {
-        if (!config.stopGameOnWindowBlur) return;
         window.onfocus = function () {
+            arrowController.arrowMove(true);
+            enemyArrowController.enemyArrowMove(true);
+            if (!config.stopGameOnWindowBlur) return;
             if (!pause.windowBlurGameStopped) return;
             game.resumeGame();
             pause.windowBlurGameStopped = false;

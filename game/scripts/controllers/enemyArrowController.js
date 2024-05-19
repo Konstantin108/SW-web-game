@@ -1,28 +1,27 @@
 import {EnemyArrow} from "../classes/EnemyArrow.js";
 import {EnemyArrowBomb} from "../classes/EnemyArrowBomb.js";
-import {config} from "../config/config.js";
-import {debugPanel} from "../objects/debugPanel.js";
+import {arrowMethodsMixin} from "../mixins/arrowMethodsMixin.js";
 
 export const enemyArrowController = {
+    __proto__: arrowMethodsMixin,
+
     debugElementName: "enemyArrowsObjects",
+    debugParamName: "debugEnemyArrowsObjectsShow",
     arrowTypes: {
         enemyArrow: EnemyArrow,
         enemyArrowBomb: EnemyArrowBomb
     },
     enemyArrowsArray: [],
 
-    enemyArrowCreate(shootingBlockageData) {
-        if (shootingBlockageData) {
-            this.enemyArrowsArray.push(new this.arrowTypes[shootingBlockageData.arrowType](shootingBlockageData.x, shootingBlockageData.y));
-        }
+    enemyArrowCreate(shootingData) {
+        this.enemyArrowsArray.push(new this.arrowTypes[shootingData.arrowType](shootingData.x, shootingData.y));
     },
 
-    enemyArrowMove() {
-        if (!this.enemyArrowsArray.length) return;
-        let enemyArrow = this.enemyArrowsArray.at(-1);
-        enemyArrow.makeStep();
-        if (config.debugEnemyArrowsObjectsShow) {
-            debugPanel.objectsInfoShow(this.debugElementName, this.enemyArrowsArray, true);
-        }
+    enemyArrowMove(force = false) {
+        super.arrowMove(this.enemyArrowsArray, this.debugElementName, this.debugParamName, force);
+    },
+
+    enemyArrowStop() {
+        super.arrowStop(this.enemyArrowsArray);
     }
 };
